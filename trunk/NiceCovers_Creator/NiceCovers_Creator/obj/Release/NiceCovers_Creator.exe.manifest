@@ -57,26 +57,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NiceCovers_Creator.exe" size="497664">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NiceCovers_Creator.exe" size="495616">
       <assemblyIdentity name="NiceCovers_Creator" version="1.1.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>SwfRodaG7i7mQvxFZJj3Y962Qq8=</dsig:DigestValue>
+        <dsig:DigestValue>S683k5970H5U8t4vB+55loKdnYE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NiceCovers_Library.dll" size="170496">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NiceCovers_Library.dll" size="169472">
       <assemblyIdentity name="NiceCovers_Library" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>lrVJUtO/LlfvIK+gCsFL6YKWRLc=</dsig:DigestValue>
+        <dsig:DigestValue>VYmEGYyKWitcEvofx612/E7ZNoM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

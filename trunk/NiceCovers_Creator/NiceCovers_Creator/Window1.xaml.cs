@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
+using NiceCovers_Library;
 
 namespace NiceCovers_Creator
 {
@@ -23,42 +24,13 @@ namespace NiceCovers_Creator
     public partial class Window1 : Window
     {
 
-
-
-
         public Window1()
         {
             InitializeComponent();
 
         }
 
-        private void BTN_SaveClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public static Bitmap NiceCovers(string _FichierCover,Bitmap _DvdBox )
-        {
-            //Bitmap bDvdBox = new Bitmap(_DvdBox);
-            Bitmap bCover = new Bitmap(@_FichierCover);
-            Bitmap bVide = new Bitmap(NiceCovers_Creator.Properties.Resources.Vide);
-            Graphics g = Graphics.FromImage(bVide);
-
-            g.DrawImage(bCover, 81, 24, 458, 655);
-            g.DrawImage(_DvdBox, 0, 0, 571, 720);
-
-            g.Save();
-            //bVide.Save(@"c:\test.png");
-
-
-            //BitmapImage toto = new BitmapImage(new Uri(@"c:\test.png"));
-
-            //DvdBox.Source = bVide.;
-
-            return bVide;
-        }
-
-
+  
 
         public static BitmapSource loadBitmap(System.Drawing.Bitmap source)
         {
@@ -68,32 +40,7 @@ namespace NiceCovers_Creator
 
         private void BTN_Charge_Click(object sender, RoutedEventArgs e)
         {
-            
-
-            Fusion("BLANC");
-        }
-
-        private void Fusion(string _typecover)
-        {
-            string _suffixe;
-            Bitmap _dvdbox;
-
-            switch (_typecover)
-            {
-                case "BLANC":
-                    _suffixe = "";
-                    _dvdbox = NiceCovers_Creator.Properties.Resources.dvdbox;
-                    break;
-                case "BLUE":
-                    _suffixe = "Blue";
-                    _dvdbox = NiceCovers_Creator.Properties.Resources.dvdboxbleu;
-                    break;
-                default:
-                    _suffixe = "";
-                    _dvdbox = NiceCovers_Creator.Properties.Resources.dvdbox;
-                    break;
-            }
-
+    
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Title = "Chargement";
             openFileDialog1.Filter = @"Fichiers image (*.jpg, *.png)|*.jpg;*.png"; ;
@@ -104,14 +51,13 @@ namespace NiceCovers_Creator
 
             if (_ListeFichier.Length != 0)
             {
-                foreach (string _FileCover in _ListeFichier)
+
+                string _Fichier = NiceCovers.FusionSave(_ListeFichier);
+                if (_Fichier != "")
                 {
-                    Bitmap _NiceCovers = NiceCovers(_FileCover, _dvdbox);
-                    FileInfo _file = new FileInfo(_FileCover);
-                    string _NomFichier = _file.DirectoryName + "\\" + _file.Name.Replace(_file.Extension, "") + "_NiceCoversBlue"+_suffixe+".png";
-                    _NiceCovers.Save(_NomFichier);
-                    DvdBox.Source = new BitmapImage(new Uri(_NomFichier));
+                    DvdBox.Source = new BitmapImage(new Uri(_Fichier));
                 }
+
                 if (_ListeFichier.Length > 1)
                 {
                     System.Windows.MessageBox.Show("Tous les covers sont générés.");
@@ -122,12 +68,36 @@ namespace NiceCovers_Creator
 
         }
 
-
-            private void BTN_ChargeBlue_Click(object sender, RoutedEventArgs e)
+        private void button1_Click(object sender, RoutedEventArgs e)
         {
+            Bitmap bVide = new Bitmap(571, 720);
+            Stream ms = new MemoryStream();
+            bVide.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
 
-            Fusion("BLUE");
+            PngBitmapEncoder png = new PngBitmapEncoder();
+             
+            png.Metadata = new BitmapMetadata("png"); //error - Property
+            png.Metadata.SetQuery("/tEXt/", "Software");
+            png.Metadata.SetQuery("/tEXt/Software", "moi");
+
+            //png.Metadata.ApplicationName = "Moi";
+
+            //png.Metadata.SetQuery("/tEXt/Software", "moi");
+
+            png.Frames.Add(BitmapFrame.Create(ms));
+            using (Stream stm = File.Create("foo.png"))
+            {
+                png.Save(stm);
+                bVide = new Bitmap(stm);
+            }
+
+            bVide.Save("titi.png");
+
+            ms.Close();
+
 
         }
+
+        
     }
 }

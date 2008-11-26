@@ -18,3 +18,23 @@ C:\Documents and Settings\Julien\Mes documents\Visual Studio 2008\Projects\NiceC
 C:\Documents and Settings\Julien\Mes documents\Visual Studio 2008\Projects\NiceCovers_Creator\NiceCovers_Creator\obj\Debug\NiceCovers_Creator.application
 C:\Documents and Settings\Julien\Mes documents\Visual Studio 2008\Projects\NiceCovers_Creator\NiceCovers_Creator\bin\Debug\NiceCovers_Library.dll
 C:\Documents and Settings\Julien\Mes documents\Visual Studio 2008\Projects\NiceCovers_Creator\NiceCovers_Creator\bin\Debug\NiceCovers_Library.pdb
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\obj\Debug\ResolveAssemblyReference.cache
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\obj\Debug\Window1.baml
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\obj\Debug\Window1.g.cs
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\obj\Debug\App.g.cs
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\obj\Debug\NiceCovers_Creator_MarkupCompile.cache
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\obj\Debug\NiceCovers_Creator.g.resources
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\obj\Debug\NiceCovers_Creator.csproj.GenerateResource.Cache
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\obj\Debug\NiceCovers_Creator.exe
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\obj\Debug\NiceCovers_Creator.pdb
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\bin\Debug\NiceCovers_Creator.exe.config
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\bin\Debug\NiceCovers_Creator.exe.manifest
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\bin\Debug\NiceCovers_Creator.application
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\bin\Debug\NiceCovers_Creator.exe
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\bin\Debug\NiceCovers_Creator.pdb
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\bin\Debug\NiceCovers_Library.dll
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\bin\Debug\NiceCovers_Library.pdb
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\obj\Debug\NiceCovers_Creator.Properties.Resources.resources
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\obj\Debug\NiceCovers_Creator.TrustInfo.xml
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\obj\Debug\NiceCovers_Creator.exe.manifest
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\obj\Debug\NiceCovers_Creator.application
