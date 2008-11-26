@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // Les informations générales relatives à un assembly dépendent de 
 // l'ensemble d'attributs suivant. Changez les valeurs de ces attributs pour modifier les informations
 // associées à un assembly.
-[assembly: AssemblyTitle("NiceCovers_Library")]
+[assembly: AssemblyTitle("NiceCovers_Cmd")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Danone-KiD")]
-[assembly: AssemblyProduct("NiceCovers_Library")]
-[assembly: AssemblyCopyright("Copyright © Danone-KiD 2008")]
+[assembly: AssemblyCompany("TOTAL")]
+[assembly: AssemblyProduct("NiceCovers_Cmd")]
+[assembly: AssemblyCopyright("Copyright © TOTAL 2008")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Le GUID suivant est pour l'ID de la typelib si ce projet est exposé à COM
-[assembly: Guid("49d4fe68-966f-4a11-8c9b-65211e356907")]
+[assembly: Guid("6e93b0f1-ab99-46e9-bce4-26a858da83b1")]
 
 // Les informations de version pour un assembly se composent des quatre valeurs suivantes :
 //

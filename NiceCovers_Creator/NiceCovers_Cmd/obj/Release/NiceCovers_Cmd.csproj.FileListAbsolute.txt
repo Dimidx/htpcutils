@@ -1,0 +1,5 @@
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Cmd\bin\Release\NiceCovers_Cmd.exe
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Cmd\bin\Release\NiceCovers_Cmd.pdb
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Cmd\obj\Release\ResolveAssemblyReference.cache
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Cmd\obj\Release\NiceCovers_Cmd.exe
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Cmd\obj\Release\NiceCovers_Cmd.pdb

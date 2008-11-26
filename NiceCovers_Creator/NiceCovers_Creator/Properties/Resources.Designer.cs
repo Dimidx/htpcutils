@@ -67,13 +67,6 @@ namespace NiceCovers_Creator.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap dvdboxbleu {
-            get {
-                object obj = ResourceManager.GetObject("dvdboxbleu", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Icon NiceCovers_Creator {
             get {
                 object obj = ResourceManager.GetObject("NiceCovers_Creator", resourceCulture);

@@ -122,7 +122,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Resources\NiceCovers_Creator.ico" />
-    <None Include="NiceCovers_Creator_TemporaryKey.pfx" />
     <None Include="Properties\app.manifest" />
   </ItemGroup>
   <ItemGroup>
@@ -159,9 +158,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dvdbox.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\dvdboxbleu.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Vide.png" />
