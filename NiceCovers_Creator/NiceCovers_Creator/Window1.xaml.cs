@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.IO;
 using System.Windows;
@@ -14,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
+using System.Reflection;
 using NiceCovers_Library;
 
 namespace NiceCovers_Creator
@@ -30,7 +32,21 @@ namespace NiceCovers_Creator
 
         }
 
-  
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonDown(e);
+
+            this.DragMove();
+        }
+
+        public void LinkClicked(object sender, RoutedEventArgs e)
+        {
+            Hyperlink senderLink = sender as Hyperlink;
+            if (senderLink != null)
+            {
+                Process.Start(senderLink.NavigateUri.ToString());
+            }
+        }
 
         public static BitmapSource loadBitmap(System.Drawing.Bitmap source)
         {
@@ -38,9 +54,31 @@ namespace NiceCovers_Creator
                 System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
         }
 
+        private void BTN_About_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            // code pour vérifier la version :
+            Assembly _Assembly = Assembly.GetExecutingAssembly();
+            FileVersionInfo  _fileinfo = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location);
+            
+    
+            string version = Assembly.GetExecutingAssembly().FullName.Split(',')[1].Replace("Version=", "").Trim();
+            LIB_Titre.Content = _fileinfo.ProductName;
+            LIB_Version.Content = _fileinfo.ProductVersion;
+            LIB_Auteur.Content = _fileinfo.CompanyName;
+            LIB_Description.Text = _fileinfo.Comments;
+            
+
+            
+
+
+        }
+
         private void BTN_Charge_Click(object sender, RoutedEventArgs e)
         {
-    
+
+
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Title = "Chargement";
             openFileDialog1.Filter = @"Fichiers image (*.jpg, *.png)|*.jpg;*.png"; ;
@@ -51,11 +89,13 @@ namespace NiceCovers_Creator
 
             if (_ListeFichier.Length != 0)
             {
+                //Affiche.Source = new BitmapImage(new Uri(_ListeFichier[_ListeFichier.Length-1]));
 
                 string _Fichier = NiceCovers.FusionSave(_ListeFichier);
+
                 if (_Fichier != "")
                 {
-                    DvdBox.Source = new BitmapImage(new Uri(_Fichier));
+                    NiceCover.Source = new BitmapImage(new Uri(_Fichier));
                 }
 
                 if (_ListeFichier.Length > 1)
@@ -68,36 +108,15 @@ namespace NiceCovers_Creator
 
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
+
+
+        private void BTN_Close_Click(object sender, RoutedEventArgs e)
         {
-            Bitmap bVide = new Bitmap(571, 720);
-            Stream ms = new MemoryStream();
-            bVide.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-
-            PngBitmapEncoder png = new PngBitmapEncoder();
-             
-            png.Metadata = new BitmapMetadata("png"); //error - Property
-            png.Metadata.SetQuery("/tEXt/", "Software");
-            png.Metadata.SetQuery("/tEXt/Software", "moi");
-
-            //png.Metadata.ApplicationName = "Moi";
-
-            //png.Metadata.SetQuery("/tEXt/Software", "moi");
-
-            png.Frames.Add(BitmapFrame.Create(ms));
-            using (Stream stm = File.Create("foo.png"))
-            {
-                png.Save(stm);
-                bVide = new Bitmap(stm);
-            }
-
-            bVide.Save("titi.png");
-
-            ms.Close();
+            Close();
 
 
         }
 
-        
+
     }
 }

@@ -39,3 +39,5 @@ D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\obj\Release\NiceCov
 D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\obj\Release\NiceCovers_Creator.application
 D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\obj\Release\NiceCovers_Creator.exe
 D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\obj\Release\NiceCovers_Creator.pdb
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\obj\Release\BlackResources.baml
+D:\Perso\Dev\HTPCUtils\NiceCovers_Creator\NiceCovers_Creator\obj\Release\App.baml
