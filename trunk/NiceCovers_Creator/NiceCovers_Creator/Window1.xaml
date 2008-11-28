@@ -9,7 +9,7 @@
    Height="465.5"
    ResizeMode="NoResize"
    Title="NiceCovers Créator"
-   mc:Ignorable="d" Background="{x:Null}" SizeToContent="WidthAndHeight" WindowStyle="None" Foreground="{x:Null}" AllowsTransparency="True">
+   mc:Ignorable="d" Background="{x:Null}" SizeToContent="WidthAndHeight" WindowStyle="None" Foreground="{x:Null}" AllowsTransparency="True" WindowStartupLocation="CenterScreen">
    <Window.Resources>
    <!-- SimpleStyles: Button -->
       <Style TargetType="{x:Type Button}">
@@ -181,7 +181,7 @@
    				Click="BTN_About_Click"
    				IsDefault="False"
          
-   				ToolTip="Charge le fichier image pour le fusionner avec le DvdBox. Le fichier sera enregistré avec le suffixe  _NiceCover ." Width="90" Content="A propos..." Style="{DynamicResource BlackButtonStyle}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+   				ToolTip="A Propos..." Width="90" Content="A propos..." Style="{DynamicResource BlackButtonStyle}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
    		</DockPanel>
    	</Border>
 	</DockPanel>
