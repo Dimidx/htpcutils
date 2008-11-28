@@ -21,15 +21,48 @@ namespace NiceCovers_Library
         /// <returns>l'image fusionnée</returns>
         public static Bitmap Fusion(string _FichierCover)
         {
+
             Bitmap bDvdBox = new Bitmap(NiceCovers_Library.Properties.Resources.dvdbox);
             Bitmap bCover = new Bitmap(@_FichierCover);
             Bitmap bVide = new Bitmap(571, 720);
-            Graphics g = Graphics.FromImage(bVide);
-            g.DrawImage(bCover, 81, 24, 458, 655);
-            g.DrawImage(bDvdBox, 0, 0, 571, 720);
-            g.Save();
-            return bVide;
+
+            if (VerifNiceCovers(bCover) == false)
+            {
+                Graphics g = Graphics.FromImage(bVide);
+                g.DrawImage(bCover, 81, 24, 458, 655);
+                g.DrawImage(bDvdBox, 0, 0, 571, 720);
+
+                g.Save();
+                return bVide;
+            }
+            else
+            {
+                return bCover;
+            }
+
         }
+
+        private static bool VerifNiceCovers(Bitmap _Bitmap)
+        {
+            Color _color1 = _Bitmap.GetPixel(60, 10);
+            Color _Test1 = Color.FromArgb(133, 76, 76, 76);
+
+            if (_color1 == _Test1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+
+
+
+
+        }
+
+
 
         /// <summary>
         /// Lance la conversion de la liste de fichiers (un seul fichier peut être passé)
@@ -52,7 +85,7 @@ namespace NiceCovers_Library
                 }
                 else
                 {
-                   return "";
+                    return "";
                 }
 
             }
