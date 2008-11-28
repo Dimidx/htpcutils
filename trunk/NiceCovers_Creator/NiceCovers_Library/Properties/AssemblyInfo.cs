@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Danone-KiD")]
 [assembly: AssemblyProduct("NiceCovers_Library")]
-[assembly: AssemblyCopyright("Copyright © Danone-KiD 2008")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

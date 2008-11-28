@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // l'ensemble d'attributs suivant. Changez les valeurs de ces attributs pour modifier les informations
 // associées à un assembly.
 [assembly: AssemblyTitle("NiceCovers_Cmd")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Générateur de NiceCovers en ligne de commande")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("TOTAL")]
-[assembly: AssemblyProduct("NiceCovers_Cmd")]
-[assembly: AssemblyCopyright("Copyright © TOTAL 2008")]
+[assembly: AssemblyCompany("Danone-KiD")]
+[assembly: AssemblyProduct("NiceCovers Command")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
