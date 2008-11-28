@@ -59,8 +59,8 @@
       <VisualBrush x:Key="VisualBrush_Affiche" Visual="{Binding ElementName=NiceCover}"/>
       <Storyboard x:Key="Story_About">
       	<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Border_About" Storyboard.TargetProperty="(FrameworkElement.Height)">
-      		<SplineDoubleKeyFrame KeySpline="1,0,1,1" KeyTime="00:00:00.5000000" Value="0"/>
-      		<SplineDoubleKeyFrame KeySpline="1,0,1,1" KeyTime="00:00:01" Value="360"/>
+      		<SplineDoubleKeyFrame KeySpline="1,0,1,1" KeyTime="00:00:00" Value="0"/>
+      		<SplineDoubleKeyFrame KeyTime="00:00:01" Value="360" KeySpline="1,0,1,1"/>
       	</DoubleAnimationUsingKeyFrames>
       	<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Border_Main" Storyboard.TargetProperty="(FrameworkElement.Height)">
       		<SplineDoubleKeyFrame KeyTime="00:00:00" Value="360" KeySpline="0,1,1,1"/>
@@ -103,15 +103,16 @@
    </Window.Resources>
 	<Window.Triggers>
 		<EventTrigger RoutedEvent="ButtonBase.Click" SourceName="BTN_About">
-			<BeginStoryboard Storyboard="{StaticResource Story_About}" x:Name="Story_About_BeginStoryboard"/>
+			<BeginStoryboard x:Name="Story_About_BeginStoryboard" Storyboard="{StaticResource Story_About}"/>
 		</EventTrigger>
 		<EventTrigger RoutedEvent="UIElement.PreviewMouseLeftButtonDown" SourceName="BTN_Charge">
+			<StopStoryboard BeginStoryboardName="Story_About_BeginStoryboard"/>
 			<StopStoryboard BeginStoryboardName="Story_About_BeginStoryboard"/>
 		</EventTrigger>
 	</Window.Triggers>
    <DockPanel Width="283" Height="Auto" LastChildFill="False">
    	<Border Margin="5,5,5,0" Width="Auto" Height="47" Background="{DynamicResource HeaderBackgroundBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,0,0" DockPanel.Dock="Top">
-   		<Grid Width="Auto" Height="Auto" Cursor="None">
+   		<Grid Width="Auto" Height="Auto">
    			<Label FontSize="18" FontWeight="Bold" Content="NiceCovers Créator" Margin="8,4,110.497,4" VerticalAlignment="Stretch" d:LayoutOverrides="Width"/>
    			<Button Click="BTN_Close_Click" HorizontalAlignment="Right" Margin="0,2.165,3.667,0" Width="11.833" Content="X" Style="{DynamicResource BlackButtonStyle}" Height="13.667" VerticalAlignment="Top" x:Name="BTN_Close" Cursor="Hand"/>
    		</Grid>

@@ -86,16 +86,24 @@ namespace NiceCovers_Creator
             openFileDialog1.Multiselect = true;
             openFileDialog1.ShowDialog();
             string[] _ListeFichier = openFileDialog1.FileNames;
-
+            string _Result = "";
             if (_ListeFichier.Length != 0)
             {
                 //Affiche.Source = new BitmapImage(new Uri(_ListeFichier[_ListeFichier.Length-1]));
-
-                string _Fichier = NiceCovers.FusionSave(_ListeFichier);
-
-                if (_Fichier != "")
+                foreach (string _Fichier in _ListeFichier)
                 {
-                    NiceCover.Source = new BitmapImage(new Uri(_Fichier));
+                    _Result = NiceCovers.FusionSave(_Fichier);
+
+                    if (_Result == "")
+                    {
+                        System.Windows.MessageBox.Show("Impossible de générer le fichier "+_Fichier,"Erreur", MessageBoxButton.OK,MessageBoxImage.Error);
+                    }
+
+                    
+                }
+                if (_Result != "")
+                {
+                    NiceCover.Source = new BitmapImage(new Uri(_Result));
                 }
 
                 if (_ListeFichier.Length > 1)
@@ -103,6 +111,7 @@ namespace NiceCovers_Creator
                     System.Windows.MessageBox.Show("Tous les covers sont générés.");
 
                 }
+                
 
             }
 

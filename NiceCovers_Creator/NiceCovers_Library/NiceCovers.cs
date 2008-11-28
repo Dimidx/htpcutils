@@ -36,26 +36,27 @@ namespace NiceCovers_Library
         /// </summary>
         /// <param name="_ListeFichiers"></param>
         /// <returns>Le dernier nom du fichier généré</returns>
-        public static string FusionSave(string[] _ListeFichiers)
+        public static string FusionSave(string _FichierJpg)
         {
             string _suffixe = "_NiceCovers";
             string _NomFichier = "";
             try
             {
-                if (_ListeFichiers.Length != 0)
+                if (File.Exists(_FichierJpg) == true)
                 {
-                    foreach (string _FileCover in _ListeFichiers)
-                    {
-                        Bitmap _NiceCovers = NiceCovers.Fusion(_FileCover);
-                        FileInfo _file = new FileInfo(_FileCover);
-                        _NomFichier = _file.DirectoryName + "\\" + _file.Name.Replace(_file.Extension, "") + _suffixe + ".png";
-                        _NiceCovers.Save(_NomFichier);
-                    }
+                    Bitmap _NiceCovers = NiceCovers.Fusion(_FichierJpg);
+                    FileInfo _file = new FileInfo(_FichierJpg);
+                    _NomFichier = _file.DirectoryName + "\\" + _file.Name.Replace(_file.Extension, "") + _suffixe + ".png";
+                    _NiceCovers.Save(_NomFichier);
                     return _NomFichier;
                 }
-                return "";
+                else
+                {
+                   return "";
+                }
+
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 return "";
