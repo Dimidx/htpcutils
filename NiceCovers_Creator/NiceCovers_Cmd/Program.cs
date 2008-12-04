@@ -16,13 +16,19 @@ namespace NiceCovers_Cmd
             if (args.Length != 0)
             {
                 string _fichier = args[0];
+                string _type = "MOVIE";
+                if (args.Length == 2)
+                {
+                    _type = args[1].ToUpper().Replace("/","");
+                }
+
                 string _result = "";
                 if (File.Exists(_fichier))
                 {
                     FileInfo _fichierJpg = new FileInfo(_fichier);
                     
                     Console.WriteLine("Convertion de " + _fichierJpg.Name + " vers "+_fichierJpg.Name.Replace(_fichierJpg.Extension, "") + "_NiceCovers.png");
-                    _result = NiceCovers.FusionSave(_fichier);
+                    _result = NiceCovers.FusionSave(_fichier, _type);
                     if (_result == "")
                     {
                         Console.WriteLine("--Erreur--");
@@ -38,7 +44,7 @@ namespace NiceCovers_Cmd
                             if ((_fic.Extension.ToLower() == ".jpg") || (_fic.Extension.ToLower() == ".png"))
                             {
                                 Console.WriteLine("Convertion de " + _fic.Name + " vers " + _fic.Name.Replace(_fic.Extension, "") + "_NiceCovers.png");
-                                _result = NiceCovers.FusionSave(_sfic);
+                                _result = NiceCovers.FusionSave(_sfic, _type);
                                 if (_result == "")
                                 {
                                     Console.WriteLine("--Erreur--");
@@ -61,8 +67,8 @@ namespace NiceCovers_Cmd
             else
             {
                 Console.WriteLine("------------------------------------------------------");
-                Console.WriteLine("Syntaxe : NiceCovers_Cmd NomDuFichier");
-                Console.WriteLine("Syntaxe : NiceCovers_Cmd NomDuDossier");
+                Console.WriteLine("Syntaxe : NiceCovers_Cmd NomDuFichier /MUSIC ou /MOVIE");
+                Console.WriteLine("Syntaxe : NiceCovers_Cmd NomDuDossier /MUSIC ou /MOVIE");
                 Console.WriteLine("------------------------------------------------------");
 
 
