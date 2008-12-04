@@ -95,17 +95,19 @@ namespace NiceCovers_Library
         {
             string _suffixe = "_NiceCovers";
             string _NomFichier = "";
+            Bitmap _NiceCovers = null;
             try
             {
                 if (File.Exists(_FichierJpg) == true)
                 {
-                    if (_Type = "MOVIE")
+                    if (_Type == "MOVIE")
                     {
-                        Bitmap _NiceCovers = NiceCovers.Fusion(_FichierJpg);
+                        _NiceCovers = NiceCovers.Fusion(_FichierJpg);
                     }
                     else
                     {
-                    
+                        _NiceCovers = NiceCovers.FusionMusic(_FichierJpg);
+
                     }
 
                         FileInfo _file = new FileInfo(_FichierJpg);
