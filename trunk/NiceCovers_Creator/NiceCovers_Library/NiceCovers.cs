@@ -31,7 +31,6 @@ namespace NiceCovers_Library
                 Graphics g = Graphics.FromImage(bVide);
                 g.DrawImage(bCover, 81, 24, 458, 655);
                 g.DrawImage(bDvdBox, 0, 0, 571, 720);
-
                 g.Save();
                 return bVide;
             }
@@ -42,10 +41,33 @@ namespace NiceCovers_Library
 
         }
 
+        public static Bitmap FusionMusic(string _FichierCover)
+        {
+            Bitmap bCDBox = new Bitmap(NiceCovers_Library.Properties.Resources.CDBox);
+       
+            Bitmap bCover = new Bitmap(@_FichierCover);
+            Bitmap bVide = new Bitmap(520, 470);
+
+
+          
+
+            Graphics g = Graphics.FromImage(bVide);
+            g.DrawImage(bCover, 72, 20, 420, 417);
+            g.DrawImage(bCDBox, 0, 0, 520, 470);
+            g.Save();
+            return bVide;
+
+
+        }
+
+
         private static bool VerifNiceCovers(Bitmap _Bitmap)
         {
             Color _color1 = _Bitmap.GetPixel(60, 10);
             Color _Test1 = Color.FromArgb(133, 76, 76, 76);
+
+    
+
 
             if (_color1 == _Test1)
             {
@@ -69,7 +91,7 @@ namespace NiceCovers_Library
         /// </summary>
         /// <param name="_ListeFichiers"></param>
         /// <returns>Le dernier nom du fichier généré</returns>
-        public static string FusionSave(string _FichierJpg)
+        public static string FusionSave(string _FichierJpg,string _Type)
         {
             string _suffixe = "_NiceCovers";
             string _NomFichier = "";
@@ -77,8 +99,16 @@ namespace NiceCovers_Library
             {
                 if (File.Exists(_FichierJpg) == true)
                 {
-                    Bitmap _NiceCovers = NiceCovers.Fusion(_FichierJpg);
-                    FileInfo _file = new FileInfo(_FichierJpg);
+                    if (_Type = "MOVIE")
+                    {
+                        Bitmap _NiceCovers = NiceCovers.Fusion(_FichierJpg);
+                    }
+                    else
+                    {
+                    
+                    }
+
+                        FileInfo _file = new FileInfo(_FichierJpg);
                     _NomFichier = _file.DirectoryName + "\\" + _file.Name.Replace(_file.Extension, "") + _suffixe + ".png";
                     _NiceCovers.Save(_NomFichier);
                     return _NomFichier;

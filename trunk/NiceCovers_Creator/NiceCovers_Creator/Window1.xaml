@@ -6,12 +6,12 @@
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
    Width="301"
-   Height="465.5"
+   Height="485.5"
    ResizeMode="NoResize"
    Title="NiceCovers Créator"
    mc:Ignorable="d" Background="{x:Null}" SizeToContent="WidthAndHeight" WindowStyle="None" Foreground="{x:Null}" AllowsTransparency="True" WindowStartupLocation="CenterScreen">
    <Window.Resources>
-   <!-- SimpleStyles: Button -->
+        <!-- SimpleStyles: Button -->
       <Style TargetType="{x:Type Button}">
          <Setter Property="SnapsToDevicePixels" Value="true"/>
          <Setter Property="OverridesDefaultStyle" Value="true"/>
@@ -100,6 +100,7 @@
             </Setter.Value>
          </Setter>
       </Style>
+      <VisualBrush x:Key="VisualBrush1" Visual="{Binding ElementName=Img_NiceCover}"/>
    </Window.Resources>
 	<Window.Triggers>
 		<EventTrigger RoutedEvent="ButtonBase.Click" SourceName="BTN_About">
@@ -111,20 +112,22 @@
 		</EventTrigger>
 	</Window.Triggers>
    <DockPanel Width="283" Height="Auto" LastChildFill="False">
-   	<Border Margin="5,5,5,0" Width="Auto" Height="47" Background="{DynamicResource HeaderBackgroundBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,0,0" DockPanel.Dock="Top">
+   	<Border Margin="5,5,5,0" Width="Auto" Height="67" Background="{DynamicResource HeaderBackgroundBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,0,0" DockPanel.Dock="Top">
    		<Grid Width="Auto" Height="Auto">
    			<Label FontSize="18" FontWeight="Bold" Content="NiceCovers Créator" Margin="8,4,110.497,4" VerticalAlignment="Stretch" d:LayoutOverrides="Width"/>
    			<Button Click="BTN_Close_Click" HorizontalAlignment="Right" Margin="0,2.165,3.667,0" Width="11.833" Content="X" Style="{DynamicResource BlackButtonStyle}" Height="13.667" VerticalAlignment="Top" x:Name="BTN_Close" Cursor="Hand"/>
+   			<RadioButton Click="RadioButton_Checked" Margin="12,0,0,2" VerticalAlignment="Bottom" Height="18" Content="Vidéo" Width="49" HorizontalAlignment="Left" GroupName="Type_Cover" IsChecked="True" Name="INT_Movie" />
+   			<RadioButton  Click="RadioButton_Checked" Width="67" Height="18" Content="Music" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="65,0,0,2" GroupName="Type_Cover" Name="INT_Music" />
    		</Grid>
    	</Border>
    	<Border Margin="5,0,5,0" Width="Auto" Height="360" Background="{DynamicResource DiagramGradientBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,0,1,0" DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Visible" x:Name="Border_Main" Opacity="1">
    		<StackPanel Width="Auto" Height="Auto" x:Name="stackPanel">
    			<Image
-   				x:Name="NiceCover"
+   				x:Name="Img_NiceCover"
    				Source="/NiceCovers_Creator;component/dvdbox.png"
-   				Stretch="Fill"
+   				Stretch="Uniform"
          Width="265" Height="333.824" Style="{DynamicResource ImageStyle1}"/>
-   			<Rectangle Width="265" Height="265" Fill="{DynamicResource VisualBrush_Affiche}" Stroke="{x:Null}" Stretch="Uniform" Margin="0,-12,0,0" RenderTransformOrigin="0.5,0.5">
+   			<Rectangle Width="265" Height="265" Fill="{DynamicResource VisualBrush1}" Stroke="{x:Null}" Stretch="Uniform" Margin="0,-12,0,0" RenderTransformOrigin="0.5,0.5">
    				<Rectangle.OpacityMask>
    					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
    						<GradientStop Color="#00777777" Offset="0.857"/>

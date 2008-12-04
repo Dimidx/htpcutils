@@ -77,7 +77,16 @@ namespace NiceCovers_Creator
 
         private void BTN_Charge_Click(object sender, RoutedEventArgs e)
         {
+            string _type = "MOVIE";
 
+            if (INT_Movie.IsChecked == true)
+            {
+                _type = "MOVIE";
+            }
+            else
+            {
+                _type = "MUSIC";
+            }
 
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Title = "Chargement";
@@ -92,7 +101,7 @@ namespace NiceCovers_Creator
                 //Affiche.Source = new BitmapImage(new Uri(_ListeFichier[_ListeFichier.Length-1]));
                 foreach (string _Fichier in _ListeFichier)
                 {
-                    _Result = NiceCovers.FusionSave(_Fichier);
+                    _Result = NiceCovers.FusionSave(_Fichier, _type);
 
                     if (_Result == "")
                     {
@@ -103,7 +112,7 @@ namespace NiceCovers_Creator
                 }
                 if (_Result != "")
                 {
-                    NiceCover.Source = new BitmapImage(new Uri(_Result));
+                    Img_NiceCover.Source = new BitmapImage(new Uri(_Result));
                 }
 
                 if (_ListeFichier.Length > 1)
@@ -126,6 +135,53 @@ namespace NiceCovers_Creator
 
         }
 
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if (INT_Movie.IsChecked == true)
+            {
 
+                Img_NiceCover.Source = Convert(NiceCovers_Creator.Properties.Resources.dvdbox);
+
+            }
+                else
+            {
+                Img_NiceCover.Source = Convert(NiceCovers_Creator.Properties.Resources.CDBox);
+
+            }
+ 
+        }
+
+
+         public BitmapImage Convert(object value)
+        {
+            BitmapImage ImgSource = null;
+
+            System.Drawing.Image image = value as System.Drawing.Image;
+
+            if (image != null)
+            {
+                ImgSource = new BitmapImage();
+                ImgSource.BeginInit();
+
+                ImgSource.StreamSource = new MemoryStream(ConvertImageToByteArray(image));
+
+                ImgSource.EndInit();
+            }
+
+            return ImgSource;
+        }
+
+        /// <summary>
+        /// Convert a System.Drawing.Image to a byte array
+        /// </summary>
+        /// <param name="img">The System.Drawing.Image to convert in a byte array</param>
+        /// <returns>A byte array</returns>
+        private byte[] ConvertImageToByteArray(System.Drawing.Image img)
+        {
+            MemoryStream ms = new MemoryStream();
+            img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+
+            return ms.ToArray();
+        }
     }
 }
