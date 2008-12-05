@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NiceCovers_Library", "NiceC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NiceCovers_Cmd", "NiceCovers_Cmd\NiceCovers_Cmd.csproj", "{3A4F4454-CB74-4784-AB58-DDFC92DF320C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "meeNiceCovers_Converter", "meeNiceCovers_Converter\meeNiceCovers_Converter.csproj", "{D5B5018A-D9A8-49B4-8F20-4B0EA8E54F3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{3A4F4454-CB74-4784-AB58-DDFC92DF320C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A4F4454-CB74-4784-AB58-DDFC92DF320C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A4F4454-CB74-4784-AB58-DDFC92DF320C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5B5018A-D9A8-49B4-8F20-4B0EA8E54F3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5B5018A-D9A8-49B4-8F20-4B0EA8E54F3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5B5018A-D9A8-49B4-8F20-4B0EA8E54F3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5B5018A-D9A8-49B4-8F20-4B0EA8E54F3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
