@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C# Express 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCovers_Plugin", "MovieCovers_Plugin\MovieCovers_Plugin.csproj", "{003FFBCD-FBD4-481E-B80C-8FA0F7890179}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestScraper", "..\..\TestScraper\TestScraper\TestScraper.csproj", "{74B926B8-3B66-4511-AA4C-F12FB89C0261}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{003FFBCD-FBD4-481E-B80C-8FA0F7890179}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{003FFBCD-FBD4-481E-B80C-8FA0F7890179}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{003FFBCD-FBD4-481E-B80C-8FA0F7890179}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{003FFBCD-FBD4-481E-B80C-8FA0F7890179}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74B926B8-3B66-4511-AA4C-F12FB89C0261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74B926B8-3B66-4511-AA4C-F12FB89C0261}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74B926B8-3B66-4511-AA4C-F12FB89C0261}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74B926B8-3B66-4511-AA4C-F12FB89C0261}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
