@@ -378,3 +378,16 @@ RFRA1025,01/15/09,19:35:57,19:59:52,0:23:55,7,Procedures globales de MoviesManag
 RFRA1025,01/15/09,19:40:23,19:59:52,0:19:29,4,PluginResultat,D:\Perso\Dev\HTPCUtils\MoviesManager\PluginResultats.wdc
 RFRA1025,01/15/09,19:40:24,19:59:52,0:19:28,4,Plugin,D:\Perso\Dev\HTPCUtils\MoviesManager\Plugin.wdc
 RFRA1025,01/15/09,19:35:56,19:59:52,0:23:56,4097,MoviesManager,D:\Perso\Dev\HTPCUtils\MoviesManager\MoviesManager.WDP
+RFRA1025,01/16/09,08:29:36,08:30:07,0:0:31,2,FEN_Fenêtre1,
+RFRA1025,01/16/09,08:30:12,08:30:31,0:0:19,2,FEN_ZoomImage,C:\Users\Julien\Documents\Dev\htpcutils\MoviesManager\FEN_ZoomImage.wdw
+RFRA1025,01/16/09,08:36:51,08:42:17,0:5:26,2,FEN_ZoomImage,C:\Users\Julien\Documents\Dev\htpcutils\MoviesManager\FEN_ZoomImage.wdw
+RFRA1025,01/16/09,08:42:17,08:42:48,0:0:31,8,FI_FilmDetails,C:\Users\Julien\Documents\Dev\htpcutils\MoviesManager\FI_FilmDetails.wdw
+RFRA1025,01/16/09,08:43:12,08:45:29,0:2:17,8,FI_FilmDetails,C:\Users\Julien\Documents\Dev\htpcutils\MoviesManager\FI_FilmDetails.wdw
+RFRA1025,01/16/09,08:45:29,08:45:51,0:0:22,2,FEN_Main,C:\Users\Julien\Documents\Dev\htpcutils\MoviesManager\FEN_Main.wdw
+RFRA1025,01/16/09,08:45:51,08:54:31,0:8:40,8,FI_FilmDetails,C:\Users\Julien\Documents\Dev\htpcutils\MoviesManager\FI_FilmDetails.wdw
+RFRA1025,01/16/09,08:22:32,08:54:31,0:31:59,2,FEN_Main,C:\Users\Julien\Documents\Dev\htpcutils\MoviesManager\FEN_Main.wdw
+RFRA1025,01/16/09,08:29:36,08:54:31,0:24:55,2,FEN_ZoomImage,C:\Users\Julien\Documents\Dev\htpcutils\MoviesManager\FEN_ZoomImage.wdw
+RFRA1025,01/16/09,08:31:05,08:54:31,0:23:26,8,FI_FilmDetails,C:\Users\Julien\Documents\Dev\htpcutils\MoviesManager\FI_FilmDetails.wdw
+RFRA1025,01/16/09,08:22:22,08:54:31,0:32:9,7,Procedures globales de MoviesManager,C:\Users\Julien\Documents\Dev\htpcutils\MoviesManager\Procedures globales de MoviesManager.wdg
+RFRA1025,01/16/09,08:42:48,08:54:31,0:11:43,4,Film,C:\Users\Julien\Documents\Dev\htpcutils\MoviesManager\Movie.wdc
+RFRA1025,01/16/09,08:22:16,08:54:31,0:32:15,4097,MoviesManager,C:\Users\Julien\Documents\Dev\htpcutils\MoviesManager\MoviesManager.WDP
