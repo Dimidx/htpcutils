@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Threading;
 using Scraper;
+using WL;
 
 namespace MovieCovers_Plugin
 {
@@ -22,8 +23,9 @@ namespace MovieCovers_Plugin
         {
             Movie[] _result = null;
             List<Movie> _ListeResult = new List<Movie>();
-
-
+            WL.Film titi;
+            
+            
    
             //Recupère le resultats des films
             string strURL = "http://www.moviecovers.com/multicrit.html?titre=" + HttpUtility.UrlEncode(MovieName, Encoding.Default) + "&slow=1&tri=Titre";
