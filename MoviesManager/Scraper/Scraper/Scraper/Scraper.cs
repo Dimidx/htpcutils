@@ -81,7 +81,7 @@ namespace Scraper
             {
                 // Load dll
                 objDLL = Assembly.LoadFrom(Plugin.Path);
-
+                
                 //Cherche le nom de la classe
                 //Plugin.ClassName = 
                 

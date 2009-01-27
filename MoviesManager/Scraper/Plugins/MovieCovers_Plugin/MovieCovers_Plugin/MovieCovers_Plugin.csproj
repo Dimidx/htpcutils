@@ -31,9 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Scraper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="MoviesManager, Version=1.0.3.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Exe\Scraper.dll</HintPath>
+      <HintPath>..\..\..\..\Exe\MoviesManager.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -48,6 +49,10 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WD140NET2, Version=14.0.2.2, Culture=neutral, PublicKeyToken=4173916b013faa00, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Exe\WD140NET2.DLL</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="main.cs" />
