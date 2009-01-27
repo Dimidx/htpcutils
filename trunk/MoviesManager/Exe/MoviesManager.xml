@@ -4,42 +4,17 @@
         <name>MoviesManager</name>
     </assembly>
     <members>
-        <member name="T:WL.Actor">
+        <member name="T:WL.Movie">
             <summary>
             
             (Classe générée avec WinDev)
             </summary>
         </member>
-        <member name="T:WL.Film">
+        <member name="T:WL.Person">
             <summary>
             
             (Classe générée avec WinDev)
             </summary>
-        </member>
-        <member name="M:WL.Film.GetNFO">
-            <summary>
-            
-            </summary>
-            <returns>
-             	Aucune
-            </returns>
-            <example>
-             Indiquez ici un exemple d'utilisation.
-            </example>
-        </member>
-        <member name="M:WL.Film.Load(System.String)">
-            <summary>
-            
-            </summary>
-            <param name="sCheminFilm">
-             &lt;indiquez ici le rôle de sCheminFilm&gt;
-            </param>
-            <returns>
-             	Aucune
-            </returns>
-            <example>
-             Indiquez ici un exemple d'utilisation.
-            </example>
         </member>
         <member name="T:WL.PluginResultat">
             <summary>

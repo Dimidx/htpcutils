@@ -8,27 +8,25 @@ using System.Xml;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Threading;
-using Scraper;
 using WL;
 
 namespace MovieCovers_Plugin
 {
-    public class main : ScraperPlugin
+    public class main 
     {
-        public string PluginName { get { return "MovieCovers"; } }
-        public string Author { get { return "Danone-KiD"; } }
-        public string Version { get { return "1.0"; } }
+        //public string PluginName { get { return "MovieCovers"; } }
+        //public string Author { get { return "Danone-KiD"; } }
+        //public string Version { get { return "1.0"; } }
 
-        public Movie[] SearchMovie(string MovieName)
-        {
-            Movie[] _result = null;
-            List<Movie> _ListeResult = new List<Movie>();
-            WL.Film titi;
-            
-            
    
+
+        public PluginResultat[] SearchMovie(Movie TheFilm)
+        {
+            PluginResultat[] _TabResult = null;
+            List<PluginResultat> _ListResult = null;
+
             //Recupère le resultats des films
-            string strURL = "http://www.moviecovers.com/multicrit.html?titre=" + HttpUtility.UrlEncode(MovieName, Encoding.Default) + "&slow=1&tri=Titre";
+            string strURL = "http://www.moviecovers.com/multicrit.html?titre=" + HttpUtility.UrlEncode(TheFilm.Title, Encoding.Default) + "&slow=1&tri=Titre";
             int _NbrFilms;
             
             string strBody = GetSourceHTML(strURL);
@@ -41,62 +39,46 @@ namespace MovieCovers_Plugin
 
                 foreach (Match movieCode in myMatches)
                 {
-
-                    //Le filme trouvé
-                    Movie _Movie = new Movie();
-
-                    //La liste des covers
-                    List<ImageMovie> _ListeCovers = new List<ImageMovie>();
-
-                    //La liste des fanart
-                    List<ImageMovie> _ListeFanart = new List<ImageMovie>();
+                    //Le film trouvé
+                    PluginResultat _result = null;
 
                     string strMovieCode = movieCode.ToString();
 
                     string strLink = Regex.Match(strMovieCode, @".*/film/titre_(.*).html"">(.*)</A> \((.*)\)").ToString();
-                    _Movie.URLPage = @"http://www.moviecovers.com/film/titre_" + movieCode.Groups[1].ToString()+".html";
-                    _Movie.ID = movieCode.Groups[1].ToString();
-                    _Movie.Title = movieCode.Groups[2].ToString();
-                    _Movie.Year = movieCode.Groups[3].ToString();
+                    _result.URL = @"http://www.moviecovers.com/film/titre_" + movieCode.Groups[1].ToString()+".html";
+                    _result.ID = movieCode.Groups[1].ToString();
+                    _result.Titre = movieCode.Groups[2].ToString();
+                    _result.Annee = movieCode.Groups[3].ToString();
 
-
-                    string _URLCover = @"http://www.moviecovers.com/DATA/thumbs/films-" + movieCode.Groups[2].ToString().Substring(0, 1).ToLower() + "/" + movieCode.Groups[1].ToString() + ".jpg";
-
-                        ImageMovie _Cover = new ImageMovie();
-                        _Cover.URLImage = _URLCover;
-                        _Cover.URLThumb = _URLCover;
-                        _ListeCovers.Add(_Cover);
-
-
-                    _Movie.Cover = _ListeCovers.ToArray();
-                    _ListeResult.Add(_Movie);
+                    _ListResult.Add(_result);
 
                 }
             }
 
 
-            _result = _ListeResult.ToArray();
+            _TabResult = _ListResult.ToArray();
 
-            return _result;
+            return _TabResult;
         }
 
 
-        public Movie GetMovie(string id)
+        public Movie GetMovie(PluginResultat ResultSelected)
         {
             Movie MonFilm = new Movie();
-            string s = GetSourceHTML("http://www.moviecovers.com/film/titre_" + id + ".html");
+            string s = GetSourceHTML("http://www.moviecovers.com/film/titre_" + ResultSelected.ID + ".html");
 
             s = Regex.Replace(s, "[\r\n]", "");
 
-           //La liste des covers
-            List<ImageMovie> _ListeCovers = new List<ImageMovie>();
 
-            string strThumbURL = "http://www.moviecovers.com/getjpg.html/" + id + ".jpg";
-            ImageMovie _Cover = new ImageMovie();
-            _Cover.URLImage = strThumbURL;
-            _Cover.URLThumb = strThumbURL;
+           //La liste des covers
+            List<Thumb> _ListeCovers = new List<Thumb>();
+
+            string strThumbURL = "http://www.moviecovers.com/getjpg.html/" + ResultSelected.ID + ".jpg";
+            Thumb _Cover = new Thumb();
+            _Cover.URL = strThumbURL;
+            _Cover.URLMiniature = strThumbURL;
             _ListeCovers.Add(_Cover);
-            MonFilm.Cover = _ListeCovers.ToArray();
+            MonFilm.Thumbs = _ListeCovers.ToArray();
 
             return MonFilm;
         }
