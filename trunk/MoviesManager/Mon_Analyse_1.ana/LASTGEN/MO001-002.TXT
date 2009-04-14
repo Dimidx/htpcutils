@@ -1,4 +1,7 @@
 //MO001-002.TXT ANA00001 TO ANA00002
-FichierPlugin		EXT	XML	nouvelle extension  XML
-FichierPlugin		TAR	237	nouvelle taille enregistrement : 237
-FichierPlugin		TYPE		Le type du fichier est passé de Accès natif/Autre accès OLE DB à HyperFileSQL
+Fanart		TAR	50	nouvelle taille enregistrement : 50
+Fanart	URLMiniature	RUB+		URLMiniature est une nouvelle clé
+Fanart	ImageMiniature	RUB+		ImageMiniature est une nouvelle rubrique
+Affiche		TAR	50	nouvelle taille enregistrement : 50
+Affiche	URLMiniature	RUB+		URLMiniature est une nouvelle clé
+Affiche	ImageMiniature	RUB+		ImageMiniature est une nouvelle rubrique
