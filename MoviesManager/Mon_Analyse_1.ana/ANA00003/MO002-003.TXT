@@ -1,2 +1,1 @@
 //MO002-003.TXT ANA00002 TO ANA00003
-FichierPlugin		EXT	mmp	nouvelle extension  mmp
