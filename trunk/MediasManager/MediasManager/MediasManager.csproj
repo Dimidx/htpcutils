@@ -48,12 +48,104 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPF.Themes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\WPF.Themes.dll</HintPath>
+    </Reference>
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\WPFToolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Themes\BubbleCreme\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\BureauBlack\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\BureauBlue\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\DavesGlossyControls\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ExpressionDark\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ExpressionLight\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\RainierOrange\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\RainierPurple\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\RainierRadialBlue\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ShinyBlue\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ShinyDarkGreen\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ShinyDarkPurple\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ShinyDarkTeal\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ShinyRed\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\TwilightBlue\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\UXMusingsBubblyBlue\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\UXMusingsGreen\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\UXMusingsRed\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\UXMusingsRoughGreen\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\UXMusingsRoughRed\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\WhistlerBlue\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Window1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -89,6 +181,69 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Themes\BubbleCreme\.svn\all-wcprops" />
+    <None Include="Themes\BubbleCreme\.svn\entries" />
+    <None Include="Themes\BubbleCreme\.svn\text-base\Theme.xaml.svn-base" />
+    <None Include="Themes\BureauBlack\.svn\all-wcprops" />
+    <None Include="Themes\BureauBlack\.svn\entries" />
+    <None Include="Themes\BureauBlack\.svn\text-base\Theme.xaml.svn-base" />
+    <None Include="Themes\BureauBlue\.svn\all-wcprops" />
+    <None Include="Themes\BureauBlue\.svn\entries" />
+    <None Include="Themes\BureauBlue\.svn\text-base\Theme.xaml.svn-base" />
+    <None Include="Themes\DavesGlossyControls\.svn\all-wcprops" />
+    <None Include="Themes\DavesGlossyControls\.svn\entries" />
+    <None Include="Themes\DavesGlossyControls\.svn\text-base\Theme.xaml.svn-base" />
+    <None Include="Themes\ExpressionDark\.svn\all-wcprops" />
+    <None Include="Themes\ExpressionDark\.svn\entries" />
+    <None Include="Themes\ExpressionDark\.svn\text-base\Theme.xaml.svn-base" />
+    <None Include="Themes\ExpressionLight\.svn\all-wcprops" />
+    <None Include="Themes\ExpressionLight\.svn\entries" />
+    <None Include="Themes\ExpressionLight\.svn\text-base\Theme.xaml.svn-base" />
+    <None Include="Themes\RainierOrange\.svn\all-wcprops" />
+    <None Include="Themes\RainierOrange\.svn\entries" />
+    <None Include="Themes\RainierOrange\.svn\text-base\Theme.xaml.svn-base" />
+    <None Include="Themes\RainierPurple\.svn\all-wcprops" />
+    <None Include="Themes\RainierPurple\.svn\entries" />
+    <None Include="Themes\RainierPurple\.svn\text-base\Theme.xaml.svn-base" />
+    <None Include="Themes\RainierRadialBlue\.svn\all-wcprops" />
+    <None Include="Themes\RainierRadialBlue\.svn\entries" />
+    <None Include="Themes\RainierRadialBlue\.svn\text-base\Theme.xaml.svn-base" />
+    <None Include="Themes\ShinyBlue\.svn\all-wcprops" />
+    <None Include="Themes\ShinyBlue\.svn\entries" />
+    <None Include="Themes\ShinyBlue\.svn\text-base\Theme.xaml.svn-base" />
+    <None Include="Themes\ShinyDarkGreen\.svn\all-wcprops" />
+    <None Include="Themes\ShinyDarkGreen\.svn\entries" />
+    <None Include="Themes\ShinyDarkGreen\.svn\text-base\Theme.xaml.svn-base" />
+    <None Include="Themes\ShinyDarkPurple\.svn\all-wcprops" />
+    <None Include="Themes\ShinyDarkPurple\.svn\entries" />
+    <None Include="Themes\ShinyDarkPurple\.svn\text-base\Theme.xaml.svn-base" />
+    <None Include="Themes\ShinyDarkTeal\.svn\all-wcprops" />
+    <None Include="Themes\ShinyDarkTeal\.svn\entries" />
+    <None Include="Themes\ShinyDarkTeal\.svn\text-base\Theme.xaml.svn-base" />
+    <None Include="Themes\ShinyRed\.svn\all-wcprops" />
+    <None Include="Themes\ShinyRed\.svn\entries" />
+    <None Include="Themes\ShinyRed\.svn\text-base\Theme.xaml.svn-base" />
+    <None Include="Themes\TwilightBlue\.svn\all-wcprops" />
+    <None Include="Themes\TwilightBlue\.svn\entries" />
+    <None Include="Themes\TwilightBlue\.svn\text-base\Theme.xaml.svn-base" />
+    <None Include="Themes\UXMusingsBubblyBlue\.svn\all-wcprops" />
+    <None Include="Themes\UXMusingsBubblyBlue\.svn\entries" />
+    <None Include="Themes\UXMusingsBubblyBlue\.svn\text-base\Theme.xaml.svn-base" />
+    <None Include="Themes\UXMusingsGreen\.svn\all-wcprops" />
+    <None Include="Themes\UXMusingsGreen\.svn\entries" />
+    <None Include="Themes\UXMusingsGreen\.svn\text-base\Theme.xaml.svn-base" />
+    <None Include="Themes\UXMusingsRed\.svn\all-wcprops" />
+    <None Include="Themes\UXMusingsRed\.svn\entries" />
+    <None Include="Themes\UXMusingsRed\.svn\text-base\Theme.xaml.svn-base" />
+    <None Include="Themes\UXMusingsRoughGreen\.svn\all-wcprops" />
+    <None Include="Themes\UXMusingsRoughGreen\.svn\entries" />
+    <None Include="Themes\UXMusingsRoughGreen\.svn\text-base\Theme.xaml.svn-base" />
+    <None Include="Themes\UXMusingsRoughRed\.svn\all-wcprops" />
+    <None Include="Themes\UXMusingsRoughRed\.svn\entries" />
+    <None Include="Themes\UXMusingsRoughRed\.svn\text-base\Theme.xaml.svn-base" />
+    <None Include="Themes\WhistlerBlue\.svn\all-wcprops" />
+    <None Include="Themes\WhistlerBlue\.svn\entries" />
+    <None Include="Themes\WhistlerBlue\.svn\text-base\Theme.xaml.svn-base" />
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +251,113 @@
       <Project>{40437BC5-5D5A-4473-87C0-AE9813AE153D}</Project>
       <Name>MMLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Themes\BubbleCreme\.svn\prop-base\" />
+    <Folder Include="Themes\BubbleCreme\.svn\props\" />
+    <Folder Include="Themes\BubbleCreme\.svn\tmp\prop-base\" />
+    <Folder Include="Themes\BubbleCreme\.svn\tmp\props\" />
+    <Folder Include="Themes\BubbleCreme\.svn\tmp\text-base\" />
+    <Folder Include="Themes\BureauBlack\.svn\prop-base\" />
+    <Folder Include="Themes\BureauBlack\.svn\props\" />
+    <Folder Include="Themes\BureauBlack\.svn\tmp\prop-base\" />
+    <Folder Include="Themes\BureauBlack\.svn\tmp\props\" />
+    <Folder Include="Themes\BureauBlack\.svn\tmp\text-base\" />
+    <Folder Include="Themes\BureauBlue\.svn\prop-base\" />
+    <Folder Include="Themes\BureauBlue\.svn\props\" />
+    <Folder Include="Themes\BureauBlue\.svn\tmp\prop-base\" />
+    <Folder Include="Themes\BureauBlue\.svn\tmp\props\" />
+    <Folder Include="Themes\BureauBlue\.svn\tmp\text-base\" />
+    <Folder Include="Themes\DavesGlossyControls\.svn\prop-base\" />
+    <Folder Include="Themes\DavesGlossyControls\.svn\props\" />
+    <Folder Include="Themes\DavesGlossyControls\.svn\tmp\prop-base\" />
+    <Folder Include="Themes\DavesGlossyControls\.svn\tmp\props\" />
+    <Folder Include="Themes\DavesGlossyControls\.svn\tmp\text-base\" />
+    <Folder Include="Themes\ExpressionDark\.svn\prop-base\" />
+    <Folder Include="Themes\ExpressionDark\.svn\props\" />
+    <Folder Include="Themes\ExpressionDark\.svn\tmp\prop-base\" />
+    <Folder Include="Themes\ExpressionDark\.svn\tmp\props\" />
+    <Folder Include="Themes\ExpressionDark\.svn\tmp\text-base\" />
+    <Folder Include="Themes\ExpressionLight\.svn\prop-base\" />
+    <Folder Include="Themes\ExpressionLight\.svn\props\" />
+    <Folder Include="Themes\ExpressionLight\.svn\tmp\prop-base\" />
+    <Folder Include="Themes\ExpressionLight\.svn\tmp\props\" />
+    <Folder Include="Themes\ExpressionLight\.svn\tmp\text-base\" />
+    <Folder Include="Themes\RainierOrange\.svn\prop-base\" />
+    <Folder Include="Themes\RainierOrange\.svn\props\" />
+    <Folder Include="Themes\RainierOrange\.svn\tmp\prop-base\" />
+    <Folder Include="Themes\RainierOrange\.svn\tmp\props\" />
+    <Folder Include="Themes\RainierOrange\.svn\tmp\text-base\" />
+    <Folder Include="Themes\RainierPurple\.svn\prop-base\" />
+    <Folder Include="Themes\RainierPurple\.svn\props\" />
+    <Folder Include="Themes\RainierPurple\.svn\tmp\prop-base\" />
+    <Folder Include="Themes\RainierPurple\.svn\tmp\props\" />
+    <Folder Include="Themes\RainierPurple\.svn\tmp\text-base\" />
+    <Folder Include="Themes\RainierRadialBlue\.svn\prop-base\" />
+    <Folder Include="Themes\RainierRadialBlue\.svn\props\" />
+    <Folder Include="Themes\RainierRadialBlue\.svn\tmp\prop-base\" />
+    <Folder Include="Themes\RainierRadialBlue\.svn\tmp\props\" />
+    <Folder Include="Themes\RainierRadialBlue\.svn\tmp\text-base\" />
+    <Folder Include="Themes\ShinyBlue\.svn\prop-base\" />
+    <Folder Include="Themes\ShinyBlue\.svn\props\" />
+    <Folder Include="Themes\ShinyBlue\.svn\tmp\prop-base\" />
+    <Folder Include="Themes\ShinyBlue\.svn\tmp\props\" />
+    <Folder Include="Themes\ShinyBlue\.svn\tmp\text-base\" />
+    <Folder Include="Themes\ShinyDarkGreen\.svn\prop-base\" />
+    <Folder Include="Themes\ShinyDarkGreen\.svn\props\" />
+    <Folder Include="Themes\ShinyDarkGreen\.svn\tmp\prop-base\" />
+    <Folder Include="Themes\ShinyDarkGreen\.svn\tmp\props\" />
+    <Folder Include="Themes\ShinyDarkGreen\.svn\tmp\text-base\" />
+    <Folder Include="Themes\ShinyDarkPurple\.svn\prop-base\" />
+    <Folder Include="Themes\ShinyDarkPurple\.svn\props\" />
+    <Folder Include="Themes\ShinyDarkPurple\.svn\tmp\prop-base\" />
+    <Folder Include="Themes\ShinyDarkPurple\.svn\tmp\props\" />
+    <Folder Include="Themes\ShinyDarkPurple\.svn\tmp\text-base\" />
+    <Folder Include="Themes\ShinyDarkTeal\.svn\prop-base\" />
+    <Folder Include="Themes\ShinyDarkTeal\.svn\props\" />
+    <Folder Include="Themes\ShinyDarkTeal\.svn\tmp\prop-base\" />
+    <Folder Include="Themes\ShinyDarkTeal\.svn\tmp\props\" />
+    <Folder Include="Themes\ShinyDarkTeal\.svn\tmp\text-base\" />
+    <Folder Include="Themes\ShinyRed\.svn\prop-base\" />
+    <Folder Include="Themes\ShinyRed\.svn\props\" />
+    <Folder Include="Themes\ShinyRed\.svn\tmp\prop-base\" />
+    <Folder Include="Themes\ShinyRed\.svn\tmp\props\" />
+    <Folder Include="Themes\ShinyRed\.svn\tmp\text-base\" />
+    <Folder Include="Themes\TwilightBlue\.svn\prop-base\" />
+    <Folder Include="Themes\TwilightBlue\.svn\props\" />
+    <Folder Include="Themes\TwilightBlue\.svn\tmp\prop-base\" />
+    <Folder Include="Themes\TwilightBlue\.svn\tmp\props\" />
+    <Folder Include="Themes\TwilightBlue\.svn\tmp\text-base\" />
+    <Folder Include="Themes\UXMusingsBubblyBlue\.svn\prop-base\" />
+    <Folder Include="Themes\UXMusingsBubblyBlue\.svn\props\" />
+    <Folder Include="Themes\UXMusingsBubblyBlue\.svn\tmp\prop-base\" />
+    <Folder Include="Themes\UXMusingsBubblyBlue\.svn\tmp\props\" />
+    <Folder Include="Themes\UXMusingsBubblyBlue\.svn\tmp\text-base\" />
+    <Folder Include="Themes\UXMusingsGreen\.svn\prop-base\" />
+    <Folder Include="Themes\UXMusingsGreen\.svn\props\" />
+    <Folder Include="Themes\UXMusingsGreen\.svn\tmp\prop-base\" />
+    <Folder Include="Themes\UXMusingsGreen\.svn\tmp\props\" />
+    <Folder Include="Themes\UXMusingsGreen\.svn\tmp\text-base\" />
+    <Folder Include="Themes\UXMusingsRed\.svn\prop-base\" />
+    <Folder Include="Themes\UXMusingsRed\.svn\props\" />
+    <Folder Include="Themes\UXMusingsRed\.svn\tmp\prop-base\" />
+    <Folder Include="Themes\UXMusingsRed\.svn\tmp\props\" />
+    <Folder Include="Themes\UXMusingsRed\.svn\tmp\text-base\" />
+    <Folder Include="Themes\UXMusingsRoughGreen\.svn\prop-base\" />
+    <Folder Include="Themes\UXMusingsRoughGreen\.svn\props\" />
+    <Folder Include="Themes\UXMusingsRoughGreen\.svn\tmp\prop-base\" />
+    <Folder Include="Themes\UXMusingsRoughGreen\.svn\tmp\props\" />
+    <Folder Include="Themes\UXMusingsRoughGreen\.svn\tmp\text-base\" />
+    <Folder Include="Themes\UXMusingsRoughRed\.svn\prop-base\" />
+    <Folder Include="Themes\UXMusingsRoughRed\.svn\props\" />
+    <Folder Include="Themes\UXMusingsRoughRed\.svn\tmp\prop-base\" />
+    <Folder Include="Themes\UXMusingsRoughRed\.svn\tmp\props\" />
+    <Folder Include="Themes\UXMusingsRoughRed\.svn\tmp\text-base\" />
+    <Folder Include="Themes\WhistlerBlue\.svn\prop-base\" />
+    <Folder Include="Themes\WhistlerBlue\.svn\props\" />
+    <Folder Include="Themes\WhistlerBlue\.svn\tmp\prop-base\" />
+    <Folder Include="Themes\WhistlerBlue\.svn\tmp\props\" />
+    <Folder Include="Themes\WhistlerBlue\.svn\tmp\text-base\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
