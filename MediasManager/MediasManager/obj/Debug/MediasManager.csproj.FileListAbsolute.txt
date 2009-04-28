@@ -1,52 +1,14 @@
-C:\Documents and Settings\Administrateur\Mes documents\Dev\MediasManager\MediasManager\obj\Debug\ResolveAssemblyReference.cache
-C:\Documents and Settings\Administrateur\Mes documents\Dev\MediasManager\MediasManager\obj\Debug\Window1.baml
-C:\Documents and Settings\Administrateur\Mes documents\Dev\MediasManager\MediasManager\obj\Debug\Window1.g.cs
-C:\Documents and Settings\Administrateur\Mes documents\Dev\MediasManager\MediasManager\obj\Debug\App.g.cs
-C:\Documents and Settings\Administrateur\Mes documents\Dev\MediasManager\MediasManager\obj\Debug\MediasManager_MarkupCompile.cache
-C:\Documents and Settings\Administrateur\Mes documents\Dev\MediasManager\MediasManager\obj\Debug\MediasManager.g.resources
-C:\Documents and Settings\Administrateur\Mes documents\Dev\MediasManager\MediasManager\obj\Debug\MediaManager.Properties.Resources.resources
-C:\Documents and Settings\Administrateur\Mes documents\Dev\MediasManager\MediasManager\obj\Debug\MediasManager.csproj.GenerateResource.Cache
-C:\Documents and Settings\Administrateur\Mes documents\Dev\MediasManager\MediasManager\bin\Debug\MediasManager.exe
-C:\Documents and Settings\Administrateur\Mes documents\Dev\MediasManager\MediasManager\bin\Debug\MediasManager.pdb
-C:\Documents and Settings\Administrateur\Mes documents\Dev\MediasManager\MediasManager\bin\Debug\MMLibrary.dll
-C:\Documents and Settings\Administrateur\Mes documents\Dev\MediasManager\MediasManager\bin\Debug\MMLibrary.pdb
-C:\Documents and Settings\Administrateur\Mes documents\Dev\MediasManager\MediasManager\obj\Debug\MediasManager.exe
-C:\Documents and Settings\Administrateur\Mes documents\Dev\MediasManager\MediasManager\obj\Debug\MediasManager.pdb
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\MediasManager.exe
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\MediasManager.pdb
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\bin\Debug\MediasManager.exe
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\bin\Debug\MediasManager.pdb
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\bin\Debug\MMLibrary.dll
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\bin\Debug\WPF.Themes.dll
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\bin\Debug\WPFToolkit.dll
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\bin\Debug\MMLibrary.pdb
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\ResolveAssemblyReference.cache
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\Window1.baml
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\Window1.g.cs
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\App.g.cs
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\MediasManager_MarkupCompile.cache
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\MediasManager.g.resources
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\MediaManager.Properties.Resources.resources
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\MediasManager.csproj.GenerateResource.Cache
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\Themes\BubbleCreme\Theme.baml
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\Themes\BureauBlack\Theme.baml
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\Themes\BureauBlue\Theme.baml
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\Themes\DavesGlossyControls\Theme.baml
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\Themes\ExpressionDark\Theme.baml
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\Themes\ExpressionLight\Theme.baml
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\Themes\RainierOrange\Theme.baml
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\Themes\RainierPurple\Theme.baml
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\Themes\RainierRadialBlue\Theme.baml
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\Themes\ShinyBlue\Theme.baml
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\Themes\ShinyDarkGreen\Theme.baml
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\Themes\ShinyDarkPurple\Theme.baml
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\Themes\ShinyDarkTeal\Theme.baml
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\Themes\ShinyRed\Theme.baml
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\Themes\TwilightBlue\Theme.baml
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\Themes\UXMusingsBubblyBlue\Theme.baml
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\Themes\UXMusingsGreen\Theme.baml
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\Themes\UXMusingsRed\Theme.baml
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\Themes\UXMusingsRoughGreen\Theme.baml
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\Themes\UXMusingsRoughRed\Theme.baml
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\Themes\WhistlerBlue\Theme.baml
-C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\obj\Debug\App.baml
+C:\Users\Julien\Documents\Dev\htpcutils\MediasManager\MediasManager\bin\Debug\MediasManager.exe
+C:\Users\Julien\Documents\Dev\htpcutils\MediasManager\MediasManager\bin\Debug\MediasManager.pdb
+C:\Users\Julien\Documents\Dev\htpcutils\MediasManager\MediasManager\bin\Debug\MMLibrary.dll
+C:\Users\Julien\Documents\Dev\htpcutils\MediasManager\MediasManager\bin\Debug\MMLibrary.pdb
+C:\Users\Julien\Documents\Dev\htpcutils\MediasManager\MediasManager\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Julien\Documents\Dev\htpcutils\MediasManager\MediasManager\obj\Debug\Window1.baml
+C:\Users\Julien\Documents\Dev\htpcutils\MediasManager\MediasManager\obj\Debug\Window1.g.cs
+C:\Users\Julien\Documents\Dev\htpcutils\MediasManager\MediasManager\obj\Debug\App.g.cs
+C:\Users\Julien\Documents\Dev\htpcutils\MediasManager\MediasManager\obj\Debug\MediasManager_MarkupCompile.cache
+C:\Users\Julien\Documents\Dev\htpcutils\MediasManager\MediasManager\obj\Debug\MediasManager.g.resources
+C:\Users\Julien\Documents\Dev\htpcutils\MediasManager\MediasManager\obj\Debug\MediaManager.Properties.Resources.resources
+C:\Users\Julien\Documents\Dev\htpcutils\MediasManager\MediasManager\obj\Debug\MediasManager.csproj.GenerateResource.Cache
+C:\Users\Julien\Documents\Dev\htpcutils\MediasManager\MediasManager\obj\Debug\MediasManager.exe
+C:\Users\Julien\Documents\Dev\htpcutils\MediasManager\MediasManager\obj\Debug\MediasManager.pdb

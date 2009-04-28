@@ -1,0 +1,5 @@
+C:\Users\Julien\Documents\Dev\htpcutils\MusicFanartDownloader\MusicFanartDownloader\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Julien\Documents\Dev\htpcutils\MusicFanartDownloader\MusicFanartDownloader\bin\Debug\MusicFanartDownloader.exe
+C:\Users\Julien\Documents\Dev\htpcutils\MusicFanartDownloader\MusicFanartDownloader\bin\Debug\MusicFanartDownloader.pdb
+C:\Users\Julien\Documents\Dev\htpcutils\MusicFanartDownloader\MusicFanartDownloader\obj\Debug\MusicFanartDownloader.exe
+C:\Users\Julien\Documents\Dev\htpcutils\MusicFanartDownloader\MusicFanartDownloader\obj\Debug\MusicFanartDownloader.pdb
