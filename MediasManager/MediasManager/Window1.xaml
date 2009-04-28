@@ -1,12 +1,21 @@
 ﻿<Window
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:MediaManager_Library_NFO="clr-namespace:MediaManager.Library.NFO;assembly=MMLibrary" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" x:Class="MediaManager.Window1"
+    xmlns:MediaManager_Library_NFO="clr-namespace:MediaManager.Library.NFO;assembly=MMLibrary"
+    xmlns:Converters="clr-namespace:Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:themes="clr-namespace:WPF.Themes;assembly=WPF.Themes"
+    themes:ThemeManager.Theme="BureauBlack"
+    mc:Ignorable="d" xmlns:local="clr-namespace:MediaManager"
+    x:Class="MediaManager.Window1"
     DataContext="{Binding RelativeSource={RelativeSource Self}}"
-    Title="Window1" Height="364" Width="359" mc:Ignorable="d">
+    Title="Window1" Height="364" Width="592" Background="{DynamicResource WindowBackgroundBrush}">
+    <Window.Resources>
+        <Converters:StringToImageSource x:Key="StringToImageSource"/>
+    </Window.Resources>
     <Grid >
-        <Button Height="22" HorizontalAlignment="Left" Margin="12,12,0,0" x:Name="button1" VerticalAlignment="Top" Width="107" Click="button1_Click" Content="Button"/>
-        <TextBox Text="{Binding Path=Title}" Height="23" Margin="12,40,34,0" x:Name="textBox1" VerticalAlignment="Top" />
-        <TextBlock Text="{Binding Path=Title}" Margin="94,139,78,160" />
+        <ListBox Margin="0,12" x:Name="listBox_Films" HorizontalAlignment="Left" Width="191" SelectionChanged="listBox_Films_SelectionChanged" />
+    	<local:UC_FilmDetails x:Name="FilmDetails" Margin="207,12,8,8"/>
     </Grid>
 </Window>
