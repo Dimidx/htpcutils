@@ -29,12 +29,12 @@ namespace MediaManager
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-
+            
             
             movie = NfoFile.getNfoMovie(@"X:\Films\300\300.nfo");
+            //this.DataContext = movie;
+            //movie.Credits = "";
             
-            this.DataContext = movie;
-
 
 
 
