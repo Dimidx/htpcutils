@@ -22,7 +22,16 @@ namespace MediaManager
         public bool HasValidNfo;
 
         public String SearchString;
-        public String MovieName;
+
+        private String moviename;
+       
+
+        public String MovieName
+        {
+            get { return moviename; }
+            set { moviename = value; }
+        }
+        
 
         public int FileSize;
 

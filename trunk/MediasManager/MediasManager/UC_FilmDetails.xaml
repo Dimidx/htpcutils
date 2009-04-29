@@ -41,30 +41,30 @@
 					</Border>
 				</StackPanel>
 				<DockPanel Margin="5,5,5,5" Width="Auto" Height="Auto" LastChildFill="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
-					<TextBlock Text="{Binding Path=Nfo.Title}" Height="Auto" TextWrapping="Wrap" Width="Auto" Foreground="{DynamicResource PressedBrush}" FontSize="16" FontWeight="Bold" x:Name="Titre" DockPanel.Dock="Top" Padding="5,5,5,5"/>
+					<TextBlock Text="{Binding Path=MovieName}" Height="Auto" TextWrapping="Wrap" Width="Auto" Foreground="{DynamicResource TextBrush}" FontSize="16" FontWeight="Bold" x:Name="Titre" DockPanel.Dock="Top" Padding="5,5,5,5" VerticalAlignment="Top"/>
 					<DockPanel Width="Auto" Height="Auto" DockPanel.Dock="Top" LastChildFill="True">
 						<StackPanel Width="Auto" Height="Auto" DockPanel.Dock="Left">
-							<Label Width="Auto" Content="REALISATEURS :" Foreground="{DynamicResource OutsideFontColor}" Height="23" HorizontalAlignment="Left"/>
-							<Label Width="Auto" Content="GENRES :" Foreground="{DynamicResource NormalHighlightBrush}" Height="23" Background="{x:Null}" HorizontalAlignment="Left"/>
-							<Label Width="Auto" Content="ANNEE :" Foreground="{DynamicResource NormalHighlightBrush}" Height="23" HorizontalAlignment="Left"/>
-							<Label Width="Auto" Content="DATE DE SORTIE :" Foreground="{DynamicResource NormalHighlightBrush}" Height="23" HorizontalAlignment="Left"/>
-							<Label Width="Auto" Content="DUREE :" Foreground="{DynamicResource NormalHighlightBrush}" Height="23" HorizontalAlignment="Left"/>
-							<Label Width="Auto" Content="AVIS :" Foreground="{DynamicResource NormalHighlightBrush}" Height="23" HorizontalAlignment="Left"/>
+							<Label Width="Auto" Content="REALISATEURS :" Foreground="#FF000000" Height="23" HorizontalAlignment="Left"/>
+							<Label Width="Auto" Content="GENRES :" Foreground="#FF000000" Height="23" Background="{x:Null}" HorizontalAlignment="Left"/>
+							<Label Width="Auto" Content="ANNEE :" Foreground="#FF000000" Height="23" HorizontalAlignment="Left"/>
+							<Label Width="Auto" Content="DATE DE SORTIE :" Foreground="#FF000000" Height="23" HorizontalAlignment="Left"/>
+							<Label Width="Auto" Content="DUREE :" Foreground="#FF000000" Height="23" HorizontalAlignment="Left"/>
+							<Label Width="Auto" Content="AVIS :" Foreground="#FF000000" Height="23" HorizontalAlignment="Left"/>
 						</StackPanel>
 						<StackPanel Width="Auto" Height="Auto" DockPanel.Dock="Left">
-							<Label Width="Auto" Content="{Binding Path=Realisateurs, Converter={StaticResource PersonneToString}, Mode=Default}" Foreground="{DynamicResource LabelBrushBlack}" Height="23" x:Name="lib_Realisateurs"/>
-							<Label Width="Auto" Content="{Binding Path=Genres, Converter={StaticResource TableauToString}, Mode=Default}" Foreground="{DynamicResource LabelBrushBlack}" Height="23" x:Name="lib_Genres"/>
-							<Label Width="Auto" Content="{Binding Path=Nfo.Year}" Foreground="{DynamicResource LabelBrushBlack}" Height="23" x:Name="lib_Annee"/>
-							<Label Width="Auto" Content="{Binding Path=DateSortie}" Foreground="{DynamicResource LabelBrushBlack}" Height="23" x:Name="lib_DateSortie"/>
-							<Label Width="Auto" Content="{Binding Path=Nfo.Runtime}" Foreground="{DynamicResource LabelBrushBlack}" Height="23" x:Name="lib_Duree"/>
+							<Label Width="Auto" Content="{Binding Path=Nfo.Director}" Foreground="{DynamicResource TextBrush}" Height="23" x:Name="lib_Realisateurs"/>
+							<Label Width="Auto" Content="{Binding Path=Nfo.Genre}" Foreground="{DynamicResource TextBrush}" Height="23" x:Name="lib_Genres"/>
+							<Label Width="Auto" Content="{Binding Path=Nfo.Year}" Foreground="{DynamicResource TextBrush}" Height="23" x:Name="lib_Annee"/>
+							<Label Width="Auto" Content="{Binding Path=DateSortie}" Foreground="{DynamicResource TextBrush}" Height="23" x:Name="lib_DateSortie"/>
+							<Label Width="Auto" Content="{Binding Path=Nfo.Runtime}" Foreground="{DynamicResource TextBrush}" Height="23" x:Name="lib_Duree"/>
                             <Image Source="{Binding Path=Avis}" Width="Auto" Height="23" Stretch="None" VerticalAlignment="Center" HorizontalAlignment="Left" />
                         </StackPanel>
 					</DockPanel>
 					<Border Width="Auto" Height="Auto" DockPanel.Dock="Top" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="0,1,0,0" Padding="5,5,5,5">
-						<TextBlock Width="Auto" Height="Auto" x:Name="txt_Synopsis" Text="{Binding Path=Nfo.Plot}" TextAlignment="Justify" TextWrapping="Wrap"/>
+						<TextBlock Width="Auto" Height="Auto" x:Name="txt_Synopsis" Text="{Binding Path=Nfo.Plot}" TextAlignment="Justify" TextWrapping="Wrap" Foreground="{DynamicResource TextBrush}"/>
 					</Border>
 					<Border Width="Auto" Height="Auto" DockPanel.Dock="Top" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="0,1,0,0" Padding="5,5,5,5">
-						<TextBlock Text="{Binding Path=Critique}" Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_Critiques" TextAlignment="Justify"/>
+						<TextBlock Text="{Binding Path=Critique}" Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_Critiques" TextAlignment="Justify" Foreground="{DynamicResource TextBrush}"/>
 					</Border>
 					<ListBox ItemsSource="{Binding Path=Acteurs}" Width="Auto" Height="Auto" IsSynchronizedWithCurrentItem="True" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" DockPanel.Dock="Top" Background="#FFFFFFFF" ItemsPanel="{DynamicResource ItemsPanelTemplate_Acteurs}" ItemTemplate="{DynamicResource DataTemplate_Acteurs}"/>
 						

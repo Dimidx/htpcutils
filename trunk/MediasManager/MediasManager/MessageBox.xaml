@@ -1,0 +1,13 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	x:Class="MediaManager.MessageBox"
+	x:Name="Window"
+	Title="MessageBox"
+	Width="452" Height="197" Background="{DynamicResource WindowBackgroundBrush}" WindowStyle="ToolWindow" Topmost="True" ShowInTaskbar="False">
+
+	<Grid x:Name="LayoutRoot">
+		<TextBlock x:Name="txtMessage" Margin="92,34,8,54" Text="TextBlock" TextWrapping="Wrap" Foreground="{DynamicResource TextBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+		<Button HorizontalAlignment="Right" Margin="0,0,35.864,18" VerticalAlignment="Bottom" Width="135.272" Height="32" Content="Button"/>
+	</Grid>
+</Window>

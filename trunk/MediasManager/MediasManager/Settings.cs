@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using MediaManager.Library.NFO;
 
 namespace MediaManager
 {
-    public static class Settings
+    public class Settings
     {
         public static String xmlPath;
         public static MediaManager.Config.XmlSettings XML = new MediaManager.Config.XmlSettings();

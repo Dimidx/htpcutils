@@ -328,8 +328,16 @@
                                 <BeginStoryboard Storyboard="{StaticResource CheckedTrue}" x:Name="CheckedTrue_BeginStoryboard"/>
                             </Trigger.ExitActions>
                             <Trigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource CheckedFalse}"/>
+                                <BeginStoryboard x:Name="CheckedFalse_BeginStoryboard" Storyboard="{StaticResource CheckedFalse}"/>
                             </Trigger.EnterActions>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                        	<Trigger.ExitActions>
+                        		<BeginStoryboard x:Name="CheckedTrue_BeginStoryboard2" Storyboard="{StaticResource CheckedFalse}"/>
+                        	</Trigger.ExitActions>
+                        	<Trigger.EnterActions>
+                        		<BeginStoryboard x:Name="CheckedTrue_BeginStoryboard1" Storyboard="{StaticResource CheckedTrue}"/>
+                        	</Trigger.EnterActions>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Trigger.EnterActions>

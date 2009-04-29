@@ -24,7 +24,7 @@ namespace MediaManager
         public ObservableCollection<Movie> scanMovieDirs()
         {
             //dlMgr.CancelAllDownloads();
-            MovieFolder[] paths = Settings.XML.Config.confMovie.MovieFolders;
+            ObservableCollection<MovieFolder> paths = Settings.XML.Config.confMovie.MovieFolders;
             movies.Clear();
             if (paths != null)
             {
