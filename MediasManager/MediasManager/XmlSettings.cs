@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
@@ -80,10 +82,40 @@ public class ConfigMovie
     public String lastFolder;
     public int maxDownloading = 5;
     public int maxRetry = 1;
+    /// <summary>
+    /// Sauve les fichiers avec le nom de la video
+    /// </summary>
     public bool saveAsMovie = true;
+
+    /// <summary>
+    /// Sauve le fanart sous la forme fanart.jpg
+    /// </summary>
     public bool saveFanartJpg = true;
-    public bool savePosterJpg = true;
+    
+    /// <summary>
+    /// Sauve le poster en folder.jpg
+    /// </summary>
     public bool saveFolderJpg = true;
+
+    /// <summary>
+    /// Sauve le fanart sous la forme moviename-fanart.jpg
+    /// </summary>
+    public bool saveMovieNameFanart = true;
+
+    /// <summary>
+    /// Sauve le fanart sous la forme moviename.tbn
+    /// </summary>
+    public bool saveMovieNameTbn = true;
+
+    /// <summary>
+    /// Sauve le fanart sous la forme movie.tbn
+    /// </summary>
+    public bool saveMovieTbn = true;
+
+    
+
+
+
     public bool useFolderForSearch = true;
     public bool cleanFilename = true;
     public bool skipSample = true;
@@ -93,13 +125,28 @@ public class ConfigMovie
     public char[] split = { ',', ';' };
 
     [XmlElement(ElementName = "folder")]
-    public MovieFolder[] MovieFolders;
+
+    public ObservableCollection<MovieFolder> MovieFolders;
 }
 
 public class MovieFolder
 {
-    public String path = "";
-    public bool containsFolders = true;
+    private String _path = "";
+    public String path
+    {
+        get { return _path; }
+        set { _path = value; }
+    }
+
+    private bool _containsFolders = true;
+    public bool containsFolders
+    {
+        get { return _containsFolders; }
+        set { _containsFolders = value; }
+    }
+
+
+
     public bool monitorFolder = false;
     public bool autoScrape = false;
     public override string ToString()

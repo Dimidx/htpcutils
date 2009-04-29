@@ -6,16 +6,25 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:themes="clr-namespace:WPF.Themes;assembly=WPF.Themes"
-    themes:ThemeManager.Theme="BureauBlack"
+    themes:ThemeManager.Theme="ExpressionDark"
     mc:Ignorable="d" xmlns:local="clr-namespace:MediaManager"
     x:Class="MediaManager.Window1"
     DataContext="{Binding RelativeSource={RelativeSource Self}}"
     Title="Window1" Height="364" Width="592" Background="{DynamicResource WindowBackgroundBrush}">
     <Window.Resources>
         <Converters:StringToImageSource x:Key="StringToImageSource"/>
+        <ItemsPanelTemplate x:Key="MovieTemplate">
+        	<StackPanel Width="Auto" Height="Auto"/>
+
+        </ItemsPanelTemplate>
+        <DataTemplate x:Key="MovieDataTemplate">
+        	<Grid>
+        		<TextBlock Text="{Binding Path=MovieName}" Width="Auto" TextWrapping="Wrap"/>
+        	</Grid>
+        </DataTemplate>
     </Window.Resources>
     <Grid >
-        <ListBox Margin="0,12" x:Name="listBox_Films" HorizontalAlignment="Left" Width="191" SelectionChanged="listBox_Films_SelectionChanged" />
+        <ListBox Margin="0,12" x:Name="listBox_Films" HorizontalAlignment="Left" Width="191" SelectionChanged="listBox_Films_SelectionChanged" ItemsPanel="{DynamicResource MovieTemplate}" ItemTemplate="{DynamicResource MovieDataTemplate}" />
     	<local:UC_FilmDetails x:Name="FilmDetails" Margin="207,12,8,8"/>
     </Grid>
 </Window>

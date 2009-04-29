@@ -38,6 +38,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -46,9 +47,11 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="WPF.Themes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\WPF.Themes.dll</HintPath>
@@ -63,6 +66,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Configuration.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Theme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -169,6 +176,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration.xaml.cs">
+      <DependentUpon>Configuration.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters.cs" />
     <Compile Include="Media.cs" />
     <Compile Include="Movie.cs" />
@@ -188,6 +198,9 @@
     <Compile Include="Settings.cs" />
     <Compile Include="UC_FilmDetails.xaml.cs">
       <DependentUpon>UC_FilmDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\FolderBrowserDialogEx.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="XmlSettings.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -268,6 +281,12 @@
       <Project>{40437BC5-5D5A-4473-87C0-AE9813AE153D}</Project>
       <Name>MMLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Plus_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Moins_16.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Themes\BubbleCreme\.svn\prop-base\" />
