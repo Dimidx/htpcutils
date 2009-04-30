@@ -5,7 +5,7 @@
 	x:Class="MediaManager.Configuration"
 	x:Name="Window"
 	Title="Configuration"
-	Width="640" Height="480" Background="{DynamicResource WindowBackgroundBrush}" mc:Ignorable="d">
+	Width="640" Height="480" Background="{DynamicResource WindowBackgroundBrush}" mc:Ignorable="d" Icon="Images\Config_16.png">
 	<Window.Resources>
 		<DataTemplate x:Key="MoviePathDataTemplate">
 			<Grid Height="Auto" Width="Auto">

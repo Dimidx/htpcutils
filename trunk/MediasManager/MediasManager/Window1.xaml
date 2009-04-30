@@ -5,12 +5,10 @@
     xmlns:Converters="clr-namespace:Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:themes="clr-namespace:WPF.Themes;assembly=WPF.Themes"
-    themes:ThemeManager.Theme="ExpressionDark"
     mc:Ignorable="d" xmlns:local="clr-namespace:MediaManager"
     x:Class="MediaManager.Window1"
     DataContext="{Binding RelativeSource={RelativeSource Self}}"
-    Title="Window1" Height="364" Width="592" Background="{DynamicResource WindowBackgroundBrush}">
+    Title="Window1" Height="600" Width="800" Background="#FF595959">
     <Window.Resources>
         <Converters:StringToImageSource x:Key="StringToImageSource"/>
         <ItemsPanelTemplate x:Key="MovieTemplate">
@@ -24,7 +22,38 @@
         </DataTemplate>
     </Window.Resources>
     <Grid >
-        <ListBox Margin="0,12" x:Name="listBox_Films" HorizontalAlignment="Left" Width="191" SelectionChanged="listBox_Films_SelectionChanged" ItemsPanel="{DynamicResource MovieTemplate}" ItemTemplate="{DynamicResource MovieDataTemplate}" />
-    	<local:UC_FilmDetails x:Name="FilmDetails" Margin="207,12,8,8"/>
+    	<DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True">
+    		<Menu DockPanel.Dock="Top">
+    			<MenuItem Header="Fichier">
+    				<MenuItem x:Name="mnuQuitter" Header="Quitter" ToolTip="Quitte l'application" Click="mnuQuitter_Click">
+						<MenuItem.Icon>
+						    <Image Source="Images/Quitter_16.png"/>
+						</MenuItem.Icon>
+					</MenuItem>
+    			</MenuItem>
+    			<MenuItem Header="Edition">
+    				<MenuItem x:Name="mnuScan" Header="Scanner les dossiers" Click="mnuScan_Click">
+						<MenuItem.Icon>
+						    <Image Source="Images/Scan_16.png"/>
+						</MenuItem.Icon>
+					</MenuItem>
+    				<MenuItem x:Name="mnuPreference" Header="Préférences" Click="mnuPreference_Click">
+						<MenuItem.Icon>
+						    <Image Source="Images/Config_16.png"/>
+						</MenuItem.Icon>
+					</MenuItem>
+    			</MenuItem>
+    		</Menu>
+    		<ProgressBar BorderThickness="1,1,1,1" IsIndeterminate="True" x:Name="jauge_progress" Visibility="Collapsed" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Height="16" DockPanel.Dock="Bottom"/>
+    		<TextBlock x:Name="lib_BarreEtat" Width="Auto" Text="Recherche en cours..." TextWrapping="Wrap" DockPanel.Dock="Bottom" Visibility="Collapsed"/>
+    		<DockPanel DockPanel.Dock="Top" LastChildFill="True" d:LayoutOverrides="Height">
+    			<Border Margin="5,5,5,5" Width="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10">
+    				<ListBox x:Name="listBox_Films" SelectionChanged="listBox_Films_SelectionChanged" ItemsPanel="{DynamicResource MovieTemplate}" ItemTemplate="{DynamicResource MovieDataTemplate}" OverridesDefaultStyle="True" Background="{x:Null}" BorderBrush="{DynamicResource NormalBorderBrush}" Foreground="#FF000000" Margin="5,5,5,5" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" d:LayoutOverrides="Height" />
+    			</Border>
+    			<Border Margin="5,5,5,5" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10">
+    				<local:UC_FilmDetails x:Name="FilmDetails" Margin="5,5,5,5"/>
+    			</Border>
+    		</DockPanel>
+    	</DockPanel>
     </Grid>
 </Window>
