@@ -33,7 +33,7 @@ namespace MediaManager.Library.NFO
         private String premiered = "";
         private String studio = "";
         private String trailer = "";
-        private List<Actor> actors = new List<Actor>();
+        private ObservableCollection<Actor> actors = new ObservableCollection<Actor>();
 
         [XmlElement(ElementName = "title")]
         public String Title
@@ -171,20 +171,20 @@ namespace MediaManager.Library.NFO
         }
 
         [XmlElement(ElementName = "actor")]
-        public Actor[] Actor
+        public ObservableCollection<Actor> Actor
         {
             get
             {
-                Actor[] act = new Actor[actors.Count];
-                actors.CopyTo(act);
-                return act;
+                //Actor[] act = new Actor[actors.Count];
+                //actors.CopyTo(act);
+                return actors;
             }
             set
             {
                 if (value == null) return;
-                Actor[] newActors = (Actor[])value;
+                //Actor[] newActors = (Actor[])value;
                 actors.Clear();
-                foreach (Actor newActor in newActors) actors.Add(newActor);
+                foreach (Actor newActor in value) actors.Add(newActor);
             }
         }
 

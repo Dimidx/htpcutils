@@ -20,10 +20,21 @@ namespace MediaManager
         }
 
         //private downloadManager dlMgr = new DownloadManagerImpl();
-
         public ObservableCollection<Movie> scanMovieDirs()
         {
+            return scanMovieDirs(null);
+        }
+
+
+        public ObservableCollection<Movie> scanMovieDirs(object sender)
+        {
             //dlMgr.CancelAllDownloads();
+            BackgroundWorker BackWork = new BackgroundWorker();
+            if (sender != null)
+            {
+                BackWork = sender as BackgroundWorker;
+            }
+
             ObservableCollection<MovieFolder> paths = Settings.XML.Config.confMovie.MovieFolders;
             movies.Clear();
             if (paths != null)
@@ -46,7 +57,12 @@ namespace MediaManager
                                 {
                                     if (!fileInfo.Name.ToLower().Contains("sample") || !Settings.XML.Config.confMovie.skipSample)
                                     {
-                                        if (fileInfo != null) movies.Add(new Movie(fileInfo, mf));
+                                        if (fileInfo != null)
+                                        {
+                                            if (sender != null) BackWork.ReportProgress(0, fileInfo.Name);
+                                            movies.Add(new Movie(fileInfo, mf));
+                                        }
+
                                     }
                                 }
                             }

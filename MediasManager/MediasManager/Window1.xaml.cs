@@ -18,7 +18,6 @@ using MediaManager;
 using MediaManager.Library.NFO;
 using System.IO;
 
-
 namespace MediaManager
 {
     /// <summary>
@@ -55,23 +54,34 @@ namespace MediaManager
         /// </summary>
         private void ScanDir()
         {
-            BackWorker.DoWork += new DoWorkEventHandler(ScanDir_DoWork);
-            BackWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ScanDir_RunWorkerCompleted);
+            media.Movies.OrderBy(m => m.MovieName);
 
-            //_CritereRecherche = sai_Recherche.Text;
-            _RechercheTerminée = false;
             if (BackWorker.IsBusy == false)
             {
-                //this.jauge_progress.Visibility = Visibility.Visible;
+                BackWorker = new BackgroundWorker();
+                BackWorker.DoWork += new DoWorkEventHandler(ScanDir_DoWork);
+                BackWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ScanDir_RunWorkerCompleted);
+                BackWorker.ProgressChanged += new ProgressChangedEventHandler(BackWorker_ProgressChanged);
+                BackWorker.WorkerReportsProgress = true;
+                media = new Media();
 
+                media.Movies.Clear();
+                this.jauge_progress.Visibility = Visibility.Visible;
+                this.lib_BarreEtat.Visibility = Visibility.Visible;
                 BackWorker.RunWorkerAsync();
             }
+        }
+
+        private void BackWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            this.lib_BarreEtat.Text =  "Nombre de films trouvés : " + media.Movies.Count.ToString() + " - " + e.UserState.ToString() ;
+
         }
 
 
         private void ScanDir_DoWork(object sender, DoWorkEventArgs e)
         {
-            media.scanMovieDirs();
+            media.scanMovieDirs(BackWorker);
         }
 
         private void ScanDir_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -79,10 +89,10 @@ namespace MediaManager
 
             //Lance la recherche
             Binding b = new Binding();
-            b.Source = media.Movies;
+            b.Source = media.Movies.OrderBy(m => m.MovieName); //.OrderBy(m => m.MovieName); sert a trier
             listBox_Films.SetBinding(ItemsControl.ItemsSourceProperty, b);
-            _RechercheTerminée = true;
-            //this.jauge_progress.Visibility = Visibility.Collapsed;
+            this.jauge_progress.Visibility = Visibility.Collapsed;
+            this.lib_BarreEtat.Visibility = Visibility.Collapsed;
 
         }
 
@@ -105,6 +115,8 @@ namespace MediaManager
             if (listBox_Films.SelectedItem != null)
             {
                 MonFilm = (Movie)listBox_Films.SelectedItem;
+                MonFilm.updateItem();
+
                 //MonFilm = AllocineHandler.GetFilmDetails(MonFilm.ID, true, true);
                 this.DataContext = MonFilm;
 				FilmDetails.ImagePoster.Source = null;
@@ -121,5 +133,30 @@ namespace MediaManager
 
             }
         }
+
+        #region Menu
+
+        private void mnuScan_Click(object sender, RoutedEventArgs e)
+        {
+            ScanDir();
+
+        }
+
+        private void mnuPreference_Click(object sender, RoutedEventArgs e)
+        {
+            Configuration conf = new Configuration();
+
+            conf.ShowDialog();
+            Settings.Load();
+        }
+
+
+        private void mnuQuitter_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+        
+        #endregion
+
     }
 }
