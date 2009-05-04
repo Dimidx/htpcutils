@@ -1592,7 +1592,6 @@
     <Style TargetType="{x:Type PasswordBox}">
         <Setter Property="Background" Value="#FFFFFFFF" />
         <Setter Property="BorderBrush" Value="{DynamicResource SecondaryBrush}" />
-        <Setter Property="FontFamily" Value="Times New Roman" />
         <Setter Property="PasswordChar" Value="●" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />

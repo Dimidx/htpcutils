@@ -159,7 +159,11 @@ namespace MediaManager.Library.NFO
         [XmlElement(ElementName = "studio")]
         public String Studio
         {
-            get { return studio; }
+            get 
+            {
+                return studio; 
+                
+            }
             set { studio = value; }
         }
 

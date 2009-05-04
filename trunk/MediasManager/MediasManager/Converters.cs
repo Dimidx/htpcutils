@@ -67,20 +67,15 @@ namespace Converters
 
             public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
             {
-                System.Windows.Media.Imaging.BitmapImage bitz = null;
-
-                    try
-                    {
-                    String toConvert = (String)value;
-
-                        bitz = new System.Windows.Media.Imaging.BitmapImage(new Uri(toConvert));
-                    }
-                    catch 
-                    {
-                        bitz = new System.Windows.Media.Imaging.BitmapImage();
-                    }
-                
-                return bitz;
+                String toConvert = (String)value;
+                BitmapImage bi3 = new BitmapImage();
+                if (toConvert != null)
+                {
+                    bi3.BeginInit();
+                    bi3.UriSource = new Uri(toConvert, UriKind.Relative);
+                    bi3.EndInit();
+                }
+                return bi3;
 
             }
                        

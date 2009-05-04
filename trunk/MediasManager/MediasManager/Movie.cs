@@ -31,7 +31,12 @@ namespace MediaManager
             get { return moviename; }
             set { moviename = value; }
         }
-        
+        private string _MediaSource = "Images/flags/source/dvd.png";
+        public string MediaSource
+        {
+            get { return _MediaSource; }
+            set { _MediaSource = value; }
+        }
 
         public int FileSize;
 
@@ -140,6 +145,25 @@ namespace MediaManager
 
             // Filesize
             FileSize = Convert.ToInt32(fileInfo.Length / (1024 * 1024));
+
+            //Source
+            if (fileInfo.Name.ToLower().Contains("bluray") | fileInfo.Name.ToLower().Contains("bluray") | fileInfo.Name.ToLower().Contains("brrip"))
+            {
+                _MediaSource = "Images/flags/source/bluray.png";
+            }
+            if (fileInfo.Name.ToLower().Contains("sddvd") | fileInfo.Name.ToLower().Contains("dvdrip") | fileInfo.Name.ToLower().Contains("dvd"))
+            {
+                _MediaSource = "Images/flags/source/dvd.png";
+            }
+            if (fileInfo.Name.ToLower().Contains("hdtv"))
+            {
+                _MediaSource = "Images/flags/source/hdtv.png";
+            }
+            if (fileInfo.Name.ToLower().Contains("hddvd"))
+            {
+                _MediaSource = "Images/flags/source/hddvd.png";
+            }
+
 
         }
 
