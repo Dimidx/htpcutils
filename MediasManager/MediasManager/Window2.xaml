@@ -2,10 +2,11 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:vsm="clr-namespace:System.Windows;assembly=WPFToolkit"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	x:Class="MediaManager.Window2"
 	x:Name="Window"
 	Title="Window2"
-	Width="640" Height="480" Background="#FFE73535">
+	Width="640" Height="480" Background="{DynamicResource WindowBackgroundBrush}" mc:Ignorable="d">
 	<Window.Resources>
 		<ItemsPanelTemplate x:Key="ItemsPanelTemplate1">
 			<WrapPanel Width="Auto" Height="Auto"/>
@@ -35,12 +36,26 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
+		<Style x:Key="ImageStyle1" TargetType="{x:Type Image}">
+			<Style.Triggers>
+				<Trigger Property="DataContext" Value="{x:Null}"/>
+				<EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
+			</Style.Triggers>
+		</Style>
+
+		<VisualBrush x:Key="VisualBrush4">
+      <VisualBrush.Visual>
+		  	<UniformGrid >
+		  			<Border CornerRadius="10,10,10,10" Background="#FFFFFFFF" BorderBrush="#FFFFFFFF" BorderThickness="1,1,1,1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Disabled" Width="10" Height="10" OverridesDefaultStyle="True" SnapsToDevicePixels="True" />
+				</UniformGrid>
+      </VisualBrush.Visual>
+    </VisualBrush>
 	</Window.Resources>
 
 	<Grid x:Name="LayoutRoot">
-		<ListBox OverridesDefaultStyle="False" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsSynchronizedWithCurrentItem="True" ItemsPanel="{DynamicResource ItemsPanelTemplate1}" IsEnabled="True" IsTextSearchEnabled="True" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="False" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="0,0,296,0" Style="{DynamicResource ListBoxStyle1}" Height="186" VerticalAlignment="Top">
-			<ListBoxItem Content="ListBoxItem"/>
-			<ListBoxItem Content="ListBoxItem"/>
-		</ListBox>
+		<Image Margin="210.833,20.25,194.944,86.418" Source="Images\Matrix bluray.jpg" Stretch="Fill" OpacityMask="{DynamicResource VisualBrush4}" VerticalAlignment="Stretch"/>
+		<UniformGrid HorizontalAlignment="Left" d:LayoutOverrides="Width, Height">
+				<Border Height="128" ClipToBounds="False" BorderBrush="#FF000000" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10"/>
+		</UniformGrid>
 	</Grid>
 </Window>

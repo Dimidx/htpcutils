@@ -8,7 +8,7 @@
     mc:Ignorable="d" xmlns:local="clr-namespace:MediaManager"
     x:Class="MediaManager.Window1"
     DataContext="{Binding RelativeSource={RelativeSource Self}}"
-    Title="Window1" Height="600" Width="800" Background="#FF595959">
+    Title="Window1" Height="768" Width="1024" Background="#FF595959">
     <Window.Resources>
         <Converters:StringToImageSource x:Key="StringToImageSource"/>
         <ItemsPanelTemplate x:Key="MovieTemplate">
@@ -17,10 +17,22 @@
         </ItemsPanelTemplate>
         <DataTemplate x:Key="MovieDataTemplate">
         	<Grid>
-        		<TextBlock Text="{Binding Path=MovieName}" Width="Auto" TextWrapping="Wrap"/>
+        		<TextBlock Text="{Binding Path=MovieName}" Width="Auto" TextWrapping="Wrap" FontFamily="./Fonts/#Aeon Info"/>
         	</Grid>
         </DataTemplate>
+        <Storyboard x:Key="Storyboard1">
+        	<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="FilmDetails" Storyboard.TargetProperty="(UIElement.Opacity)">
+        		<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+        		<SplineDoubleKeyFrame KeySpline="0,0,0,1" KeyTime="00:00:01" Value="1"/>
+        	</DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Converters:ToImage x:Key="ToImage"/>
     </Window.Resources>
+	<Window.Triggers>
+		<EventTrigger RoutedEvent="Selector.SelectionChanged" SourceName="listBox_Films">
+			<BeginStoryboard x:Name="Storyboard1_BeginStoryboard" Storyboard="{StaticResource Storyboard1}"/>
+		</EventTrigger>
+	</Window.Triggers>
     <Grid >
     	<DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True">
     		<Menu DockPanel.Dock="Top">
@@ -48,7 +60,7 @@
     		<TextBlock x:Name="lib_BarreEtat" Width="Auto" Text="Recherche en cours..." TextWrapping="Wrap" DockPanel.Dock="Bottom" Visibility="Collapsed"/>
     		<DockPanel DockPanel.Dock="Top" LastChildFill="True" d:LayoutOverrides="Height">
     			<Border Margin="5,5,5,5" Width="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10">
-    				<ListBox x:Name="listBox_Films" SelectionChanged="listBox_Films_SelectionChanged" ItemsPanel="{DynamicResource MovieTemplate}" ItemTemplate="{DynamicResource MovieDataTemplate}" OverridesDefaultStyle="True" Background="{x:Null}" BorderBrush="{DynamicResource NormalBorderBrush}" Foreground="#FF000000" Margin="5,5,5,5" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" d:LayoutOverrides="Height" />
+    				<ListBox x:Name="listBox_Films" SelectionChanged="listBox_Films_SelectionChanged" ItemsPanel="{DynamicResource MovieTemplate}" ItemTemplate="{DynamicResource MovieDataTemplate}" Background="{x:Null}" BorderBrush="{DynamicResource NormalBorderBrush}" Foreground="#FF000000" Margin="5,5,5,5" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" d:LayoutOverrides="Height" />
     			</Border>
     			<Border Margin="5,5,5,5" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10">
     				<local:UC_FilmDetails x:Name="FilmDetails" Margin="5,5,5,5"/>

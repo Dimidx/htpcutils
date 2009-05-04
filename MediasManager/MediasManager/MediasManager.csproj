@@ -214,6 +214,12 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="SubsetFont.targets">
+      <Visible>False</Visible>
+    </None>
+    <None Include="SubsetFontTask.dll">
+      <Visible>False</Visible>
+    </None>
     <None Include="Themes\BubbleCreme\.svn\all-wcprops" />
     <None Include="Themes\BubbleCreme\.svn\entries" />
     <None Include="Themes\BubbleCreme\.svn\text-base\Theme.xaml.svn-base" />
@@ -295,6 +301,223 @@
     <Resource Include="Images\Quitter_16.png" />
     <Resource Include="Images\Scan_128.png" />
     <Resource Include="Images\Scan_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\flags\source\bluray.png" />
+    <Resource Include="Images\flags\source\dvd.png" />
+    <Resource Include="Images\flags\source\hddvd.png" />
+    <Resource Include="Images\flags\source\hdtv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BlendEmbeddedFont Include="Fonts\aeon_info.ttf">
+      <IsSystemFont>True</IsSystemFont>
+      <Characters>
+      </Characters>
+      <Uppercase>True</Uppercase>
+      <Lowercase>True</Lowercase>
+      <Numbers>True</Numbers>
+      <Punctuation>True</Punctuation>
+      <AutoFill>False</AutoFill>
+      <All>True</All>
+    </BlendEmbeddedFont>
+    <Resource Include="Images\flags\studios\007.png" />
+    <Resource Include="Images\flags\studios\20thcenturyfox.png" />
+    <Resource Include="Images\flags\studios\aandm.png" />
+    <Resource Include="Images\flags\studios\abandon.png" />
+    <Resource Include="Images\flags\studios\abc.png" />
+    <Resource Include="Images\flags\studios\adultswim.png" />
+    <Resource Include="Images\flags\studios\alcon.png" />
+    <Resource Include="Images\flags\studios\alliance atlantis.png" />
+    <Resource Include="Images\flags\studios\amblin.png" />
+    <Resource Include="Images\flags\studios\anchor_bay.png" />
+    <Resource Include="Images\flags\studios\apple.png" />
+    <Resource Include="Images\flags\studios\ark.png" />
+    <Resource Include="Images\flags\studios\arte.png" />
+    <Resource Include="Images\flags\studios\artisan.png" />
+    <Resource Include="Images\flags\studios\bad_robot.png" />
+    <Resource Include="Images\flags\studios\bandapart.png" />
+    <Resource Include="Images\flags\studios\bazmark.png" />
+    <Resource Include="Images\flags\studios\bbc.png" />
+    <Resource Include="Images\flags\studios\beacon.png" />
+    <Resource Include="Images\flags\studios\blackdog.png" />
+    <Resource Include="Images\flags\studios\canalplus.png" />
+    <Resource Include="Images\flags\studios\carolco.png" />
+    <Resource Include="Images\flags\studios\cartoon.png" />
+    <Resource Include="Images\flags\studios\castlerock.png" />
+    <Resource Include="Images\flags\studios\cbs.png" />
+    <Resource Include="Images\flags\studios\celador.png" />
+    <Resource Include="Images\flags\studios\ceska_televize.png" />
+    <Resource Include="Images\flags\studios\channelfour.png" />
+    <Resource Include="Images\flags\studios\cheyenne.png" />
+    <Resource Include="Images\flags\studios\cnc.png" />
+    <Resource Include="Images\flags\studios\columbia.png" />
+    <Resource Include="Images\flags\studios\comedy central.png" />
+    <Resource Include="Images\flags\studios\condemned.png" />
+    <Resource Include="Images\flags\studios\constantin.png" />
+    <Resource Include="Images\flags\studios\czolowka.png" />
+    <Resource Include="Images\flags\studios\dc.png" />
+    <Resource Include="Images\flags\studios\destination.png" />
+    <Resource Include="Images\flags\studios\de_laurentiis.png" />
+    <Resource Include="Images\flags\studios\dfi.png" />
+    <Resource Include="Images\flags\studios\digital_playground.png" />
+    <Resource Include="Images\flags\studios\dimension.png" />
+    <Resource Include="Images\flags\studios\disney.png" />
+    <Resource Include="Images\flags\studios\disney_dvd.png" />
+    <Resource Include="Images\flags\studios\dreamworks.png" />
+    <Resource Include="Images\flags\studios\dreamworks_animation.png" />
+    <Resource Include="Images\flags\studios\eleven.png" />
+    <Resource Include="Images\flags\studios\entertainment_tonight.png" />
+    <Resource Include="Images\flags\studios\eurimages.png" />
+    <Resource Include="Images\flags\studios\europa.png" />
+    <Resource Include="Images\flags\studios\Europa_Corp.png" />
+    <Resource Include="Images\flags\studios\excel.png" />
+    <Resource Include="Images\flags\studios\fact.png" />
+    <Resource Include="Images\flags\studios\figaro.png" />
+    <Resource Include="Images\flags\studios\filmax.png" />
+    <Resource Include="Images\flags\studios\filmfour.png" />
+    <Resource Include="Images\flags\studios\filmoteka_narodowa.png" />
+    <Resource Include="Images\flags\studios\film_media.png" />
+    <Resource Include="Images\flags\studios\film_polski.png" />
+    <Resource Include="Images\flags\studios\focus.png" />
+    <Resource Include="Images\flags\studios\fox.png" />
+    <Resource Include="Images\flags\studios\franchise.png" />
+    <Resource Include="Images\flags\studios\fuji.png" />
+    <Resource Include="Images\flags\studios\gaumont.png" />
+    <Resource Include="Images\flags\studios\ghibli.png" />
+    <Resource Include="Images\flags\studios\ghosthouse.png" />
+    <Resource Include="Images\flags\studios\gofilms.png" />
+    <Resource Include="Images\flags\studios\gramercy.png" />
+    <Resource Include="Images\flags\studios\gutek.png" />
+    <Resource Include="Images\flags\studios\halestorm.png" />
+    <Resource Include="Images\flags\studios\hand_made.png" />
+    <Resource Include="Images\flags\studios\happymadison.png" />
+    <Resource Include="Images\flags\studios\happy_madison.png" />
+    <Resource Include="Images\flags\studios\hbo.png" />
+    <Resource Include="Images\flags\studios\hollywood.png" />
+    <Resource Include="Images\flags\studios\icon.png" />
+    <Resource Include="Images\flags\studios\imaginary_forces.png" />
+    <Resource Include="Images\flags\studios\imagine.png" />
+    <Resource Include="Images\flags\studios\imax.png" />
+    <Resource Include="Images\flags\studios\industrial_light.png" />
+    <Resource Include="Images\flags\studios\infilm.png" />
+    <Resource Include="Images\flags\studios\infinifilm.png" />
+    <Resource Include="Images\flags\studios\interactual.png" />
+    <Resource Include="Images\flags\studios\iti.png" />
+    <Resource Include="Images\flags\studios\jawa.png" />
+    <Resource Include="Images\flags\studios\jerry_bruckheimer.png" />
+    <Resource Include="Images\flags\studios\jim henson.png" />
+    <Resource Include="Images\flags\studios\kadokawa.png" />
+    <Resource Include="Images\flags\studios\kadr.png" />
+    <Resource Include="Images\flags\studios\kamera.png" />
+    <Resource Include="Images\flags\studios\ladd.png" />
+    <Resource Include="Images\flags\studios\lakeshore.png" />
+    <Resource Include="Images\flags\studios\legendary.png" />
+    <Resource Include="Images\flags\studios\lightstorm.png" />
+    <Resource Include="Images\flags\studios\lionsgate.png" />
+    <Resource Include="Images\flags\studios\lizard.png" />
+    <Resource Include="Images\flags\studios\lucasfilm.png" />
+    <Resource Include="Images\flags\studios\madman.png" />
+    <Resource Include="Images\flags\studios\magnolia.png" />
+    <Resource Include="Images\flags\studios\mandalay.png" />
+    <Resource Include="Images\flags\studios\mandate.png" />
+    <Resource Include="Images\flags\studios\marvel.png" />
+    <Resource Include="Images\flags\studios\maverick.png" />
+    <Resource Include="Images\flags\studios\maya.png" />
+    <Resource Include="Images\flags\studios\mgm.png" />
+    <Resource Include="Images\flags\studios\mibac.png" />
+    <Resource Include="Images\flags\studios\millenium.png" />
+    <Resource Include="Images\flags\studios\millennium.png" />
+    <Resource Include="Images\flags\studios\miramax.png" />
+    <Resource Include="Images\flags\studios\monolith.png" />
+    <Resource Include="Images\flags\studios\morgan.png" />
+    <Resource Include="Images\flags\studios\morgan_creek.png" />
+    <Resource Include="Images\flags\studios\mosfilm.png" />
+    <Resource Include="Images\flags\studios\mtv.png" />
+    <Resource Include="Images\flags\studios\myriad.png" />
+    <Resource Include="Images\flags\studios\nala.png" />
+    <Resource Include="Images\flags\studios\newlinecinema.png" />
+    <Resource Include="Images\flags\studios\newmarket.png" />
+    <Resource Include="Images\flags\studios\nothing.png" />
+    <Resource Include="Images\flags\studios\nuimage.png" />
+    <Resource Include="Images\flags\studios\oko.png" />
+    <Resource Include="Images\flags\studios\orion.png" />
+    <Resource Include="Images\flags\studios\overture.png" />
+    <Resource Include="Images\flags\studios\paramount.png" />
+    <Resource Include="Images\flags\studios\participant.png" />
+    <Resource Include="Images\flags\studios\pathe.png" />
+    <Resource Include="Images\flags\studios\pecf.png" />
+    <Resource Include="Images\flags\studios\phoenix.png" />
+    <Resource Include="Images\flags\studios\picturehouse.png" />
+    <Resource Include="Images\flags\studios\pisf.png" />
+    <Resource Include="Images\flags\studios\pixar.png" />
+    <Resource Include="Images\flags\studios\platige.png" />
+    <Resource Include="Images\flags\studios\polsat.png" />
+    <Resource Include="Images\flags\studios\polygram.png" />
+    <Resource Include="Images\flags\studios\premiere-direkt.png" />
+    <Resource Include="Images\flags\studios\premiere.png" />
+    <Resource Include="Images\flags\studios\rai.png" />
+    <Resource Include="Images\flags\studios\rankin.png" />
+    <Resource Include="Images\flags\studios\redrum.png" />
+    <Resource Include="Images\flags\studios\red_wagon.png" />
+    <Resource Include="Images\flags\studios\regency.png" />
+    <Resource Include="Images\flags\studios\relativity.png" />
+    <Resource Include="Images\flags\studios\revol.png" />
+    <Resource Include="Images\flags\studios\revolution.png" />
+    <Resource Include="Images\flags\studios\rhombus.png" />
+    <Resource Include="Images\flags\studios\rko_radio.png" />
+    <Resource Include="Images\flags\studios\roadside.png" />
+    <Resource Include="Images\flags\studios\rogue.png" />
+    <Resource Include="Images\flags\studios\sandrew.png" />
+    <Resource Include="Images\flags\studios\saul_zaentz.png" />
+    <Resource Include="Images\flags\studios\scifi.png" />
+    <Resource Include="Images\flags\studios\scott_free.png" />
+    <Resource Include="Images\flags\studios\screengems.png" />
+    <Resource Include="Images\flags\studios\Screen_Australia.png" />
+    <Resource Include="Images\flags\studios\se-ma-for.png" />
+    <Resource Include="Images\flags\studios\semafor.png" />
+    <Resource Include="Images\flags\studios\sfi.png" />
+    <Resource Include="Images\flags\studios\shout factory.png" />
+    <Resource Include="Images\flags\studios\showtime.png" />
+    <Resource Include="Images\flags\studios\sidney_kimmel.png" />
+    <Resource Include="Images\flags\studios\sonypictures.png" />
+    <Resource Include="Images\flags\studios\Square-Enix.png" />
+    <Resource Include="Images\flags\studios\squareenix.png" />
+    <Resource Include="Images\flags\studios\storyline.png" />
+    <Resource Include="Images\flags\studios\studiocanal.png" />
+    <Resource Include="Images\flags\studios\syrena.png" />
+    <Resource Include="Images\flags\studios\telos.png" />
+    <Resource Include="Images\flags\studios\thinkfilm.png" />
+    <Resource Include="Images\flags\studios\thisisthat.png" />
+    <Resource Include="Images\flags\studios\toho b.png" />
+    <Resource Include="Images\flags\studios\toho.png" />
+    <Resource Include="Images\flags\studios\tor.png" />
+    <Resource Include="Images\flags\studios\tor2.png" />
+    <Resource Include="Images\flags\studios\touchstone.png" />
+    <Resource Include="Images\flags\studios\tristar.png" />
+    <Resource Include="Images\flags\studios\turner.png" />
+    <Resource Include="Images\flags\studios\tvn.png" />
+    <Resource Include="Images\flags\studios\tvp.png" />
+    <Resource Include="Images\flags\studios\ugc.png" />
+    <Resource Include="Images\flags\studios\unitedartists.png" />
+    <Resource Include="Images\flags\studios\universal.png" />
+    <Resource Include="Images\flags\studios\village_roadshow.png" />
+    <Resource Include="Images\flags\studios\warner.png" />
+    <Resource Include="Images\flags\studios\warner_independent_pictures.png" />
+    <Resource Include="Images\flags\studios\wdr.png" />
+    <Resource Include="Images\flags\studios\weinstein.png" />
+    <Resource Include="Images\flags\studios\wfdif-b.png" />
+    <Resource Include="Images\flags\studios\wfdif.png" />
+    <Resource Include="Images\flags\studios\working_title.png" />
+    <Resource Include="Images\flags\studios\xfilme.png" />
+    <Resource Include="Images\flags\studios\zdf.png" />
+    <Resource Include="Images\flags\studios\zebra.png" />
+    <Resource Include="Images\flags\studios\zentropa.png" />
+    <Resource Include="Images\list_movieicon_flipmask.png" />
+    <Resource Include="Images\list_movieicon_frame.png" />
+    <Resource Include="Images\list_movieicon_glass.png" />
+    <Resource Include="Images\list_movieicon_mask.png" />
+    <Resource Include="Images\mask.png" />
+    <Resource Include="Images\Matrix bluray.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Themes\BubbleCreme\.svn\prop-base\" />
@@ -411,4 +634,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Import Project="SubsetFont.targets" />
 </Project>
