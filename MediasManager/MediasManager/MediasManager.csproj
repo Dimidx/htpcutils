@@ -520,6 +520,9 @@
     <Resource Include="Images\Matrix bluray.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\defaultVideoBigPoster.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Themes\BubbleCreme\.svn\prop-base\" />
     <Folder Include="Themes\BubbleCreme\.svn\props\" />
     <Folder Include="Themes\BubbleCreme\.svn\tmp\prop-base\" />

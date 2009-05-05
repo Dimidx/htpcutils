@@ -26,8 +26,9 @@ namespace MediaManager
     /// </summary>
     public partial class Window1 : Window
     {
-        private Media media = new Media();
+        //private Media media = new Media();
         private Movie MonFilm = null;
+        //public MovieCollection _Movies = new MovieCollection();
         public BackgroundWorker BackWorker = new BackgroundWorker();
         public bool _RechercheTerminée = true;
         public ImageSource PosterSource = null;
@@ -36,15 +37,18 @@ namespace MediaManager
 
         public Window1()
         {
-            InitializeComponent();
+
             Settings.xmlPath = System.IO.Path.GetDirectoryName(Application.ResourceAssembly.Location) + @"\settings.xml";
             Settings.XML = new Config.XmlSettings();
             if (!Settings.Load())
             {
                 MessageBox.Show("No valid settings.xml found. Loading defaults");
+                Settings.Save();
                 //conf.ShowDialog();
             }
 
+            InitializeComponent();
+          
             ScanDir();
 
         }
@@ -55,7 +59,7 @@ namespace MediaManager
         /// </summary>
         private void ScanDir()
         {
-            media.Movies.OrderBy(m => m.MovieName);
+            //media.Movies.OrderBy(m => m.MovieName);
 
             if (BackWorker.IsBusy == false)
             {
@@ -64,9 +68,8 @@ namespace MediaManager
                 BackWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ScanDir_RunWorkerCompleted);
                 BackWorker.ProgressChanged += new ProgressChangedEventHandler(BackWorker_ProgressChanged);
                 BackWorker.WorkerReportsProgress = true;
-                media = new Media();
-
-                media.Movies.Clear();
+                MovieCollection _Movies = this.Resources["MovieCollectionDataSource"] as MovieCollection;
+                _Movies.Clear();
                 this.jauge_progress.Visibility = Visibility.Visible;
                 this.lib_BarreEtat.Visibility = Visibility.Visible;
                 BackWorker.RunWorkerAsync();
@@ -75,64 +78,52 @@ namespace MediaManager
 
         private void BackWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            this.lib_BarreEtat.Text =  "Nombre de films trouvés : " + media.Movies.Count.ToString() + " - " + e.UserState.ToString() ;
+            MovieCollection _Movies = this.Resources["MovieCollectionDataSource"] as MovieCollection;
+            this.lib_BarreEtat.Text = "Nombre de films trouvés : " + _Movies.Count.ToString() + " - " + e.UserState.ToString();
 
         }
 
 
         private void ScanDir_DoWork(object sender, DoWorkEventArgs e)
         {
-            media.scanMovieDirs(BackWorker);
+            MovieCollection _Movies = this.Resources["MovieCollectionDataSource"] as MovieCollection;
+            _Movies.scanMovieDirs();
         }
 
         private void ScanDir_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
 
-            //Lance la recherche
-            Binding b = new Binding();
-            b.Source = media.Movies.OrderBy(m => m.MovieName); //.OrderBy(m => m.MovieName); sert a trier
-            listBox_Films.SetBinding(ItemsControl.ItemsSourceProperty, b);
             this.jauge_progress.Visibility = Visibility.Collapsed;
             this.lib_BarreEtat.Visibility = Visibility.Collapsed;
 
         }
 
-        private void LoadPoster_DoWork(object sender, DoWorkEventArgs e)
-        {
-            PosterSource = null;
-            if (MonFilm.HasPoster)
-            {
-                PosterSource = new BitmapImage(new Uri(MonFilm.Paths.PosterPath));
-            }
-        }
 
-        private void LoadPoster_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            
-        }
 
         private void listBox_Films_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (listBox_Films.SelectedItem != null)
-            {
-                MonFilm = (Movie)listBox_Films.SelectedItem;
-                MonFilm.updateItem();
+
+
+            //if (listBox_Films.SelectedItem != null)
+            //{
+                //MonFilm = (Movie)listBox_Films.SelectedItem;
+                //MonFilm.updateItem();
 
                 //MonFilm = AllocineHandler.GetFilmDetails(MonFilm.ID, true, true);
-                this.DataContext = MonFilm;
-				FilmDetails.ImagePoster.Source = null;
-				FilmDetails.ImageFanart.Source = null;
-                if (MonFilm.HasPoster)
-                {
-                    FilmDetails.ImagePoster.Source = new BitmapImage(new Uri(MonFilm.Paths.PosterPath));
-                }
-				if (MonFilm.HasFanart)
-                {
-                    FilmDetails.ImageFanart.Source = new BitmapImage(new Uri(MonFilm.Paths.FanartPath));
-                }
+                //FilmDetails.DataContext = MonFilm;
+                //FilmDetails.ImagePoster.Source = null;
+                //FilmDetails.ImageFanart.Source = null;
+                //if (MonFilm.HasPoster)
+                //{
+                //    FilmDetails.ImagePoster.Source = new BitmapImage(new Uri(MonFilm.Paths.PosterPath));
+                //}
+                //if (MonFilm.HasFanart)
+                //{
+                //    FilmDetails.ImageFanart.Source = new BitmapImage(new Uri(MonFilm.Paths.FanartPath));
+                //}
 
 
-            }
+       
         }
 
         #region Menu
@@ -148,6 +139,8 @@ namespace MediaManager
             Configuration conf = new Configuration();
 
             conf.ShowDialog();
+            Settings.xmlPath = System.IO.Path.GetDirectoryName(Application.ResourceAssembly.Location) + @"\settings.xml";
+            Settings.XML = new Config.XmlSettings();
             Settings.Load();
         }
 

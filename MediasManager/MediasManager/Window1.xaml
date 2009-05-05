@@ -13,7 +13,6 @@
         <Converters:StringToImageSource x:Key="StringToImageSource"/>
         <ItemsPanelTemplate x:Key="MovieTemplate">
         	<StackPanel Width="Auto" Height="Auto"/>
-
         </ItemsPanelTemplate>
         <DataTemplate x:Key="MovieDataTemplate">
         	<Grid>
@@ -27,13 +26,14 @@
         	</DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Converters:ToImage x:Key="ToImage"/>
+        <local:MovieCollection x:Key="MovieCollectionDataSource" d:IsDataSource="True" />
     </Window.Resources>
 	<Window.Triggers>
 		<EventTrigger RoutedEvent="Selector.SelectionChanged" SourceName="listBox_Films">
 			<BeginStoryboard x:Name="Storyboard1_BeginStoryboard" Storyboard="{StaticResource Storyboard1}"/>
 		</EventTrigger>
 	</Window.Triggers>
-    <Grid >
+    <Grid DataContext="{Binding Source={StaticResource MovieCollectionDataSource}}" >
     	<DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True">
     		<Menu DockPanel.Dock="Top">
     			<MenuItem Header="Fichier">
@@ -60,8 +60,8 @@
     		<TextBlock x:Name="lib_BarreEtat" Width="Auto" Text="Recherche en cours..." TextWrapping="Wrap" DockPanel.Dock="Bottom" Visibility="Collapsed"/>
     		<DockPanel DockPanel.Dock="Top" LastChildFill="True" d:LayoutOverrides="Height">
     			<Border Margin="5,5,5,5" Width="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10">
-    				<ListBox x:Name="listBox_Films" SelectionChanged="listBox_Films_SelectionChanged" ItemsPanel="{DynamicResource MovieTemplate}" ItemTemplate="{DynamicResource MovieDataTemplate}" Background="{x:Null}" BorderBrush="{DynamicResource NormalBorderBrush}" Foreground="#FF000000" Margin="5,5,5,5" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" d:LayoutOverrides="Height" />
-    			</Border>
+                    <ListBox x:Name="listBox_Films" ItemsPanel="{DynamicResource MovieTemplate}" Background="{x:Null}" BorderBrush="{DynamicResource NormalBorderBrush}" Foreground="#FF000000" Margin="5,5,5,5" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" d:LayoutOverrides="Height" ItemsSource="{Binding}" ItemTemplate="{DynamicResource MovieDataTemplate}" IsSynchronizedWithCurrentItem="True" />
+                </Border>
     			<Border Margin="5,5,5,5" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10">
     				<local:UC_FilmDetails x:Name="FilmDetails" Margin="5,5,5,5"/>
     			</Border>

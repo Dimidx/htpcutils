@@ -1,46 +1,95 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.IO;
 using MediaManager;
 using MediaManager.Library.NFO;
+using System.Threading;
+
 
 namespace MediaManager
 {
-    class Media
+    public class AsyncObservableCollection<T> : ObservableCollection<T>
     {
-        private ObservableCollection<Movie> movies = new ObservableCollection<Movie>();
+        private SynchronizationContext _synchronizationContext = SynchronizationContext.Current;
 
-        public ObservableCollection<Movie> Movies
+        public AsyncObservableCollection()
         {
-            get { return movies; }
         }
 
-        //private downloadManager dlMgr = new DownloadManagerImpl();
-        public ObservableCollection<Movie> scanMovieDirs()
+        public AsyncObservableCollection(IEnumerable<T> list)
+            : base(list)
         {
-            return scanMovieDirs(null);
         }
 
+        protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
+        {
+            if (SynchronizationContext.Current == _synchronizationContext)
+            {
+                // Execute the CollectionChanged event on the current thread
+                RaiseCollectionChanged(e);
+            }
+            else
+            {
+                // Post the CollectionChanged event on the creator thread
+                _synchronizationContext.Post(RaiseCollectionChanged, e);
+            }
+        }
 
-        public ObservableCollection<Movie> scanMovieDirs(object sender)
+        private void RaiseCollectionChanged(object param)
+        {
+            // We are in the creator thread, call the base implementation directly
+            base.OnCollectionChanged((NotifyCollectionChangedEventArgs)param);
+        }
+
+        protected override void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            if (SynchronizationContext.Current == _synchronizationContext)
+            {
+                // Execute the PropertyChanged event on the current thread
+                RaisePropertyChanged(e);
+            }
+            else
+            {
+                // Post the PropertyChanged event on the creator thread
+                _synchronizationContext.Post(RaisePropertyChanged, e);
+            }
+        }
+
+        private void RaisePropertyChanged(object param)
+        {
+            // We are in the creator thread, call the base implementation directly
+            base.OnPropertyChanged((PropertyChangedEventArgs)param);
+        }
+    }
+
+
+    public class MovieCollection : AsyncObservableCollection<Movie> 
+    {
+ 
+        public void scanMovieDirs() //object sender)
         {
             //dlMgr.CancelAllDownloads();
-            BackgroundWorker BackWork = new BackgroundWorker();
-            if (sender != null)
-            {
-                BackWork = sender as BackgroundWorker;
-            }
+            //BackgroundWorker BackWork = new BackgroundWorker();
+            //if (sender != null)
+            //{
+            //    BackWork = sender as BackgroundWorker;
+            //}
 
             ObservableCollection<MovieFolder> paths = Settings.XML.Config.confMovie.MovieFolders;
-            movies.Clear();
+
+            this.Clear();
             if (paths != null)
             {
+
                 foreach (MovieFolder mf in paths)
+                    
                 {
+                    
                     if (mf.monitorFolder)
                     {
 
@@ -55,12 +104,13 @@ namespace MediaManager
                             {
                                 foreach (FileInfo fileInfo in dinf.GetFiles(ext))
                                 {
+                                    
                                     if (!fileInfo.Name.ToLower().Contains("sample") || !Settings.XML.Config.confMovie.skipSample)
                                     {
                                         if (fileInfo != null)
                                         {
-                                            if (sender != null) BackWork.ReportProgress(0, fileInfo.Name);
-                                            movies.Add(new Movie(fileInfo, mf));
+                                            //if (sender != null) BackWork.ReportProgress(0, fileInfo.Name);
+                                            this.Add(new Movie(fileInfo, mf));
                                         }
 
                                     }
@@ -76,14 +126,14 @@ namespace MediaManager
                             {
                                 if (!fileInfo.Name.ToLower().Contains("sample") || !Settings.XML.Config.confMovie.skipSample)
                                 {
-                                    if (fileInfo != null) movies.Add(new Movie(fileInfo, mf));
+                                    if (fileInfo != null) this.Add(new Movie(fileInfo, mf));
                                 }
                             }
                         }
                     }
                 }
             }
-            return movies;
+            //return this;
         }
     }
 }

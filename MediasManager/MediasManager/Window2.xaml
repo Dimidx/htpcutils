@@ -53,9 +53,9 @@
 	</Window.Resources>
 
 	<Grid x:Name="LayoutRoot">
-		<Image Margin="210.833,20.25,194.944,86.418" Source="Images\Matrix bluray.jpg" Stretch="Fill" OpacityMask="{DynamicResource VisualBrush4}" VerticalAlignment="Stretch"/>
 		<UniformGrid HorizontalAlignment="Left" d:LayoutOverrides="Width, Height">
 				<Border Height="128" ClipToBounds="False" BorderBrush="#FF000000" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10"/>
 		</UniformGrid>
+		<Rectangle Margin="105,31,193,124"/>
 	</Grid>
 </Window>
