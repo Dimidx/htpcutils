@@ -9,11 +9,17 @@ using System.Text.RegularExpressions;
 
 namespace MediaManager
 {
-    class Movie
+    public class Movie
     {
 
         public FileInfo fileInfo;
-        public Path Paths;
+
+        private Path _paths;
+        public Path Paths
+        {
+            get { return _paths; }
+        }
+
 
         public bool HasFanart;
         public bool HasPoster;
@@ -61,7 +67,7 @@ namespace MediaManager
             fileInfo = movie;
             //downloadMgr = dlMgr;
             movieFolder = mf;
-            Paths = new Path(movie);
+            _paths = new Path(movie);
 
             updateItem();
         }
@@ -81,7 +87,7 @@ namespace MediaManager
         public void deleteNfo()
         {
 
-            foreach (String s in Paths.ValidNfoPaths())
+            foreach (String s in _paths.ValidNfoPaths())
             {
                 File.Delete(s);
                 SearchString = null;
@@ -93,10 +99,10 @@ namespace MediaManager
         {
             // determine missing fields...
 
-            HasNfo = (Paths.ValidNfoPaths().Count > 0);
-            HasFanart = (Paths.ValidFanartPaths().Count > 0);
-            HasPoster = (Paths.ValidPosterPaths().Count > 0);
-            HasFolderJpg = File.Exists(Paths.FolderPath);
+            HasNfo = (_paths.ValidNfoPaths().Count > 0);
+            HasFanart = (_paths.ValidFanartPaths().Count > 0);
+            HasPoster = (_paths.ValidPosterPaths().Count > 0);
+            HasFolderJpg = File.Exists(_paths.FolderPath);
 
             bool nfoValid = false;
             // does it load?
@@ -104,14 +110,14 @@ namespace MediaManager
             {
                 try
                 {
-                    if (File.Exists(Paths.NfoPath))
+                    if (File.Exists(_paths.NfoPath))
                     {
-                        nfoMov = NfoFile.getNfoMovie(Paths.NfoPath);
+                        nfoMov = NfoFile.getNfoMovie(_paths.NfoPath);
                         nfoValid = (nfoMov != null);
                     }
                     if (!nfoValid)
                     {
-                        foreach (String s in Paths.ValidNfoPaths())
+                        foreach (String s in _paths.ValidNfoPaths())
                         {
                             nfoMov = NfoFile.getNfoMovie(s);
                             nfoValid = ((nfoMov != null) || nfoValid);
@@ -127,7 +133,7 @@ namespace MediaManager
 
             if (Settings.XML.Config.confMovie.useFolderForSearch && movieFolder.containsFolders)
             {
-                MovieName = Paths.ShortDir;
+                MovieName = _paths.ShortDir;
             }
             else
             {
@@ -247,7 +253,7 @@ namespace MediaManager
         }
     }
 
-        class Path
+        public class Path
         {
             private String[] nfoPaths;
             private String[] posterPaths;
@@ -285,6 +291,7 @@ namespace MediaManager
             public String PosterPath
             {
                 get { return Settings.XML.Config.confMovie.saveAsMovie ? posterPaths[0] : posterPaths[1]; }
+                //get { return posterPaths[1]; }
             }
 
             public String FanartPath

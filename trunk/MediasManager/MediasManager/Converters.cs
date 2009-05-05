@@ -69,11 +69,23 @@ namespace Converters
             {
                 String toConvert = (String)value;
                 BitmapImage bi3 = new BitmapImage();
-                if (toConvert != null)
+
+                try
                 {
+                    if (toConvert != null)
+                    {
+                        bi3.BeginInit();
+                        bi3.UriSource = new Uri(toConvert, UriKind.RelativeOrAbsolute);
+                        bi3.EndInit();
+                    }
+                }
+                catch (Exception)
+                {
+                    bi3 = new BitmapImage();
                     bi3.BeginInit();
-                    bi3.UriSource = new Uri(toConvert, UriKind.Relative);
+                    bi3.UriSource = new Uri("Images/defaultVideoBigPoster.png",UriKind.Relative);
                     bi3.EndInit();
+                    //throw;
                 }
                 return bi3;
 
