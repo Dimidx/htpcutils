@@ -7,26 +7,44 @@
   <ItemGroup>
     <_SolutionProjectProjects Include="MediasManager\MediasManager.csproj" />
     <_SolutionProjectProjects Include="MMLibrary\MMLibrary.csproj" />
+    <_SolutionProjectProjects Include="Scraper\Allocine\Allocine.csproj" />
+    <_SolutionProjectProjects Include="Scraper\TMDB\TMDB.csproj" />
   </ItemGroup>
   <ItemGroup Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
-    <BuildLevel1 Include="MediasManager\MediasManager.csproj">
+    <BuildLevel2 Include="MediasManager\MediasManager.csproj">
       <Configuration>Debug</Configuration>
       <Platform>AnyCPU</Platform>
-    </BuildLevel1>
+    </BuildLevel2>
     <BuildLevel0 Include="MMLibrary\MMLibrary.csproj">
       <Configuration>Debug</Configuration>
       <Platform>AnyCPU</Platform>
     </BuildLevel0>
+    <BuildLevel1 Include="Scraper\Allocine\Allocine.csproj">
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </BuildLevel1>
+    <BuildLevel1 Include="Scraper\TMDB\TMDB.csproj">
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </BuildLevel1>
   </ItemGroup>
   <ItemGroup Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') ">
-    <BuildLevel1 Include="MediasManager\MediasManager.csproj">
+    <BuildLevel2 Include="MediasManager\MediasManager.csproj">
       <Configuration>Release</Configuration>
       <Platform>AnyCPU</Platform>
-    </BuildLevel1>
+    </BuildLevel2>
     <BuildLevel0 Include="MMLibrary\MMLibrary.csproj">
       <Configuration>Release</Configuration>
       <Platform>AnyCPU</Platform>
     </BuildLevel0>
+    <BuildLevel1 Include="Scraper\Allocine\Allocine.csproj">
+      <Configuration>Release</Configuration>
+      <Platform>AnyCPU</Platform>
+    </BuildLevel1>
+    <BuildLevel1 Include="Scraper\TMDB\TMDB.csproj">
+      <Configuration>Release</Configuration>
+      <Platform>AnyCPU</Platform>
+    </BuildLevel1>
   </ItemGroup>
   <UsingTask TaskName="Microsoft.Build.Tasks.CreateTemporaryVCProject" AssemblyName="Microsoft.Build.Tasks.v3.5, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <UsingTask TaskName="Microsoft.Build.Tasks.ResolveVCProjectOutput" AssemblyName="Microsoft.Build.Tasks.v3.5, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
@@ -55,6 +73,8 @@
       <SolutionConfiguration xmlns="">
         <ProjectConfiguration Project="{12D85F6A-EC9A-48C7-BE2C-2F2C0AA8B034}">Debug|AnyCPU</ProjectConfiguration>
         <ProjectConfiguration Project="{40437BC5-5D5A-4473-87C0-AE9813AE153D}">Debug|AnyCPU</ProjectConfiguration>
+        <ProjectConfiguration Project="{28B511AA-6085-4E93-8802-0F8FF553CEFD}">Debug|AnyCPU</ProjectConfiguration>
+        <ProjectConfiguration Project="{E7733B0B-46EC-488E-B85B-5512F8AB2775}">Debug|AnyCPU</ProjectConfiguration>
       </SolutionConfiguration>
     </CurrentSolutionConfigurationContents>
   </PropertyGroup>
@@ -63,6 +83,8 @@
       <SolutionConfiguration xmlns="">
         <ProjectConfiguration Project="{12D85F6A-EC9A-48C7-BE2C-2F2C0AA8B034}">Release|AnyCPU</ProjectConfiguration>
         <ProjectConfiguration Project="{40437BC5-5D5A-4473-87C0-AE9813AE153D}">Release|AnyCPU</ProjectConfiguration>
+        <ProjectConfiguration Project="{28B511AA-6085-4E93-8802-0F8FF553CEFD}">Release|AnyCPU</ProjectConfiguration>
+        <ProjectConfiguration Project="{E7733B0B-46EC-488E-B85B-5512F8AB2775}">Release|AnyCPU</ProjectConfiguration>
       </SolutionConfiguration>
     </CurrentSolutionConfigurationContents>
   </PropertyGroup>
@@ -74,7 +96,7 @@
   <Target Name="ValidateToolsVersions">
     <Error Text="La version des outils &quot;$(MSBuildToolsVersion)&quot; de la solution ne prend pas en charge la génération de projets avec une autre version d'outils." Code="MSB4149" HelpKeyword="MSBuild.SolutionToolsVersionDoesNotSupportProjectToolsVersion" Condition="'$(MSBuildToolsVersion)' == '2.0' and ('$(ProjectToolsVersion)' != '2.0' and '$(ProjectToolsVersion)' != '')" />
   </Target>
-  <Target Name="MediasManager" DependsOnTargets="MMLibrary" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(MediasManagerBuildOutput)">
+  <Target Name="MediasManager" DependsOnTargets="TMDB;Allocine;MMLibrary" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(MediasManagerBuildOutput)">
     <MSBuild Projects="MediasManager\MediasManager.csproj" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
       <Output TaskParameter="TargetOutputs" ItemName="MediasManagerBuildOutput" />
     </MSBuild>
@@ -82,11 +104,11 @@
       <Output TaskParameter="TargetOutputs" ItemName="MediasManagerBuildOutput" />
     </MSBuild>
   </Target>
-  <Target Name="MediasManager:Clean" DependsOnTargets="MMLibrary:Clean" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
+  <Target Name="MediasManager:Clean" DependsOnTargets="TMDB:Clean;Allocine:Clean;MMLibrary:Clean" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
     <MSBuild Projects="MediasManager\MediasManager.csproj" Targets="Clean" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " />
     <MSBuild Projects="MediasManager\MediasManager.csproj" Targets="Clean" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
   </Target>
-  <Target Name="MediasManager:Rebuild" DependsOnTargets="MMLibrary:Rebuild" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(MediasManagerBuildOutput)">
+  <Target Name="MediasManager:Rebuild" DependsOnTargets="TMDB:Rebuild;Allocine:Rebuild;MMLibrary:Rebuild" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(MediasManagerBuildOutput)">
     <MSBuild Projects="MediasManager\MediasManager.csproj" Targets="Rebuild" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
       <Output TaskParameter="TargetOutputs" ItemName="MediasManagerBuildOutput" />
     </MSBuild>
@@ -94,7 +116,7 @@
       <Output TaskParameter="TargetOutputs" ItemName="MediasManagerBuildOutput" />
     </MSBuild>
   </Target>
-  <Target Name="MediasManager:Publish" DependsOnTargets="MMLibrary:Publish" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
+  <Target Name="MediasManager:Publish" DependsOnTargets="TMDB:Publish;Allocine:Publish;MMLibrary:Publish" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
     <MSBuild Projects="MediasManager\MediasManager.csproj" Targets="Publish" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " />
     <MSBuild Projects="MediasManager\MediasManager.csproj" Targets="Publish" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
   </Target>
@@ -122,6 +144,54 @@
     <MSBuild Projects="MMLibrary\MMLibrary.csproj" Targets="Publish" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " />
     <MSBuild Projects="MMLibrary\MMLibrary.csproj" Targets="Publish" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
   </Target>
+  <Target Name="Allocine" DependsOnTargets="MMLibrary" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(AllocineBuildOutput)">
+    <MSBuild Projects="Scraper\Allocine\Allocine.csproj" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
+      <Output TaskParameter="TargetOutputs" ItemName="AllocineBuildOutput" />
+    </MSBuild>
+    <MSBuild Projects="Scraper\Allocine\Allocine.csproj" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') ">
+      <Output TaskParameter="TargetOutputs" ItemName="AllocineBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="Allocine:Clean" DependsOnTargets="MMLibrary:Clean" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
+    <MSBuild Projects="Scraper\Allocine\Allocine.csproj" Targets="Clean" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " />
+    <MSBuild Projects="Scraper\Allocine\Allocine.csproj" Targets="Clean" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
+  </Target>
+  <Target Name="Allocine:Rebuild" DependsOnTargets="MMLibrary:Rebuild" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(AllocineBuildOutput)">
+    <MSBuild Projects="Scraper\Allocine\Allocine.csproj" Targets="Rebuild" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
+      <Output TaskParameter="TargetOutputs" ItemName="AllocineBuildOutput" />
+    </MSBuild>
+    <MSBuild Projects="Scraper\Allocine\Allocine.csproj" Targets="Rebuild" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') ">
+      <Output TaskParameter="TargetOutputs" ItemName="AllocineBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="Allocine:Publish" DependsOnTargets="MMLibrary:Publish" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
+    <MSBuild Projects="Scraper\Allocine\Allocine.csproj" Targets="Publish" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " />
+    <MSBuild Projects="Scraper\Allocine\Allocine.csproj" Targets="Publish" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
+  </Target>
+  <Target Name="TMDB" DependsOnTargets="MMLibrary" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(TMDBBuildOutput)">
+    <MSBuild Projects="Scraper\TMDB\TMDB.csproj" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
+      <Output TaskParameter="TargetOutputs" ItemName="TMDBBuildOutput" />
+    </MSBuild>
+    <MSBuild Projects="Scraper\TMDB\TMDB.csproj" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') ">
+      <Output TaskParameter="TargetOutputs" ItemName="TMDBBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="TMDB:Clean" DependsOnTargets="MMLibrary:Clean" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
+    <MSBuild Projects="Scraper\TMDB\TMDB.csproj" Targets="Clean" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " />
+    <MSBuild Projects="Scraper\TMDB\TMDB.csproj" Targets="Clean" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
+  </Target>
+  <Target Name="TMDB:Rebuild" DependsOnTargets="MMLibrary:Rebuild" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(TMDBBuildOutput)">
+    <MSBuild Projects="Scraper\TMDB\TMDB.csproj" Targets="Rebuild" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
+      <Output TaskParameter="TargetOutputs" ItemName="TMDBBuildOutput" />
+    </MSBuild>
+    <MSBuild Projects="Scraper\TMDB\TMDB.csproj" Targets="Rebuild" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') ">
+      <Output TaskParameter="TargetOutputs" ItemName="TMDBBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="TMDB:Publish" DependsOnTargets="MMLibrary:Publish" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
+    <MSBuild Projects="Scraper\TMDB\TMDB.csproj" Targets="Publish" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " />
+    <MSBuild Projects="Scraper\TMDB\TMDB.csproj" Targets="Publish" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
+  </Target>
   <Target Name="Build" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(CollectedBuildOutput)">
     <MSBuild Condition="@(BuildLevel0) != ''" Projects="@(BuildLevel0)" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)">
       <Output TaskParameter="TargetOutputs" ItemName="CollectedBuildOutput" />
@@ -133,6 +203,11 @@
     </MSBuild>
     <Message Text="Le projet &quot;%(SkipLevel1.Identity)&quot; n'est pas sélectionné dans le cadre d'une génération dans la configuration de solution &quot;$(Configuration)|$(Platform)&quot;." Condition="@(SkipLevel1) != ''" />
     <Warning Text="La configuration du projet &quot;%(MissingConfigLevel1.Identity)&quot; n'était pas spécifiée dans le fichier solution pour la configuration de solution &quot;$(Configuration)|$(Platform)&quot;." Code="MSB4121" HelpKeyword="MSBuild.SolutionProjectConfigurationMissing" Condition="@(MissingConfigLevel1) != ''" />
+    <MSBuild Condition="@(BuildLevel2) != ''" Projects="@(BuildLevel2)" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)">
+      <Output TaskParameter="TargetOutputs" ItemName="CollectedBuildOutput" />
+    </MSBuild>
+    <Message Text="Le projet &quot;%(SkipLevel2.Identity)&quot; n'est pas sélectionné dans le cadre d'une génération dans la configuration de solution &quot;$(Configuration)|$(Platform)&quot;." Condition="@(SkipLevel2) != ''" />
+    <Warning Text="La configuration du projet &quot;%(MissingConfigLevel2.Identity)&quot; n'était pas spécifiée dans le fichier solution pour la configuration de solution &quot;$(Configuration)|$(Platform)&quot;." Code="MSB4121" HelpKeyword="MSBuild.SolutionProjectConfigurationMissing" Condition="@(MissingConfigLevel2) != ''" />
   </Target>
   <Target Name="Clean" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
     <MSBuild Condition="@(BuildLevel0) != ''" Projects="@(BuildLevel0)" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" Targets="Clean" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" />
@@ -141,6 +216,9 @@
     <MSBuild Condition="@(BuildLevel1) != ''" Projects="@(BuildLevel1)" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" Targets="Clean" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" />
     <Message Text="Le projet &quot;%(SkipLevel1.Identity)&quot; n'est pas sélectionné dans le cadre d'une génération dans la configuration de solution &quot;$(Configuration)|$(Platform)&quot;." Condition="@(SkipLevel1) != ''" />
     <Warning Text="La configuration du projet &quot;%(MissingConfigLevel1.Identity)&quot; n'était pas spécifiée dans le fichier solution pour la configuration de solution &quot;$(Configuration)|$(Platform)&quot;." Code="MSB4121" HelpKeyword="MSBuild.SolutionProjectConfigurationMissing" Condition="@(MissingConfigLevel1) != ''" />
+    <MSBuild Condition="@(BuildLevel2) != ''" Projects="@(BuildLevel2)" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" Targets="Clean" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" />
+    <Message Text="Le projet &quot;%(SkipLevel2.Identity)&quot; n'est pas sélectionné dans le cadre d'une génération dans la configuration de solution &quot;$(Configuration)|$(Platform)&quot;." Condition="@(SkipLevel2) != ''" />
+    <Warning Text="La configuration du projet &quot;%(MissingConfigLevel2.Identity)&quot; n'était pas spécifiée dans le fichier solution pour la configuration de solution &quot;$(Configuration)|$(Platform)&quot;." Code="MSB4121" HelpKeyword="MSBuild.SolutionProjectConfigurationMissing" Condition="@(MissingConfigLevel2) != ''" />
     <Delete Files="MediasManager.sln.cache" />
   </Target>
   <Target Name="Rebuild" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(CollectedBuildOutput)">
@@ -154,6 +232,11 @@
     </MSBuild>
     <Message Text="Le projet &quot;%(SkipLevel1.Identity)&quot; n'est pas sélectionné dans le cadre d'une génération dans la configuration de solution &quot;$(Configuration)|$(Platform)&quot;." Condition="@(SkipLevel1) != ''" />
     <Warning Text="La configuration du projet &quot;%(MissingConfigLevel1.Identity)&quot; n'était pas spécifiée dans le fichier solution pour la configuration de solution &quot;$(Configuration)|$(Platform)&quot;." Code="MSB4121" HelpKeyword="MSBuild.SolutionProjectConfigurationMissing" Condition="@(MissingConfigLevel1) != ''" />
+    <MSBuild Condition="@(BuildLevel2) != ''" Projects="@(BuildLevel2)" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" Targets="Rebuild" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)">
+      <Output TaskParameter="TargetOutputs" ItemName="CollectedBuildOutput" />
+    </MSBuild>
+    <Message Text="Le projet &quot;%(SkipLevel2.Identity)&quot; n'est pas sélectionné dans le cadre d'une génération dans la configuration de solution &quot;$(Configuration)|$(Platform)&quot;." Condition="@(SkipLevel2) != ''" />
+    <Warning Text="La configuration du projet &quot;%(MissingConfigLevel2.Identity)&quot; n'était pas spécifiée dans le fichier solution pour la configuration de solution &quot;$(Configuration)|$(Platform)&quot;." Code="MSB4121" HelpKeyword="MSBuild.SolutionProjectConfigurationMissing" Condition="@(MissingConfigLevel2) != ''" />
   </Target>
   <Target Name="Publish" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
     <MSBuild Condition="@(BuildLevel0) != ''" Projects="@(BuildLevel0)" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" Targets="Publish" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" />
@@ -162,5 +245,8 @@
     <MSBuild Condition="@(BuildLevel1) != ''" Projects="@(BuildLevel1)" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" Targets="Publish" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" />
     <Message Text="Le projet &quot;%(SkipLevel1.Identity)&quot; n'est pas sélectionné dans le cadre d'une génération dans la configuration de solution &quot;$(Configuration)|$(Platform)&quot;." Condition="@(SkipLevel1) != ''" />
     <Warning Text="La configuration du projet &quot;%(MissingConfigLevel1.Identity)&quot; n'était pas spécifiée dans le fichier solution pour la configuration de solution &quot;$(Configuration)|$(Platform)&quot;." Code="MSB4121" HelpKeyword="MSBuild.SolutionProjectConfigurationMissing" Condition="@(MissingConfigLevel1) != ''" />
+    <MSBuild Condition="@(BuildLevel2) != ''" Projects="@(BuildLevel2)" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" Targets="Publish" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" />
+    <Message Text="Le projet &quot;%(SkipLevel2.Identity)&quot; n'est pas sélectionné dans le cadre d'une génération dans la configuration de solution &quot;$(Configuration)|$(Platform)&quot;." Condition="@(SkipLevel2) != ''" />
+    <Warning Text="La configuration du projet &quot;%(MissingConfigLevel2.Identity)&quot; n'était pas spécifiée dans le fichier solution pour la configuration de solution &quot;$(Configuration)|$(Platform)&quot;." Code="MSB4121" HelpKeyword="MSBuild.SolutionProjectConfigurationMissing" Condition="@(MissingConfigLevel2) != ''" />
   </Target>
 </Project>

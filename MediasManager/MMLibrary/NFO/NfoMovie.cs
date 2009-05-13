@@ -33,6 +33,8 @@ namespace MediaManager.Library.NFO
         private String premiered = "";
         private String studio = "";
         private String trailer = "";
+        private String alloid = "";
+
         private ObservableCollection<Actor> actors = new ObservableCollection<Actor>();
 
         [XmlElement(ElementName = "title")]
@@ -42,88 +44,95 @@ namespace MediaManager.Library.NFO
             set { title = value; OnPropertyChanged("Title"); }
         }
 
+        [XmlElement(ElementName = "alloid")]
+        public String AlloId
+        {
+            get { return alloid; }
+            set { alloid = value; OnPropertyChanged("AlloId"); }
+        }
+
         [XmlElement(ElementName = "rating")]
         public String Rating
         {
             get { return rating; }
-            set { rating = value; }
+            set { rating = value; OnPropertyChanged("Rating"); }
         }
 
         [XmlElement(ElementName = "year")]
         public String Year
         {
             get { return year; }
-            set { year = value; }
+            set { year = value; OnPropertyChanged("Year"); }
         }
 
         [XmlElement(ElementName = "top250")]
         public String Top250
         {
             get { return top250; }
-            set { top250 = value; }
+            set { top250 = value; OnPropertyChanged("Top250"); }
         }
 
         [XmlElement(ElementName = "votes")]
         public String Votes
         {
             get { return votes; }
-            set { votes = value; }
+            set { votes = value; OnPropertyChanged("Votes"); }
         }
 
         [XmlElement(ElementName = "outline")]
         public String Outline
         {
             get { return outline; }
-            set { outline = value; }
+            set { outline = value; OnPropertyChanged("Outline"); }
         }
 
         [XmlElement(ElementName = "plot")]
         public String Plot
         {
             get { return plot; }
-            set { plot = value; }
+            set { plot = value; OnPropertyChanged("Plot"); }
         }
 
         [XmlElement(ElementName = "tagline")]
         public String Tagline
         {
             get { return tagline; }
-            set { tagline = value; }
+            set { tagline = value; OnPropertyChanged("Tagline"); }
         }
 
         [XmlElement(ElementName = "runtime")]
         public String Runtime
         {
             get { return runtime; }
-            set { runtime = value; }
+            set { runtime = value; OnPropertyChanged("Runtime"); }
         }
 
         [XmlElement(ElementName = "thumb")]
         public String Thumb
         {
             get { return thumb; }
-            set { thumb = value; }
+            set { thumb = value; OnPropertyChanged("Thumb"); }
         }
 
         [XmlElement(ElementName = "mpaa")]
         public String Mpaa
         {
             get { return mpaa; }
-            set { mpaa = value; }
+            set { mpaa = value; OnPropertyChanged("Mpaa"); }
         }
 
         [XmlElement(ElementName = "playcount")]
         public String Playcount
         {
             get { return playcount; }
-            set { playcount = value; }
+            set { playcount = value; OnPropertyChanged("Playcount"); }
         }
 
         [XmlElement(ElementName = "id")]
         public String Id
         {
             get { return id; }
-            set { id = value; }
+            set { id = value; OnPropertyChanged("Id"); }
         }
 
 
@@ -132,28 +141,28 @@ namespace MediaManager.Library.NFO
         public String Genre
         {
             get { return genre; }
-            set { genre = value; }
+            set { genre = value; OnPropertyChanged("Genre"); }
         }
 
         [XmlElement(ElementName = "credits")]
         public String Credits
         {
             get { return credits; }
-            set { credits = value; }
+            set { credits = value; OnPropertyChanged("Credits"); }
         }
 
         [XmlElement(ElementName = "director")]
         public String Director
         {
             get { return director; }
-            set { director = value; }
+            set { director = value; OnPropertyChanged("Director"); }
         }
 
         [XmlElement(ElementName = "premiered")]
         public String Premiered
         {
             get { return premiered; }
-            set { premiered = value; }
+            set { premiered = value; OnPropertyChanged("Premiered"); }
         }
 
         [XmlElement(ElementName = "studio")]
@@ -164,14 +173,14 @@ namespace MediaManager.Library.NFO
                 return studio; 
                 
             }
-            set { studio = value; }
+            set { studio = value; OnPropertyChanged("Studio"); }
         }
 
         [XmlElement(ElementName = "trailer")]
         public String Trailer
         {
             get { return trailer; }
-            set { trailer = value; }
+            set { trailer = value; OnPropertyChanged("Trailer"); }
         }
 
         [XmlElement(ElementName = "actor")]
@@ -209,7 +218,7 @@ namespace MediaManager.Library.NFO
     }
 }
 
-public class Actor
+public class Actor : INotifyPropertyChanged
 {
     private String name;
     private String role;
@@ -219,20 +228,34 @@ public class Actor
     public String Name
     {
         get { return name; }
-        set { name = value; }
+        set { name = value; OnPropertyChanged("Name"); }
     }
 
     [XmlElement(ElementName = "role")]
     public String Role
     {
         get { return role; }
-        set { role = value; }
+        set { role = value; OnPropertyChanged("Role"); }
     }
 
     [XmlElement(ElementName = "thumb")]
     public String Thumb
     {
         get { return thumb; }
-        set { thumb = value; }
+        set { thumb = value; OnPropertyChanged("Thumb"); }
     }
+
+    #region INotifyPropertyChanged Members
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    public void OnPropertyChanged(string propertyName)
+    {
+        if (PropertyChanged != null)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    #endregion
 }

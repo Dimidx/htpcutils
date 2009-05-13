@@ -23,14 +23,14 @@ namespace MediaManager.Library
     {
         #region Membres
 
-        private string m_FilmId;
+        private string m_FilmAlloId;
         /// <summary>
         /// Référence du film chez http://www.allocine.fr
         /// </summary>
-        public string ID
+        public string AlloID
         {
-            get { return m_FilmId; }
-            set { m_FilmId = value; OnPropertyChanged("ID"); }
+            get { return m_FilmAlloId; }
+            set { m_FilmAlloId = value; OnPropertyChanged("AlloID"); }
         }
 
         private string m_FilmTitle;
@@ -165,10 +165,55 @@ namespace MediaManager.Library
         /// </summary>
         public Thumb Cover
         {
-            get { return m_FilmCover; }
-            set { m_FilmCover = value; }
+            get 
+            {
+                if (m_FilmListeCover.Count > 0)
+                {
+                    return m_FilmListeCover[0];
+                }
+                return null;
+            }
+            //set { m_FilmCover = value; }
         }
- 
+
+        private Thumb m_FilmFanart;
+        /// <summary>
+        /// Le fanart pour le film
+        /// </summary>
+        public Thumb Fanart
+        {
+            get 
+            {
+                if (m_FilmListeFanart.Count > 0)
+                {
+                    return m_FilmListeFanart[0];
+                }
+                return null;
+            }
+            
+            //set { m_FilmFanart = value; }
+        }
+
+        private ObservableCollection<Thumb> m_FilmListeCover;
+        /// <summary>
+        /// Liste d'affiches pour le film
+        /// </summary>
+        public ObservableCollection<Thumb> ListeCover
+        {
+            get { return m_FilmListeCover; }
+            set { m_FilmListeCover = value; }
+        }
+
+        private ObservableCollection<Thumb> m_FilmListeFanart;
+        /// <summary>
+        /// Liste de fanart pour le film
+        /// </summary>
+        public ObservableCollection<Thumb> ListeFanart
+        {
+            get { return m_FilmListeFanart; }
+            set { m_FilmListeFanart = value; }
+        }
+
         private string m_FilmURLBandeAnnonce;
         /// <summary>
         /// L'URL de la bande annonce
@@ -215,8 +260,12 @@ namespace MediaManager.Library
         public Film()
         {
             this.m_FilmCover = new Thumb();
+            this.m_FilmFanart = new Thumb();
             this.m_FilmActors = new PersonneCollection();
             this.m_FilmRealisateurs = new PersonneCollection();
+            this.m_FilmListeCover = new ObservableCollection<Thumb>();
+            this.m_FilmListeFanart = new ObservableCollection<Thumb>();
+
         }
 
         #region INotifyPropertyChanged Members

@@ -16,6 +16,7 @@ using System.Threading;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using MediaManager;
+using MediaManager.Library;
 using MediaManager.Library.NFO;
 using System.IO;
 
@@ -33,7 +34,7 @@ namespace MediaManager
         public bool _RechercheTerminée = true;
         public ImageSource PosterSource = null;
         public ImageSource FanartSource = null;
-
+        public MovieManager MovieManager = new MovieManager();
 
         public Window1()
         {
@@ -48,9 +49,15 @@ namespace MediaManager
             }
 
             InitializeComponent();
-          
-            ScanDir();
 
+
+
+            ListCollectionView lcv = new ListCollectionView(MovieManager.Movies);
+            lcv.SortDescriptions.Add(new System.ComponentModel.SortDescription("MovieName", System.ComponentModel.ListSortDirection.Ascending));
+            listBox_Films.ItemsSource = lcv;
+            this.DataContext = lcv;
+            ScanDir();
+            
         }
 
 
@@ -59,7 +66,7 @@ namespace MediaManager
         /// </summary>
         private void ScanDir()
         {
-            //media.Movies.OrderBy(m => m.MovieName);
+            MovieManager.Movies.OrderBy(m => m.MovieName);
 
             if (BackWorker.IsBusy == false)
             {
@@ -68,8 +75,8 @@ namespace MediaManager
                 BackWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ScanDir_RunWorkerCompleted);
                 BackWorker.ProgressChanged += new ProgressChangedEventHandler(BackWorker_ProgressChanged);
                 BackWorker.WorkerReportsProgress = true;
-                MovieCollection _Movies = this.Resources["MovieCollectionDataSource"] as MovieCollection;
-                _Movies.Clear();
+                //ObservableCollection<Movie> _Movies = this.Resources["MovieCollectionDataSource"] as MovieCollection;
+                //_Movies.Clear();
                 this.jauge_progress.Visibility = Visibility.Visible;
                 this.lib_BarreEtat.Visibility = Visibility.Visible;
                 BackWorker.RunWorkerAsync();
@@ -78,7 +85,7 @@ namespace MediaManager
 
         private void BackWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            MovieCollection _Movies = this.Resources["MovieCollectionDataSource"] as MovieCollection;
+            ObservableCollection<Movie> _Movies = this.Resources["MovieCollectionDataSource"] as ObservableCollection<Movie>;
             this.lib_BarreEtat.Text = "Nombre de films trouvés : " + _Movies.Count.ToString() + " - " + e.UserState.ToString();
 
         }
@@ -86,8 +93,9 @@ namespace MediaManager
 
         private void ScanDir_DoWork(object sender, DoWorkEventArgs e)
         {
-            MovieCollection _Movies = this.Resources["MovieCollectionDataSource"] as MovieCollection;
-            _Movies.scanMovieDirs();
+            //ObservableCollection<Movie> _Movies = this.Resources["MovieCollectionDataSource"] as ObservableCollection<Movie>;
+            MovieManager.scanMovieDirs();
+            //_Movies.scanMovieDirs();
         }
 
         private void ScanDir_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -151,6 +159,26 @@ namespace MediaManager
         }
         
         #endregion
+
+        private void mnuEditer_Click(object sender, RoutedEventArgs e)
+        {
+            Movie _movie = (Movie)listBox_Films.SelectedItem;
+            _movie.MovieName = "Aviator2";
+            NfoFile.saveNfoMovie(_movie.Nfo, _movie.Paths.NfoPath);
+
+        }
+
+        private void btnScraper_Click(object sender, RoutedEventArgs e)
+        {
+            Movie _movie = (Movie)listBox_Films.SelectedItem;
+            Film _Film = new Film();
+            _Film.Titre = _movie.MovieName;
+            _Film.AlloID = _movie.Nfo.AlloId;
+
+            ScraperSelect _scraper = new ScraperSelect(_Film);
+            _scraper.ShowDialog();
+
+        }
 
     }
 }

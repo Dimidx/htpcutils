@@ -8,7 +8,7 @@
     mc:Ignorable="d" xmlns:local="clr-namespace:MediaManager"
     x:Class="MediaManager.Window1"
     DataContext="{Binding RelativeSource={RelativeSource Self}}"
-    Title="Window1" Height="768" Width="1024" Background="#FF595959">
+    Title="Window1" Height="768" Width="1024" Background="{DynamicResource WindowBackgroundBrush}" >
     <Window.Resources>
         <Converters:StringToImageSource x:Key="StringToImageSource"/>
         <ItemsPanelTemplate x:Key="MovieTemplate">
@@ -22,19 +22,19 @@
         <Storyboard x:Key="Storyboard1">
         	<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="FilmDetails" Storyboard.TargetProperty="(UIElement.Opacity)">
         		<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-        		<SplineDoubleKeyFrame KeySpline="0,0,0,1" KeyTime="00:00:01" Value="1"/>
+        		<SplineDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
         	</DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Converters:ToImage x:Key="ToImage"/>
-        <local:MovieCollection x:Key="MovieCollectionDataSource" d:IsDataSource="True" />
+        
     </Window.Resources>
 	<Window.Triggers>
 		<EventTrigger RoutedEvent="Selector.SelectionChanged" SourceName="listBox_Films">
 			<BeginStoryboard x:Name="Storyboard1_BeginStoryboard" Storyboard="{StaticResource Storyboard1}"/>
 		</EventTrigger>
 	</Window.Triggers>
-    <Grid DataContext="{Binding Source={StaticResource MovieCollectionDataSource}}" >
-    	<DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True">
+    <Grid >
+    	<DockPanel x:Name="dockPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True">
     		<Menu DockPanel.Dock="Top">
     			<MenuItem Header="Fichier">
     				<MenuItem x:Name="mnuQuitter" Header="Quitter" ToolTip="Quitte l'application" Click="mnuQuitter_Click">
@@ -54,17 +54,28 @@
 						    <Image Source="Images/Config_16.png"/>
 						</MenuItem.Icon>
 					</MenuItem>
+    				<Separator/>
+    				<MenuItem x:Name="mnuEditer" Header="Editer" Click="mnuEditer_Click"/>
     			</MenuItem>
     		</Menu>
     		<ProgressBar BorderThickness="1,1,1,1" IsIndeterminate="True" x:Name="jauge_progress" Visibility="Collapsed" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Height="16" DockPanel.Dock="Bottom"/>
     		<TextBlock x:Name="lib_BarreEtat" Width="Auto" Text="Recherche en cours..." TextWrapping="Wrap" DockPanel.Dock="Bottom" Visibility="Collapsed"/>
     		<DockPanel DockPanel.Dock="Top" LastChildFill="True" d:LayoutOverrides="Height">
     			<Border Margin="5,5,5,5" Width="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10">
-                    <ListBox x:Name="listBox_Films" ItemsPanel="{DynamicResource MovieTemplate}" Background="{x:Null}" BorderBrush="{DynamicResource NormalBorderBrush}" Foreground="#FF000000" Margin="5,5,5,5" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" d:LayoutOverrides="Height" ItemsSource="{Binding}" ItemTemplate="{DynamicResource MovieDataTemplate}" IsSynchronizedWithCurrentItem="True" />
+                    <ListBox x:Name="listBox_Films" ItemsPanel="{DynamicResource MovieTemplate}" Background="{x:Null}" BorderBrush="{DynamicResource NormalBorderBrush}" Foreground="#FF000000" Margin="5,5,5,5" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" d:LayoutOverrides="Height" ItemsSource="{Binding}" ItemTemplate="{DynamicResource MovieDataTemplate}" IsSynchronizedWithCurrentItem="True" IsTextSearchEnabled="False" />
                 </Border>
-    			<Border Margin="5,5,5,5" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10">
-    				<local:UC_FilmDetails x:Name="FilmDetails" Margin="5,5,5,5"/>
-    			</Border>
+    			<DockPanel LastChildFill="True">
+    				<Border BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,5,5,5" VerticalAlignment="Stretch" DockPanel.Dock="Top" Background="{DynamicResource ControlBackgroundBrush}">
+    					<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,5,5,5">
+    						<Button Click="btnScraper_Click" x:Name="btnScraper" Width="20" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Stretch" Height="20">
+    							<Image Width="16" Height="16" Source="Images\Allocine_16.png"/>
+    						</Button>
+    					</StackPanel>
+    				</Border>
+    				<Border BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" d:LayoutOverrides="Height" Margin="5,5,5,5">
+    					<local:UC_FilmDetails x:Name="FilmDetails" Margin="5,5,5,5"/>
+    				</Border>
+    			</DockPanel>
     		</DockPanel>
     	</DockPanel>
     </Grid>

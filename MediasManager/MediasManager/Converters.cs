@@ -108,7 +108,7 @@ namespace Converters
             public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
             {
                 string _TableauSepare = "";
-
+                if (value == null) return "";
                 string[] _TableauOrigine = value as string[];
                 if (_TableauOrigine.Length != 0)
                 {
