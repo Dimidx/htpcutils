@@ -66,6 +66,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="FilmDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScraperSelect.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Theme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -180,6 +188,9 @@
       <DependentUpon>Configuration.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters.cs" />
+    <Compile Include="FilmDetails.xaml.cs">
+      <DependentUpon>FilmDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Media.cs" />
     <Compile Include="Movie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -195,7 +206,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ScraperSelect.xaml.cs">
+      <DependentUpon>ScraperSelect.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="Settings1.cs" />
     <Compile Include="UC_FilmDetails.xaml.cs">
       <DependentUpon>UC_FilmDetails.xaml</DependentUpon>
     </Compile>
@@ -520,7 +535,17 @@
     <Resource Include="Images\Matrix bluray.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Allocine_16.png" />
     <Resource Include="Images\defaultVideoBigPoster.png" />
+    <Resource Include="Images\Matrix bluray-fanart.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scraper\Movies\Allocine.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scraper\Movies\TMDB.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Themes\BubbleCreme\.svn\prop-base\" />

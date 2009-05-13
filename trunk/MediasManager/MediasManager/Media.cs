@@ -9,7 +9,8 @@ using System.IO;
 using MediaManager;
 using MediaManager.Library.NFO;
 using System.Threading;
-
+using System.Windows.Threading;
+using System.Windows;
 
 namespace MediaManager
 {
@@ -68,21 +69,52 @@ namespace MediaManager
     }
 
 
-    public class MovieCollection : AsyncObservableCollection<Movie> 
+    public class MovieManager 
     {
- 
+        //La collection de film
+        ObservableCollection<Movie> _movies = new ObservableCollection<Movie>();
+        
+        /// <summary>
+        /// Pour pouvoir ajouter un film dans la collection depuis un autre Thread
+        /// </summary>
+        /// <param name="_movie"></param>
+        /// <returns></returns>
+        private object Add(object _movie)
+        {
+            _movies.Add((Movie)_movie);
+            return null;
+        }
+
+        /// <summary>
+        /// Pour pouvoir vider la collection depuis un autre Thread
+        /// </summary>
+        /// <returns></returns>
+        private object Clear(object _null)
+        {
+            _movies.Clear(); ;
+            return null;
+        }
+
+        /// <summary>
+        /// La collection de films
+        /// </summary>
+        public ObservableCollection<Movie> Movies
+        {
+            get { return _movies; }
+        }
+
         public void scanMovieDirs() //object sender)
         {
-            //dlMgr.CancelAllDownloads();
-            //BackgroundWorker BackWork = new BackgroundWorker();
-            //if (sender != null)
-            //{
-            //    BackWork = sender as BackgroundWorker;
-            //}
 
             ObservableCollection<MovieFolder> paths = Settings.XML.Config.confMovie.MovieFolders;
+            //Récupère le thread
+            Application app = System.Windows.Application.Current;
+            if (app != null)
+            {
+                app.Dispatcher.BeginInvoke(DispatcherPriority.Background, new DispatcherOperationCallback(Clear),null);
+            }
 
-            this.Clear();
+            //_movies.Clear();
             if (paths != null)
             {
 
@@ -109,8 +141,10 @@ namespace MediaManager
                                     {
                                         if (fileInfo != null)
                                         {
-                                            //if (sender != null) BackWork.ReportProgress(0, fileInfo.Name);
-                                            this.Add(new Movie(fileInfo, mf));
+                                            if (app != null)
+                                            {
+                                                app.Dispatcher.BeginInvoke(DispatcherPriority.Background, new DispatcherOperationCallback(Add), new Movie(fileInfo, mf));
+                                            }
                                         }
 
                                     }
@@ -126,14 +160,20 @@ namespace MediaManager
                             {
                                 if (!fileInfo.Name.ToLower().Contains("sample") || !Settings.XML.Config.confMovie.skipSample)
                                 {
-                                    if (fileInfo != null) this.Add(new Movie(fileInfo, mf));
+                                    if (fileInfo != null)
+                                    {
+                                        if (app != null)
+                                        {
+                                            app.Dispatcher.BeginInvoke(DispatcherPriority.Background, new DispatcherOperationCallback(Add), new Movie(fileInfo, mf));
+                                        }
+
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
-            //return this;
         }
     }
 }

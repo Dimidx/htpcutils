@@ -14,11 +14,11 @@ using System.Windows.Shapes;
 namespace MediaManager
 {
 	/// <summary>
-	/// Logique d’interaction pour UC_FilmDetails.xaml
+	/// Logique d’interaction pour FilmDetails.xaml
 	/// </summary>
-	public partial class UC_FilmDetails
+	public partial class FilmDetails
 	{
-		public UC_FilmDetails()
+		public FilmDetails()
 		{
 			this.InitializeComponent();
 		}
