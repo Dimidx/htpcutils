@@ -1,0 +1,10 @@
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\bin\Debug\Allocine.dll
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\bin\Debug\Allocine.pdb
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\bin\Debug\Doc.xml
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\bin\Debug\MMLibrary.dll
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\bin\Debug\MMLibrary.pdb
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Debug\Allocine.Properties.Resources.resources
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Debug\Allocine.csproj.GenerateResource.Cache
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Debug\Allocine.dll
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Debug\Allocine.pdb

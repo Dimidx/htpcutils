@@ -1,0 +1,8 @@
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\MediasManager\Scraper\Movies\Allocine.dll
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\MediasManager\Scraper\Movies\Allocine.pdb
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\MediasManager\Scraper\Movies\Doc.xml
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Release\Allocine.Properties.Resources.resources
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Release\Allocine.csproj.GenerateResource.Cache
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Release\Allocine.dll
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Release\Allocine.pdb

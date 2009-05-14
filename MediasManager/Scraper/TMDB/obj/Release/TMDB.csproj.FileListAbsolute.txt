@@ -1,0 +1,5 @@
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\MediasManager\Scraper\Movies\TMDB.dll
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\MediasManager\Scraper\Movies\TMDB.pdb
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\TMDB\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\TMDB\obj\Release\TMDB.dll
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\TMDB\obj\Release\TMDB.pdb
