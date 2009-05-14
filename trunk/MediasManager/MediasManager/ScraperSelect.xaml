@@ -39,7 +39,7 @@
 					<Border.Background>
 						<VisualBrush>
 							<VisualBrush.Visual>
-								<Image x:Name="ImageFanart" Stretch="Uniform" Source="{Binding Path=Miniature, Converter={StaticResource ToImage}}"/>
+								<Image x:Name="ImageFanart" Stretch="Uniform" Source="{Binding Path=Miniature}"/>
 							</VisualBrush.Visual>
 						</VisualBrush>
 					</Border.Background>
@@ -90,7 +90,7 @@
 							</StackPanel>
 							<Grid VerticalAlignment="Stretch">
 								<ProgressBar x:Name="progressBar" Value="{Binding Path=Cover.ProgressImage}" VerticalAlignment="Center" Opacity="0.5" HorizontalAlignment="Center" Width="150" Height="20"/>
-								<Image Source="{Binding Path=Image, Converter={StaticResource ToImage}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+								<Image Source="{Binding Path=Image}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
 							</Grid>
 						</DockPanel>
 					</DockPanel>
@@ -109,7 +109,7 @@
 							</StackPanel>
 							<Grid VerticalAlignment="Stretch">
 								<ProgressBar x:Name="progressBar1" Value="{Binding Path=Cover.ProgressImage}" VerticalAlignment="Center" Opacity="0.5" HorizontalAlignment="Center" Width="150" Height="20"/>
-								<Image Source="{Binding Path=Image, Converter={StaticResource ToImage}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+								<Image Source="{Binding Path=Image}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
 							</Grid>
 						</DockPanel>
 					</DockPanel>

@@ -46,7 +46,7 @@
 						<Border.Background>
 							<VisualBrush>
 								<VisualBrush.Visual>
-									<Image x:Name="ImagePoster" Stretch="Fill" Source="{Binding Path=Cover.BImage}" />
+									<Image x:Name="ImagePoster" Stretch="Fill" Source="{Binding Path=Cover.Image}" />
 								</VisualBrush.Visual>
          					</VisualBrush>
 						</Border.Background>
@@ -67,7 +67,7 @@
 						<Border.Background>
 							<VisualBrush>
 								<VisualBrush.Visual>
-									<Image x:Name="ImageFanart" Stretch="Fill" Source="{Binding Path=Fanart.Image, Converter={StaticResource ToImage}}"/>
+									<Image x:Name="ImageFanart" Stretch="Fill" Source="{Binding Path=Fanart.Image}"/>
 								</VisualBrush.Visual>
          					</VisualBrush>
 						</Border.Background>
