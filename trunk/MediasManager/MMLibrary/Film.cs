@@ -33,6 +33,16 @@ namespace MediaManager.Library
             set { m_FilmAlloId = value; OnPropertyChanged("AlloID"); }
         }
 
+        private string m_FilmId;
+        /// <summary>
+        /// Référence du film
+        /// </summary>
+        public string ID
+        {
+            get { return m_FilmId; }
+            set { m_FilmId = value; OnPropertyChanged("ID"); }
+        }
+
         private string m_FilmTitle;
 
         /// <summary>

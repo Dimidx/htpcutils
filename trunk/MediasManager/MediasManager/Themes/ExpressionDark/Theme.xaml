@@ -1496,9 +1496,6 @@
                         <Border Background="{DynamicResource DisabledBackgroundBrush}" Opacity="0" BorderThickness="1,1,1,1" BorderBrush="{DynamicResource DisabledBorderBrush}" x:Name="border"/>
                     </Grid>
                     <ControlTemplate.Triggers>
-                		<Trigger Property="Value" Value="100">
-                			<Setter Property="Visibility" TargetName="grid" Value="Hidden"/>
-                		</Trigger>
                 		<Trigger Property="IsEnabled" Value="False">
                 			<Setter Property="Opacity" TargetName="border" Value="0.8"/>
                 		</Trigger>

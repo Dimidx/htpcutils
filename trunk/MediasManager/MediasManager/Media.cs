@@ -69,11 +69,11 @@ namespace MediaManager
     }
 
 
-    public class MovieManager 
+    public class MovieManager
     {
         //La collection de film
         ObservableCollection<Movie> _movies = new ObservableCollection<Movie>();
-        
+
         /// <summary>
         /// Pour pouvoir ajouter un film dans la collection depuis un autre Thread
         /// </summary>
@@ -127,6 +127,8 @@ namespace MediaManager
 
                     }
                     String directory = mf.path;
+                    if (Directory.Exists(directory))
+                    {
                     DirectoryInfo dir = new DirectoryInfo(directory);
                     if (mf.containsFolders)
                     {
@@ -172,6 +174,7 @@ namespace MediaManager
                             }
                         }
                     }
+                }
                 }
             }
         }

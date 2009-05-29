@@ -22,6 +22,7 @@ namespace MediaManager
 
 		public Configuration()
 		{
+            
 			this.InitializeComponent();
 			Settings.xmlPath = System.IO.Path.GetDirectoryName(System.Windows.Application.ResourceAssembly.Location) + @"\settings.xml";
             Settings.XML = new Config.XmlSettings();

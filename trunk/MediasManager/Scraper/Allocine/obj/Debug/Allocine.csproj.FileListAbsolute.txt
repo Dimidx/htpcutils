@@ -8,3 +8,13 @@ C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Debug
 C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Debug\Allocine.csproj.GenerateResource.Cache
 C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Debug\Allocine.dll
 C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Debug\Allocine.pdb
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\bin\Debug\Allocine.dll
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\bin\Debug\Allocine.pdb
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\bin\Debug\Doc.xml
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\bin\Debug\MMLibrary.dll
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\bin\Debug\MMLibrary.pdb
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Debug\Allocine.Properties.Resources.resources
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Debug\Allocine.csproj.GenerateResource.Cache
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Debug\Allocine.dll
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Debug\Allocine.pdb

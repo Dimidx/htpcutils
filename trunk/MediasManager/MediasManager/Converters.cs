@@ -12,154 +12,199 @@ using MediaManager.Library;
 namespace Converters
 {
 
-        #region ImageToImageSource
-        /// <summary>
-        /// Converter use to convert a System.Drawing.Image to an BitmapImage, when you need an ImageSource
-        /// </summary>
-        public class ToImage : IValueConverter
+
+
+    #region UriToImageConverter
+    public class UriToImageConverter : IValueConverter
+    {
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-
-            public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+            if (value == null | value == "" )
             {
-                BitmapImage ImgSource = null;
-
-                System.Drawing.Image image = value as System.Drawing.Image;
-
-                if (image != null)
-                {
-                    ImgSource = new BitmapImage();
-                    ImgSource.BeginInit();
-
-                    ImgSource.StreamSource = new MemoryStream(ConvertImageToByteArray(image));
-
-                    ImgSource.EndInit();
-                }
-
-                return ImgSource;
+                return null;
             }
 
-            /// <summary>
-            /// Convert a System.Drawing.Image to a byte array
-            /// </summary>
-            /// <param name="img">The System.Drawing.Image to convert in a byte array</param>
-            /// <returns>A byte array</returns>
-            private byte[] ConvertImageToByteArray(System.Drawing.Image img)
+            if (value is string)
             {
-                MemoryStream ms = new MemoryStream();
-                img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-
-                return ms.ToArray();
+                value = new Uri((string)value);
             }
 
-            public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+            if (value is Uri)
             {
-                throw new Exception("The method or operation is not implemented.");
+                BitmapImage bi = new BitmapImage();
+                bi.BeginInit();
+                //bi.DecodePixelWidth = 200;
+                //bi.DecodePixelHeight = 60;  
+                bi.CacheOption = BitmapCacheOption.OnDemand;
+                bi.UriSource = (Uri)value;
+                bi.EndInit();
+                return bi;
             }
+
+            return null;
+
         }
-        #endregion
 
-        #region StringToImageSource
-        /// <summary>
-        /// Convertie un chemin string en ImageSource
-        /// </summary>
-        public class StringToImageSource : IValueConverter
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
+            throw new Exception("The method or operation is not implemented.");
+        }
+    }
 
-            public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    
+    #endregion
+
+
+
+    #region ImageToImageSource
+    /// <summary>
+    /// Converter use to convert a System.Drawing.Image to an BitmapImage, when you need an ImageSource
+    /// </summary>
+    public class ToImage : IValueConverter
+    {
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            BitmapImage ImgSource = null;
+
+            System.Drawing.Image image = value as System.Drawing.Image;
+
+            if (image != null)
             {
-                String toConvert = (String)value;
-                BitmapImage bi3 = new BitmapImage();
+                ImgSource = new BitmapImage();
+                ImgSource.BeginInit();
 
-                try
+                ImgSource.StreamSource = new MemoryStream(ConvertImageToByteArray(image));
+
+                ImgSource.EndInit();
+            }
+
+            return ImgSource;
+        }
+
+        /// <summary>
+        /// Convert a System.Drawing.Image to a byte array
+        /// </summary>
+        /// <param name="img">The System.Drawing.Image to convert in a byte array</param>
+        /// <returns>A byte array</returns>
+        private byte[] ConvertImageToByteArray(System.Drawing.Image img)
+        {
+            MemoryStream ms = new MemoryStream();
+            img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+
+            return ms.ToArray();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+    }
+    #endregion
+
+    #region StringToImageSource
+    /// <summary>
+    /// Convertie un chemin string en ImageSource
+    /// </summary>
+    public class StringToImageSource : IValueConverter
+    {
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            String toConvert = (String)value;
+            BitmapImage bi3 = new BitmapImage();
+
+            try
+            {
+                if (toConvert != null)
                 {
-                    if (toConvert != null)
-                    {
-                        bi3.BeginInit();
-                        bi3.UriSource = new Uri(toConvert, UriKind.RelativeOrAbsolute);
-                        bi3.EndInit();
-                    }
-                }
-                catch (Exception)
-                {
-                    bi3 = new BitmapImage();
                     bi3.BeginInit();
-                    bi3.UriSource = new Uri("Images/defaultVideoBigPoster.png",UriKind.Relative);
+                    bi3.UriSource = new Uri(toConvert, UriKind.RelativeOrAbsolute);
                     bi3.EndInit();
-                    //throw;
                 }
-                return bi3;
-
             }
-                       
-            public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+            catch (Exception)
             {
-                throw new Exception("The method or operation is not implemented.");
+                bi3 = new BitmapImage();
+                bi3.BeginInit();
+                bi3.UriSource = new Uri("Images/defaultVideoBigPoster.png", UriKind.Relative);
+                bi3.EndInit();
+                //throw;
             }
-        }
-        #endregion
+            return bi3;
 
-        #region TableauToString
-        /// <summary>
-        /// Convertie un Tableau de chaine en une chaine séparée par des ", "
-        /// </summary>
-        public class TableauToString : IValueConverter
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-
-            public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-            {
-                string _TableauSepare = "";
-                if (value == null) return "";
-                string[] _TableauOrigine = value as string[];
-                if (_TableauOrigine.Length != 0)
-                {
-                    foreach (string item in _TableauOrigine)
-                    {
-                        _TableauSepare += item + ", ";
-                    }
-                    if (_TableauSepare.Length > 0) _TableauSepare = _TableauSepare.Substring(0, _TableauSepare.Length - 2);
-                }
-                    return _TableauSepare;
-            }
-
-            public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-            {
-                throw new Exception("The method or operation is not implemented.");
-            }
-
-
+            throw new Exception("The method or operation is not implemented.");
         }
-        #endregion
+    }
+    #endregion
 
-        #region PersonneCollectionToString
-        /// <summary>
-        /// Convertie un Collection de chaine en une chaine séparée par des ", "
-        /// </summary>
-        public class PersonneToString : IValueConverter
+    #region TableauToString
+    /// <summary>
+    /// Convertie un Tableau de chaine en une chaine séparée par des ", "
+    /// </summary>
+    public class TableauToString : IValueConverter
+    {
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-
-            public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+            string _TableauSepare = "";
+            if (value == null) return "";
+            string[] _TableauOrigine = value as string[];
+            if (_TableauOrigine.Length != 0)
             {
-                string _TableauSepare = string.Empty;
-
-                PersonneCollection _TableauOrigine = value as PersonneCollection;
-                if (_TableauOrigine.Count != 0)
+                foreach (string item in _TableauOrigine)
                 {
-                    foreach (Personne item in _TableauOrigine)
-                    {
-                        _TableauSepare += item.Nom + ", ";
-                    }
-                    if (_TableauSepare.Length > 0) _TableauSepare = _TableauSepare.Substring(0, _TableauSepare.Length - 2);
+                    _TableauSepare += item + ", ";
                 }
-                return _TableauSepare;
+                if (_TableauSepare.Length > 0) _TableauSepare = _TableauSepare.Substring(0, _TableauSepare.Length - 2);
             }
-
-            public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-            {
-                throw new Exception("The method or operation is not implemented.");
-            }
-
-
+            return _TableauSepare;
         }
-        #endregion
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+
+    }
+    #endregion
+
+    #region PersonneCollectionToString
+    /// <summary>
+    /// Convertie un Collection de chaine en une chaine séparée par des ", "
+    /// </summary>
+    public class PersonneToString : IValueConverter
+    {
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            string _TableauSepare = string.Empty;
+
+            PersonneCollection _TableauOrigine = value as PersonneCollection;
+            if (_TableauOrigine.Count != 0)
+            {
+                foreach (Personne item in _TableauOrigine)
+                {
+                    _TableauSepare += item.Nom + ", ";
+                }
+                if (_TableauSepare.Length > 0) _TableauSepare = _TableauSepare.Substring(0, _TableauSepare.Length - 2);
+            }
+            return _TableauSepare;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+
+    }
+    #endregion
 
 }

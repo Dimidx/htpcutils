@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Drawing;
 using System.ComponentModel;
 using System.Net;
 using System.Web;
@@ -20,27 +19,27 @@ namespace MediaManager.Library
     [Serializable]
     public class Thumb : INotifyPropertyChanged
     {
-        private BitmapImage m_Miniature;
+        //private BitmapImage m_Miniature;
 
-        /// <summary>
-        /// L'image de la miniature
-        /// </summary>
-        [XmlIgnore]
-        public BitmapImage Miniature
-        {
-            get 
-            {
-                if (m_Miniature == null) GetMiniature();
-                  
-                    return m_Miniature;
-             
-            
-            }
-            
-            
-            //set { m_Miniature = value; }
-            
-        }
+        ///// <summary>
+        ///// L'image de la miniature
+        ///// </summary>
+        //[XmlIgnore]
+        //public BitmapImage Miniature
+        //{
+        //    get 
+        //    {
+        //        if (m_Miniature == null) GetMiniature();
+
+        //            return m_Miniature;
+
+
+        //    }
+
+
+        //    //set { m_Miniature = value; }
+
+        //}
 
         private string m_URLMiniature;
         /// <summary>
@@ -48,29 +47,43 @@ namespace MediaManager.Library
         /// </summary>
         public string URLMiniature
         {
-            get { return m_URLMiniature; }
-            set { m_URLMiniature = value; }
+            get
+            {
+                if (m_URLMiniature == null)
+                {
+                    return m_URLImage;
+                }
+                else
+                {
+                    return m_URLMiniature;
+                }
+            }
+            set
+            {
+                m_URLMiniature = value;
+                if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("URLMiniature"));
+            }
         }
 
-        private double m_Hauteur;
-        /// <summary>
-        /// Hauteur de l'image
-        /// </summary>
-        public double Hauteur
-        {
-            get { return m_Hauteur; }
-            //set { m_Hauteur = value; }
-        }
+        //private double m_Hauteur;
+        ///// <summary>
+        ///// Hauteur de l'image
+        ///// </summary>
+        //public double Hauteur
+        //{
+        //    get { return m_Hauteur; }
+        //    //set { m_Hauteur = value; }
+        //}
 
-        private double m_Largeur;
-        /// <summary>
-        /// Largeur de l'image
-        /// </summary>
-        public double Largeur
-        {
-            get { return m_Largeur; }
-            //set { m_Hauteur = value; }
-        }
+        //private double m_Largeur;
+        ///// <summary>
+        ///// Largeur de l'image
+        ///// </summary>
+        //public double Largeur
+        //{
+        //    get { return m_Largeur; }
+        //    //set { m_Hauteur = value; }
+        //}
 
         private string m_URLImage;
         /// <summary>
@@ -79,33 +92,37 @@ namespace MediaManager.Library
         public string URLImage
         {
             get { return m_URLImage; }
-            set { m_URLImage = value; }
+            set
+            {
+                m_URLImage = value;
+                if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("URLImage"));
+            }
         }
 
-        private int m_ProgressImage;
-        /// <summary>
-        /// Pourcentage chargé de l'image
-        /// </summary>
-        public int ProgressImage
-        {
-            get { return m_ProgressImage; }
-            set { m_ProgressImage = value; }
-        }
+        //private int m_ProgressImage;
+        ///// <summary>
+        ///// Pourcentage chargé de l'image
+        ///// </summary>
+        //public int ProgressImage
+        //{
+        //    get { return m_ProgressImage; }
+        //    set { m_ProgressImage = value; }
+        //}
 
-        private int m_ProgressMiniature;
-        /// <summary>
-        /// Pourcentage chargé de la miniature
-        /// </summary>
-        public int ProgressMiniature
-        {
-            get { return m_ProgressMiniature; }
-            set { m_ProgressMiniature = value; }
-        }
+        //private int m_ProgressMiniature;
+        ///// <summary>
+        ///// Pourcentage chargé de la miniature
+        ///// </summary>
+        //public int ProgressMiniature
+        //{
+        //    get { return m_ProgressMiniature; }
+        //    set { m_ProgressMiniature = value; }
+        //}
 
-        /// <summary>
-        /// Type d'image
-        /// </summary>
-        public enum ImageType {Miniature=1,Image=2}
+        ///// <summary>
+        ///// Type d'image
+        ///// </summary>
+        //public enum ImageType {Miniature=1,Image=2}
 
         /// <summary>
         /// Sauve l'image sur le disque
@@ -143,185 +160,194 @@ namespace MediaManager.Library
         //    }
         //    catch (Exception)
         //    {
-                
+
         //    }
 
         //}
 
+        ///// <summary>
+        ///// Télécharge l'image
+        ///// </summary>
+        //private void GetMiniature()
+        //{
+
+        //        //WebClient client = new WebClient();
+
+        //        //#region Proxy
+        //        //WebProxy wProxy = new WebProxy("10.126.71.12", 80);
+        //        //wProxy.Credentials = new NetworkCredential("rfraftp", "Siberbo2000", "fr");
+        //        //client.Proxy = wProxy;
+        //        //#endregion
+
+        //        //Téléchargement
+        //        //client.DownloadDataCompleted += new DownloadDataCompletedEventHandler(Miniature_DownloadDataCompleted);
+        //        //client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(Miniature_DownloadProgressChanged);
+
+        //    try
+        //    {
+        //        this.m_Miniature = new BitmapImage();
+
+        //        this.m_Miniature.DownloadProgress += new EventHandler<DownloadProgressEventArgs>(m_Miniature_DownloadProgress);
+        //        this.m_Miniature.DownloadCompleted += new EventHandler(m_Miniature_DownloadCompleted);
+        //        this.m_Miniature.DownloadFailed += new EventHandler<ExceptionEventArgs>(m_Miniature_DownloadFailed);
+        //        this.m_Miniature.BeginInit();
+
+
+
+        //        if (this.m_URLMiniature != null)
+        //        {
+        //            this.m_Miniature.UriSource = new Uri(this.m_URLMiniature, UriKind.RelativeOrAbsolute);
+        //        }
+        //        else
+        //        {
+        //            this.m_Miniature.UriSource = new Uri(this.m_URLImage, UriKind.RelativeOrAbsolute);
+        //        }
+        //        this.m_Miniature.EndInit();
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+
+        //}
+
+        //void m_Miniature_DownloadFailed(object sender, ExceptionEventArgs e)
+        //{
+        //    this.m_Miniature = null;
+        //}
+
+        //void m_Miniature_DownloadCompleted(object sender, EventArgs e)
+        //{
+        //    //if (this.m_Miniature != null)
+        //    //PropertyChanged(this, new PropertyChangedEventArgs("Miniature"));
+
+        //}
+
+        //void m_Miniature_DownloadProgress(object sender, DownloadProgressEventArgs e)
+        //{
+        //    this.m_ProgressMiniature = e.Progress;
+        //    if (PropertyChanged != null)
+        //    {
+        //        PropertyChanged(this, new PropertyChangedEventArgs("ProgressMiniature"));
+        //    }
+        //}
+
+
         /// <summary>
         /// Télécharge l'image
         /// </summary>
-        private void GetMiniature()
-        {
+        //private void GetImage()
+        //{
 
-                //WebClient client = new WebClient();
+        //        WebClient client = new WebClient();
 
-                //#region Proxy
-                //WebProxy wProxy = new WebProxy("10.126.71.12", 80);
-                //wProxy.Credentials = new NetworkCredential("rfraftp", "Siberbo2000", "fr");
-                //client.Proxy = wProxy;
-                //#endregion
+        //        //#region Proxy
+        //        //WebProxy wProxy = new WebProxy("10.126.71.12", 80);
+        //        //wProxy.Credentials = new NetworkCredential("rfraftp", "Siberbo2000", "fr");
+        //        //client.Proxy = wProxy;
+        //        //#endregion
 
-                //Téléchargement
-                //client.DownloadDataCompleted += new DownloadDataCompletedEventHandler(Miniature_DownloadDataCompleted);
-                //client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(Miniature_DownloadProgressChanged);
+        //        //Téléchargement
+        //        client.DownloadDataCompleted += new DownloadDataCompletedEventHandler(Image_DownloadDataCompleted);
+        //        client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(Image_DownloadProgressChanged);
+        //        client.DownloadDataAsync(new Uri(this.m_URLImage));
+        //    try
+        //    {
+        //        this.m_Image = new BitmapImage();
 
-            try
-            {
-                this.m_Miniature = new BitmapImage();
+        //        this.m_Image.DownloadProgress += new EventHandler<DownloadProgressEventArgs>(m_Image_DownloadProgress);
+        //        this.m_Image.DownloadCompleted += new EventHandler(m_Image_DownloadCompleted);
+        //        this.m_Image.DownloadFailed += new EventHandler<ExceptionEventArgs>(m_Image_DownloadFailed);
+        //        this.m_Image.BeginInit();
+        //        this.m_Image.UriSource = new Uri(this.m_URLImage, UriKind.RelativeOrAbsolute);
+        //        this.m_Image.EndInit();
+        //    }
+        //    catch (Exception)
+        //    {
 
-                this.m_Miniature.DownloadProgress += new EventHandler<DownloadProgressEventArgs>(m_Miniature_DownloadProgress);
-                this.m_Miniature.DownloadCompleted += new EventHandler(m_Miniature_DownloadCompleted);
-                this.m_Miniature.DownloadFailed += new EventHandler<ExceptionEventArgs>(m_Miniature_DownloadFailed);
-                this.m_Miniature.BeginInit();
-
-
-
-                if (this.m_URLMiniature != null)
-                {
-                    this.m_Miniature.UriSource = new Uri(this.m_URLMiniature, UriKind.RelativeOrAbsolute);
-                }
-                else
-                {
-                    this.m_Miniature.UriSource = new Uri(this.m_URLImage, UriKind.RelativeOrAbsolute);
-                }
-                this.m_Miniature.EndInit();
-            }
-            catch (Exception)
-            {
-                
-                throw;
-            }
-
-        }
-
-        void m_Miniature_DownloadFailed(object sender, ExceptionEventArgs e)
-        {
-            this.m_Miniature = null;
-        }
-
-        void m_Miniature_DownloadCompleted(object sender, EventArgs e)
-        {
-            //if (this.m_Miniature != null)
-            //PropertyChanged(this, new PropertyChangedEventArgs("Miniature"));
- 
-        }
-
-        void m_Miniature_DownloadProgress(object sender, DownloadProgressEventArgs e)
-        {
-            this.m_ProgressMiniature = e.Progress;
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs("ProgressMiniature"));
-            }
-        }
+        //        throw;
+        //    }
 
 
-        /// <summary>
-        /// Télécharge l'image
-        /// </summary>
-        private void GetImage()
-        {
-                
-                //WebClient client = new WebClient();
+        //}
 
-                //#region Proxy
-                //WebProxy wProxy = new WebProxy("10.126.71.12", 80);
-                //wProxy.Credentials = new NetworkCredential("rfraftp", "Siberbo2000", "fr");
-                //client.Proxy = wProxy;
-                //#endregion
+        //void Image_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        //{
+        //    //throw new NotImplementedException();
+        //}
 
-                //Téléchargement
-                //client.DownloadDataCompleted += new DownloadDataCompletedEventHandler(Image_DownloadDataCompleted);
-                //client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(Image_DownloadProgressChanged);
-                //client.DownloadDataAsync(new Uri(this.m_URLImage));
-            try
-            {
-                this.m_Image = new BitmapImage();
+        //void m_Image_DownloadFailed(object sender, ExceptionEventArgs e)
+        //{
+        //    this.m_Image = null;
+        //}
 
-                this.m_Image.DownloadProgress += new EventHandler<DownloadProgressEventArgs>(m_Image_DownloadProgress);
-                this.m_Image.DownloadCompleted += new EventHandler(m_Image_DownloadCompleted);
-                this.m_Image.DownloadFailed += new EventHandler<ExceptionEventArgs>(m_Image_DownloadFailed);
-                this.m_Image.BeginInit();
-                this.m_Image.UriSource = new Uri(this.m_URLImage, UriKind.RelativeOrAbsolute);
-                this.m_Image.EndInit();
-            }
-            catch (Exception)
-            {
-                
-                throw;
-            }
- 
+        //void m_Image_DownloadCompleted(object sender, EventArgs e)
+        //{
 
-        }
+        //    //if (PropertyChanged != null)
+        //    //{
+        //    if (this.m_Image != null)
+        //    {
+        //        this.m_Largeur = this.m_Image.Width;
+        //        this.m_Hauteur = this.m_Image.Height;
+        //        //PropertyChanged(this, new PropertyChangedEventArgs("Image"));
 
-        void m_Image_DownloadFailed(object sender, ExceptionEventArgs e)
-        {
-            this.m_Image = null;
-        }
+        //    }
+        //        //PropertyChanged(this, new PropertyChangedEventArgs("Hauteur"));
+        //        //PropertyChanged(this, new PropertyChangedEventArgs("Largeur"));
+        //    //}
+        //}
 
-        void m_Image_DownloadCompleted(object sender, EventArgs e)
-        {
-            
-            //if (PropertyChanged != null)
-            //{
-            if (this.m_Image != null)
-            {
-                this.m_Largeur = this.m_Image.Width;
-                this.m_Hauteur = this.m_Image.Height;
-                //PropertyChanged(this, new PropertyChangedEventArgs("Image"));
+        //void m_Image_DownloadProgress(object sender, DownloadProgressEventArgs e)
+        //{
+        //    this.m_ProgressImage = e.Progress;
+        //    if (PropertyChanged != null)
+        //    {
+        //        PropertyChanged(this, new PropertyChangedEventArgs("ProgressImage"));
+        //    }
+        //}
 
-            }
-                //PropertyChanged(this, new PropertyChangedEventArgs("Hauteur"));
-                //PropertyChanged(this, new PropertyChangedEventArgs("Largeur"));
-            //}
-        }
 
-        void m_Image_DownloadProgress(object sender, DownloadProgressEventArgs e)
-        {
-            this.m_ProgressImage = e.Progress;
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs("ProgressImage"));
-            }
-        }
-        
-
-        private BitmapImage m_Image;
-        /// <summary>
-        /// L'image
-        /// </summary>
-        [XmlIgnore]
-        public BitmapImage Image
-        {
-            get
-            {
-                if (m_Image == null) GetImage();
-                //    return new BitmapImage();
-                //}
-                //else
-                //{  
-                    return m_Image;
-                //}
-            }
-            //set { m_Image = value; }
-        }
+        //private BitmapImage m_Image;
+        ///// <summary>
+        ///// L'image
+        ///// </summary>
+        //[XmlIgnore]
+        //public BitmapImage Image
+        //{
+        //    get
+        //    {
+        //        if (m_Image == null) GetImage();
+        //        //    return new BitmapImage();
+        //        //}
+        //        //else
+        //        //{  
+        //            return m_Image;
+        //        //}
+        //    }
+        //    //set { m_Image = value; }
+        //}
 
         //void Image_DownloadDataCompleted(object sender, DownloadDataCompletedEventArgs e)
         //{
         //    WebClient c = (WebClient)sender;
         //    c.Dispose();
 
-        //    byte[] _result = e.Result;
+        //    //byte[] _result = e.Result;
 
-        //    MemoryStream ms = new MemoryStream(_result);
+        //    //MemoryStream ms = new MemoryStream(_result);
 
-            
-            
-        //    this.m_Image = Image.FromStream(ms, true, true);
+        //    BitmapImage bimage = new BitmapImage();
 
-        //    this.m_Hauteur = m_Image.Height;
-        //    this.m_Largeur = m_Image.Width;
+        //    //bimage.SetSource(e.Result);
+
+        //    //this.Image.Source = bimage;
+
+        //    //this.m_Image = Image.FromStream(ms, true, true);
+
+        //    //this.m_Hauteur = m_Image.Height;
+        //    //this.m_Largeur = m_Image.Width;
 
         //    if (PropertyChanged != null)
         //    {
@@ -365,7 +391,7 @@ namespace MediaManager.Library
 
         ~Thumb()
         {
-            
+
         }
 
         /// <summary>
@@ -373,7 +399,7 @@ namespace MediaManager.Library
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
-        
+
 
     }
 }

@@ -54,12 +54,15 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Film.cs" />
-    <Compile Include="MovieScraper.cs" />
     <Compile Include="NFO\NfoFile.cs" />
     <Compile Include="NFO\NfoMovie.cs" />
     <Compile Include="NFO\NfoTV.cs" />
     <Compile Include="NFO\Serializer.cs" />
     <Compile Include="Personne.cs" />
+    <Compile Include="Plugins\IMMPlugin.cs" />
+    <Compile Include="Plugins\IMMPluginScraper.cs" />
+    <Compile Include="Plugins\MMPluginScraper.cs" />
+    <Compile Include="Plugins\MMPluginOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Salle.cs" />
     <Compile Include="Thumb.cs" />
