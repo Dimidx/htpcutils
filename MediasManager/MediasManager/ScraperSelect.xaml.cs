@@ -10,10 +10,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Threading;
 using System.ComponentModel;
 using System.IO;
 using System.Reflection;
 using MediaManager.Library;
+using MediaManager.Plugins;
 
 namespace MediaManager
 {
@@ -22,8 +24,8 @@ namespace MediaManager
     /// </summary>
     public partial class ScraperSelect : Window
     {
-        private ObservableCollection<MovieScraper> MovieScrapers = new ObservableCollection<MovieScraper>();
-        public static MovieScraper Scraper;
+        private ObservableCollection<IMMPluginScraper> MovieScrapers = new ObservableCollection<IMMPluginScraper>();
+        public static IMMPluginScraper Scraper;
         public Film FilmRecherche; //Film a recherché (provient de la fenetre précédente)
         public List<Film> _Resultats = new List<Film>();
         public Film FilmSelectionne = new Film(); //le film sélectionné dans les résultats
@@ -34,11 +36,10 @@ namespace MediaManager
         public ScraperSelect(Film _FilmRecherche)
         {
             this.InitializeComponent();
-
             FilmRecherche = _FilmRecherche;
 
             Assembly PluginFile;
-            MovieScraper ScraperPlugin;
+            IMMPluginScraper ScraperPlugin;
             DirectoryInfo DI = new DirectoryInfo(Directory.GetCurrentDirectory() + System.IO.Path.DirectorySeparatorChar + "Scraper" + System.IO.Path.DirectorySeparatorChar + "Movies");
 
             try
@@ -48,11 +49,12 @@ namespace MediaManager
                 {
                     PluginFile = Assembly.LoadFrom(ScraperFile.FullName);
 
-                    ScraperPlugin = PluginFile.CreateInstance("MediaManager.Library." + ScraperFile.Name.Substring(0
-                                                             , ScraperFile.Name.Length - 4)) as MovieScraper;
+                    ScraperPlugin = PluginFile.CreateInstance("MediaManager.Plugins." + ScraperFile.Name.Substring(0
+                                                             , ScraperFile.Name.Length - 4)) as IMMPluginScraper;
                     if (ScraperPlugin != null)
                     {
                         MovieScrapers.Add(ScraperPlugin);
+                        
                     }
 
                 }
@@ -67,13 +69,22 @@ namespace MediaManager
 
         }
 
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (cbScraper.SelectedItem != null)
             {
+                if (BackWorkerRecherche.IsBusy == true)
+                {
+                    BackWorkerRecherche.CancelAsync();
+                    while (!BackWorkerRecherche.CancellationPending)
+                    {
+                        Thread.Sleep(1);
+                    }
+                }
                 GridRecherche.Visibility = Visibility.Visible;
 
-                Scraper = (MovieScraper)cbScraper.SelectedItem;
+                Scraper = (IMMPluginScraper)cbScraper.SelectedItem;
                 if (_Resultats != null)
                 {
                     _Resultats.Clear();
@@ -85,6 +96,7 @@ namespace MediaManager
                 BackWorkerRecherche = new BackgroundWorker();
                 BackWorkerRecherche.DoWork += new DoWorkEventHandler(BackWorkerRecherche_DoWork);
                 BackWorkerRecherche.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BackWorkerRecherche_RunWorkerCompleted);
+                BackWorkerRecherche.WorkerSupportsCancellation = true;
                 BackWorkerRecherche.RunWorkerAsync();
             }
         }
@@ -109,12 +121,23 @@ namespace MediaManager
 
             if (lstResult.SelectedItem != null)
             {
+                if (BackWorkerDetails.IsBusy == true)
+                {
+                    BackWorkerDetails.CancelAsync();
+                    while (!BackWorkerDetails.CancellationPending)
+                    {
+                        Thread.Sleep(1);
+                    }
+                }
+                
+                
                 GridRecherche.Visibility = Visibility.Visible;
-                Scraper = (MovieScraper)cbScraper.SelectedItem;
+                Scraper = (IMMPluginScraper)cbScraper.SelectedItem;
                 FilmSelectionne = (Film)lstResult.SelectedItem;
                 BackWorkerDetails = new BackgroundWorker();
                 BackWorkerDetails.DoWork += new DoWorkEventHandler(BackWorkerDetails_DoWork);
                 BackWorkerDetails.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BackWorkerDetails_RunWorkerCompleted);
+                BackWorkerDetails.WorkerSupportsCancellation = true;
                 BackWorkerDetails.RunWorkerAsync();
 
 
@@ -135,6 +158,24 @@ namespace MediaManager
         void BackWorkerDetails_DoWork(object sender, DoWorkEventArgs e)
         {
             FilmSelectionne = Scraper.GetMovie(FilmSelectionne);
+        }
+
+        private void lstAffiches_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lstAffiches.SelectedItem != null)
+            {
+                imageafficheselect.Source = ((Thumb)lstAffiches.SelectedItem).URLImage;
+                DetailsFilm.Affiche.Source = ((Thumb)lstAffiches.SelectedItem).URLImage;
+            }
+        }
+
+        private void lstFanarts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lstFanarts.SelectedItem != null)
+            {
+                imagefanartselect.Source = ((Thumb)lstFanarts.SelectedItem).URLImage;
+                DetailsFilm.Fanart.Source = ((Thumb)lstFanarts.SelectedItem).URLImage;
+            }
         }
     }
 }

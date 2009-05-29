@@ -11,20 +11,32 @@ using System.Drawing;
 using System.Threading;
 using System.Xml.Serialization;
 using MediaManager.Library;
+using MediaManager.Plugins;
 
-namespace MediaManager.Library
+
+namespace MediaManager.Plugins
 {
 
 
     /// <summary>
     /// Permet d'accéder aux informations de http://www.allocine.fr
     /// </summary>
-    public class Allocine : MediaManager.Library.MovieScraper
+    public class Allocine : IMMPluginScraper
     {
 
         public string URL { get { return "http://www.allocine.fr"; } }
         public string Name { get { return "Allocine"; } }
         public string Author { get { return "Danone-KiD"; } }
+        public string Version { get { return "1.0"; } }
+        public string Description { get { return "Récupère les informations sur Allocine"; } }
+
+
+        public List<MMPluginOption> GetOptions()
+        {
+            List<MMPluginOption> options = new List<MMPluginOption>();
+            return options;
+        }
+
 
         /// <summary>
         /// Récupère les infos du film en spécifiant si on les charge depuis le cache ou pas

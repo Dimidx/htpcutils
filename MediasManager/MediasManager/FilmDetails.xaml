@@ -4,19 +4,20 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:MediaManager="clr-namespace:MediaManager"
+    xmlns:Controls="clr-namespace:MediaManager.Controls"
     xmlns:Converters="clr-namespace:Converters"
     
 	mc:Ignorable="d"
 	x:Class="MediaManager.FilmDetails"
 	x:Name="UserControl_FilmDetails"
-	d:DesignWidth="640" d:DesignHeight="480" FontFamily="./Fonts/#Aeon Info" >
+	d:DesignWidth="640" d:DesignHeight="480" FontFamily="./Fonts/#Aeon Info" Loaded="UserControl_FilmDetails_Loaded">
     <UserControl.Resources>
 		<VisualBrush x:Key="Reflet_Poster">
       		<VisualBrush.Visual>
 	  			<Image Source="Images/list_movieicon_glass.png"/>
       		</VisualBrush.Visual>
     	</VisualBrush>
-    	<Converters:ToImage x:Key="ToImage"/>
+    	<Converters:UriToImageConverter x:Key="UriToImageConverter"/>
     	<Converters:TableauToString x:Key="TableauToString"/>
     	<Converters:PersonneToString x:Key="PersonneToString"/>
         <Converters:StringToImageSource x:Key="StringToImageSource"/>
@@ -46,8 +47,8 @@
 						<Border.Background>
 							<VisualBrush>
 								<VisualBrush.Visual>
-									<Image x:Name="ImagePoster" Stretch="Fill" Source="{Binding Path=Cover.Image}" />
-								</VisualBrush.Visual>
+                                        <Controls:ImageLoading x:Name="Affiche" Source="{Binding Path=Cover.URLImage}" />
+     								</VisualBrush.Visual>
          					</VisualBrush>
 						</Border.Background>
 					</Border>
@@ -59,7 +60,6 @@
 								</VisualBrush.Visual>
          					</VisualBrush>
 						</Border.Background>
-						<ProgressBar x:Name="progressBar" Value="{Binding Path=Cover.ProgressImage}" VerticalAlignment="Center" Opacity="0.5" HorizontalAlignment="Center" Width="100" Height="20"/>
 					</Border>
 					</Grid>
 					<Grid Width="253" Height="143" Margin="0,0,0,5">
@@ -67,8 +67,8 @@
 						<Border.Background>
 							<VisualBrush>
 								<VisualBrush.Visual>
-									<Image x:Name="ImageFanart" Stretch="Fill" Source="{Binding Path=Fanart.Image}"/>
-								</VisualBrush.Visual>
+                                        <Controls:ImageLoading x:Name="Fanart" Source="{Binding Path=Fanart.URLImage}" />
+                                    </VisualBrush.Visual>
          					</VisualBrush>
 						</Border.Background>
 					</Border>
@@ -80,7 +80,6 @@
 								</VisualBrush.Visual>
          					</VisualBrush>
 						</Border.Background>
-						<ProgressBar Value="{Binding Path=Fanart.ProgressImage}" VerticalAlignment="Center" Opacity="0.5" HorizontalAlignment="Center" Width="100" Height="20"/>
 					</Border>
 					</Grid>
 				</StackPanel>

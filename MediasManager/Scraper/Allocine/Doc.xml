@@ -4,22 +4,6 @@
         <name>Allocine</name>
     </assembly>
     <members>
-        <member name="T:Allocine.Properties.Resources">
-            <summary>
-              Une classe de ressource fortement typée destinée, entre autres, à la consultation des chaînes localisées.
-            </summary>
-        </member>
-        <member name="P:Allocine.Properties.Resources.ResourceManager">
-            <summary>
-              Retourne l'instance ResourceManager mise en cache utilisée par cette classe.
-            </summary>
-        </member>
-        <member name="P:Allocine.Properties.Resources.Culture">
-            <summary>
-              Remplace la propriété CurrentUICulture du thread actuel pour toutes
-              les recherches de ressources à l'aide de cette classe de ressource fortement typée.
-            </summary>
-        </member>
         <member name="M:MediaManager.Library.Utils.GetSourceHTML(System.String)">
             <summary>
             Récupère la source HTML d'une page Web
@@ -39,12 +23,12 @@
             Method used to extract the content of a string from a 2 strings.
             </summary>
         </member>
-        <member name="T:MediaManager.Library.Allocine">
+        <member name="T:MediaManager.Plugins.Allocine">
             <summary>
             Permet d'accéder aux informations de http://www.allocine.fr
             </summary>
         </member>
-        <member name="M:MediaManager.Library.Allocine.GetMovie(MediaManager.Library.Film)">
+        <member name="M:MediaManager.Plugins.Allocine.GetMovie(MediaManager.Library.Film)">
             <summary>
             Récupère les infos du film en spécifiant si on les charge depuis le cache ou pas
             et si on récupère les images ou pas. Si le film n'est pas dans le cache on récupère
@@ -53,13 +37,29 @@
             <param name="IDFilm">ID du film</param>
             <returns>Infos du Film</returns>
         </member>
-        <member name="M:MediaManager.Library.Allocine.SearchMovie(MediaManager.Library.Film)">
+        <member name="M:MediaManager.Plugins.Allocine.SearchMovie(MediaManager.Library.Film)">
             <summary>
             Recherche un film sur Allociné
             </summary>
             <param name="TitreFilm">Titre du film à rechercher</param>
             <param name="LoadImage"><c>true</c> pour télécharger les miniatures, <c>false</c> dans le cas contraire</param>
             <returns>Film</returns>
+        </member>
+        <member name="T:Allocine.Properties.Resources">
+            <summary>
+              Une classe de ressource fortement typée destinée, entre autres, à la consultation des chaînes localisées.
+            </summary>
+        </member>
+        <member name="P:Allocine.Properties.Resources.ResourceManager">
+            <summary>
+              Retourne l'instance ResourceManager mise en cache utilisée par cette classe.
+            </summary>
+        </member>
+        <member name="P:Allocine.Properties.Resources.Culture">
+            <summary>
+              Remplace la propriété CurrentUICulture du thread actuel pour toutes
+              les recherches de ressources à l'aide de cette classe de ressource fortement typée.
+            </summary>
         </member>
     </members>
 </doc>

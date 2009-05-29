@@ -11,22 +11,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MediaManager
+namespace MediaManager.Controls
 {
 	/// <summary>
-	/// Logique d’interaction pour FilmDetails.xaml
+	/// Interaction logic for Sablier.xaml
 	/// </summary>
-	public partial class FilmDetails
+	public partial class Sablier
 	{
-		public FilmDetails()
+		public Sablier()
 		{
 			this.InitializeComponent();
 		}
-
-        private void UserControl_FilmDetails_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
+		
 
 	}
 }

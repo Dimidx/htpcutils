@@ -2,15 +2,17 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:Converters="clr-namespace:Converters"
+    xmlns:Controls="clr-namespace:MediaManager.Controls"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" xmlns:local="clr-namespace:MediaManager"
 	x:Class="MediaManager.ScraperSelect"
+    
 	x:Name="Window"
 	Title="Scraper"
 	Width="640" Height="480" Background="{DynamicResource WindowBackgroundBrush}">
 	<Window.Resources>
 	    <Converters:PersonneToString x:Key="PersonneToString"/>
-		<Converters:ToImage x:Key="ToImage"/>
+		<Converters:UriToImageConverter x:Key="UriToImageConverter"/>
 		<DataTemplate x:Key="DataTemplateScraper">
 			<StackPanel HorizontalAlignment="Stretch" Margin="0,0,0,0">
 				<TextBlock Text="{Binding Path=Name}" FontWeight="Bold" />
@@ -39,7 +41,7 @@
 					<Border.Background>
 						<VisualBrush>
 							<VisualBrush.Visual>
-								<Image x:Name="ImageFanart" Stretch="Uniform" Source="{Binding Path=Miniature}"/>
+                                <Controls:ImageLoading x:Name="ImageFanart" Source="{Binding Path=URLMiniature}" />
 							</VisualBrush.Visual>
 						</VisualBrush>
 					</Border.Background>
@@ -52,7 +54,6 @@
 							</VisualBrush.Visual>
 						</VisualBrush>
 					</Border.Background>
-					<ProgressBar Value="{Binding Path=ProgressMiniature}" VerticalAlignment="Center" Opacity="0.5" HorizontalAlignment="Center" Width="100" Height="20"/>
 				</Border>
 			</Grid>
 		</DataTemplate>
@@ -74,23 +75,22 @@
 						<ColumnDefinition Width="0.712*"/>
 						<ColumnDefinition Width="0.288*"/>
 					</Grid.ColumnDefinitions>
-					<local:FilmDetails Grid.ColumnSpan="2"/>
+					<local:FilmDetails x:Name="DetailsFilm" Grid.ColumnSpan="2"/>
 				</Grid>
 			</TabItem>
 			<TabItem Header="Affiches">
 				<Grid x:Name="gridaffiches">
 					<DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True">
-						<ListBox ItemsSource="{Binding}" x:Name="lstAffiches" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplateFanart}" Width="230" Margin="5,5,5,5" BorderBrush="{DynamicResource NormalBorderBrush}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" DockPanel.Dock="Left" />
+						<ListBox ItemsSource="{Binding}" x:Name="lstAffiches" SelectionChanged="lstAffiches_SelectionChanged" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplateFanart}" Width="230" Margin="5,5,5,5" BorderBrush="{DynamicResource NormalBorderBrush}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" DockPanel.Dock="Left" />
 						<DockPanel>
 							<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,5">
 								<TextBlock Text="Largeur : " Foreground="#FF000000" />
-								<TextBlock Text="{Binding Path=Largeur}" Foreground="{DynamicResource TextBrush}" Margin="5,0,5,0" />
+								<TextBlock x:Name="lib_AfficheLargeur" Text="" Foreground="{DynamicResource TextBrush}" Margin="5,0,5,0" />
 								<TextBlock Text="Hauteur : " Foreground="#FF000000" />
-								<TextBlock Text="{Binding Path=Hauteur}" Foreground="{DynamicResource TextBrush}" Margin="5,0,5,0" />
+								<TextBlock x:Name="lib_AfficheHauteur" Text="" Foreground="{DynamicResource TextBrush}" Margin="5,0,5,0" />
 							</StackPanel>
 							<Grid VerticalAlignment="Stretch">
-								<ProgressBar x:Name="progressBar" Value="{Binding Path=Cover.ProgressImage}" VerticalAlignment="Center" Opacity="0.5" HorizontalAlignment="Center" Width="150" Height="20"/>
-								<Image Source="{Binding Path=Image}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                                <Controls:ImageLoading x:Name="imageafficheselect" Source="{Binding Path=URLImage}" />
 							</Grid>
 						</DockPanel>
 					</DockPanel>
@@ -99,17 +99,16 @@
 			<TabItem Header="Fanarts">
 				<Grid x:Name="gridfanarts">
 					<DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True">
-						<ListBox ItemsSource="{Binding}" x:Name="lstFanarts" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplateFanart}" Width="230" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" DockPanel.Dock="Left" Margin="5,5,5,5" BorderBrush="{DynamicResource NormalBorderBrush}" />
+						<ListBox ItemsSource="{Binding}" x:Name="lstFanarts" SelectionChanged="lstFanarts_SelectionChanged" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplateFanart}" Width="230" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" DockPanel.Dock="Left" Margin="5,5,5,5" BorderBrush="{DynamicResource NormalBorderBrush}" />
 						<DockPanel>
 							<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,5">
 								<TextBlock Text="Largeur : " Foreground="#FF000000" />
-								<TextBlock Text="{Binding Path=Largeur}" Foreground="{DynamicResource TextBrush}" Margin="5,0,5,0" />
+								<TextBlock Text="" Foreground="{DynamicResource TextBrush}" Margin="5,0,5,0" />
 								<TextBlock Text="Hauteur : " Foreground="#FF000000" />
-								<TextBlock Text="{Binding Path=Hauteur}" Foreground="{DynamicResource TextBrush}" Margin="5,0,5,0" />
+								<TextBlock Text="" Foreground="{DynamicResource TextBrush}" Margin="5,0,5,0" />
 							</StackPanel>
 							<Grid VerticalAlignment="Stretch">
-								<ProgressBar x:Name="progressBar1" Value="{Binding Path=Cover.ProgressImage}" VerticalAlignment="Center" Opacity="0.5" HorizontalAlignment="Center" Width="150" Height="20"/>
-								<Image Source="{Binding Path=Image}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                                <Controls:ImageLoading x:Name="imagefanartselect" Source="{Binding Path=URLImage}" />
 							</Grid>
 						</DockPanel>
 					</DockPanel>
