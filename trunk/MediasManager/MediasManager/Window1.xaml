@@ -62,7 +62,7 @@
     		<TextBlock x:Name="lib_BarreEtat" Width="Auto" Text="Recherche en cours..." TextWrapping="Wrap" DockPanel.Dock="Bottom" Visibility="Collapsed"/>
     		<DockPanel DockPanel.Dock="Top" LastChildFill="True" d:LayoutOverrides="Height">
     			<Border Margin="5,5,5,5" Width="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10">
-                    <ListBox x:Name="listBox_Films" ItemsPanel="{DynamicResource MovieTemplate}" Background="{x:Null}" BorderBrush="{DynamicResource NormalBorderBrush}" Foreground="#FF000000" Margin="5,5,5,5" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" d:LayoutOverrides="Height" ItemsSource="{Binding}" ItemTemplate="{DynamicResource MovieDataTemplate}" IsSynchronizedWithCurrentItem="True" IsTextSearchEnabled="False" />
+                    <ListBox SelectionChanged="listBox_Films_SelectionChanged" x:Name="listBox_Films" ItemsPanel="{DynamicResource MovieTemplate}" Background="{x:Null}" BorderBrush="{DynamicResource NormalBorderBrush}" Foreground="#FF000000" Margin="5,5,5,5" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" d:LayoutOverrides="Height" ItemsSource="{Binding}" ItemTemplate="{DynamicResource MovieDataTemplate}" IsSynchronizedWithCurrentItem="True" IsTextSearchEnabled="False" />
                 </Border>
     			<DockPanel LastChildFill="True">
     				<Border BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,5,5,5" VerticalAlignment="Stretch" DockPanel.Dock="Top" Background="{DynamicResource ControlBackgroundBrush}">
@@ -73,7 +73,7 @@
     					</StackPanel>
     				</Border>
     				<Border BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" d:LayoutOverrides="Height" Margin="5,5,5,5">
-    					<local:UC_FilmDetails x:Name="FilmDetails" Margin="5,5,5,5"/>
+    					<local:FilmDetails x:Name="FilmDetails" Margin="5,5,5,5"/>
     				</Border>
     			</DockPanel>
     		</DockPanel>

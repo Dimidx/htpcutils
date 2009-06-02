@@ -282,16 +282,19 @@ namespace MediaManager
             {
                 String ext = fi.Extension;
                 nfoPaths = new String[2];
-                nfoPaths[0] = fi.DirectoryName + "\\movie.nfo";
-                nfoPaths[1] = fi.FullName.Replace(ext, ".nfo");
+
+                nfoPaths[0] = fi.FullName.Replace(ext, ".nfo");
+                nfoPaths[1] = fi.DirectoryName + "\\movie.nfo";
 
                 posterPaths = new String[2];
-                posterPaths[0] = fi.DirectoryName + "\\movie.tbn";
-                posterPaths[1] = fi.FullName.Replace(ext, ".tbn");
+                posterPaths[0] = fi.FullName.Replace(ext, ".tbn");
+                posterPaths[1] = fi.DirectoryName + "\\movie.tbn";
+
 
                 fanartPaths = new String[2];
-                fanartPaths[0] = fi.DirectoryName + "\\fanart.jpg";
-                fanartPaths[1] = fi.FullName.Replace(ext, "-fanart.jpg");
+                fanartPaths[0] = fi.FullName.Replace(ext, "-fanart.jpg");
+                fanartPaths[1] = fi.DirectoryName + "\\fanart.jpg";
+
 
                 folderPath = fi.DirectoryName + "\\folder.jpg";
 
