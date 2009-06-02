@@ -82,10 +82,20 @@ namespace MediaManager.Controls
                     bmp.UriSource = new Uri((string)value, UriKind.RelativeOrAbsolute);
 
                 }
-   
 
-                
-                bmp.EndInit();
+
+
+                try
+                {
+                    bmp.EndInit();
+                }
+                catch (Exception)
+                {
+                    bmp = new BitmapImage();
+                    this.StopAnimation();
+                    //this.Image.Source = null;
+                     //throw;
+                }
                 this.Image.Source = bmp;
                 
 

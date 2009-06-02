@@ -28,7 +28,7 @@ namespace MediaManager
     public partial class Window1 : Window
     {
         //private Media media = new Media();
-        private Movie MonFilm = null;
+        private Film MonFilm = null;
         //public MovieCollection _Movies = new MovieCollection();
         public BackgroundWorker BackWorker = new BackgroundWorker();
         public bool _RechercheTerminée = true;
@@ -112,10 +112,29 @@ namespace MediaManager
         {
 
 
-            //if (listBox_Films.SelectedItem != null)
-            //{
-                //MonFilm = (Movie)listBox_Films.SelectedItem;
-                //MonFilm.updateItem();
+            if (listBox_Films.SelectedItem != null)
+            {
+                Movie _mov = (Movie)listBox_Films.SelectedItem;
+                _mov.updateItem();
+                MonFilm = new Film();
+                MonFilm.Titre = _mov.Nfo.Title;
+                MonFilm.TitreOriginal = _mov.Nfo.Title;
+
+
+                //FilmDe_mov.Paths.FanartPath
+                Thumb t = new Thumb();
+                t.URLImage = _mov.Paths.PosterPath;
+                
+                MonFilm.ListeCover.Add(t);
+
+                Thumb f = new Thumb();
+                f.URLImage = _mov.Paths.FanartPath;
+                MonFilm.ListeFanart.Add(f);
+
+                FilmDetails.DataContext = MonFilm;
+                FilmDetails.Affiche.Source = MonFilm.Cover.URLImage;
+                FilmDetails.Fanart.Source = MonFilm.Fanart.URLImage;
+
 
                 //MonFilm = AllocineHandler.GetFilmDetails(MonFilm.ID, true, true);
                 //FilmDetails.DataContext = MonFilm;
@@ -128,7 +147,7 @@ namespace MediaManager
                 //if (MonFilm.HasFanart)
                 //{
                 //    FilmDetails.ImageFanart.Source = new BitmapImage(new Uri(MonFilm.Paths.FanartPath));
-                //}
+                }
 
 
        
