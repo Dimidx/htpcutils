@@ -48,6 +48,12 @@
         <string>*.iso</string>
         <string>*.img</string>
       </extensions>
+      <folder>
+        <monitorFolder>false</monitorFolder>
+        <autoScrape>false</autoScrape>
+        <path>D:\Perso\Films2</path>
+        <containsFolders>true</containsFolders>
+      </folder>
     </movies>
   </config>
 </settings>

@@ -162,6 +162,10 @@ namespace MediaManager
             {
                 MovieName = nfoMov.Title;
             }
+            else
+            {
+                nfoMov.Title = MovieName;
+            }
 
             if (SearchString == null) SearchString = MovieName;
 

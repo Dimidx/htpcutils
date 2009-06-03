@@ -52,6 +52,21 @@ namespace MediaManager.Library
             set { m_Photo = value; OnPropertyChanged("Photo"); }
         }
 
+        public Personne()
+        {
+        
+        }
+
+        public Personne(string _Name)
+        {
+            m_Nom = _Name;
+        }
+
+        public Personne(string _Name, string _Role)
+        {
+            m_Nom = _Name;
+            m_Role = _Role;
+        }
 
 
         #region INotifyPropertyChanged Members
