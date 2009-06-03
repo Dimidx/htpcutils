@@ -388,6 +388,21 @@ namespace MediaManager.Library
         {
 
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_URLImage"></param>
+        /// <param name="_URLMiniature"></param>
+        public Thumb(string _URLImage,string _URLMiniature)
+        {
+            m_URLImage = _URLImage;
+            m_URLMiniature = _URLMiniature;
+        }
+
+        public Thumb(string _URLImage)
+        {
+            m_URLImage = _URLImage;
+        }
 
         ~Thumb()
         {

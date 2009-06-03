@@ -57,7 +57,7 @@ namespace MediaManager
             listBox_Films.ItemsSource = lcv;
             this.DataContext = lcv;
             ScanDir();
-            
+
         }
 
 
@@ -119,7 +119,45 @@ namespace MediaManager
                 MonFilm = new Film();
                 MonFilm.Titre = _mov.Nfo.Title;
                 MonFilm.TitreOriginal = _mov.Nfo.Title;
+                MonFilm.Annee = _mov.Nfo.Year;
+                MonFilm.Avis = _mov.Nfo.Mpaa;
+                MonFilm.Critique = _mov.Nfo.Outline;
+                
+                #region Date de sortie
+		        try
+                {
+                    MonFilm.DateSortie = DateTime.Parse(_mov.Nfo.Premiered);
+                }
+                catch { } 
+	            #endregion
 
+                MonFilm.DureeChaine = _mov.Nfo.Runtime;
+                MonFilm.Genres = _mov.Nfo.Genre.Split('/');
+                MonFilm.ID = _mov.Nfo.Id;
+
+                #region Note
+                try
+                {
+                    MonFilm.NotePresse = Convert.ToInt32(_mov.Nfo.Rating);
+                }
+                catch { } 
+                #endregion
+
+                MonFilm.Synopsis = _mov.Nfo.Plot;
+
+                #region Réalisateurs
+                foreach (string dir in _mov.Nfo.Director.Split('/'))
+                {
+                    MonFilm.Realisateurs.Add(new Personne(dir, "Réalisateur"));
+                } 
+                #endregion
+
+                #region Acteurs
+                foreach (Actor act in _mov.Nfo.Actor)
+                {
+                    MonFilm.Acteurs.Add(new Personne(act.Name, act.Role));
+                }
+                #endregion
 
                 //FilmDe_mov.Paths.FanartPath
                 Thumb t = new Thumb();
@@ -176,7 +214,7 @@ namespace MediaManager
         {
             this.Close();
         }
-        
+
         #endregion
 
         private void mnuEditer_Click(object sender, RoutedEventArgs e)
