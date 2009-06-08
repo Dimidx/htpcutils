@@ -4,6 +4,25 @@
         <name>Allocine</name>
     </assembly>
     <members>
+        <member name="M:MediaManager.Library.Utils.GetSourceHTML(System.String)">
+            <summary>
+            Récupère la source HTML d'une page Web
+            </summary>
+            <param name="url">URL de la page à récupérer</param>
+            <returns></returns>
+        </member>
+        <member name="M:MediaManager.Library.Utils.removeUnwantedChars(System.String)">
+            <summary>
+            Supprime les caractères html
+            </summary>
+            <param name="tInput"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MediaManager.Library.Utils.GetStringBetweenTwoStrings(System.String,System.String,System.String)">
+            <summary>
+            Method used to extract the content of a string from a 2 strings.
+            </summary>
+        </member>
         <member name="T:MediaManager.Plugins.Allocine">
             <summary>
             Permet d'accéder aux informations de http://www.allocine.fr
@@ -25,25 +44,6 @@
             <param name="TitreFilm">Titre du film à rechercher</param>
             <param name="LoadImage"><c>true</c> pour télécharger les miniatures, <c>false</c> dans le cas contraire</param>
             <returns>Film</returns>
-        </member>
-        <member name="M:MediaManager.Library.Utils.GetSourceHTML(System.String)">
-            <summary>
-            Récupère la source HTML d'une page Web
-            </summary>
-            <param name="url">URL de la page à récupérer</param>
-            <returns></returns>
-        </member>
-        <member name="M:MediaManager.Library.Utils.removeUnwantedChars(System.String)">
-            <summary>
-            Supprime les caractères html
-            </summary>
-            <param name="tInput"></param>
-            <returns></returns>
-        </member>
-        <member name="M:MediaManager.Library.Utils.GetStringBetweenTwoStrings(System.String,System.String,System.String)">
-            <summary>
-            Method used to extract the content of a string from a 2 strings.
-            </summary>
         </member>
         <member name="T:Allocine.Properties.Resources">
             <summary>
