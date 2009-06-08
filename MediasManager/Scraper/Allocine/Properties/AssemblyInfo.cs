@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 // l'ensemble d'attributs suivant. Changez les valeurs de ces attributs pour modifier les informations
 // associées à un assembly.
 [assembly: AssemblyTitle("AllocineLib")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Scraper pour MediaManager")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("DanoneKiD")]
-[assembly: AssemblyProduct("Allocine Library for .Net")]
+[assembly: AssemblyProduct("Scraper pour MediaManager")]
 [assembly: AssemblyCopyright("Copyright © DanoneKiD 2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
