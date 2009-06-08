@@ -53,18 +53,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Fileinfo.cs" />
     <Compile Include="Film.cs" />
-    <Compile Include="NFO\NfoFile.cs" />
-    <Compile Include="NFO\NfoMovie.cs" />
-    <Compile Include="NFO\NfoTV.cs" />
-    <Compile Include="NFO\Serializer.cs" />
     <Compile Include="Personne.cs" />
     <Compile Include="Plugins\IMMPlugin.cs" />
+    <Compile Include="Plugins\IMMPluginImportExport.cs" />
     <Compile Include="Plugins\IMMPluginScraper.cs" />
     <Compile Include="Plugins\MMPluginScraper.cs" />
     <Compile Include="Plugins\MMPluginOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Salle.cs" />
+    <Compile Include="Serializer.cs" />
     <Compile Include="Thumb.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
