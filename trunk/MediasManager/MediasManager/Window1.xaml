@@ -1,7 +1,6 @@
 ﻿<Window
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:MediaManager_Library_NFO="clr-namespace:MediaManager.Library.NFO;assembly=MMLibrary"
     xmlns:Converters="clr-namespace:Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -55,14 +54,14 @@
 						</MenuItem.Icon>
 					</MenuItem>
     				<Separator/>
-    				<MenuItem x:Name="mnuEditer" Header="Editer" Click="mnuEditer_Click"/>
+    				<MenuItem x:Name="mnuEditer" Header="Editer"/>
     			</MenuItem>
     		</Menu>
     		<ProgressBar BorderThickness="1,1,1,1" IsIndeterminate="True" x:Name="jauge_progress" Visibility="Collapsed" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Height="16" DockPanel.Dock="Bottom"/>
     		<TextBlock x:Name="lib_BarreEtat" Width="Auto" Text="Recherche en cours..." TextWrapping="Wrap" DockPanel.Dock="Bottom" Visibility="Collapsed"/>
     		<DockPanel DockPanel.Dock="Top" LastChildFill="True" d:LayoutOverrides="Height">
     			<Border Margin="5,5,5,5" Width="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10">
-                    <ListBox SelectionChanged="listBox_Films_SelectionChanged" x:Name="listBox_Films" ItemsPanel="{DynamicResource MovieTemplate}" Background="{x:Null}" BorderBrush="{DynamicResource NormalBorderBrush}" Foreground="#FF000000" Margin="5,5,5,5" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" d:LayoutOverrides="Height" ItemsSource="{Binding}" ItemTemplate="{DynamicResource MovieDataTemplate}" IsSynchronizedWithCurrentItem="True" IsTextSearchEnabled="False" />
+                    <ListBox SelectionChanged="listBox_Films_SelectionChanged" x:Name="listBox_Films" ItemsPanel="{DynamicResource MovieTemplate}" Background="{x:Null}" BorderBrush="{DynamicResource NormalBorderBrush}" Foreground="#FF000000" Margin="5,5,5,5" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" d:LayoutOverrides="Height" ItemsSource="{Binding}" ItemTemplate="{DynamicResource MovieDataTemplate}" IsSynchronizedWithCurrentItem="True" IsTextSearchEnabled="False" MaxWidth="300" MinWidth="200" />
                 </Border>
     			<DockPanel LastChildFill="True">
     				<Border BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,5,5,5" VerticalAlignment="Stretch" DockPanel.Dock="Top" Background="{DynamicResource ControlBackgroundBrush}">

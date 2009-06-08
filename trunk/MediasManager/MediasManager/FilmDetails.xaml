@@ -130,8 +130,7 @@
 					</Border>
 					<Border Width="Auto" Height="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="0,1,0,0" Padding="5,5,5,5" DockPanel.Dock="Top">
 						<TextBlock Text="{Binding Path=Synopsis}" Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_Tagline" TextAlignment="Justify" Foreground="{DynamicResource TextBrush}"/>
-					</Border>
-						
+                    </Border>		
 				</DockPanel>
 			</DockPanel>
 		</Grid>

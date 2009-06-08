@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using System.IO;
-using MediaManager.Library.NFO;
+using MediaManager.Library;
 
-namespace MediaManager.Config
+namespace MediaManager.Configuration
 {
     /*************
      * 
@@ -22,10 +22,10 @@ namespace MediaManager.Config
     public class XmlSettings
     {
         [XmlElement(ElementName = "main")]
-        public MainS Main = new MainS();
+        public Main Main = new Main();
 
         [XmlElement(ElementName = "config")]
-        public ConfigS Config = new ConfigS();
+        public Config Config = new Config();
     }
 
     /***************
@@ -35,41 +35,13 @@ namespace MediaManager.Config
      **************/
 }
 
-public class MainS
+public class Main
 {
-    public int top = 165;
-    public int left = 282;
-    public int width  = 852;
-    public int height = 576;
-    public bool fullscreen = false;
 
-    [XmlElement(ElementName = "movielistview")]
-    public MainMovies movies = new MainMovies();
-
-    [XmlElement(ElementName = "movienfoeditor")]
-    public NfoConfigMovie NfoConfMovie = new NfoConfigMovie();
 }
 
-public class NfoConfigMovie
-{
-    public int top = 200;
-    public int left = 200;
-}
 
-public class MainMovies
-{
-    public int col1Width = 240;
-    public int col2Width = 280;
-    public int col3Width = 60;
-    public int col4Width = 45;
-    public int col5Width = 45;
-    public int col6Width = 45;
-    public int col7Width = 80;
-    public int selectedFilterSize = 4;
-    public int selectedFilterNfo = 7;
-}
-
-public class ConfigS
+public class Config
 {
     [XmlElement(ElementName = "movies")]
     public ConfigMovie confMovie = new ConfigMovie();
@@ -77,49 +49,7 @@ public class ConfigS
 
 public class ConfigMovie
 {
-    public int top = 200;
-    public int left = 200;
-    public String lastFolder;
-    public int maxDownloading = 5;
-    public int maxRetry = 1;
-    /// <summary>
-    /// Sauve les fichiers avec le nom de la video
-    /// </summary>
-    public bool saveAsMovie = true;
 
-    /// <summary>
-    /// Sauve le fanart sous la forme fanart.jpg
-    /// </summary>
-    public bool saveFanartJpg = true;
-    
-    /// <summary>
-    /// Sauve le poster en folder.jpg
-    /// </summary>
-    public bool saveFolderJpg = true;
-
-    /// <summary>
-    /// Sauve le fanart sous la forme moviename-fanart.jpg
-    /// </summary>
-    public bool saveMovieNameFanart = true;
-
-    /// <summary>
-    /// Sauve le fanart sous la forme moviename.tbn
-    /// </summary>
-    public bool saveMovieNameTbn = true;
-
-    /// <summary>
-    /// Sauve le fanart sous la forme movie.tbn
-    /// </summary>
-    public bool saveMovieTbn = true;
-
-    
-
-
-
-    public bool useFolderForSearch = true;
-    public bool cleanFilename = true;
-    public bool skipSample = true;
-    public bool overwriteNfo = false;
     public String[] extensions = { "*.mkv", "*.mp4", "*.avi", "*.wmv", "*.rar", "*.ifo", "*.iso", "*.img" };
     [XmlIgnore]
     public char[] split = { ',', ';' };
@@ -145,10 +75,6 @@ public class MovieFolder
         set { _containsFolders = value; }
     }
 
-
-
-    public bool monitorFolder = false;
-    public bool autoScrape = false;
     public override string ToString()
     {
         return path;

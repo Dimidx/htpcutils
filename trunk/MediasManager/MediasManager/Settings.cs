@@ -4,14 +4,16 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using MediaManager.Library.NFO;
-
+using MediaManager.Library;
+using MediaManager.Plugins;
 namespace MediaManager
 {
     public class Settings
     {
         public static String xmlPath;
-        public static MediaManager.Config.XmlSettings XML = new MediaManager.Config.XmlSettings();
+        public static MediaManager.Configuration.XmlSettings XML = new MediaManager.Configuration.XmlSettings();
+        public static List<IMMPluginScraper> PluginsScraper = new List<IMMPluginScraper>();
+        public static List<IMMPluginImportExport> PluginsImportExport = new List<IMMPluginImportExport>();
 
         public static bool Save()
         {
@@ -30,11 +32,11 @@ namespace MediaManager
         {
 
             Serializer s = new Serializer(xmlPath, XML);
-            XML = (Config.XmlSettings)s.FromFile();
+            XML = (Configuration.XmlSettings)s.FromFile();
 
             if (XML == null)
             {
-                XML = new Config.XmlSettings();
+                XML = new Configuration.XmlSettings();
                 return false;
             }
             return true;

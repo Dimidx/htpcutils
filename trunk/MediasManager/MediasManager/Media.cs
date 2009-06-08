@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using MediaManager;
-using MediaManager.Library.NFO;
+using MediaManager.Library;
 using System.Threading;
 using System.Windows.Threading;
 using System.Windows;
@@ -122,10 +122,6 @@ namespace MediaManager
                     
                 {
                     
-                    if (mf.monitorFolder)
-                    {
-
-                    }
                     String directory = mf.path;
                     if (Directory.Exists(directory))
                     {
@@ -139,7 +135,7 @@ namespace MediaManager
                                 foreach (FileInfo fileInfo in dinf.GetFiles(ext))
                                 {
                                     
-                                    if (!fileInfo.Name.ToLower().Contains("sample") || !Settings.XML.Config.confMovie.skipSample)
+                                    if (!fileInfo.Name.ToLower().Contains("sample") )
                                     {
                                         if (fileInfo != null)
                                         {
@@ -160,7 +156,7 @@ namespace MediaManager
                         {
                             foreach (FileInfo fileInfo in dir.GetFiles(ext))
                             {
-                                if (!fileInfo.Name.ToLower().Contains("sample") || !Settings.XML.Config.confMovie.skipSample)
+                                if (!fileInfo.Name.ToLower().Contains("sample"))
                                 {
                                     if (fileInfo != null)
                                     {

@@ -1,9 +1,10 @@
 ﻿<UserControl x:Class="MediaManager.Controls.ImageLoading"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:MediaManager.Controls">
+    xmlns:local="clr-namespace:MediaManager.Controls"
+    x:Name="myUcName">
     <Grid x:Name="LayoutRoot">
-        <Image x:Name="Image" Stretch="Uniform" />
+        <Image x:Name="Image" Source="{Binding ElementName=myUcName, Path=Source}" Stretch="Uniform" />
         <TextBlock  x:Name="ProgressChargement" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" />
     </Grid>
 </UserControl>
