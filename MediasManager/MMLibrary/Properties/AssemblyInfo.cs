@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("MMLibrary")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("TOTAL")]
+[assembly: AssemblyCompany("DanoneKiD")]
 [assembly: AssemblyProduct("MMLibrary")]
-[assembly: AssemblyCopyright("Copyright © TOTAL 2009")]
+[assembly: AssemblyCopyright("Copyright © DanoneKiD 2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

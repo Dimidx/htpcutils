@@ -5,7 +5,7 @@ using System.Text;
 using System.Xml.Serialization;
 using System.IO;
 
-namespace MediaManager.Library.NFO
+namespace MediaManager.Library
 {
     public class Serializer
     {
@@ -43,9 +43,9 @@ namespace MediaManager.Library.NFO
                 r.Close();
                 return obj;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Console.WriteLine("ERROR in: " + path);
+                Console.WriteLine("ERROR in: " + path + e.Message);
                 return null;
             }
         }
