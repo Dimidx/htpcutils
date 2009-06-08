@@ -37,10 +37,12 @@ namespace MediaManager
         {
             this.InitializeComponent();
             FilmRecherche = _FilmRecherche;
+            ThreadPool.SetMaxThreads(5, 5);
+
 
             Assembly PluginFile;
             IMMPluginScraper ScraperPlugin;
-            DirectoryInfo DI = new DirectoryInfo(Directory.GetCurrentDirectory() + System.IO.Path.DirectorySeparatorChar + "Scraper" + System.IO.Path.DirectorySeparatorChar + "Movies");
+            DirectoryInfo DI = new DirectoryInfo(Directory.GetCurrentDirectory() + System.IO.Path.DirectorySeparatorChar + "Plugins/Scraper");
 
             try
             {

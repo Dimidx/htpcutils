@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows;
+using MediaManager.Plugins;
 
 namespace MediaManager
 {
@@ -12,5 +13,6 @@ namespace MediaManager
     /// </summary>
     public partial class App : Application
     {
+
     }
 }

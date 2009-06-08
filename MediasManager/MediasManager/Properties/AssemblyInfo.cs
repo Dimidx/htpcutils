@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("MediaManager")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("TOTAL")]
+[assembly: AssemblyCompany("DanoneKiD")]
 [assembly: AssemblyProduct("MediaManager")]
-[assembly: AssemblyCopyright("Copyright © TOTAL 2009")]
+[assembly: AssemblyCopyright("Copyright © DanoneKiD 2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

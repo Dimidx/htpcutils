@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
 using System.IO;
 
 
@@ -19,14 +20,15 @@ namespace MediaManager.Controls
     /// <summary>
     /// Logique d'interaction pour ImageLoading.xaml
     /// </summary>
-    public partial class ImageLoading : UserControl
+    public partial class ImageLoading : UserControl , INotifyPropertyChanged
     {
         private string defaultCacheDir = System.Environment.CurrentDirectory + @"\Cache\Images\";
         private string fichierlocal = "";
         public ImageLoading()
         {
-
+            if (!Directory.Exists(defaultCacheDir)) Directory.CreateDirectory(defaultCacheDir);
             InitializeComponent();
+            //this.Image.DataContext = this.DataContext;
             this.StopAnimation();
         }
         //public BitmapImage Source
@@ -64,13 +66,13 @@ namespace MediaManager.Controls
             {
 
                 SetValue(SourceProperty, value);
-                this.Image.Source = null;
+                //this.Image.Source = null;
                 this.BeginAnimation();
                 var bmp = new BitmapImage();
                 bmp.DownloadProgress += new EventHandler<DownloadProgressEventArgs>(value_DownloadProgress);
                 bmp.DownloadCompleted += new EventHandler(bmp_DownloadCompleted);
                 bmp.BeginInit();
-                fichierlocal = defaultCacheDir + "\\" + (string)value.Replace(@"\", "_").Replace(@"/", "_").Replace(":", "_");
+                fichierlocal = defaultCacheDir + (string)value.Replace(@"\", "_").Replace(@"/", "_").Replace(":", "_");
                 if (File.Exists(fichierlocal))
                 {
                     this.StopAnimation();
@@ -96,7 +98,7 @@ namespace MediaManager.Controls
                     //this.Image.Source = null;
                      //throw;
                 }
-                this.Image.Source = bmp;
+                //this.Image.Source = bmp;
                 
 
             }
@@ -128,6 +130,7 @@ namespace MediaManager.Controls
                 }
             }
             StopAnimation();
+            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("Source"));
         }
  
 
@@ -153,18 +156,19 @@ namespace MediaManager.Controls
 
         // Using a DependencyProperty as the backing store for Source.  This enables animation, styling, binding, etc...
 
-        public static readonly DependencyProperty SourceProperty =
+        //public static readonly DependencyProperty sourceProperty =
 
-            DependencyProperty.Register("Source", typeof(string), typeof(ImageLoading), new PropertyMetadata(new PropertyChangedCallback(OnSourceChanged)));
+          //  DependencyProperty.Register("Source", typeof(string), typeof(ImageLoading), new UIPropertyMetadata(new PropertyChangedCallback(OnSourceChanged)));
+
+        public static DependencyProperty SourceProperty = DependencyProperty.Register(
+                 "Source", typeof(string), typeof(ImageLoading));
 
         private static void OnSourceChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
 
         {
 
-
+             
             ImageLoading source = sender as ImageLoading;
-
-
             source.Source = (string)e.NewValue;
 
         }
@@ -174,23 +178,23 @@ namespace MediaManager.Controls
         private void BeginAnimation()
 
         {
-
             //this.Sablier.Start();
             this.ProgressChargement.Text = "0 %";
             this.ProgressChargement.Visibility = Visibility.Visible;
-
         }
 
- 
 
         private void StopAnimation()
 
         {
-
             //this.Sablier.Stop();
             this.ProgressChargement.Visibility = Visibility.Collapsed;
 
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+
 
     }
 
