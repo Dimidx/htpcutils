@@ -25,7 +25,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\MediasManager\Scraper\Movies\</OutputPath>
+    <OutputPath>..\..\..\MediasManager\Plugins\Scraper\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -52,7 +52,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MMLibrary\MMLibrary.csproj">
+    <ProjectReference Include="..\..\..\MMLibrary\MMLibrary.csproj">
       <Project>{40437BC5-5D5A-4473-87C0-AE9813AE153D}</Project>
       <Name>MMLibrary</Name>
     </ProjectReference>
