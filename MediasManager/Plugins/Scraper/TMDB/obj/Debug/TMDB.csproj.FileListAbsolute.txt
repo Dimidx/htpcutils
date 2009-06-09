@@ -1,0 +1,35 @@
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\TMDB\bin\Debug\TMDB.dll
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\TMDB\bin\Debug\TMDB.pdb
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\TMDB\bin\Debug\MMLibrary.dll
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\TMDB\bin\Debug\MMLibrary.pdb
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\TMDB\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\TMDB\obj\Debug\TMDB.dll
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\TMDB\obj\Debug\TMDB.pdb
+D:\Perso\Dev\HTPCUtils\MediasManager\Scraper\TMDB\bin\Debug\TMDB.dll
+D:\Perso\Dev\HTPCUtils\MediasManager\Scraper\TMDB\bin\Debug\TMDB.pdb
+D:\Perso\Dev\HTPCUtils\MediasManager\Scraper\TMDB\bin\Debug\MMLibrary.dll
+D:\Perso\Dev\HTPCUtils\MediasManager\Scraper\TMDB\bin\Debug\MMLibrary.pdb
+D:\Perso\Dev\HTPCUtils\MediasManager\Scraper\TMDB\obj\Debug\ResolveAssemblyReference.cache
+D:\Perso\Dev\HTPCUtils\MediasManager\Scraper\TMDB\obj\Debug\TMDB.dll
+D:\Perso\Dev\HTPCUtils\MediasManager\Scraper\TMDB\obj\Debug\TMDB.pdb
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\Scraper\TMDB\bin\Debug\TMDB.dll
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\Scraper\TMDB\bin\Debug\TMDB.pdb
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\Scraper\TMDB\bin\Debug\MMLibrary.dll
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\Scraper\TMDB\bin\Debug\MMLibrary.pdb
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\Scraper\TMDB\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\Scraper\TMDB\obj\Debug\TMDB.dll
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\Scraper\TMDB\obj\Debug\TMDB.pdb
+C:\Dev\HTPCUtils\MediasManager\Scraper\TMDB\bin\Debug\TMDB.dll
+C:\Dev\HTPCUtils\MediasManager\Scraper\TMDB\bin\Debug\TMDB.pdb
+C:\Dev\HTPCUtils\MediasManager\Scraper\TMDB\bin\Debug\MMLibrary.dll
+C:\Dev\HTPCUtils\MediasManager\Scraper\TMDB\bin\Debug\MMLibrary.pdb
+C:\Dev\HTPCUtils\MediasManager\Scraper\TMDB\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\HTPCUtils\MediasManager\Scraper\TMDB\obj\Debug\TMDB.dll
+C:\Dev\HTPCUtils\MediasManager\Scraper\TMDB\obj\Debug\TMDB.pdb
+C:\Dev\HTPCUtils\MediasManager\Plugins\Scraper\TMDB\bin\Debug\TMDB.dll
+C:\Dev\HTPCUtils\MediasManager\Plugins\Scraper\TMDB\bin\Debug\TMDB.pdb
+C:\Dev\HTPCUtils\MediasManager\Plugins\Scraper\TMDB\bin\Debug\MMLibrary.dll
+C:\Dev\HTPCUtils\MediasManager\Plugins\Scraper\TMDB\bin\Debug\MMLibrary.pdb
+C:\Dev\HTPCUtils\MediasManager\Plugins\Scraper\TMDB\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\HTPCUtils\MediasManager\Plugins\Scraper\TMDB\obj\Debug\TMDB.dll
+C:\Dev\HTPCUtils\MediasManager\Plugins\Scraper\TMDB\obj\Debug\TMDB.pdb
