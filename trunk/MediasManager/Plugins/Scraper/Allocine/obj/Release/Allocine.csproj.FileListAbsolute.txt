@@ -1,0 +1,34 @@
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\MediasManager\Scraper\Movies\Allocine.dll
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\MediasManager\Scraper\Movies\Allocine.pdb
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\MediasManager\Scraper\Movies\Doc.xml
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Release\Allocine.Properties.Resources.resources
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Release\Allocine.csproj.GenerateResource.Cache
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Release\Allocine.dll
+C:\Users\Julien\Documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Release\Allocine.pdb
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\Scraper\Movies\Allocine.dll
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\Scraper\Movies\Allocine.pdb
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\Scraper\Movies\Doc.xml
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Release\Allocine.Properties.Resources.resources
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Release\Allocine.csproj.GenerateResource.Cache
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Release\Allocine.dll
+C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Release\Allocine.pdb
+C:\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Release\ResolveAssemblyReference.cache
+C:\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Release\Allocine.Properties.Resources.resources
+C:\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Release\Allocine.csproj.GenerateResource.Cache
+C:\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Release\Allocine.dll
+C:\Dev\HTPCUtils\MediasManager\Scraper\Allocine\obj\Release\Allocine.pdb
+C:\Dev\HTPCUtils\MediasManager\MediasManager\Scraper\Movies\Allocine.dll
+C:\Dev\HTPCUtils\MediasManager\MediasManager\Scraper\Movies\Allocine.pdb
+C:\Dev\HTPCUtils\MediasManager\MediasManager\Scraper\Movies\Doc.xml
+C:\Dev\HTPCUtils\MediasManager\MediasManager\Plugins\Scraper\Allocine.dll
+C:\Dev\HTPCUtils\MediasManager\MediasManager\Plugins\Scraper\Allocine.pdb
+C:\Dev\HTPCUtils\MediasManager\Plugins\MediasManager\Plugins\Scraper\Allocine.dll
+C:\Dev\HTPCUtils\MediasManager\Plugins\MediasManager\Plugins\Scraper\Allocine.pdb
+C:\Dev\HTPCUtils\MediasManager\Plugins\MediasManager\Plugins\Scraper\Doc.xml
+C:\Dev\HTPCUtils\MediasManager\Plugins\Scraper\Allocine\obj\Release\ResolveAssemblyReference.cache
+C:\Dev\HTPCUtils\MediasManager\Plugins\Scraper\Allocine\obj\Release\Allocine.Properties.Resources.resources
+C:\Dev\HTPCUtils\MediasManager\Plugins\Scraper\Allocine\obj\Release\Allocine.csproj.GenerateResource.Cache
+C:\Dev\HTPCUtils\MediasManager\Plugins\Scraper\Allocine\obj\Release\Allocine.dll
+C:\Dev\HTPCUtils\MediasManager\Plugins\Scraper\Allocine\obj\Release\Allocine.pdb
