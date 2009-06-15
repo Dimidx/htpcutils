@@ -14,7 +14,7 @@ namespace MusicFanartDownloader
     {
         static void Main(string[] args)
         {
-            string _urlFanartMusic = "http://www.meediofr.org/~dmdocuments/artist_music/backdrops/";
+            string _urlFanartMusic = "http://www.meediofr.org/~dmdocuments/music/artist_backdrops/";
             string sPath = @args[0];
             List<string> ArtisteSansFanarts = new List<string>();
             int FanartsManquants = 0;

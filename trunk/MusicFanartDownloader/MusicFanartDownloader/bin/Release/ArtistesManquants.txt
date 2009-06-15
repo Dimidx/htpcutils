@@ -1,5 +1,3 @@
-Alain Bashung
-America
 Axelle Red
 Abd Al Malik
 Adrienne Pauly
@@ -7,7 +5,6 @@ Bad Religion
 Bananarama
 Barbara
 Barbra Streisand
-Billy crawford
 BO
 Boney M 2000
 Bratisla Boys
@@ -24,9 +21,7 @@ Compil
 Chocolate Weasel
 Corduroy
 Camille Bazbaz
-Charlotte Gainsbourg
 Corrine Bailey Rae
-Cat Stevens
 Charlie Winston
 Dany Brillant
 De Palmas
@@ -35,15 +30,12 @@ DC Talk
 Diana King
 Eddy Louiss
 Edith Piaf
-Era
-Eros Ramazzotti
 Eddie  Cochran
 Emilie Simon
 Emily Loizeau
 Fat Boy Slim
 Francoise Hardy
 Freeman
-Gotan Project
 Garou
 George Benson
 Gérald De Palmas
@@ -53,10 +45,8 @@ Hélène Ségara
 Hanson
 Henri Salvador
 Hugues Aufray
-Indochine
 Jean-Louis Murat
 Jeanne Cherhal
-Jennifer Lopez
 Julien Clerc
 Juliette
 Jacques Dutronc
@@ -66,12 +56,9 @@ Julio Iglesias
 Jacques Higelin
 Jeanne Balibar
 Jehro
-John Legend
 Kana
-Keane
 Kim Carnes
 Kyo
-K's Choice
 Lara Fabian
 Les Innocents
 Les Pires
@@ -86,8 +73,6 @@ Les Rita Mitsouko
 Manau
 Marc Lavoine
 Marcel et Son Orchestre
-Maroon 5
-Massive Attack
 Maxime Le Forestier
 Mickey 3D
 Motörhead
@@ -100,8 +85,6 @@ Michel Polnareff
 Michel Sardou
 Mattafix
 Mylène Farmer
-Madness
-Michael Bublé
 Monsieur Roux
 Nouvelle Vague
 Nilda Fernandez
@@ -112,15 +95,12 @@ Public Enemy
 Paolo Conte
 Patricia Kaas
 Patrick Sébastien
-Peter Gabriel
 Pow Wow
-Paul Anka
 Pauline Croze
 Ragassonic
 Raggasonic
 Red Hot Chilli Peppers
 Rickie Lee Jones
-Robbie Williams
 René Aubry
 Rachid Taha
 Sanseverino
@@ -136,19 +116,13 @@ Séries TV
 Sangria gratuite
 Ska-P
 Starmania
-St-Germain
 Sandrine Kiberlain
 Stray Cats
-Serge Gainsbourg
 Snoop Dogg
 Tarace Boulba
 Tarmac
-The Gipsy Kings
-The Pogues
 The Rasmus
 Téléphone
-The Cure
-Vanessa Carlton
 Vincent Delerm
 Véronique Sanson
 Various Artist

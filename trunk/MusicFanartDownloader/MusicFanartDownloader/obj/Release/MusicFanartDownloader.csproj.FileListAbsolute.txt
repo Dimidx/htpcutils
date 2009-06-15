@@ -3,3 +3,8 @@ C:\Users\Julien\Documents\Dev\htpcutils\MusicFanartDownloader\MusicFanartDownloa
 C:\Users\Julien\Documents\Dev\htpcutils\MusicFanartDownloader\MusicFanartDownloader\bin\Release\MusicFanartDownloader.pdb
 C:\Users\Julien\Documents\Dev\htpcutils\MusicFanartDownloader\MusicFanartDownloader\obj\Release\MusicFanartDownloader.exe
 C:\Users\Julien\Documents\Dev\htpcutils\MusicFanartDownloader\MusicFanartDownloader\obj\Release\MusicFanartDownloader.pdb
+C:\Dev\HTPCUtils\MusicFanartDownloader\MusicFanartDownloader\obj\Release\MusicFanartDownloader.exe
+C:\Dev\HTPCUtils\MusicFanartDownloader\MusicFanartDownloader\obj\Release\MusicFanartDownloader.pdb
+C:\Dev\HTPCUtils\MusicFanartDownloader\MusicFanartDownloader\bin\Release\MusicFanartDownloader.exe
+C:\Dev\HTPCUtils\MusicFanartDownloader\MusicFanartDownloader\bin\Release\MusicFanartDownloader.pdb
+C:\Dev\HTPCUtils\MusicFanartDownloader\MusicFanartDownloader\obj\Release\ResolveAssemblyReference.cache
