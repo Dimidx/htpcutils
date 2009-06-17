@@ -47,7 +47,7 @@
 						<Border.Background>
 							<VisualBrush>
 								<VisualBrush.Visual>
-                                        <Controls:ImageLoading x:Name="Affiche" Source="{Binding Path=Cover.URLImage}" />
+                                        <Image x:Name="Affiche" Source="{Binding Path=Cover.URLImage,Converter={StaticResource UriToImageConverter}}" />
      								</VisualBrush.Visual>
          					</VisualBrush>
 						</Border.Background>
@@ -67,7 +67,7 @@
 						<Border.Background>
 							<VisualBrush>
 								<VisualBrush.Visual>
-                                        <Controls:ImageLoading x:Name="Fanart" Source="{Binding Path=Fanart.URLImage}" />
+                                        <Image x:Name="Fanart" Source="{Binding Path=Fanart.URLImage,Converter={StaticResource UriToImageConverter}}" />
                                     </VisualBrush.Visual>
          					</VisualBrush>
 						</Border.Background>

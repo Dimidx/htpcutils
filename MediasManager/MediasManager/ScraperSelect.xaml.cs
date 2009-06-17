@@ -167,7 +167,7 @@ namespace MediaManager
             if (lstAffiches.SelectedItem != null)
             {
                 imageafficheselect.Source = ((Thumb)lstAffiches.SelectedItem).URLImage;
-                DetailsFilm.Affiche.Source = ((Thumb)lstAffiches.SelectedItem).URLImage;
+                //DetailsFilm.Affiche.Source = ((Thumb)lstAffiches.SelectedItem).URLImage;
             }
         }
 
@@ -176,7 +176,7 @@ namespace MediaManager
             if (lstFanarts.SelectedItem != null)
             {
                 imagefanartselect.Source = ((Thumb)lstFanarts.SelectedItem).URLImage;
-                DetailsFilm.Fanart.Source = ((Thumb)lstFanarts.SelectedItem).URLImage;
+                //DetailsFilm.Fanart.Source = ((Thumb)lstFanarts.SelectedItem).URLImage;
             }
         }
     }

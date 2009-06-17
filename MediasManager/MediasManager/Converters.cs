@@ -34,12 +34,17 @@ namespace Converters
             {
                 BitmapImage bi = new BitmapImage();
                 bi.BeginInit();
-                //bi.DecodePixelWidth = 200;
+                bi.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
+                bi.DecodePixelWidth = 300;
                 //bi.DecodePixelHeight = 60;  
-                bi.CacheOption = BitmapCacheOption.OnDemand;
+                bi.CacheOption = BitmapCacheOption.OnLoad;
                 bi.UriSource = (Uri)value;
+                
                 bi.EndInit();
                 return bi;
+
+   
+
             }
 
             return null;

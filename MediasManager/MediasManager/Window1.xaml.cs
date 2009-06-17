@@ -42,7 +42,7 @@ namespace MediaManager
             Settings.XML = new Configuration.XmlSettings();
             if (!Settings.Load())
             {
-                MessageBox.Show("No valid settings.xml found. Loading defaults");
+                //MessageBox.Show("No valid settings.xml found. Loading defaults");
                 Settings.Save();
                 //conf.ShowDialog();
             }
