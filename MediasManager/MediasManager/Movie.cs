@@ -57,7 +57,7 @@ namespace MediaManager
             _MovieName = cleanMovieFilename(movie.Name.Replace(movie.Extension, ""));
             this.Infos.Titre = _MovieName;
             this.Infos.TitreOriginal = _MovieName;
-            updateItem();
+            //updateItem();
         }
 
 

@@ -77,16 +77,16 @@ namespace MediaManager.Plugins
                 MonFilm.Synopsis = Nfo.Plot;
 
                 #region Réalisateurs
-                foreach (string dir in Nfo.Director.Split('/'))
+                foreach (string dir in Nfo.Director.Split(','))
                 {
-                    MonFilm.Realisateurs.Add(new Personne(dir, "Réalisateur"));
+                    MonFilm.Realisateurs.Add(new Personne(dir.Trim(), "Réalisateur"));
                 }
                 #endregion
 
                 #region Acteurs
                 foreach (Actor act in Nfo.Actor)
                 {
-                    MonFilm.Acteurs.Add(new Personne(act.Name, act.Role));
+                    MonFilm.Acteurs.Add(new Personne(act.Name.Trim(), act.Role));
                 }
                 #endregion
 
@@ -138,8 +138,71 @@ namespace MediaManager.Plugins
         }
 
 
-        public bool Export(Film _Film)
+        public bool Export(Film _Film, FileInfo _FileInfo)
         {
+            NfoMovie Nfo = new NfoMovie();
+            Nfo.Title = _Film.Titre;
+            Nfo.Title = _Film.TitreOriginal;
+            Nfo.Year = _Film.Annee;
+            Nfo.Mpaa = _Film.Avis;
+            Nfo.Outline = _Film.Critique;
+            #region Date de sortie
+            try
+            {
+                Nfo.Premiered = _Film.DateSortie.ToString("DD/MM/YYYY");
+            }
+            catch { }
+            #endregion
+            Nfo.Runtime = _Film.DureeChaine;
+            #region Genres
+            foreach (string item in _Film.Genres)
+            {
+                Nfo.Genre += item.Trim() + "/";
+            }
+            if (Nfo.Genre.Length > 0) Nfo.Genre = Nfo.Genre.Substring(0, Nfo.Genre.Length - 1);
+            #endregion
+            Nfo.Id = _Film.ID;
+            Nfo.Rating = _Film.NotePresse.ToString();
+            Nfo.Plot = _Film.Synopsis;
+            #region Réalisateurs
+            foreach (Personne real in _Film.Realisateurs)
+            {
+                Nfo.Director += real.Nom + ", ";
+            }
+            if (Nfo.Director.Length > 0) Nfo.Director = Nfo.Director.Substring(0, Nfo.Director.Length - 2);
+            #endregion
+            #region Acteurs
+            foreach (Personne act in _Film.Acteurs)
+            {
+                Actor _act = new Actor();
+                _act.Name = act.Nom;
+                _act.Role = act.Role;
+                _act.Thumb = act.Photo.URLImage;
+                Nfo.Actor.Add(_act);
+            }
+            #endregion
+
+            #region Affiche
+            try
+            {
+                string _PostersPath = _FileInfo.FullName.Replace(_FileInfo.Extension, ".tbn");
+                if (File.Exists(_PostersPath)) File.Delete(_PostersPath);
+                File.Copy(_Film.Cover.URLImage, _PostersPath);
+            }
+            catch {}
+            #endregion
+
+            #region Fanart
+            try
+            {
+                string _FanartPath = _FileInfo.FullName.Replace(_FileInfo.Extension, "-fanart.jpg");
+                if (File.Exists(_FanartPath)) File.Delete(_FanartPath);
+                File.Copy(_Film.Fanart.URLImage, _FanartPath);
+            }
+            catch { }
+            #endregion
+
+            NfoFile.saveNfoMovie(Nfo, _FileInfo.FullName.Replace(_FileInfo.Extension, ".nfo"));
             return true;
         }
 

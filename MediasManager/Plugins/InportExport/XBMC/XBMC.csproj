@@ -50,11 +50,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FilmsDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FilmsDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="NFO\NfoFile.cs" />
     <Compile Include="NFO\NfoMovie.cs" />
     <Compile Include="NFO\NfoTV.cs" />
@@ -73,18 +68,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="FilmsDataSet.xsc">
-      <DependentUpon>FilmsDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="FilmsDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>FilmsDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="FilmsDataSet.xss">
-      <DependentUpon>FilmsDataSet.xsd</DependentUpon>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

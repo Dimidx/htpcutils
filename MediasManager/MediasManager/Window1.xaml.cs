@@ -17,6 +17,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using MediaManager;
 using MediaManager.Library;
+using MediaManager.Plugins;
 using System.IO;
 
 namespace MediaManager
@@ -55,7 +56,7 @@ namespace MediaManager
             lcv.SortDescriptions.Add(new System.ComponentModel.SortDescription("MovieName", System.ComponentModel.ListSortDirection.Ascending));
             listBox_Films.ItemsSource = lcv;
             this.DataContext = lcv;
-            
+            //lcv.Filter = film => ((Film)film).Titre.ToLower().Contains(this.txt_Recherche);
             
             ScanDir();
 
@@ -122,7 +123,7 @@ namespace MediaManager
             if (listBox_Films.SelectedItem != null)
             {
                 Movie _mov = (Movie)listBox_Films.SelectedItem;
-                //_mov.updateItem();
+                _mov.updateItem();
                 MonFilm = new Film();
                 MonFilm = _mov.Infos;
                 FilmDetails.DataContext = MonFilm;
@@ -171,6 +172,34 @@ namespace MediaManager
             ScraperSelect _scraper = new ScraperSelect(_Film);
             _scraper.ShowDialog();
 
+        }
+
+        private void txt_Recherche_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+            ListCollectionView lcv = new ListCollectionView(MovieManager.Movies);
+            lcv.SortDescriptions.Add(new System.ComponentModel.SortDescription("MovieName", System.ComponentModel.ListSortDirection.Ascending));
+            lcv.Filter = film => ((Movie)film).MovieName.ToLower().Contains(this.txt_Recherche.Text);
+
+            listBox_Films.ItemsSource = lcv;
+            this.DataContext = lcv;
+  
+
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            Movie _movie = (Movie)listBox_Films.SelectedItem;
+
+            foreach (IMMPluginImportExport plug in Settings.PluginsImportExport)
+            {
+                try
+                {
+                    plug.Export(_movie.Infos, _movie.fileInfo);
+                }
+                catch { }
+
+            }
         }
 
     }

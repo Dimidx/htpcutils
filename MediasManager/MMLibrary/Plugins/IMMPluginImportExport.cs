@@ -11,6 +11,6 @@ namespace MediaManager.Plugins
     {
         Film Import(FileInfo _FileInfo);
 
-        bool Export(Film _Film);
+        bool Export(Film _Film, FileInfo _FileInfo);
     }
 }
