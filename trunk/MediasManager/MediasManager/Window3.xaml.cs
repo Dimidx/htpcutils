@@ -24,7 +24,7 @@ namespace MediaManager
             InitializeComponent();
             //Database db = new Database();
 
-            textBox1.Text = Database.GetNumberOfMovie().ToString();
+
 
         }
     }

@@ -54,18 +54,23 @@ namespace MediaManager.Library
 
         public Personne()
         {
-        
+            m_Nom = "";
+            m_Role = "";
+            m_Photo = new Thumb();
         }
 
         public Personne(string _Name)
         {
             m_Nom = _Name;
+            m_Role = "";
+            m_Photo = new Thumb();
         }
 
         public Personne(string _Name, string _Role)
         {
             m_Nom = _Name;
             m_Role = _Role;
+            m_Photo = new Thumb();
         }
 
 
