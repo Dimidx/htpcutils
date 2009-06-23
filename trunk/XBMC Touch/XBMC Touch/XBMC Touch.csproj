@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EECAA899-957B-404A-B2B7-0FB772504A3E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XBMC_Touch</RootNamespace>
+    <AssemblyName>XBMC Touch</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationFramework.Luna" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Resources\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UCControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UCNowPlaying.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Window1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UCControl.xaml.cs">
+      <DependentUpon>UCControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UCNowPlaying.xaml.cs">
+      <DependentUpon>UCNowPlaying.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="XBMC.Library\XBMC.Communicator.cs" />
+    <Compile Include="XBMC.Library\XBMC.Controls.cs" />
+    <Compile Include="XBMC.Library\XBMC.Database.cs" />
+    <Compile Include="XBMC.Library\XBMC.Media.cs" />
+    <Compile Include="XBMC.Library\XBMC.NowPlaying.cs" />
+    <Compile Include="XBMC.Library\XBMC.Playlist.cs" />
+    <Compile Include="XBMC.Library\XBMC.Status.cs" />
+    <Compile Include="XBMC.Library\XBMC.Video.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\video-32x32.png" />
+    <None Include="SubsetFont.targets">
+      <Visible>False</Visible>
+    </None>
+    <None Include="SubsetFontTask.dll">
+      <Visible>False</Visible>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BlendEmbeddedFont Include="Fonts\aeon_player_caps.ttf">
+      <IsSystemFont>True</IsSystemFont>
+    </BlendEmbeddedFont>
+    <BlendEmbeddedFont Include="Fonts\aeon_title_cy.ttf">
+      <IsSystemFont>True</IsSystemFont>
+    </BlendEmbeddedFont>
+    <BlendEmbeddedFont Include="Fonts\aeon_title_ce.ttf">
+      <IsSystemFont>True</IsSystemFont>
+    </BlendEmbeddedFont>
+    <BlendEmbeddedFont Include="Fonts\aeon_info.ttf">
+      <IsSystemFont>True</IsSystemFont>
+    </BlendEmbeddedFont>
+    <BlendEmbeddedFont Include="Fonts\aeon_main.ttf">
+      <IsSystemFont>True</IsSystemFont>
+    </BlendEmbeddedFont>
+    <BlendEmbeddedFont Include="Fonts\aeon_list_cy.ttf">
+      <IsSystemFont>True</IsSystemFont>
+    </BlendEmbeddedFont>
+    <BlendEmbeddedFont Include="Fonts\aeon_list.ttf">
+      <IsSystemFont>True</IsSystemFont>
+    </BlendEmbeddedFont>
+    <BlendEmbeddedFont Include="Fonts\aeon_main_cy.ttf">
+      <IsSystemFont>True</IsSystemFont>
+    </BlendEmbeddedFont>
+    <BlendEmbeddedFont Include="Fonts\aeon_main_ce.ttf">
+      <IsSystemFont>True</IsSystemFont>
+    </BlendEmbeddedFont>
+    <Resource Include="Resources\default.png" />
+    <Resource Include="Resources\list_movieicon_glass.png" />
+    <Resource Include="Resources\osd_button_advance.png" />
+    <Resource Include="Resources\osd_button_dvd.png" />
+    <Resource Include="Resources\osd_button_ff.png" />
+    <Resource Include="Resources\osd_button_pause.png" />
+    <Resource Include="Resources\osd_button_paused.png" />
+    <Resource Include="Resources\osd_button_play.png" />
+    <Resource Include="Resources\osd_button_playlist.png" />
+    <Resource Include="Resources\osd_button_reverse.png" />
+    <Resource Include="Resources\osd_button_rew.png" />
+    <Resource Include="Resources\osd_button_settings.png" />
+    <Resource Include="Resources\osd_button_skipbwd.png" />
+    <Resource Include="Resources\osd_button_skipfwd.png" />
+    <Resource Include="Resources\osd_button_video.png" />
+    <Resource Include="Resources\osd_button_vis.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Import Project="SubsetFont.targets" />
+</Project>
