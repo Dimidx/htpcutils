@@ -1,0 +1,75 @@
+﻿<Application
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Luna" x:Class="XBMC_Touch.App"
+    StartupUri="Window1.xaml">
+    <Application.Resources>
+         
+    	<ResourceDictionary>
+    		<ResourceDictionary.MergedDictionaries>
+    			<ResourceDictionary Source="Resources\Theme.xaml"/>
+    		</ResourceDictionary.MergedDictionaries>
+    		<LinearGradientBrush x:Key="ProgressBarFill" EndPoint="0,1" StartPoint="0,0">
+    			<GradientStop Color="#ABEDAC" Offset="0"/>
+    			<GradientStop Color="#2ED331" Offset="0.5"/>
+    			<GradientStop Color="#8EE790" Offset="1"/>
+    		</LinearGradientBrush>
+    		<Style x:Key="ProgressBarStyle1" TargetType="{x:Type ProgressBar}">
+    			<Setter Property="BorderBrush" Value="{DynamicResource NormalBorderBrush}"/>
+    			<Setter Property="BorderThickness" Value="1"/>
+    			<Setter Property="Template">
+    				<Setter.Value>
+    					<ControlTemplate TargetType="{x:Type ProgressBar}">
+    						
+    								<Border BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1">
+    									<DockPanel x:Name="PART_Track" Margin="1,1,1,1" LastChildFill="false" Background="{x:Null}">
+    										<Rectangle x:Name="PART_Indicator" Fill="#FFBCB4B4"/>
+    									</DockPanel>
+    								</Border>
+    							
+    					</ControlTemplate>
+    				</Setter.Value>
+    			</Setter>
+    			<Setter Property="Foreground" Value="{x:Null}"/>
+    			<Style.Triggers>
+    				<Trigger Property="Orientation" Value="Vertical">
+    					<Setter Property="Template">
+    						<Setter.Value>
+    							<ControlTemplate TargetType="{x:Type ProgressBar}">
+    								<Border SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+    									<Border BorderBrush="#BEBEBE" BorderThickness="1,1,1,0" CornerRadius="2">
+    										<Border BorderBrush="#EFEFEF" BorderThickness="1" CornerRadius="1">
+    											<DockPanel x:Name="PART_Track" Margin="0,0,0,1" LastChildFill="false">
+    												<Decorator x:Name="PART_Indicator" DockPanel.Dock="Bottom">
+    													<Rectangle>
+    														<Rectangle.LayoutTransform>
+    															<RotateTransform Angle="-90"/>
+    														</Rectangle.LayoutTransform>
+    														<Rectangle.Fill>
+    															<MultiBinding>
+    																<MultiBinding.Converter>
+    																	<Microsoft_Windows_Themes:ProgressBarBrushConverter/>
+    																</MultiBinding.Converter>
+    																<Binding Path="Foreground" RelativeSource="{RelativeSource TemplatedParent}"/>
+    																<Binding Path="IsIndeterminate" RelativeSource="{RelativeSource TemplatedParent}"/>
+    																<Binding Path="ActualHeight" ElementName="PART_Indicator"/>
+    																<Binding Path="ActualWidth" ElementName="PART_Indicator"/>
+    																<Binding Path="ActualHeight" ElementName="PART_Track"/>
+    															</MultiBinding>
+    														</Rectangle.Fill>
+    													</Rectangle>
+    												</Decorator>
+    											</DockPanel>
+    										</Border>
+    									</Border>
+    								</Border>
+    							</ControlTemplate>
+    						</Setter.Value>
+    					</Setter>
+    				</Trigger>
+    			</Style.Triggers>
+    		</Style>
+    	</ResourceDictionary>
+         
+    </Application.Resources>
+</Application>
