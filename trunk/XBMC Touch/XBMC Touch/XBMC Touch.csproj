@@ -173,6 +173,23 @@
     <Resource Include="Resources\osd_button_video.png" />
     <Resource Include="Resources\osd_button_vis.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\volume_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\osd_button_audio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Mute.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\osd_button_volume_down.png" />
+    <Resource Include="Resources\osd_button_volume_mute.png" />
+    <Resource Include="Resources\osd_button_volume_up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\osd_button_stop.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

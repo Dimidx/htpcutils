@@ -98,16 +98,21 @@ namespace XBMC
         public void ToggleMute()
         {
             parent.Request("ExecBuiltIn", "Mute");
+            parent.Status.GetVolume();
         }
 
         public void SetVolume(int percentage)
         {
+
+ 
             parent.Request("ExecBuiltIn", "SetVolume(" + Convert.ToString(percentage) + ")");
+            parent.Status.GetVolume();
         }
 
         public void SeekPercentage(int percentage)
         {
             parent.Request("SeekPercentage", Convert.ToString(percentage));
+            parent.Status.GetProgress();
         }
 
         public void Reboot()
