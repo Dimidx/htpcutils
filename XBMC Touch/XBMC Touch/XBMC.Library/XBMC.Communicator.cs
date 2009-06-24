@@ -34,7 +34,7 @@ namespace XBMC
         public XBMC_Playlist Playlist = null;
         public XBMC_Controls Controls = null;
         //public XBMC_NowPlaying NowPlaying = null;
-        public XBMC_Status Status = null;
+        private XBMC_Status _Status = null;
         public XBMC_Media Media = null;
         public XBMC_Video Video = null;
 
@@ -50,12 +50,21 @@ namespace XBMC
 
 
         /// <summary>
-        /// NowPlauing
+        /// NowPlaying
         /// </summary>
         public XBMC_NowPlaying NowPlaying
         {
             get { return _NowPlaying; }
             set { _NowPlaying = value; OnPropertyChanged("NowPlaying"); }
+        }
+
+        /// <summary>
+        /// Status
+        /// </summary>
+        public XBMC_Status Status
+        {
+            get { return _Status; }
+            set { _Status = value; OnPropertyChanged("Status"); }
         }
 
         private string xbmcPassword = null;

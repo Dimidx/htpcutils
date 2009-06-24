@@ -53,7 +53,7 @@ namespace XBMC
         public BitmapImage Thumb
         {
             get { return _Thumb; }
-            set { _Thumb = value; OnPropertyChanged("Thumb"); }
+            set { _Thumb = value; _Thumb.Freeze(); OnPropertyChanged("Thumb"); }
         }
 
         /// <summary>
@@ -135,6 +135,24 @@ namespace XBMC
                 //_Thumb = GetCoverArt();
                 Thumb = GetCoverArt();
             }
+                else
+            {
+                Titre = "";
+                Album = "";
+                Artiste = "";
+                Time = "";
+                Duration = "";
+                Status = "";
+                Percentage = 0;
+
+                //_Thumb = GetCoverArt();
+                Thumb = new BitmapImage();
+                Thumb.Freeze();
+                OnPropertyChanged("Thumb");
+
+                }
+
+
         }
 
 

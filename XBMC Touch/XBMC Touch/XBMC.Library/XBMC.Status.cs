@@ -22,11 +22,13 @@ using System.Collections.Generic;
 using System.Text;
 //using System.Threading;
 //using System.Windows.Forms;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Timers;
 
 namespace XBMC
 {
-    public class XBMC_Status
+    public class XBMC_Status : INotifyPropertyChanged
     {
         XBMC_Communicator parent = null;
 
@@ -36,14 +38,32 @@ namespace XBMC
         private bool isNotPlaying = true;
         private bool isPlayingLastFm = false;
         private bool isPaused = false;
-        private bool isMuted = false;
-        private int volume = 0;
-        private int progress = 1;
+        private bool _IsMuted = false;
+        private int _volume = 0;
+        private int _progress = 1;
         private string mediaNowPlaying = null;
         private bool newMediaPlaying = true;
         private Timer heartBeatTimer = null;
         private int connectedInterval = 5000;
         private int disconnectedInterval = 10000;
+
+        /// <summary>
+        /// Volume %
+        /// </summary>
+        public int Volume
+        {
+            get { return _volume; }
+            set { _volume = value; OnPropertyChanged("Volume"); }
+        }
+
+        /// <summary>
+        /// Progress %
+        /// </summary>
+        public int Progress
+        {
+            get { return _progress; }
+            set { _progress = value; OnPropertyChanged("Progress"); }
+        }
 
         public XBMC_Status(XBMC_Communicator p)
         {
@@ -51,6 +71,15 @@ namespace XBMC
             heartBeatTimer = new Timer();
             heartBeatTimer.Interval = connectedInterval;
             heartBeatTimer.Elapsed += new ElapsedEventHandler(heartBeatTimer_Elapsed);
+        }
+
+        /// <summary>
+        /// Mute
+        /// </summary>
+        public bool IsMuted
+        {
+            get { return _IsMuted; }
+            set { _IsMuted = value; OnPropertyChanged("IsMuted"); }
         }
 
         void heartBeatTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -85,20 +114,9 @@ namespace XBMC
                     isPlayingLastFm = (mediaNowPlaying.Substring(0, 6) == "lastfm") ? true : false;
                 }
 
-                string[] aVolume = parent.Request("GetVolume");
-                string[] aProgress = parent.Request("GetPercentage");
+                GetVolume();
+                GetProgress();
 
-                if (aVolume == null || aVolume[0] == "Error")
-                    volume = 0;
-                else
-                    volume = Convert.ToInt32(aVolume[0]);
-
-                if (aProgress == null || aProgress[0] == "Error" || aProgress[0] == "0" || Convert.ToInt32(aProgress[0]) > 99)
-                    progress = 1;
-                else
-                    progress = Convert.ToInt32(aProgress[0]);
-
-                isMuted = (volume == 0) ? true : false;
             }
         }
 
@@ -160,19 +178,31 @@ namespace XBMC
             return isPaused;
         }
 
-        public bool IsMuted()
-        {
-            return isMuted;
-        }
-
         public int GetVolume()
         {
-            return volume;
+            string[] aVolume = parent.Request("GetVolume");
+
+            if (aVolume == null || aVolume[0] == "Error")
+            {
+                Volume = 0;
+            }
+            else
+            {
+                Volume = Convert.ToInt32(aVolume[0]);
+            }
+            IsMuted = (Volume == 0) ? true : false;
+            return Volume;
         }
 
         public int GetProgress()
         {
-            return progress;
+            string[] aProgress = parent.Request("GetPercentage");
+            if (aProgress == null || aProgress[0] == "Error" || aProgress[0] == "0" || Convert.ToInt32(aProgress[0]) > 99)
+                Progress = 1;
+            else
+                Progress = Convert.ToInt32(aProgress[0]);
+
+            return Progress;
         }
 
         public bool LastFmEnabled()
@@ -194,5 +224,21 @@ namespace XBMC
             else
                 return (aRepeatEnabled[0] == "False") ? false : true;
         }
+
+
+            #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion
+
     }
 }

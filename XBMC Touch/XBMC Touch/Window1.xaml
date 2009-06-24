@@ -4,25 +4,83 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" xmlns:local="clr-namespace:XBMC_Touch" x:Class="XBMC_Touch.Window1"
     Title="Window1" Height="480
 	" Width="640" Background="{DynamicResource BackGround}">
-	<DockPanel LastChildFill="False">
-	<StackPanel VerticalAlignment="Bottom" Margin="0,0,0,0" HorizontalAlignment="Stretch" Background="#64000000" DockPanel.Dock="Bottom">
-		<DockPanel Height="30" LastChildFill="True" Margin="10,10,10,10">
-			<ProgressBar Value="{Binding Path=NowPlaying.Percentage}" Width="Auto" Height="16" Style="{DynamicResource ProgressBarStyle1}" VerticalAlignment="Top"/>
-		</DockPanel>
-		<UniformGrid Columns="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10,0,10,10">
-			<Button x:Name="btn_Precedent" VerticalAlignment="Center" Width="50" Height="50" Click="btn_Precedent_Click" Style="{DynamicResource ButtonStyle1}">
-				<Image Source="Resources\osd_button_skipbwd.png"/>
-			</Button>
-			
-			<Button x:Name="btn_Play" Width="50" Height="50" Click="btn_Play_Click" Style="{DynamicResource ButtonStyle1}">
-				<Image Source="Resources\osd_button_play.png"/>
-			</Button>
-			<Button x:Name="btn_Next" VerticalAlignment="Center" Width="50" Height="50" Click="btn_Next_Click" Style="{DynamicResource ButtonStyle1}">
-				<Image Source="Resources\osd_button_skipfwd.png"/>
-			</Button>
-		</UniformGrid>
-	</StackPanel>
-	<local:UCNowPlaying Margin="10,10,10,10" DockPanel.Dock="Bottom"/>
-	</DockPanel>
+	<Window.Resources>
+		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+		<Storyboard x:Key="VolumeShow">
+			<ThicknessAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="GridVolume" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+				<SplineThicknessKeyFrame KeyTime="00:00:00" Value="10,10,10,10"/>
+				<SplineThicknessKeyFrame KeyTime="00:00:04.8000000" Value="10,10,10,10"/>
+				<SplineThicknessKeyFrame KeyTime="00:00:05" Value="10,-80,10,10"/>
+			</ThicknessAnimationUsingKeyFrames>
+		</Storyboard>
+	</Window.Resources>
+	<Window.Triggers>
+		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
+			<BeginStoryboard Storyboard="{StaticResource VolumeShow}"/>
+		</EventTrigger>
+		<EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btn_VolUp">
+			<BeginStoryboard Storyboard="{StaticResource VolumeShow}"/>
+		</EventTrigger>
+		<EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btn_VolDown">
+			<BeginStoryboard Storyboard="{StaticResource VolumeShow}"/>
+		</EventTrigger>
+	</Window.Triggers>
+    <Grid>
+	    <Image Source="Resources/Mute.png"  Margin="5,5,5,5" Width="100" Height="100" HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="{Binding Path=Status.IsMuted, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default}"/>
+
+        <Grid Height="50" Name="GridVolume" Width="200" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Top" Background="#7F000000">
+            <DockPanel LastChildFill="True">
+                <Image Source="Resources/volume_icon.png" Margin="5,5,5,5"/>
+                <ProgressBar Value="{Binding Path=Status.Volume}" Margin="5,5,5,5" Style="{DynamicResource ProgressBarStyle1}" />
+            </DockPanel>
+        </Grid>
+        <DockPanel LastChildFill="False">
+        <StackPanel VerticalAlignment="Bottom" Margin="0,0,0,0" HorizontalAlignment="Stretch" Background="#64000000" DockPanel.Dock="Bottom">
+            <DockPanel LastChildFill="True" Margin="10,10,10,10">
+                <ProgressBar Value="{Binding Path=NowPlaying.Percentage}" Width="Auto" Height="16" Style="{DynamicResource ProgressBarStyle1}" VerticalAlignment="Top" DockPanel.Dock="Top"/>
+            	<DockPanel Margin="0,3,0,0">
+					<TextBlock x:Name="txt_Time" Text="{Binding Path=NowPlaying.Time}"  FontFamily="Aeon Player CE" FontSize="12" FontWeight="Bold" ClipToBounds="False" SnapsToDevicePixels="False" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="#FFFFFFFF" />
+					<TextBlock x:Name="txt_Duration" Text="{Binding Path=NowPlaying.Duration}"   FontFamily="Aeon Player CE" FontSize="12" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="#FFFFFFFF"  />
+				</DockPanel>
+			</DockPanel>
+            <DockPanel >
+                <UniformGrid Columns="6" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10,0,10,10">
+                    <Button x:Name="btn_Recule" VerticalAlignment="Center" Width="50" Height="50" Click="btn_Recule_Click"  Style="{DynamicResource ButtonStyle1}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                		<Image Source="Resources\osd_button_rew.png"/>
+                	</Button>
+                    <Button x:Name="btn_Precedent" VerticalAlignment="Center" Width="50" Height="50" Click="btn_Precedent_Click" Style="{DynamicResource ButtonStyle1}">
+                        <Image Source="Resources\osd_button_skipbwd.png"/>
+                    </Button>
+
+                    <Button x:Name="btn_Play" Width="50" Height="50" Click="btn_Play_Click" Style="{DynamicResource ButtonStyle1}">
+                        <Image Source="Resources\osd_button_play.png"/>
+                    </Button>
+                    <Button x:Name="btn_Stop" Width="50" Height="50" Click="btn_Stop_Click"  Style="{DynamicResource ButtonStyle1}">
+                    	<Image Source="Resources\osd_button_stop.png"/>
+                    </Button>
+                    <Button x:Name="btn_Next" VerticalAlignment="Center" Width="50" Height="50" Click="btn_Next_Click" Style="{DynamicResource ButtonStyle1}">
+                        <Image Source="Resources\osd_button_skipfwd.png"/>
+                    </Button>
+                	<Button x:Name="btn_Avance" VerticalAlignment="Center" Width="50" Height="50" Click="btn_Avance_Click"  Style="{DynamicResource ButtonStyle1}">
+                		<Image Source="Resources\osd_button_ff.png"/>
+                	</Button>
+                </UniformGrid>
+                <UniformGrid Margin="10,10,10,10" Columns="3" HorizontalAlignment="Right">
+                    <Button x:Name="btn_VolDown" VerticalAlignment="Center" Width="50" Height="50" Click="btn_VolDown_Click" Style="{DynamicResource ButtonStyle1}">
+                        <Image Source="Resources\osd_button_volume_down.png"/>
+                    </Button>
+                        <Button x:Name="btn_VolMute" VerticalAlignment="Center" Width="50" Height="50" Click="btn_VolMute_Click" Style="{DynamicResource ButtonStyle1}">
+                            <Image Source="Resources\osd_button_volume_mute.png"/>
+                        </Button>
+                        <Button x:Name="btn_VolUp" VerticalAlignment="Center" Width="50" Height="50" Click="btn_VolUp_Click" Style="{DynamicResource ButtonStyle1}" ClickMode="Press">
+                            <Image Source="Resources\osd_button_volume_up.png" />
+                        </Button>
+                    </UniformGrid>
+            </DockPanel>
+        </StackPanel>
+        <local:UCNowPlaying Margin="10,10,10,10" DockPanel.Dock="Bottom"/>
+
+        </DockPanel>
+</Grid>
 
 </Window>

@@ -28,7 +28,7 @@ namespace XBMC_Touch
 
             //Language = new XBMCLanguage();
             //XBMC = new XBMC_Communicator();
-            XBMC.SetIp("127.0.0.1:8080");
+            XBMC.SetIp("salon:8080");
             XBMC.SetConnectionTimeout(1000);
             XBMC.SetCredentials("xbmc", "");
             this.DataContext = XBMC;
@@ -64,5 +64,41 @@ namespace XBMC_Touch
         {
             XBMC.Controls.Next();
         }
+
+        private void btn_VolMute_Click(object sender, RoutedEventArgs e)
+        {
+            XBMC.Controls.ToggleMute();
+
+        }
+
+        private void btn_VolUp_Click(object sender, RoutedEventArgs e)
+        {
+            if (XBMC.Status.IsMuted) XBMC.Controls.ToggleMute();
+            XBMC.Controls.SetVolume(XBMC.Status.Volume + 1);
+        }
+
+        private void btn_VolDown_Click(object sender, RoutedEventArgs e)
+        {
+            if (XBMC.Status.IsMuted) XBMC.Controls.ToggleMute();
+            XBMC.Controls.SetVolume(XBMC.Status.Volume - 1);
+
+        }
+
+        private void btn_Recule_Click(object sender, RoutedEventArgs e)
+        {
+            XBMC.Controls.SeekPercentage(XBMC.Status.Progress - 1);
+        }
+
+        private void btn_Avance_Click(object sender, RoutedEventArgs e)
+        {
+            XBMC.Controls.SeekPercentage(XBMC.Status.Progress + 1);
+        }
+
+        private void btn_Stop_Click(object sender, RoutedEventArgs e)
+        {
+            XBMC.Controls.Stop();
+        }
+
+
     }
 }
