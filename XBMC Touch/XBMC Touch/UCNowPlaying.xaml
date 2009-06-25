@@ -31,14 +31,14 @@
 				</Border>
 			</Grid>
 			<StackPanel VerticalAlignment="Top">
-				<TextBlock x:Name="txt_Artiste" Text="{Binding Path=NowPlaying.Artiste}" VerticalAlignment="Top" HorizontalAlignment="Left" FontFamily="./Fonts/#Aeon Main CE" d:IsStaticText="True" FontSize="24" FontWeight="Bold" />
+				<TextBlock x:Name="txt_Artiste" Text="{Binding Path=NowPlaying.Artist}" VerticalAlignment="Top" HorizontalAlignment="Left" FontFamily="./Fonts/#Aeon Main CE" d:IsStaticText="True" FontSize="24" FontWeight="Bold" />
 				<TextBlock x:Name="txt_Album" Text="{Binding Path=NowPlaying.Album}" VerticalAlignment="Top" HorizontalAlignment="Left" FontFamily="./Fonts/#Aeon Main CE" FontSize="16" FontStyle="Italic" d:IsStaticText="True" />
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
 					<TextBlock x:Name="txt_Time" Text="{Binding Path=NowPlaying.Time}" VerticalAlignment="Top" HorizontalAlignment="Left" FontFamily="Aeon Player CE" FontSize="72" FontWeight="Bold" ClipToBounds="False" SnapsToDevicePixels="False" />
 					<TextBlock x:Name="txt_Duration" Text="{Binding Path=NowPlaying.Duration}" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Aeon Player CE" FontSize="30" FontWeight="Bold" FontStyle="Italic" Grid.IsSharedSizeScope="False" ScrollViewer.CanContentScroll="False" OverridesDefaultStyle="False" AllowDrop="True" />
 				</StackPanel>
-				<TextBlock x:Name="txt_Status" Text="{Binding Path=NowPlaying.Status}"  VerticalAlignment="Top" HorizontalAlignment="Left" FontFamily="./Fonts/#Aeon Main CE" FontSize="14" Foreground="#FF525151" d:IsStaticText="True" FontStyle="Italic" />
-				<TextBlock x:Name="txt_Titre" Text="{Binding Path=NowPlaying.Titre}"  VerticalAlignment="Top" HorizontalAlignment="Left" FontFamily="./Fonts/#Aeon Main CE" FontSize="22" d:IsStaticText="True" />
+				<TextBlock x:Name="txt_Status" Text="{Binding Path=NowPlaying.PlayStatus}"  VerticalAlignment="Top" HorizontalAlignment="Left" FontFamily="./Fonts/#Aeon Main CE" FontSize="14" Foreground="#FF525151" d:IsStaticText="True" FontStyle="Italic" />
+				<TextBlock x:Name="txt_Titre" Text="{Binding Path=NowPlaying.Title}"  VerticalAlignment="Top" HorizontalAlignment="Left" FontFamily="./Fonts/#Aeon Main CE" FontSize="22" d:IsStaticText="True" />
 			</StackPanel>
 		</DockPanel>
 	</Grid>

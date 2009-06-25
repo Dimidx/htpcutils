@@ -9,9 +9,12 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Timers;
+
+
 using XBMC;
 
 namespace XBMC_Touch
@@ -28,7 +31,7 @@ namespace XBMC_Touch
 
             //Language = new XBMCLanguage();
             //XBMC = new XBMC_Communicator();
-            XBMC.SetIp("salon:8080");
+            XBMC.SetIp("127.0.0.1:8080");
             XBMC.SetConnectionTimeout(1000);
             XBMC.SetCredentials("xbmc", "");
             this.DataContext = XBMC;
@@ -97,6 +100,25 @@ namespace XBMC_Touch
         private void btn_Stop_Click(object sender, RoutedEventArgs e)
         {
             XBMC.Controls.Stop();
+        }
+
+        private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (this.GridMenu.Visibility == Visibility.Hidden)
+            { 
+                this.GridMenu.Visibility = Visibility.Visible;
+                Storyboard sbdshowMenu = (Storyboard)FindResource("ShowMenu"); 
+                sbdshowMenu.Begin(this); 
+                return;
+            }
+
+            if (this.GridMenu.Visibility == Visibility.Visible) { this.GridMenu.Visibility = Visibility.Hidden; return; }
+
+        }
+
+        private void btnQuitter_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
 
 

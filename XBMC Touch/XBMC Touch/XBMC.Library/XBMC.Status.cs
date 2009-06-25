@@ -34,11 +34,12 @@ namespace XBMC
 
         //XBMC Properties
         internal bool isConnected = false;
-        private bool isPlaying = false;
+        //private bool isPlaying = false;
         private bool isNotPlaying = true;
         private bool isPlayingLastFm = false;
         private bool isPaused = false;
         private bool _IsMuted = false;
+        private bool _IsPlaying = false;
         private int _volume = 0;
         private int _progress = 1;
         private string mediaNowPlaying = null;
@@ -82,6 +83,15 @@ namespace XBMC
             set { _IsMuted = value; OnPropertyChanged("IsMuted"); }
         }
 
+        /// <summary>
+        /// Lecture en cours
+        /// </summary>
+        public bool IsPlaying
+        {
+            get { return _IsPlaying; }
+            set { _IsPlaying = value; OnPropertyChanged("IsPlaying"); }
+        }
+
         void heartBeatTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             isConnected = parent.Controls.SetResponseFormat();
@@ -101,9 +111,9 @@ namespace XBMC
                 else
                     newMediaPlaying = false;
 
-                isPlaying = (parent.NowPlaying.Get("playstatus", true) == "Playing") ? true : false;
-                isPaused = (parent.NowPlaying.Get("playstatus", true) == "Paused") ? true : false;
-                isNotPlaying = (mediaNowPlaying == "[Nothing Playing]" || mediaNowPlaying == null) ? true : false;
+                //isPlaying = (parent.NowPlaying.Get("playstatus", true) == "Playing") ? true : false;
+                //isPaused = (parent.NowPlaying.Get("playstatus", true) == "Paused") ? true : false;
+                IsPlaying = (parent.NowPlaying.Get("playstatus") != "[Nothing Playing]") ? true : false;
 
                 if (mediaNowPlaying == null || isNotPlaying || mediaNowPlaying.Length < 6)
                 {
@@ -156,16 +166,6 @@ namespace XBMC
         public bool IsNewMediaPlaying()
         {
             return newMediaPlaying;
-        }
-
-        public bool IsPlaying(string lastfm)
-        {
-            return (lastfm != null) ? isPlayingLastFm : isPlaying;
-        }
-
-        public bool IsPlaying()
-        {
-            return this.IsPlaying(null);
         }
 
         public bool IsNotPlaying()
