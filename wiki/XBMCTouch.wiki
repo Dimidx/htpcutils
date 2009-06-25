@@ -1,13 +1,11 @@
 #summary Paramétrage de XBMC Touch
+== _Pré-requis_ ==
+ _Configurer le serveur Web dans XBMC [http://code.google.com/p/htpcutils/wiki/XBMCWebServer Procédure]_
+ 
+= Paramétrage =
 
-= Introduction =
-
-Add your content here.
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+ * Lancez *XBMC Touch*
+ * Cliquez avec le bouton droit n'importe où dans la fenêtre
+ * Cliquez sur *Paramètres*
+ * Saisissez les paramètres de connexion
+ * Cliquez sur *Sauver*
