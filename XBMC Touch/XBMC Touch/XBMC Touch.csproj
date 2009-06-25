@@ -14,6 +14,8 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <ApplicationIcon>Resources\Icone.ico</ApplicationIcon>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -95,6 +97,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="UCControl.xaml.cs">
       <DependentUpon>UCControl.xaml</DependentUpon>
     </Compile>
@@ -120,7 +123,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\video-32x32.png" />
+    <None Include="app.config" />
     <None Include="SubsetFont.targets">
       <Visible>False</Visible>
     </None>
@@ -129,33 +132,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <BlendEmbeddedFont Include="Fonts\aeon_player_caps.ttf">
-      <IsSystemFont>True</IsSystemFont>
-    </BlendEmbeddedFont>
-    <BlendEmbeddedFont Include="Fonts\aeon_title_cy.ttf">
-      <IsSystemFont>True</IsSystemFont>
-    </BlendEmbeddedFont>
-    <BlendEmbeddedFont Include="Fonts\aeon_title_ce.ttf">
-      <IsSystemFont>True</IsSystemFont>
-    </BlendEmbeddedFont>
-    <BlendEmbeddedFont Include="Fonts\aeon_info.ttf">
-      <IsSystemFont>True</IsSystemFont>
-    </BlendEmbeddedFont>
-    <BlendEmbeddedFont Include="Fonts\aeon_main.ttf">
-      <IsSystemFont>True</IsSystemFont>
-    </BlendEmbeddedFont>
-    <BlendEmbeddedFont Include="Fonts\aeon_list_cy.ttf">
-      <IsSystemFont>True</IsSystemFont>
-    </BlendEmbeddedFont>
-    <BlendEmbeddedFont Include="Fonts\aeon_list.ttf">
-      <IsSystemFont>True</IsSystemFont>
-    </BlendEmbeddedFont>
-    <BlendEmbeddedFont Include="Fonts\aeon_main_cy.ttf">
-      <IsSystemFont>True</IsSystemFont>
-    </BlendEmbeddedFont>
-    <BlendEmbeddedFont Include="Fonts\aeon_main_ce.ttf">
-      <IsSystemFont>True</IsSystemFont>
-    </BlendEmbeddedFont>
     <Resource Include="Resources\default.png" />
     <Resource Include="Resources\list_movieicon_glass.png" />
     <Resource Include="Resources\osd_button_advance.png" />
@@ -191,11 +167,38 @@
     <Resource Include="Resources\osd_button_stop.png" />
   </ItemGroup>
   <ItemGroup>
+    <BlendEmbeddedFont Include="Fonts\aeon_edit_ce.ttf">
+      <IsSystemFont>True</IsSystemFont>
+      <Characters>
+      </Characters>
+      <Uppercase>True</Uppercase>
+      <Lowercase>True</Lowercase>
+      <Numbers>True</Numbers>
+      <Punctuation>True</Punctuation>
+      <AutoFill>True</AutoFill>
+      <All>False</All>
+    </BlendEmbeddedFont>
     <Resource Include="Resources\defaultAudio.png" />
-    <Resource Include="Resources\DefaultPicture.png" />
-    <Resource Include="Resources\defaultVideo.png" />
-    <Resource Include="Resources\defaultVideoBigPoster.png" />
-    <Resource Include="Resources\defaultVideoCover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icone.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BlendEmbeddedFont Include="Fonts\aeon_player_cy.ttf">
+      <IsSystemFont>True</IsSystemFont>
+      <Characters>
+      </Characters>
+      <Uppercase>True</Uppercase>
+      <Lowercase>True</Lowercase>
+      <Numbers>True</Numbers>
+      <Punctuation>True</Punctuation>
+      <AutoFill>True</AutoFill>
+      <All>True</All>
+    </BlendEmbeddedFont>
+    <Resource Include="Resources\Splash.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -206,4 +209,47 @@
   </Target>
   -->
   <Import Project="SubsetFont.targets" />
+  <!-- Import of the MSBuildCommunityTask targets -->
+<Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
+ 
+<!-- to manage version number -->
+<Target Name="Version">
+  <Version VersionFile="version.txt" RevisionType="Increment">
+    <Output TaskParameter="Major" PropertyName="Major" />
+    <Output TaskParameter="Minor" PropertyName="Minor" />
+    <Output TaskParameter="Build" PropertyName="Build" />
+    <Output TaskParameter="Revision" PropertyName="Revision" />
+  </Version>
+</Target>
+ 
+  <!-- to generate our personnal version info -->
+  <Target Name="AssemblyInfo">
+ 
+  <SvnVersion LocalPath="$(MSBuildProjectDirectory)">
+    <Output TaskParameter="Revision" PropertyName="Build" />
+  </SvnVersion>
+ 
+  <AssemblyInfo
+    CodeLanguage="CS"
+    OutputFile="Properties\AssemblyInfo.cs"
+    AssemblyTitle="XBMC Touch"
+    AssemblyDescription=""
+    AssemblyCompany="Danone-KiD"
+    AssemblyProduct="XBMC Touch"
+    AssemblyCopyright="Copyright Danone-KiD© 2009"
+    ComVisible="false"
+    Guid="88812638-9547-4480-9bf4-4fe25103b35c"
+    AssemblyVersion="$(Major).$(Minor).$(Build).$(Revision)"
+    AssemblyFileVersion="$(Major).$(Minor).$(Build).$(Revision)"
+    Condition="$(Revision) != '0' "/>
+</Target>
+ 
+<!-- We launch these two targets -->
+<Target Name="BeforeBuild">
+    <CallTarget Targets="Version" />
+    <CallTarget Targets="AssemblyInfo" />
+</Target>
+ 
+<Target Name="AfterBuild">
+</Target>
 </Project>

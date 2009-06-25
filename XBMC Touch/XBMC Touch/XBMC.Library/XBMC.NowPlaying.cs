@@ -272,7 +272,7 @@ namespace XBMC
             set { _Percentage = value; OnPropertyChanged("Percentage"); }
         }
 
-        
+
         #endregion
 
 
@@ -281,8 +281,9 @@ namespace XBMC
         /// </summary>
         public void Refresh()
         {
-            if (parent.Status.IsConnected() != false && Get("filename", true) != "[Nothing Playing]")
+            if (parent.Status.IsConnected() != false)
             {
+                if (Get("filename", true) == "[Nothing Playing]") { Reset(); return; }
                 switch (Get("changed"))
                 {
                     case "True":
@@ -325,28 +326,34 @@ namespace XBMC
             }
             else
             {
-                IsPlaying = false;
-                Percentage = 0;
-                Time = "";
-                PlayStatus = "";
-                SongNo = "";
-                Type = "";
-                Title = "";
-                Track = "";
-                Artist = "";
-                Album = "";
-                Genre = "";
-                Year = "";
-                URL = "";
-                Lyrics = "";
-                Bitrate = "";
-                SampleRate = "";
-                Thumb = GetCoverArt();
-                Duration = "";
-                FileSize = "";
+                Reset();
+
             }
 
 
+        }
+
+        private void Reset()
+        {
+            IsPlaying = false;
+            Percentage = 0;
+            Time = "";
+            PlayStatus = "";
+            SongNo = "";
+            Type = "";
+            Title = "";
+            Track = "";
+            Artist = "";
+            Album = "";
+            Genre = "";
+            Year = "";
+            URL = "";
+            Lyrics = "";
+            Bitrate = "";
+            SampleRate = "";
+            Thumb = GetCoverArt();
+            Duration = "";
+            FileSize = "";
         }
 
 
@@ -358,7 +365,7 @@ namespace XBMC
             timer.Interval = 1000;
             timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
             timer.Enabled = true;
-            
+
             timer.Start();
         }
 
@@ -396,10 +403,13 @@ namespace XBMC
             }
             else
             {
-                for (int x = 0; x < this.maNowPlayingInfo.GetLength(0); x++)
+                if (maNowPlayingInfo != null)
                 {
-                    if (this.maNowPlayingInfo[x, 0] == field)
-                        returnValue = this.maNowPlayingInfo[x, 1];
+                    for (int x = 0; x < this.maNowPlayingInfo.GetLength(0); x++)
+                    {
+                        if (this.maNowPlayingInfo[x, 0] == field)
+                            returnValue = this.maNowPlayingInfo[x, 1];
+                    }
                 }
             }
 
@@ -417,44 +427,46 @@ namespace XBMC
             string ipString;
             string[] fileExist;
             BitmapImage _thumbnail = new BitmapImage();
+            _thumbnail.BeginInit();
 
             ipString = Get("thumb");
+            if (ipString == null) ipString = "";
             fileExist = parent.Request("FileExists", ipString);
-
-            if (fileExist[0] == "True")
+            if (fileExist != null)
             {
-
-                try
+                if (fileExist[0] == "True")
                 {
-                    downloadData = parent.Request("FileDownload", ipString);
+                    try
+                    {
 
-                    // Convert Base64 String to byte[]
-                    byte[] imageBytes = Convert.FromBase64String(downloadData[0]);
-                    MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
-                    //BitmapImage titi = new BitmapImage();
-                    _thumbnail.BeginInit();
-                    _thumbnail.StreamSource = ms;
-                    _thumbnail.EndInit();
-                    _thumbnail.Freeze();
+                        downloadData = parent.Request("FileDownload", ipString);
+
+                        // Convert Base64 String to byte[]
+                        byte[] imageBytes = Convert.FromBase64String(downloadData[0]);
+                        MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+                        _thumbnail.StreamSource = ms;
+
+                    }
+                    catch (Exception)
+                    {
+                        _thumbnail.UriSource = new Uri("pack://application:,,,/Resources/defaultAudio.png", UriKind.RelativeOrAbsolute);
+                    }
+
                 }
-                catch (Exception)
+                else
                 {
-                    return _thumbnail;
+                    _thumbnail.UriSource = new Uri("pack://application:,,,/Resources/defaultAudio.png", UriKind.RelativeOrAbsolute);
                 }
-
-                
-
             }
             else
             {
-                _thumbnail.BeginInit();
                 _thumbnail.UriSource = new Uri("pack://application:,,,/Resources/defaultAudio.png", UriKind.RelativeOrAbsolute);
-                _thumbnail.EndInit();
-                _thumbnail.Freeze();
-                //thumbnail = Image.FromStream(ms, true);
             }
 
+            _thumbnail.EndInit();
+            _thumbnail.Freeze();
             return _thumbnail;
+
 
 
 
