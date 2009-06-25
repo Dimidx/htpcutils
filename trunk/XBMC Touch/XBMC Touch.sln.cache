@@ -31,11 +31,11 @@
     <AspNetConfiguration>$(Configuration)</AspNetConfiguration>
   </PropertyGroup>
   <PropertyGroup>
-    <SolutionDir>C:\Dev\HTPCUtils\XBMC Touch\</SolutionDir>
+    <SolutionDir>D:\Perso\Dev\HTPCUtils\XBMC Touch\</SolutionDir>
     <SolutionExt>.sln</SolutionExt>
     <SolutionFileName>XBMC Touch.sln</SolutionFileName>
     <SolutionName>XBMC Touch</SolutionName>
-    <SolutionPath>C:\Dev\HTPCUtils\XBMC Touch\XBMC Touch.sln</SolutionPath>
+    <SolutionPath>D:\Perso\Dev\HTPCUtils\XBMC Touch\XBMC Touch.sln</SolutionPath>
   </PropertyGroup>
   <PropertyGroup>
     <TargetFrameworkVersion Condition="'$(TargetFrameworkVersion)' == '' and '$(MSBuildToolsVersion)' == '2.0'">v2.0</TargetFrameworkVersion>

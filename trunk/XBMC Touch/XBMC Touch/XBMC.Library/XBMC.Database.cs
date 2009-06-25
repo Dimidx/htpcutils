@@ -205,8 +205,6 @@ namespace XBMC
             return aPath;
         }
 
-
-
         public string[] GetSearchSongTitles(string searchString)
         {
             return parent.Request("QueryMusicDatabase", "SELECT strTitle FROM song WHERE strTitle LIKE '%%" + searchString + "%%' ORDER BY strTitle");

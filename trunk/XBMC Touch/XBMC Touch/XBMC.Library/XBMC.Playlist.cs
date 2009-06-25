@@ -50,7 +50,7 @@ namespace XBMC
                         if (i > 1)
                         {
                             string extension = aPlaylistTemp[x].Substring(i, aPlaylistTemp[x].Length - i);
-                                aPlaylistTemp[x] = aPlaylistTemp[x].Replace("/", "\\");
+                            aPlaylistTemp[x] = aPlaylistTemp[x].Replace("/", "\\");
                             string[] aPlaylistEntry = aPlaylistTemp[x].Split('\\');
                             string playlistEntry = aPlaylistEntry[aPlaylistEntry.Length - 1].Replace(extension, "");
                             aCurrentPlaylist[x] = playlistEntry;

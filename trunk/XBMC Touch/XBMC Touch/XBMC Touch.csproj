@@ -190,6 +190,13 @@
   <ItemGroup>
     <Resource Include="Resources\osd_button_stop.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\defaultAudio.png" />
+    <Resource Include="Resources\DefaultPicture.png" />
+    <Resource Include="Resources\defaultVideo.png" />
+    <Resource Include="Resources\defaultVideoBigPoster.png" />
+    <Resource Include="Resources\defaultVideoCover.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
