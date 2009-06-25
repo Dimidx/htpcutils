@@ -13,7 +13,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Timers;
-
+using XBMC_Touch.Properties;
 
 using XBMC;
 
@@ -29,28 +29,51 @@ namespace XBMC_Touch
         public Window1()
         {
 
-            //Language = new XBMCLanguage();
-            //XBMC = new XBMC_Communicator();
-            XBMC.SetIp("127.0.0.1:8080");
-            XBMC.SetConnectionTimeout(1000);
-            XBMC.SetCredentials("xbmc", "");
+
+            Load();
             this.DataContext = XBMC;
-           
-            XBMC.Status.Refresh();
             InitializeComponent();
-            //Timer timer = new Timer();
-            //timer.Interval = 1000;
-            //timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
-            //timer.Enabled = true;
-            //timer.Start();
 
+            if (Settings.Default.FirstTime)
+            {
+                LoadConfig();
+                this.GridConfig.Visibility = Visibility.Visible;
+                Storyboard sbdshowMenu = (Storyboard)FindResource("ShowConfig");
+                sbdshowMenu.Begin(this);
+            }
 
-            //ApplySettings();
-            //SetLanguageStrings();
-            //Initialize();
 
         }
 
+        private void Load()
+        {
+            XBMC.SetIp(Settings.Default.Ip);
+            XBMC.SetConnectionTimeout(Settings.Default.ConnectionTimeout);
+            XBMC.SetCredentials(Settings.Default.UserName, Settings.Default.Password);
+            XBMC.NowPlaying.FistTime = true;
+            XBMC.Status.Refresh();
+        }
+
+
+        private void LoadConfig()
+        {
+            txtIP.Text = Settings.Default.Ip;
+            txtUsername.Text = Settings.Default.UserName;
+            txtPassword.Text = Settings.Default.Password;
+            txtTimeout.Text = Settings.Default.ConnectionTimeout.ToString();
+
+        }
+
+        private void SaveConfig()
+        {
+            Settings.Default.Ip = txtIP.Text;
+            Settings.Default.UserName = txtUsername.Text;
+            Settings.Default.Password = txtPassword.Text;
+            Settings.Default.ConnectionTimeout = Convert.ToInt32(txtTimeout.Text);
+            Settings.Default.FirstTime = false;
+            Settings.Default.Save();
+            Load();
+        }
 
 
         private void btn_Play_Click(object sender, RoutedEventArgs e)
@@ -119,6 +142,28 @@ namespace XBMC_Touch
         private void btnQuitter_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void btnSaveParam_Click(object sender, RoutedEventArgs e)
+        {
+            SaveConfig();
+            this.GridConfig.Visibility = Visibility.Hidden;
+            this.GridMenu.Visibility = Visibility.Hidden;
+        }
+
+        private void btnAnnulerParam_Click(object sender, RoutedEventArgs e)
+        {
+            this.GridConfig.Visibility = Visibility.Hidden;
+            this.GridMenu.Visibility = Visibility.Hidden;
+        }
+
+        private void btnParametres_Click(object sender, RoutedEventArgs e)
+        {
+                LoadConfig();
+                this.GridConfig.Visibility = Visibility.Visible;
+                Storyboard sbdshowMenu = (Storyboard)FindResource("ShowConfig");
+                sbdshowMenu.Begin(this);
+
         }
 
 

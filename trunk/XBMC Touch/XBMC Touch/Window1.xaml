@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" xmlns:local="clr-namespace:XBMC_Touch" x:Class="XBMC_Touch.Window1"
     Title="XBMC Touch" Height="480
-	" Width="640" Background="{DynamicResource BackGround}" MouseRightButtonDown="Window_MouseRightButtonDown" ResizeMode="NoResize" SizeToContent="Manual" WindowStartupLocation="CenterScreen" WindowState="Maximized" WindowStyle="None">
+	" Width="640" Background="{DynamicResource BackGround}" MouseRightButtonDown="Window_MouseRightButtonDown" ResizeMode="CanResize" SizeToContent="Manual" WindowStartupLocation="CenterScreen" WindowState="Normal" WindowStyle="SingleBorderWindow" Cursor="Hand" Icon="Resources/Icone.ico">
     
 	<Window.Resources>
 		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -15,15 +15,46 @@
 			</ThicknessAnimationUsingKeyFrames>
 		</Storyboard>
 		<Storyboard x:Key="ShowMenu">
-			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="GridMenu" Storyboard.TargetProperty="(UIElement.Opacity)">
-				<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-				<SplineDoubleKeyFrame KeyTime="00:00:01" Value="1" KeySpline="0,1,0.189,0.576"/>
+			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="GridMenu" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+				<SplineDoubleKeyFrame KeyTime="00:00:00" Value="5"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1" KeySpline="1,0.001,1,1"/>
 			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="GridMenu" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+				<SplineDoubleKeyFrame KeyTime="00:00:00" Value="5"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1" KeySpline="1,0.001,1,1"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+		<Storyboard x:Key="ShowSplash">
+			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+				<SplineDoubleKeyFrame KeyTime="00:00:01.5000000" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+				<SplineDoubleKeyFrame KeyTime="00:00:01.5000000" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="GridSplash" Storyboard.TargetProperty="(UIElement.Visibility)">
+				<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+				<DiscreteObjectKeyFrame KeyTime="00:00:00.5000000" Value="{x:Static Visibility.Visible}"/>
+				<DiscreteObjectKeyFrame KeyTime="00:00:02" Value="{x:Static Visibility.Hidden}"/>
+			</ObjectAnimationUsingKeyFrames>
+		</Storyboard>
+		<Storyboard x:Key="ShowConfig">
+			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="stackPanel" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+				<SplineDoubleKeyFrame KeyTime="00:00:00" Value="5"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1" KeySpline="1,0,1,1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="stackPanel" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+				<SplineDoubleKeyFrame KeyTime="00:00:00" Value="5"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1" KeySpline="1,0,1,1"/>
+			</DoubleAnimationUsingKeyFrames>
+
 		</Storyboard>
 	</Window.Resources>
 	<Window.Triggers>
 		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
 			<BeginStoryboard Storyboard="{StaticResource VolumeShow}"/>
+			<BeginStoryboard Storyboard="{StaticResource ShowSplash}"/>
 		</EventTrigger>
 		<EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btn_VolUp">
 			<BeginStoryboard Storyboard="{StaticResource VolumeShow}"/>
@@ -46,8 +77,8 @@
             <DockPanel LastChildFill="True" Margin="10,10,10,10" Visibility="{Binding Path=NowPlaying.IsPlaying, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default}">
                 <ProgressBar Value="{Binding Path=NowPlaying.Percentage}" Width="Auto" Height="16" Style="{DynamicResource ProgressBarStyle1}" VerticalAlignment="Top" DockPanel.Dock="Top"/>
             	<DockPanel Margin="0,3,0,0">
-					<TextBlock x:Name="txt_Time" Text="{Binding Path=NowPlaying.Time}"  FontFamily="Aeon Player CE" FontSize="12" FontWeight="Bold" ClipToBounds="False" SnapsToDevicePixels="False" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="#FFFFFFFF" />
-					<TextBlock x:Name="txt_Duration" Text="{Binding Path=NowPlaying.Duration}"   FontFamily="Aeon Player CE" FontSize="12" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="#FFFFFFFF"  />
+					<TextBlock x:Name="txt_Time" Text="{Binding Path=NowPlaying.Time}"  FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="#FFFFFFFF" />
+					<TextBlock x:Name="txt_Duration" Text="{Binding Path=NowPlaying.Duration}"   FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="#FFFFFFFF"  />
 				</DockPanel>
 			</DockPanel>
             <DockPanel >
@@ -93,18 +124,95 @@
         <local:UCNowPlaying Margin="10,10,10,10" DockPanel.Dock="Bottom" Visibility="{Binding Path=NowPlaying.IsPlaying, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default}"/>
 
         </DockPanel>
-		<Grid x:Name="GridMenu" Margin="0,0,0,0" Background="#99000000" Visibility="Hidden" Opacity="1">
+		<Grid x:Name="GridMenu" Margin="0,0,0,0" Background="#99000000" Visibility="Hidden" Opacity="1" RenderTransformOrigin="0.5,0.5">
+			<Grid.RenderTransform>
+				<TransformGroup>
+					<ScaleTransform ScaleX="1" ScaleY="1"/>
+					<SkewTransform AngleX="0" AngleY="0"/>
+					<RotateTransform Angle="0"/>
+					<TranslateTransform X="0" Y="0"/>
+				</TransformGroup>
+			</Grid.RenderTransform>
 		<StackPanel Margin="150,30,150,30" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center">
 			<Border Height="10" Background="#FF4A4949" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="5,5,0,0" DockPanel.Dock="Top"/>
 			<Border Height="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,0,1,0" CornerRadius="0,0,0,0" Background="#FFBBBBBB" DockPanel.Dock="Top">
 				<StackPanel x:Name="StackMenu" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Visibility="Visible">
-					<Button x:Name="btnPlaylist" Click="btnQuitter_Click" Height="Auto" Content="Playlist" HorizontalContentAlignment="Center" Style="{DynamicResource ButtonStyleMenu}" FontFamily="./Fonts/#Aeon Info" FontSize="16" Foreground="#FFFFFFFF"/>
-					<Button x:Name="btnParametres" Click="btnQuitter_Click" Height="Auto" Content="Paramètres" HorizontalContentAlignment="Center" Style="{DynamicResource ButtonStyleMenu}" FontFamily="./Fonts/#Aeon Info" FontSize="16" Foreground="#FFFFFFFF"/>
+					<Button x:Name="btnParametres" Click="btnParametres_Click"  Height="Auto" Content="Paramètres" HorizontalContentAlignment="Center" Style="{DynamicResource ButtonStyleMenu}" FontFamily="./Fonts/#Aeon Info" FontSize="16" Foreground="#FFFFFFFF"/>
 					<Button x:Name="btnQuitter" Click="btnQuitter_Click" Height="Auto" Content="Quitter" HorizontalContentAlignment="Center" Style="{DynamicResource ButtonStyleMenu}" FontFamily="./Fonts/#Aeon Info" FontSize="16" Foreground="#FFFFFFFF"/>
 				</StackPanel>
 			</Border>
 			<Border Background="#FF4A4949" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,0,1,1" CornerRadius="0,0,5,5" Height="10" DockPanel.Dock="Bottom"/>
 		</StackPanel>
+		</Grid>
+		<Grid x:Name="GridSplash" Background="#FF000000" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+			<Grid.RenderTransform>
+				<TransformGroup>
+					<ScaleTransform ScaleX="1" ScaleY="1"/>
+					<SkewTransform AngleX="0" AngleY="0"/>
+					<RotateTransform Angle="0"/>
+					<TranslateTransform X="0" Y="0"/>
+				</TransformGroup>
+			</Grid.RenderTransform>
+			<Image x:Name="image" Source="Resources/Splash.png" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" >
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform ScaleX="1" ScaleY="1"/>
+						<SkewTransform AngleX="0" AngleY="0"/>
+						<RotateTransform Angle="0"/>
+						<TranslateTransform X="0" Y="0"/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+		</Grid>
+		<Grid x:Name="GridConfig" Background="#99000000" Visibility="Hidden" >
+			<StackPanel x:Name="stackPanel" Margin="150,30,150,30" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+				<StackPanel.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform ScaleX="1" ScaleY="1"/>
+						<SkewTransform AngleX="0" AngleY="0"/>
+						<RotateTransform Angle="0"/>
+						<TranslateTransform X="0" Y="0"/>
+					</TransformGroup>
+				</StackPanel.RenderTransform>
+				<Border Height="30" Background="#FF4A4949" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="5,5,0,0" DockPanel.Dock="Top">
+					<TextBlock Text="Paramètres" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="./Fonts/#Aeon Info" FontSize="16" Foreground="#FFFFFFFF"/>
+				</Border>
+				<Border Height="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,0,1,0" CornerRadius="0,0,0,0" Background="#FFBBBBBB" DockPanel.Dock="Top">
+					<StackPanel >
+						<Grid >
+							<Grid.RowDefinitions>
+								<RowDefinition/>
+								<RowDefinition/>
+								<RowDefinition/>
+								<RowDefinition/>
+								<RowDefinition/>
+								<RowDefinition/>
+								<RowDefinition/>
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition/>
+								<ColumnDefinition/>
+							</Grid.ColumnDefinitions>
+							<TextBlock Text="Adresse IP :" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2,2,2,2"/>
+							<TextBlock Text="Utilisateur :" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Margin="2,2,2,2"/>
+							<TextBlock Text="Mot de passe :" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Margin="2,2,2,2"/>
+							<TextBlock Text="Timeout en ms :" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" Margin="2,2,2,2"/>
+							
+							<TextBox x:Name="txtIP" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Text="" Grid.Column="1" Margin="2,2,2,2" />
+							<TextBox x:Name="txtUsername" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Text=""  Grid.Column="1" Margin="2,2,2,2" Grid.Row="1"/>
+							<TextBox x:Name="txtPassword" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Text=""  Grid.Column="1" Margin="2,2,2,2" Grid.Row="2"/>
+							<TextBox x:Name="txtTimeout" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Text=""  Grid.Column="1" Margin="2,2,2,2" Grid.Row="3"/>
+						</Grid>
+						<UniformGrid Columns="2" >
+							<Button Click="btnSaveParam_Click"  x:Name="btnSaveParam" Height="Auto" Content="Sauver" HorizontalContentAlignment="Center" Style="{DynamicResource ButtonStyleMenu}" FontFamily="./Fonts/#Aeon Info" FontSize="16" Foreground="#FFFFFFFF"/>
+							<Button Click="btnAnnulerParam_Click" x:Name="btnAnnulerParam" Height="Auto" Content="Annuler" HorizontalContentAlignment="Center" Style="{DynamicResource ButtonStyleMenu}" FontFamily="./Fonts/#Aeon Info" FontSize="16" Foreground="#FFFFFFFF"/>
+
+						</UniformGrid>
+					</StackPanel>
+
+				</Border>
+				<Border Background="#FF4A4949" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,0,1,1" CornerRadius="0,0,5,5" Height="10" DockPanel.Dock="Bottom"/>
+			</StackPanel>
 		</Grid>
 </Grid>
 

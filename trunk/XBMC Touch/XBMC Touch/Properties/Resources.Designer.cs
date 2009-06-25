@@ -59,12 +59,5 @@ namespace XBMC_Touch.Properties {
                 resourceCulture = value;
             }
         }
-        
-        internal static System.Drawing.Bitmap video_32x32 {
-            get {
-                object obj = ResourceManager.GetObject("video_32x32", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }
