@@ -1,5 +1,5 @@
-= Configure XBMCWebserver =
 #summary configuration du serveur web dans xbmc ...
+= Configure XBMCWebserver =
 
  * Lancez XBMC
  * Allez dans le menu *Paramètres*
