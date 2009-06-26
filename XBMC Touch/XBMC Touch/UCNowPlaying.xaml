@@ -5,9 +5,12 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d"
 	x:Class="XBMC_Touch.UCNowPlaying"
+	xmlns:conv="clr-namespace:XBMC_Touch.Utils.Converters"
 	x:Name="UserControl"
 	d:DesignWidth="640" d:DesignHeight="480">
-
+	<UserControl.Resources>
+		<conv:SecondesToTime x:Key="SecondesToTime"/>
+	</UserControl.Resources>
 	<Grid x:Name="LayoutRoot">
 		<DockPanel HorizontalAlignment="Left" LastChildFill="True" VerticalAlignment="Top">
 			<Grid>
@@ -15,7 +18,7 @@
 					<Border.Background>
 						<VisualBrush>
 							<VisualBrush.Visual>
-								<Image x:Name="Affiche" Source="{Binding Path=NowPlaying.Thumb}" />
+								<Image x:Name="Affiche" Source="{Binding Path=NowPlaying.Song.Thumb}" />
 							</VisualBrush.Visual>
 						</VisualBrush>
 					</Border.Background>
@@ -31,13 +34,13 @@
 				</Border>
 			</Grid>
 			<StackPanel VerticalAlignment="Top">
-				<TextBlock x:Name="txt_Artiste" Text="{Binding Path=NowPlaying.Artist}" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="24" FontWeight="Bold"/>
-				<TextBlock x:Name="txt_Album" Text="{Binding Path=NowPlaying.Album}" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" FontStyle="Italic"/>
+				<TextBlock x:Name="txt_Artiste" Text="{Binding Path=NowPlaying.Song.Artist.Artist}" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="24" FontWeight="Bold"/>
+				<TextBlock x:Name="txt_Album" Text="{Binding Path=NowPlaying.Song.Album.Album}" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" FontStyle="Italic"/>
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
 					<TextBlock x:Name="txt_Time" Text="{Binding Path=NowPlaying.Time}" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="72" FontWeight="Bold"/>
-					<TextBlock x:Name="txt_Duration" Text="{Binding Path=NowPlaying.Duration}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontWeight="Bold" FontStyle="Italic"/>
+					<TextBlock x:Name="txt_Duration" Text="{Binding Path=NowPlaying.Song.Duration, Converter={StaticResource SecondesToTime}, Mode=Default}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontWeight="Bold" FontStyle="Italic"/>
 				</StackPanel>
-				<TextBlock x:Name="txt_Titre" Text="{Binding Path=NowPlaying.Title}"  VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="22"/>
+				<TextBlock x:Name="txt_Titre" Text="{Binding Path=NowPlaying.Song.Title}"  VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="22"/>
 			</StackPanel>
 		</DockPanel>
 	</Grid>

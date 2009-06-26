@@ -131,7 +131,85 @@ namespace XBMC
             return (aPathId != null) ? GetPathById(aPathId[0]) : null;
         }
 
+        /// <summary>
+        /// Retourne les infos de l'artiste a partir de son id
+        /// </summary>
+        /// <param name="_IDArtist"></param>
+        /// <returns></returns>
+        public MusicArtist GetArtistByID(int _IDArtist)
+        {
+            MusicArtist _Artist = new MusicArtist();
+            string[] _Infos = parent.Request("QueryMusicDatabase", "SELECT idArtist,strArtist FROM artist WHERE idArtist='" + _IDArtist + "'");
+            if (_Infos != null)
+            {
+                _Artist.IdArtist = Convert.ToInt32(_Infos[0]);
+                _Artist.Artist = _Infos[1];
+            }
+            return _Artist;
+        }
 
+        /// <summary>
+        /// Retourne les infos de l'album a partir de son id
+        /// </summary>
+        /// <param name="_IDAlbum"></param>
+        /// <returns></returns>
+        public MusicAlbum GetAlbumByID(int _IDAlbum)
+        {
+            MusicAlbum _Album = new MusicAlbum();
+            string[] _Infos = parent.Request("QueryMusicDatabase", "SELECT idAlbum,strAlbum,idArtist,strgenre,iYear,strthumb FROM album left join genre on album.idGenre = genre.idgenre left join thumb on album.idthumb = thumb.idthumb where idalbum = " + _IDAlbum);
+            if (_Infos != null)
+            {
+                _Album.IdAlbum = Convert.ToInt32(_Infos[0]);
+                _Album.Album = _Infos[1];
+                _Album.Artist = GetArtistByID(Convert.ToInt32(_Infos[2]));
+                _Album.Genre = _Infos[3];
+                _Album.Year = Convert.ToInt32(_Infos[4]);
+                _Album.Thumb = parent.Media.GetThumbByPath(_Infos[5]);
+            }
+            return _Album;
+        }
+
+        /// <summary>
+        /// Retourne les infos de la piste à partir de son id
+        /// </summary>
+        /// <param name="_IDSong"></param>
+        /// <returns></returns>
+        public MusicSong GetSongByID(int _IDSong)
+        {
+            MusicSong _Song = new MusicSong();
+            string[] _Infos = parent.Request("QueryMusicDatabase", "SELECT idSong, strTitle,idAlbum,idArtist,strPath,strFilename,strgenre,iTrack,iDuration,iYear,strthumb FROM song left join thumb on song.idthumb = thumb.idthumb left join path on song.idPath = path.idPath left join genre on song.idGenre = genre.idGenre where idSong = "+ _IDSong);
+            if (_Infos != null)
+            {
+                _Song.IdSong = Convert.ToInt32(_Infos[0]);
+                _Song.Title = _Infos[1];
+                _Song.Album = GetAlbumByID(Convert.ToInt32(_Infos[2]));
+                _Song.Artist = GetArtistByID(Convert.ToInt32(_Infos[3]));
+                _Song.Path = _Infos[4];
+                _Song.Filename = _Infos[5];
+                _Song.Genre = _Infos[6];
+                _Song.Track = Convert.ToInt32(_Infos[7]);
+                _Song.Duration = Convert.ToInt32(_Infos[8]);
+                _Song.Year = Convert.ToInt32(_Infos[9]);
+                _Song.Thumb = parent.Media.GetThumbByPath(_Infos[10]);
+            }
+            return _Song;
+        }
+
+        /// <summary>
+        /// Retourne les infos de la piste à partir de chemin
+        /// </summary>
+        /// <param name="_FileName"></param>
+        /// <returns></returns>
+        public MusicSong GetSongByFileName(string _FileName)
+        {
+            MusicSong _Song = new MusicSong();
+            string[] _Infos = parent.Request("QueryMusicDatabase", "SELECT idSong FROM song left join path on song.idPath = path.idPath where strPath || strFilename = '" + _FileName + "'");
+            if (_Infos != null)
+            {
+                _Song = GetSongByID(Convert.ToInt32(_Infos[0]));
+            }
+            return _Song;
+        }
 
         public string[] GetAlbumsByArtist(string artist)
         {

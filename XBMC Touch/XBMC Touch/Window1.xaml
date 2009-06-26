@@ -2,10 +2,12 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" xmlns:local="clr-namespace:XBMC_Touch" x:Class="XBMC_Touch.Window1"
-    Title="XBMC Touch" Height="480
+    xmlns:conv="clr-namespace:XBMC_Touch.Utils.Converters"
+	Title="XBMC Touch" Height="480
 	" Width="640" Background="{DynamicResource BackGround}" MouseRightButtonDown="Window_MouseRightButtonDown" ResizeMode="CanResize" SizeToContent="Manual" WindowStartupLocation="CenterScreen" WindowState="Normal" WindowStyle="SingleBorderWindow" Cursor="Hand" Icon="Resources/Icone.ico">
     
 	<Window.Resources>
+		<conv:SecondesToTime x:Key="SecondesToTime"/>
 		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 		<Storyboard x:Key="VolumeShow">
 			<ThicknessAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="GridVolume" Storyboard.TargetProperty="(FrameworkElement.Margin)">
@@ -78,7 +80,7 @@
                 <ProgressBar Value="{Binding Path=NowPlaying.Percentage}" Width="Auto" Height="16" Style="{DynamicResource ProgressBarStyle1}" VerticalAlignment="Top" DockPanel.Dock="Top"/>
             	<DockPanel Margin="0,3,0,0">
 					<TextBlock x:Name="txt_Time" Text="{Binding Path=NowPlaying.Time}"  FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="#FFFFFFFF" />
-					<TextBlock x:Name="txt_Duration" Text="{Binding Path=NowPlaying.Duration}"   FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="#FFFFFFFF"  />
+					<TextBlock x:Name="txt_Duration" Text="{Binding Path=NowPlaying.Song.Duration, Converter={StaticResource SecondesToTime}, Mode=Default}"   FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="#FFFFFFFF"  />
 				</DockPanel>
 			</DockPanel>
             <DockPanel >

@@ -37,41 +37,26 @@ namespace XBMC
         public bool FistTime = true;
 
         #region Private
-        private string _Filename;
         private string _PlayStatus;
-        private string _SongNo;
         private string _Type;
-        private string _Title;
-        private string _Track;
-        private string _Artist;
-        private string _Album;
-        private string _Genre;
-        private string _Year;
-        private string _URL;
-        private string _Lyrics;
-        private string _Bitrate;
-        private string _Samplerate;
         private string _Time;
-        private string _Duration;
         private int _Percentage;
-        private string _FileSize;
         private bool _Changed;
         private bool _IsPlaying = false;
-
-        private BitmapImage _Thumb;
         private Timer timer;
         private string[,] maNowPlayingInfo = null;
+        private MusicSong _Song = null;
         #endregion
 
         #region Public
 
         /// <summary>
-        /// L'image
+        /// Le song en cours de lecture
         /// </summary>
-        public BitmapImage Thumb
+        public MusicSong Song
         {
-            get { return _Thumb; }
-            set { _Thumb = value; _Thumb.Freeze(); OnPropertyChanged("Thumb"); }
+            get { return _Song; }
+            set { _Song = value; OnPropertyChanged("Song"); }
         }
 
         /// <summary>
@@ -84,111 +69,12 @@ namespace XBMC
         }
 
         /// <summary>
-        /// Le Titre
-        /// </summary>
-        public string Title
-        {
-            get { return _Title; }
-            set { _Title = value; OnPropertyChanged("Title"); }
-        }
-
-        /// <summary>
-        /// Le chemin du fichier
-        /// </summary>
-        public string Filename
-        {
-            get { return _Filename; }
-            set { _Filename = value; OnPropertyChanged("Filename"); }
-        }
-
-        /// <summary>
-        /// Le Song n°
-        /// </summary>
-        public string SongNo
-        {
-            get { return _SongNo; }
-            set { _SongNo = value; OnPropertyChanged("SongNo"); }
-        }
-
-        /// <summary>
         /// Le type
         /// </summary>
         public string Type
         {
             get { return _Type; }
             set { _Type = value; OnPropertyChanged("Type"); }
-        }
-
-        /// <summary>
-        /// Le n° de la piste
-        /// </summary>
-        public string Track
-        {
-            get { return _Track; }
-            set { _Track = value; OnPropertyChanged("Track"); }
-        }
-
-        /// <summary>
-        /// Le Genre
-        /// </summary>
-        public string Genre
-        {
-            get { return _Genre; }
-            set { _Genre = value; OnPropertyChanged("Genre"); }
-        }
-
-        /// <summary>
-        /// L'Année
-        /// </summary>
-        public string Year
-        {
-            get { return _Year; }
-            set { _Year = value; OnPropertyChanged("Year"); }
-        }
-
-        /// <summary>
-        /// L'URL
-        /// </summary>
-        public string URL
-        {
-            get { return _URL; }
-            set { _URL = value; OnPropertyChanged("URL"); }
-        }
-
-        /// <summary>
-        /// Les Lyrics
-        /// </summary>
-        public string Lyrics
-        {
-            get { return _Lyrics; }
-            set { _Lyrics = value; OnPropertyChanged("Lyrics"); }
-        }
-
-        /// <summary>
-        /// Le Bitrate
-        /// </summary>
-        public string Bitrate
-        {
-            get { return _Bitrate; }
-            set { _Bitrate = value; OnPropertyChanged("Bitrate"); }
-        }
-
-        /// <summary>
-        /// Sample Rate
-        /// </summary>
-        public string SampleRate
-        {
-            get { return _Samplerate; }
-            set { _Samplerate = value; OnPropertyChanged("Samplerate"); }
-        }
-
-        /// <summary>
-        /// Taille du fichier en octets
-        /// </summary>
-        public string FileSize
-        {
-            get { return _FileSize; }
-            set { _FileSize = value; OnPropertyChanged("FileSize"); }
         }
 
         /// <summary>
@@ -199,7 +85,6 @@ namespace XBMC
             get { return _Changed; }
             set { _Changed = value; OnPropertyChanged("Changed"); }
         }
-
 
         /// <summary>
         /// Le Status
@@ -228,39 +113,12 @@ namespace XBMC
         }
 
         /// <summary>
-        /// L'Album
-        /// </summary>
-        public string Album
-        {
-            get { return _Album; }
-            set { _Album = value; OnPropertyChanged("Album"); }
-        }
-
-        /// <summary>
-        /// L'Artiste
-        /// </summary>
-        public string Artist
-        {
-            get { return _Artist; }
-            set { _Artist = value; OnPropertyChanged("Artist"); }
-        }
-
-        /// <summary>
-        /// Time
+        /// Time écoulé
         /// </summary>
         public string Time
         {
             get { return _Time; }
             set { _Time = value; OnPropertyChanged("Time"); }
-        }
-
-        /// <summary>
-        /// Duration
-        /// </summary>
-        public string Duration
-        {
-            get { return _Duration; }
-            set { _Duration = value; OnPropertyChanged("Duration"); }
         }
 
         /// <summary>
@@ -271,7 +129,6 @@ namespace XBMC
             get { return _Percentage; }
             set { _Percentage = value; OnPropertyChanged("Percentage"); }
         }
-
 
         #endregion
 
@@ -305,21 +162,8 @@ namespace XBMC
                 if (Changed || FistTime)
                 {
                     PlayStatus = Get("PlayStatus");
-                    SongNo = Get("SongNo");
                     Type = Get("Type");
-                    Title = Get("Title");
-                    Track = Get("Track");
-                    Artist = Get("Artist");
-                    Album = Get("Album");
-                    Genre = Get("Genre");
-                    Year = Get("Year");
-                    URL = Get("URL");
-                    Lyrics = Get("Lyrics");
-                    Bitrate = Get("Bitrate");
-                    SampleRate = Get("SampleRate");
-                    Thumb = GetCoverArt();
-                    Duration = Get("Duration");
-                    FileSize = Get("File size");
+                    Song = parent.Database.GetSongByFileName(Get("filename"));
                     FistTime = false;
 
                 }
@@ -339,33 +183,21 @@ namespace XBMC
             Percentage = 0;
             Time = "";
             PlayStatus = "";
-            SongNo = "";
             Type = "";
-            Title = "";
-            Track = "";
-            Artist = "";
-            Album = "";
-            Genre = "";
-            Year = "";
-            URL = "";
-            Lyrics = "";
-            Bitrate = "";
-            SampleRate = "";
-            Thumb = GetCoverArt();
-            Duration = "";
-            FileSize = "";
+            Song = new MusicSong();
+
         }
 
 
         public XBMC_NowPlaying(XBMC_Communicator p)
         {
             parent = p;
+            Song = new MusicSong();
             FistTime = true;
             timer = new Timer();
             timer.Interval = 1000;
             timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
             timer.Enabled = true;
-
             timer.Start();
         }
 
