@@ -104,10 +104,12 @@
     <Compile Include="UCNowPlaying.xaml.cs">
       <DependentUpon>UCNowPlaying.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Converters.cs" />
     <Compile Include="XBMC.Library\XBMC.Communicator.cs" />
     <Compile Include="XBMC.Library\XBMC.Controls.cs" />
     <Compile Include="XBMC.Library\XBMC.Database.cs" />
     <Compile Include="XBMC.Library\XBMC.Media.cs" />
+    <Compile Include="XBMC.Library\XBMC.Music.cs" />
     <Compile Include="XBMC.Library\XBMC.NowPlaying.cs" />
     <Compile Include="XBMC.Library\XBMC.Playlist.cs" />
     <Compile Include="XBMC.Library\XBMC.Status.cs" />
@@ -210,46 +212,28 @@
   -->
   <Import Project="SubsetFont.targets" />
   <!-- Import of the MSBuildCommunityTask targets -->
-<Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
- 
-<!-- to manage version number -->
-<Target Name="Version">
-  <Version VersionFile="version.txt" RevisionType="Increment">
-    <Output TaskParameter="Major" PropertyName="Major" />
-    <Output TaskParameter="Minor" PropertyName="Minor" />
-    <Output TaskParameter="Build" PropertyName="Build" />
-    <Output TaskParameter="Revision" PropertyName="Revision" />
-  </Version>
-</Target>
- 
+  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
+  <!-- to manage version number -->
+  <Target Name="Version">
+    <Version VersionFile="version.txt" RevisionType="Increment">
+      <Output TaskParameter="Major" PropertyName="Major" />
+      <Output TaskParameter="Minor" PropertyName="Minor" />
+      <Output TaskParameter="Build" PropertyName="Build" />
+      <Output TaskParameter="Revision" PropertyName="Revision" />
+    </Version>
+  </Target>
   <!-- to generate our personnal version info -->
   <Target Name="AssemblyInfo">
- 
-  <SvnVersion LocalPath="$(MSBuildProjectDirectory)">
-    <Output TaskParameter="Revision" PropertyName="Build" />
-  </SvnVersion>
- 
-  <AssemblyInfo
-    CodeLanguage="CS"
-    OutputFile="Properties\AssemblyInfo.cs"
-    AssemblyTitle="XBMC Touch"
-    AssemblyDescription=""
-    AssemblyCompany="Danone-KiD"
-    AssemblyProduct="XBMC Touch"
-    AssemblyCopyright="Copyright Danone-KiD© 2009"
-    ComVisible="false"
-    Guid="88812638-9547-4480-9bf4-4fe25103b35c"
-    AssemblyVersion="$(Major).$(Minor).$(Build).$(Revision)"
-    AssemblyFileVersion="$(Major).$(Minor).$(Build).$(Revision)"
-    Condition="$(Revision) != '0' "/>
-</Target>
- 
-<!-- We launch these two targets -->
-<Target Name="BeforeBuild">
+    <SvnVersion LocalPath="$(MSBuildProjectDirectory)">
+      <Output TaskParameter="Revision" PropertyName="Build" />
+    </SvnVersion>
+    <AssemblyInfo CodeLanguage="CS" OutputFile="Properties\AssemblyInfo.cs" AssemblyTitle="XBMC Touch" AssemblyDescription="" AssemblyCompany="Danone-KiD" AssemblyProduct="XBMC Touch" AssemblyCopyright="Copyright Danone-KiD© 2009" ComVisible="false" Guid="88812638-9547-4480-9bf4-4fe25103b35c" AssemblyVersion="$(Major).$(Minor).$(Build).$(Revision)" AssemblyFileVersion="$(Major).$(Minor).$(Build).$(Revision)" Condition="$(Revision) != '0' " />
+  </Target>
+  <!-- We launch these two targets -->
+  <Target Name="BeforeBuild">
     <CallTarget Targets="Version" />
     <CallTarget Targets="AssemblyInfo" />
-</Target>
- 
-<Target Name="AfterBuild">
-</Target>
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
 </Project>

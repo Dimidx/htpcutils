@@ -20,6 +20,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace XBMC
 {
@@ -118,6 +120,55 @@ namespace XBMC
         public string[] GetDirectoryContentNames(string directory)
         {
             return GetDirectoryContentNames(directory, null);
+        }
+
+        /// <summary>
+        /// Récupère une image a partir de son chemin
+        /// </summary>
+        /// <param name="_FilePath"></param>
+        /// <returns></returns>
+        public BitmapImage GetThumbByPath(string _FilePath)
+        {
+            string[] downloadData;
+            string[] fileExist;
+            BitmapImage _thumbnail = new BitmapImage();
+            _thumbnail.BeginInit();
+
+            fileExist = parent.Request("FileExists", _FilePath);
+            if (fileExist != null)
+            {
+                if (fileExist[0] == "True")
+                {
+                    try
+                    {
+
+                        downloadData = parent.Request("FileDownload", _FilePath);
+
+                        // Convert Base64 String to byte[]
+                        byte[] imageBytes = Convert.FromBase64String(downloadData[0]);
+                        MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+                        _thumbnail.StreamSource = ms;
+
+                    }
+                    catch (Exception)
+                    {
+                        _thumbnail.UriSource = new Uri("pack://application:,,,/Resources/defaultAudio.png", UriKind.RelativeOrAbsolute);
+                    }
+
+                }
+                else
+                {
+                    _thumbnail.UriSource = new Uri("pack://application:,,,/Resources/defaultAudio.png", UriKind.RelativeOrAbsolute);
+                }
+            }
+            else
+            {
+                _thumbnail.UriSource = new Uri("pack://application:,,,/Resources/defaultAudio.png", UriKind.RelativeOrAbsolute);
+            }
+
+            _thumbnail.EndInit();
+            _thumbnail.Freeze();
+            return _thumbnail;
         }
     }
 }
