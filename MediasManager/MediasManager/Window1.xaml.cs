@@ -123,9 +123,11 @@ namespace MediaManager
             if (listBox_Films.SelectedItem != null)
             {
                 Movie _mov = (Movie)listBox_Films.SelectedItem;
-                _mov.updateItem();
-                MonFilm = new Film();
-                MonFilm = _mov.Infos;
+                //_mov.updateItem();
+                MonFilm = _mov.updateItem();
+                if (MonFilm.Titre == null) MonFilm.Titre = _mov.MovieName;
+                //MonFilm = new Film();
+                //MonFilm = _mov.Infos;
                 FilmDetails.DataContext = MonFilm;
             }
 
@@ -164,13 +166,12 @@ namespace MediaManager
 
         private void btnScraper_Click(object sender, RoutedEventArgs e)
         {
-            Movie _movie = (Movie)listBox_Films.SelectedItem;
-            Film _Film = new Film();
-            _Film.Titre = _movie.MovieName;
-            
-
-            ScraperSelect _scraper = new ScraperSelect(_Film);
+            //Movie _mov = (Movie)listBox_Films.SelectedItem;
+            ScraperSelect _scraper = new ScraperSelect(MonFilm);
             _scraper.ShowDialog();
+            MonFilm = _scraper.FilmValid;
+            FilmDetails.DataContext = MonFilm;
+
 
         }
 
@@ -195,7 +196,7 @@ namespace MediaManager
             {
                 try
                 {
-                    plug.Export(_movie.Infos, _movie.fileInfo);
+                    plug.Export(MonFilm, _movie.fileInfo);
                 }
                 catch { }
 

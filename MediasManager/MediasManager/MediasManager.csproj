@@ -613,6 +613,9 @@
     <Content Include="Plugins\Scraper\Allocine.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Plugins\Scraper\SpeedAllocine.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Plugins\Scraper\TMDB.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
