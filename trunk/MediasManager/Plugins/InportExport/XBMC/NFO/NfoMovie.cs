@@ -34,7 +34,7 @@ namespace XBMC
         private String studio = "";
         private String trailer = "";
         private String alloid = "";
-
+        private string _OriginalTitle = "";
         private List<Actor> actors  = new List<Actor>();
 
         [XmlElement(ElementName = "title")]
@@ -42,6 +42,13 @@ namespace XBMC
         {
             get { return title; }
             set { title = value; OnPropertyChanged("Title"); }
+        }
+
+        [XmlElement(ElementName = "originaltitle")]
+        public String OriginalTitle
+        {
+            get { return _OriginalTitle; }
+            set { _OriginalTitle = value; OnPropertyChanged("OriginalTitle"); }
         }
 
         [XmlElement(ElementName = "alloid")]

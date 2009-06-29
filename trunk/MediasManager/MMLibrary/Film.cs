@@ -181,7 +181,7 @@ namespace MediaManager.Library
                 {
                     return m_FilmListeCover[0];
                 }
-                return null;
+                return new Thumb();
             }
             //set { m_FilmCover = value; }
         }
@@ -198,7 +198,7 @@ namespace MediaManager.Library
                 {
                     return m_FilmListeFanart[0];
                 }
-                return null;
+                return new Thumb();
             }
             
             //set { m_FilmFanart = value; }
@@ -211,7 +211,7 @@ namespace MediaManager.Library
         public ObservableCollection<Thumb> ListeCover
         {
             get { return m_FilmListeCover; }
-            set { m_FilmListeCover = value; }
+            set { m_FilmListeCover = value; OnPropertyChanged("ListeCover"); }
         }
 
         private ObservableCollection<Thumb> m_FilmListeFanart;
@@ -221,7 +221,7 @@ namespace MediaManager.Library
         public ObservableCollection<Thumb> ListeFanart
         {
             get { return m_FilmListeFanart; }
-            set { m_FilmListeFanart = value; }
+            set { m_FilmListeFanart = value; OnPropertyChanged("ListeFanart"); }
         }
 
         private string m_FilmURLBandeAnnonce;

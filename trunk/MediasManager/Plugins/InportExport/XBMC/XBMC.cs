@@ -142,7 +142,7 @@ namespace MediaManager.Plugins
         {
             NfoMovie Nfo = new NfoMovie();
             Nfo.Title = _Film.Titre;
-            Nfo.Title = _Film.TitreOriginal;
+            Nfo.OriginalTitle = _Film.TitreOriginal;
             Nfo.Year = _Film.Annee;
             Nfo.Mpaa = _Film.Avis;
             Nfo.Outline = _Film.Critique;
@@ -187,7 +187,7 @@ namespace MediaManager.Plugins
             {
                 string _PostersPath = _FileInfo.FullName.Replace(_FileInfo.Extension, ".tbn");
                 if (File.Exists(_PostersPath)) File.Delete(_PostersPath);
-                File.Copy(_Film.Cover.URLImage, _PostersPath);
+                File.Copy(_Film.Cover.FichierCache, _PostersPath);
             }
             catch {}
             #endregion
@@ -197,7 +197,7 @@ namespace MediaManager.Plugins
             {
                 string _FanartPath = _FileInfo.FullName.Replace(_FileInfo.Extension, "-fanart.jpg");
                 if (File.Exists(_FanartPath)) File.Delete(_FanartPath);
-                File.Copy(_Film.Fanart.URLImage, _FanartPath);
+                File.Copy(_Film.Fanart.FichierCache, _FanartPath);
             }
             catch { }
             #endregion

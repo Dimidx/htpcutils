@@ -29,7 +29,7 @@ namespace MediaManager
         public Film FilmRecherche; //Film a recherché (provient de la fenetre précédente)
         public List<Film> _Resultats = new List<Film>();
         public Film FilmSelectionne = new Film(); //le film sélectionné dans les résultats
-
+        public Film FilmValid = new Film(); //le film sélectionné dans les résultats
         public BackgroundWorker BackWorkerRecherche = new BackgroundWorker();
         public BackgroundWorker BackWorkerDetails = new BackgroundWorker();
 
@@ -37,7 +37,7 @@ namespace MediaManager
         {
             this.InitializeComponent();
             FilmRecherche = _FilmRecherche;
-            ThreadPool.SetMaxThreads(5, 5);
+            //ThreadPool.SetMaxThreads(5, 5);
 
 
             Assembly PluginFile;
@@ -142,18 +142,14 @@ namespace MediaManager
                 BackWorkerDetails.WorkerSupportsCancellation = true;
                 BackWorkerDetails.RunWorkerAsync();
 
-
-
-
-
             }
         }
 
         void BackWorkerDetails_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.DataContext = FilmSelectionne;
-            this.gridfanarts.DataContext = FilmSelectionne.ListeFanart;
-            this.gridaffiches.DataContext = FilmSelectionne.ListeCover;
+            //this.gridfanarts.DataContext = FilmSelectionne.ListeFanart;
+            //this.gridaffiches.DataContext = FilmSelectionne.ListeCover;
             GridRecherche.Visibility = Visibility.Collapsed;
         }
 
@@ -166,8 +162,11 @@ namespace MediaManager
         {
             if (lstAffiches.SelectedItem != null)
             {
-                imageafficheselect.Source = ((Thumb)lstAffiches.SelectedItem).URLImage;
-                //DetailsFilm.Affiche.Source = ((Thumb)lstAffiches.SelectedItem).URLImage;
+                FilmSelectionne.ListeCover.Move(lstAffiches.SelectedIndex, 0);
+                FilmSelectionne.OnPropertyChanged("Cover");
+
+                //imageafficheselect.Source = ((Thumb)lstAffiches.SelectedItem).Image;
+                //DetailsFilm.Affiche.Source = ((Thumb)lstAffiches.SelectedItem).Image;
             }
         }
 
@@ -175,9 +174,18 @@ namespace MediaManager
         {
             if (lstFanarts.SelectedItem != null)
             {
-                imagefanartselect.Source = ((Thumb)lstFanarts.SelectedItem).URLImage;
-                //DetailsFilm.Fanart.Source = ((Thumb)lstFanarts.SelectedItem).URLImage;
+                FilmSelectionne.ListeFanart.Move(lstFanarts.SelectedIndex, 0);
+                FilmSelectionne.OnPropertyChanged("Fanart");
+                //imagefanartselect.Source = ((Thumb)lstFanarts.SelectedItem).Image;
+                //DetailsFilm.Fanart.Source = ((Thumb)lstFanarts.SelectedItem).Image;
             }
+        }
+
+        private void btn_OK_Click(object sender, RoutedEventArgs e)
+        {
+            FilmValid = FilmSelectionne;
+            this.Close();
+        
         }
     }
 }

@@ -46,37 +46,36 @@ namespace MediaManager
         //private ListViewSubItem status;
         private bool autoMode = false;
         private MovieFolder movieFolder;
-        public Film Infos;
+        //public Film Infos;
 
         public Movie(FileInfo movie, MovieFolder mf) //, downloadManager dlMgr)
         {
-            Infos = new Film();
+            //Infos = new Film();
             fileInfo = movie;
             //downloadMgr = dlMgr;
             movieFolder = mf;
             _MovieName = cleanMovieFilename(movie.Name.Replace(movie.Extension, ""));
-            this.Infos.Titre = _MovieName;
-            this.Infos.TitreOriginal = _MovieName;
+            //this.Infos.Titre = _MovieName;
+            //this.Infos.TitreOriginal = _MovieName;
             //updateItem();
         }
 
 
-        public void updateItem()
+        public Film updateItem()
         {
+            Film _Film = new Film();
 
             foreach (IMMPluginImportExport plug in Settings.PluginsImportExport)
             {
                 try
                 {
-                    this.Infos = plug.Import(this.fileInfo);
+                    _Film = plug.Import(this.fileInfo);
                 }
                 catch { }
 
             }
 
-            if (this.Infos.Titre != null) _MovieName = this.Infos.Titre;
-
-
+            return _Film;
 
 
         }

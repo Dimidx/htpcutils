@@ -12,11 +12,8 @@
 	x:Name="UserControl_FilmDetails"
 	d:DesignWidth="640" d:DesignHeight="480" FontFamily="./Fonts/#Aeon Info" Loaded="UserControl_FilmDetails_Loaded">
     <UserControl.Resources>
+    	<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 			<Style x:Key="TextBoxStyleEdit" TargetType="{x:Type TextBox}">
-			<Style.Triggers>
-				<EventTrigger RoutedEvent="FocusManager.GotFocus"/>
-				<Trigger Property="Border.BorderThickness" Value="0,0,0,0"/>
-			</Style.Triggers>
 			<Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
 			<Setter Property="FocusVisualStyle" Value="{x:Null}" />
 			<Setter Property="AllowDrop" Value="true" />
@@ -97,6 +94,10 @@
 			<Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
 			<Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}"/>
 			<Setter Property="BorderBrush" Value="#FF000000"/>
+			<Style.Triggers>
+				<EventTrigger RoutedEvent="FocusManager.GotFocus"/>
+				<Trigger Property="Border.BorderThickness" Value="0,0,0,0"/>
+			</Style.Triggers>
 		</Style>
 
 		<VisualBrush x:Key="Reflet_Poster">
@@ -253,10 +254,11 @@
 				<StackPanel Width="Auto" Height="Auto" Margin="0,0,5,0">
 					<Grid Width="253" Height="325" Margin="0,0,0,5">
 					<Border BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" BorderBrush="{DynamicResource NormalBorderBrush}" >
+						<Controls:Sablier Visibility="{Binding Path=Cover.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default}"/>
 						<Border.Background>
 							<VisualBrush>
 								<VisualBrush.Visual>
-                                        <Image x:Name="Affiche" Source="{Binding Path=Cover.URLImage ,Converter={StaticResource UriToImageConverter}}" />
+                                        <Image x:Name="Affiche" Source="{Binding Path=Cover.Image}" />
      								</VisualBrush.Visual>
          					</VisualBrush>
 						</Border.Background>
@@ -273,10 +275,12 @@
 					</Grid>
 					<Grid Width="253" Height="143" Margin="0,0,0,5">
 					<Border BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" BorderBrush="{DynamicResource NormalBorderBrush}" >
-						<Border.Background>
+						<Controls:Sablier Visibility="{Binding Path=Fanart.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default}"/>
+                        <Border.Background>
 							<VisualBrush>
 								<VisualBrush.Visual>
-                                        <Image x:Name="Fanart" Source="{Binding Path=Fanart.URLImage,Converter={StaticResource UriToImageConverter}}" />
+                                        <Image x:Name="Fanart" Source="{Binding Path=Fanart.Image}" />
+                                        
                                     </VisualBrush.Visual>
          					</VisualBrush>
 						</Border.Background>
