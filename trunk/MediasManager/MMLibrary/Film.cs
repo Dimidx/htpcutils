@@ -19,157 +19,157 @@ namespace MediaManager.Library
     [Serializable]
     [System.Xml.Serialization.XmlRoot()]
     public class Film : INotifyPropertyChanged
-
     {
-        #region Membres
 
-        private string m_FilmAlloId;
+        #region Private
+        
+        private string _AlloId;
+        private string _Id;
+        private string _Titre;
+        private string _Annee;
+        private DateTime _DateSortie;
+        private string _TitreOriginal;
+        private PersonneCollection _Realisateurs;
+        private PersonneCollection _Acteurs;
+        private ObservableCollection<Thumb> _ListeCover;
+        
+        #endregion
+
+        #region Public
+
+
         /// <summary>
         /// Référence du film chez http://www.allocine.fr
         /// </summary>
         public string AlloID
         {
-            get { return m_FilmAlloId; }
-            set { m_FilmAlloId = value; OnPropertyChanged("AlloID"); }
+            get { return _AlloId; }
+            set { _AlloId = value; OnPropertyChanged("AlloID"); }
         }
 
-        private string m_FilmId;
         /// <summary>
         /// Référence du film
         /// </summary>
         public string ID
         {
-            get { return m_FilmId; }
-            set { m_FilmId = value; OnPropertyChanged("ID"); }
+            get { return _Id; }
+            set { _Id = value; OnPropertyChanged("ID"); }
         }
-
-        private string m_FilmTitle;
 
         /// <summary>
         /// Titre Français
         /// </summary>
         public string Titre
         {
-            get { return m_FilmTitle; }
-            set { m_FilmTitle = value; OnPropertyChanged("Titre"); }
+            get { return _Titre; }
+            set { _Titre = value; OnPropertyChanged("Titre"); }
         }
-
-        private string m_FilmAnnee;
 
         /// <summary>
         /// Année de production
         /// </summary>
         public string Annee
         {
-            get { return m_FilmAnnee; }
-            set { m_FilmAnnee = value; OnPropertyChanged("Annee"); }
+            get { return _Annee; }
+            set { _Annee = value; OnPropertyChanged("Annee"); }
         }
-
- 
-        private DateTime m_FilmDateSortie;
 
         /// <summary>
         /// Date de sortie en France
         /// </summary>
         public DateTime DateSortie
         {
-            get { return m_FilmDateSortie; }
-            set { m_FilmDateSortie = value; OnPropertyChanged("DateSortie"); }
+            get { return _DateSortie; }
+            set { _DateSortie = value; OnPropertyChanged("DateSortie"); }
         }
-
-        private string m_FilmOriginalTitle;
 
         /// <summary>
         /// Titre Original
         /// </summary>
         public string TitreOriginal
         {
-            get { return m_FilmOriginalTitle; }
-            set { m_FilmOriginalTitle = value; OnPropertyChanged("TitreOriginal"); }
+            get { return _TitreOriginal; }
+            set { _TitreOriginal = value; OnPropertyChanged("TitreOriginal"); }
         }
-
-        private PersonneCollection m_FilmRealisateurs;
 
         /// <summary>
         /// Liste des réalisateurs
         /// </summary>
         public PersonneCollection Realisateurs
         {
-            get { return m_FilmRealisateurs; }
-            set { m_FilmRealisateurs = value; OnPropertyChanged("Realisateurs"); }
+            get { return _Realisateurs; }
+            set { _Realisateurs = value; OnPropertyChanged("Realisateurs"); }
         }
 
-        private PersonneCollection m_FilmActors;
         /// <summary>
         /// Liste des acteurs
         /// </summary>
         public PersonneCollection Acteurs
         {
-            get { return m_FilmActors; }
-            set { m_FilmActors = value; OnPropertyChanged("Acteurs"); }
+            get { return _Acteurs; }
+            set { _Acteurs = value; OnPropertyChanged("Acteurs"); }
         }
 
-        private string m_FilmSynopsis;
+        private string _Synopsis;
         /// <summary>
         /// Résumé
         /// </summary>
         public string Synopsis
         {
-            get { return m_FilmSynopsis; }
-            set { m_FilmSynopsis = value; }
+            get { return _Synopsis; }
+            set { _Synopsis = value; OnPropertyChanged("Synopsis"); }
         }
 
-        private string[] m_FilmPays;
+        private string[] _Pays;
         /// <summary>
         /// Pays
         /// </summary>
         public string[] Pays
         {
-            get { return m_FilmPays; }
-            set { m_FilmPays = value; OnPropertyChanged("Pays"); }
+            get { return _Pays; }
+            set { _Pays = value; OnPropertyChanged("Pays"); }
         }
 
-        private int m_FilmDureeMin;
+        private int _DureeMin;
         /// <summary>
         /// Durée en minutes
         /// </summary>
         public int DureeMin
         {
-            get { return m_FilmDureeMin; }
-            set { m_FilmDureeMin = value; }
+            get { return _DureeMin; }
+            set { _DureeMin = value; OnPropertyChanged("DureeMin"); }
         }
 
-        private string m_FilmDureeChaine;
+        private string _DureeChaine;
         /// <summary>
         /// Durée au format __h __min
         /// </summary>
         public string DureeChaine
         {
-            get { return m_FilmDureeChaine; }
-            set { m_FilmDureeChaine = value; }
+            get { return _DureeChaine; }
+            set { _DureeChaine = value; OnPropertyChanged("DureeChaine"); }
         }
 
-        private string m_FilmCritique;
+        private string _Critique;
         /// <summary>
         /// Critique presse
         /// </summary>
         public string Critique
         {
-            get { return m_FilmCritique; }
-            set { m_FilmCritique = value; }
+            get { return _Critique; }
+            set { _Critique = value; OnPropertyChanged("Critique"); }
         }
 
-        private string m_FilmAvis;
+        private string _Avis;
         /// <summary>
         /// Avis
         /// </summary>
         public string Avis
         {
-            get { return m_FilmAvis; }
-            set { m_FilmAvis = value; }
+            get { return _Avis; }
+            set { _Avis = value; OnPropertyChanged("Avis"); }
         }
 
-        private Thumb m_FilmCover;
         /// <summary>
         /// La jaquette du film
         /// </summary>
@@ -177,16 +177,14 @@ namespace MediaManager.Library
         {
             get 
             {
-                if (m_FilmListeCover.Count > 0)
+                if (_ListeCover.Count > 0)
                 {
-                    return m_FilmListeCover[0];
+                    return _ListeCover[0];
                 }
                 return new Thumb();
             }
-            //set { m_FilmCover = value; }
         }
 
-        private Thumb m_FilmFanart;
         /// <summary>
         /// Le fanart pour le film
         /// </summary>
@@ -194,87 +192,83 @@ namespace MediaManager.Library
         {
             get 
             {
-                if (m_FilmListeFanart.Count > 0)
+                if (_ListeFanart.Count > 0)
                 {
-                    return m_FilmListeFanart[0];
+                    return _ListeFanart[0];
                 }
                 return new Thumb();
             }
-            
-            //set { m_FilmFanart = value; }
         }
 
-        private ObservableCollection<Thumb> m_FilmListeCover;
+
         /// <summary>
         /// Liste d'affiches pour le film
         /// </summary>
         public ObservableCollection<Thumb> ListeCover
         {
-            get { return m_FilmListeCover; }
-            set { m_FilmListeCover = value; OnPropertyChanged("ListeCover"); }
+            get { return _ListeCover; }
+            set { _ListeCover = value; OnPropertyChanged("ListeCover"); OnPropertyChanged("Cover"); }
         }
 
-        private ObservableCollection<Thumb> m_FilmListeFanart;
+        private ObservableCollection<Thumb> _ListeFanart;
         /// <summary>
         /// Liste de fanart pour le film
         /// </summary>
         public ObservableCollection<Thumb> ListeFanart
         {
-            get { return m_FilmListeFanart; }
-            set { m_FilmListeFanart = value; OnPropertyChanged("ListeFanart"); }
+            get { return _ListeFanart; }
+            set { _ListeFanart = value; OnPropertyChanged("ListeFanart"); OnPropertyChanged("Fanart"); }
         }
 
-        private string m_FilmURLBandeAnnonce;
+        private string _URLBandeAnnonce;
         /// <summary>
         /// L'URL de la bande annonce
         /// </summary>
         private string URLBandeAnnonce
         {
-            get { return m_FilmURLBandeAnnonce; }
-            set { m_FilmURLBandeAnnonce = value; }
+            get { return _URLBandeAnnonce; }
+            set { _URLBandeAnnonce = value; OnPropertyChanged("URLBandeAnnonce"); }
         }
 
 
-        private string[] m_FilmGenres;
+        private string[] _Genres;
         /// <summary>
         /// Liste des genres
         /// </summary>
         public string[] Genres
         {
-            get { return m_FilmGenres; }
-            set { m_FilmGenres = value; }
+            get { return _Genres; }
+            set { _Genres = value; OnPropertyChanged("Genres"); }
         }
 
-        private float m_FilmNotePress;
+        private float _NotePresse;
         /// <summary>
         /// Note de la presse (/10)
         /// </summary>
         public float NotePresse
         {
-            get { return m_FilmNotePress; }
-            set { m_FilmNotePress = value; }
+            get { return _NotePresse; }
+            set { _NotePresse = value; OnPropertyChanged("NotePresse"); }
         }
 
-        private float m_FilmNoteSpectateurs;
+        private float _NoteSpectateurs;
         /// <summary>
         /// Note des spectateurs (/10)
         /// </summary>
         public float NoteSpectateurs
         {
-            get { return m_FilmNoteSpectateurs; }
-            set { m_FilmNoteSpectateurs = value; }
+            get { return _NoteSpectateurs; }
+            set { _NoteSpectateurs = value; OnPropertyChanged("NoteSpectateurs"); }
         }
 
         #endregion
 
         public Film()
         {
-            this.m_FilmCover = new Thumb();
-            this.m_FilmFanart = new Thumb();
-            this.m_FilmActors = new PersonneCollection();
-            this.m_FilmRealisateurs = new PersonneCollection();
-            this.m_FilmListeCover = new ObservableCollection<Thumb>();
-            this.m_FilmListeFanart = new ObservableCollection<Thumb>();
+            this._Acteurs = new PersonneCollection();
+            this._Realisateurs = new PersonneCollection();
+            this._ListeCover = new ObservableCollection<Thumb>();
+            this._ListeFanart = new ObservableCollection<Thumb>();
 
         }
 

@@ -111,7 +111,7 @@ namespace MediaManager
             Application app = System.Windows.Application.Current;
             if (app != null)
             {
-                app.Dispatcher.BeginInvoke(DispatcherPriority.Background, new DispatcherOperationCallback(Clear),null);
+                app.Dispatcher.BeginInvoke(DispatcherPriority.Send, new DispatcherOperationCallback(Clear),null);
             }
 
             //_movies.Clear();
@@ -141,7 +141,7 @@ namespace MediaManager
                                         {
                                             if (app != null)
                                             {
-                                                app.Dispatcher.BeginInvoke(DispatcherPriority.Background, new DispatcherOperationCallback(Add), new Movie(fileInfo, mf));
+                                                app.Dispatcher.BeginInvoke(DispatcherPriority.Send, new DispatcherOperationCallback(Add), new Movie(fileInfo, mf));
                                             }
                                         }
 
@@ -162,7 +162,7 @@ namespace MediaManager
                                     {
                                         if (app != null)
                                         {
-                                            app.Dispatcher.BeginInvoke(DispatcherPriority.Background, new DispatcherOperationCallback(Add), new Movie(fileInfo, mf));
+                                            app.Dispatcher.BeginInvoke(DispatcherPriority.Send, new DispatcherOperationCallback(Add), new Movie(fileInfo, mf));
                                         }
 
                                     }

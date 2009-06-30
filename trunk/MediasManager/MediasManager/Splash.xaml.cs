@@ -108,6 +108,8 @@ namespace MediaManager
             }
             #endregion
 
+            if (!Directory.Exists(System.Environment.CurrentDirectory + @"\Cache\Images\")) Directory.CreateDirectory(System.Environment.CurrentDirectory + @"\Cache\Images\");
+
             this.Dispatcher.BeginInvoke(DispatcherPriority.Send, new DispatcherOperationCallback(delegate(Object state)
             {
                 this.Hide();
