@@ -269,9 +269,9 @@ namespace MediaManager.Library
                         WebClient client = new WebClient();
 
                         //#region Proxy
-                        WebProxy wProxy = new WebProxy("10.126.71.12", 80);
-                        wProxy.Credentials = new NetworkCredential("rfraftp", "Siberbo2000", "fr");
-                        client.Proxy = wProxy;
+                        //WebProxy wProxy = new WebProxy("10.126.71.12", 80);
+                        //wProxy.Credentials = new NetworkCredential("rfraftp", "Siberbo2000", "fr");
+                        //client.Proxy = wProxy;
                         //#endregion
 
                         //Téléchargement
