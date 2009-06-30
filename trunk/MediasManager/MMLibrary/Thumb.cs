@@ -221,7 +221,7 @@ namespace MediaManager.Library
                 bw.CancelAsync();
                 while (bw.IsBusy)
                 {
-                    Thread.Sleep(10);
+                    Thread.Sleep(1);
                 }
             }
 

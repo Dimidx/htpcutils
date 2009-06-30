@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" xmlns:local="clr-namespace:MediaManager"
+    xmlns:MediaManager_Library="clr-namespace:MediaManager.Library;assembly=MMLibrary"
     x:Class="MediaManager.Window1"
     DataContext="{Binding RelativeSource={RelativeSource Self}}"
     Title="Window1" Height="768" Width="1024" Background="{DynamicResource WindowBackgroundBrush}" >
@@ -18,20 +19,22 @@
         		<TextBlock Text="{Binding Path=MovieName}" Width="Auto" TextWrapping="Wrap" FontFamily="./Fonts/#Aeon Info"/>
         	</Grid>
         </DataTemplate>
-        <Storyboard x:Key="Storyboard1">
-        	<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="FilmDetails" Storyboard.TargetProperty="(UIElement.Opacity)">
-        		<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-        		<SplineDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
+        <Storyboard x:Key="FadeIn">
+        	<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ucFilmDetails" Storyboard.TargetProperty="(UIElement.Opacity)">
+        		<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+        		<SplineDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
         	</DoubleAnimationUsingKeyFrames>
         </Storyboard>
+    	<Storyboard x:Key="FadeOut">
+    		<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ucFilmDetails" Storyboard.TargetProperty="(UIElement.Opacity)">
+    			<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+    			<SplineDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
+    		</DoubleAnimationUsingKeyFrames>
+    	</Storyboard>
+
         <Converters:ToImage x:Key="ToImage"/>
-        
+       
     </Window.Resources>
-	<Window.Triggers>
-		<EventTrigger RoutedEvent="Selector.SelectionChanged" SourceName="listBox_Films">
-			<BeginStoryboard x:Name="Storyboard1_BeginStoryboard" Storyboard="{StaticResource Storyboard1}"/>
-		</EventTrigger>
-	</Window.Triggers>
     <Grid >
     	<DockPanel x:Name="dockPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True">
     		<Menu DockPanel.Dock="Top">
@@ -78,7 +81,13 @@
     					</StackPanel>
     				</Border>
     				<Border BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" d:LayoutOverrides="Height" Margin="5,5,5,5">
-    					<local:FilmDetails x:Name="FilmDetails" Margin="5,5,5,5"/>
+    					<local:FilmDetails x:Name="ucFilmDetails" Margin="5,5,5,5">
+                            <local:FilmDetails.DataContext>
+                                
+                                <Binding ElementName="Windows" Path="MonFilm" />
+                                
+                            </local:FilmDetails.DataContext>
+                        </local:FilmDetails>
     				</Border>
     			</DockPanel>
     		</DockPanel>
