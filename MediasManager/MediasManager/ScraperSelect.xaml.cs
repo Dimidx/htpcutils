@@ -32,12 +32,54 @@ namespace MediaManager
         public Film FilmValid = new Film(); //le film sélectionné dans les résultats
         public BackgroundWorker BackWorkerRecherche = new BackgroundWorker();
         public BackgroundWorker BackWorkerDetails = new BackgroundWorker();
+        public ObservableCollection<ChampModifiable> _ListeChampsModif = new ObservableCollection<ChampModifiable>();
+
+        public class ChampModifiable
+        {
+            private bool _IsModifiable = false;
+            private PropertyInfo _PropertyInfo;
+
+            public bool IsModifiable
+            {
+                get { return _IsModifiable; }
+                set { _IsModifiable = value; }
+            }
+            public PropertyInfo PropertyInfo
+            {
+                get { return _PropertyInfo; }
+                set { _PropertyInfo = value; }
+            }
+
+
+        }
+
 
         public ScraperSelect(Film _FilmRecherche)
         {
             this.InitializeComponent();
             FilmRecherche = _FilmRecherche;
-            //ThreadPool.SetMaxThreads(5, 5);
+            ThreadPool.SetMaxThreads(5, 5);
+
+
+            Type _TypeFilm = typeof(Film);
+            PropertyInfo[] _Properties = _TypeFilm.GetProperties();
+            
+            foreach (PropertyInfo t in _Properties)
+            {
+                ChampModifiable c = new ChampModifiable();
+                c.PropertyInfo = t;
+                if (t.GetValue(_FilmRecherche, null) == null)
+                {
+                    c.IsModifiable = true;
+                }
+                else
+                {
+                    c.IsModifiable = false;
+                }
+                if (t.CanWrite) _ListeChampsModif.Add(c);
+
+            }
+            lstChamps.ItemsSource = _ListeChampsModif;
 
 
             Assembly PluginFile;
@@ -184,6 +226,21 @@ namespace MediaManager
         private void btn_OK_Click(object sender, RoutedEventArgs e)
         {
             FilmValid = FilmSelectionne;
+
+            foreach (ChampModifiable c in _ListeChampsModif)
+            {
+                if (c.IsModifiable)
+                {
+                    c.PropertyInfo.SetValue(FilmValid, c.PropertyInfo.GetValue(FilmSelectionne, null),null);
+
+                }
+                else
+                {
+                    c.PropertyInfo.SetValue(FilmValid, c.PropertyInfo.GetValue(FilmRecherche, null), null);
+
+                }
+
+            }
             this.Close();
         
         }

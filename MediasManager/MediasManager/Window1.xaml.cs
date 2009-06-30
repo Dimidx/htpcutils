@@ -29,11 +29,7 @@ namespace MediaManager
     public partial class Window1 : Window
     {
         //private Media media = new Media();
-        public Film MonFilm
-        {
-            get { return _MonFilm; }
-            set { _MonFilm = value; }
-        }
+
         private Film _MonFilm = new Film();
 
         //public MovieCollection _Movies = new MovieCollection();
@@ -57,7 +53,7 @@ namespace MediaManager
             }
             InitializeComponent();
             //ucFilmDetails.DataContext = MonFilm;
-            this.DataContext = MonFilm;
+            //this.DataContext = MonFilm;
 
 
             ListCollectionView lcv = new ListCollectionView(MovieManager.Movies);
@@ -65,18 +61,18 @@ namespace MediaManager
             listBox_Films.ItemsSource = lcv;
             //this.DataContext = lcv;
             //lcv.Filter = film => ((Film)film).Titre.ToLower().Contains(this.txt_Recherche);
-            //FilmDetails.DataContext = MonFilm;
+            //ucFilmDetails.DataContext = _MonFilm;
             ScanDir();
 
         }
 
-           protected override void OnClosed(EventArgs e)
-      {
-         base.OnClosed(e);
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
 
-         App.Current.Shutdown();
-      }
-	
+            App.Current.Shutdown();
+        }
+
         /// <summary>
         /// Lance le scan des dossiers pour afficher les 
         /// </summary>
@@ -101,8 +97,8 @@ namespace MediaManager
 
         private void BackWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            ObservableCollection<Movie> _Movies = this.Resources["MovieCollectionDataSource"] as ObservableCollection<Movie>;
-            this.lib_BarreEtat.Text = "Nombre de films trouvés : " + _Movies.Count.ToString() + " - " + e.UserState.ToString();
+            //ObservableCollection<Movie> _Movies = this.Resources["MovieCollectionDataSource"] as ObservableCollection<Movie>;
+            //this.lib_BarreEtat.Text = "Nombre de films trouvés : " + _Movies.Count.ToString() + " - " + e.UserState.ToString();
 
         }
 
@@ -119,17 +115,15 @@ namespace MediaManager
 
             this.jauge_progress.Visibility = Visibility.Collapsed;
             this.lib_BarreEtat.Visibility = Visibility.Collapsed;
-            
+
         }
 
 
-        private delegate void MethodInvoker();
         private void listBox_Films_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
             if (listBox_Films.SelectedItem != null)
             {
-
 
                 if (bwSelect.IsBusy == true)
                 {
@@ -139,6 +133,8 @@ namespace MediaManager
                         Thread.Sleep(1);
                     }
                 }
+                Storyboard FadeIn = (Storyboard)FindResource("FadeIn");
+                FadeIn.Begin(this);
                 MaMovie = (Movie)listBox_Films.SelectedItem;
                 bwSelect = new BackgroundWorker();
                 bwSelect.DoWork += new DoWorkEventHandler(bwSelect_DoWork);
@@ -147,11 +143,12 @@ namespace MediaManager
                 bwSelect.RunWorkerAsync();
 
             }
-       
+
         }
- 
+
         void bwSelect_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+
             Storyboard FadeOut = (Storyboard)FindResource("FadeOut");
             FadeOut.Begin(this);
 
@@ -160,15 +157,32 @@ namespace MediaManager
         void bwSelect_DoWork(object sender, DoWorkEventArgs e)
         {
 
-            //MonFilm = new Film();
+
+            _MonFilm = new Film();
+            //Thread.Sleep(5000);
             //_mov.updateItem();
             _MonFilm = MaMovie.updateItem();
             if (_MonFilm.Titre == null) _MonFilm.Titre = MaMovie.MovieName;
-            //FilmDetails.DataContext = MonFilm;
+            System.Threading.Thread thread = new System.Threading.Thread(
+    new System.Threading.ThreadStart(
+      delegate()
+      {
+          ucFilmDetails.Dispatcher.Invoke(
+            System.Windows.Threading.DispatcherPriority.Send,
+            new Action(
+              delegate()
+              {
+                  ucFilmDetails.DataContext = _MonFilm;
+              }
+          ));
+      }
+  ));
 
-            //MonFilm = new Film();
-            //MonFilm = _mov.Infos;
+            thread.Start();
+
         }
+
+
 
         #region Menu
 
@@ -199,10 +213,10 @@ namespace MediaManager
         private void btnScraper_Click(object sender, RoutedEventArgs e)
         {
             //Movie _mov = (Movie)listBox_Films.SelectedItem;
-            ScraperSelect _scraper = new ScraperSelect(MonFilm);
+            ScraperSelect _scraper = new ScraperSelect(_MonFilm);
             _scraper.ShowDialog();
-            MonFilm = _scraper.FilmValid;
-            //FilmDetails.DataContext = MonFilm;
+            _MonFilm = _scraper.FilmValid;
+            ucFilmDetails.DataContext = _MonFilm;
 
 
         }
@@ -215,8 +229,8 @@ namespace MediaManager
             lcv.Filter = film => ((Movie)film).MovieName.ToLower().Contains(this.txt_Recherche.Text);
 
             listBox_Films.ItemsSource = lcv;
-            this.DataContext = lcv;
-  
+            //this.DataContext = lcv;
+
 
         }
 
@@ -228,11 +242,12 @@ namespace MediaManager
             {
                 try
                 {
-                    plug.Export(MonFilm, _movie.fileInfo);
+                    plug.Export(_MonFilm, _movie.fileInfo);
                 }
                 catch { }
 
             }
+
         }
 
     }

@@ -7,7 +7,7 @@
     mc:Ignorable="d" xmlns:local="clr-namespace:MediaManager"
     xmlns:MediaManager_Library="clr-namespace:MediaManager.Library;assembly=MMLibrary"
     x:Class="MediaManager.Window1"
-    DataContext="{Binding RelativeSource={RelativeSource Self}}"
+
     Title="Window1" Height="768" Width="1024" Background="{DynamicResource WindowBackgroundBrush}" >
     <Window.Resources>
         <Converters:StringToImageSource x:Key="StringToImageSource"/>
@@ -33,7 +33,7 @@
     	</Storyboard>
 
         <Converters:ToImage x:Key="ToImage"/>
-       
+
     </Window.Resources>
     <Grid >
     	<DockPanel x:Name="dockPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True">
@@ -72,22 +72,16 @@
     			<DockPanel LastChildFill="True">
     				<Border BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,5,5,5" VerticalAlignment="Stretch" DockPanel.Dock="Top" Background="{DynamicResource ControlBackgroundBrush}">
     					<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,5,5,5">
-    						<Button Click="btnScraper_Click" x:Name="btnScraper" Width="20" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Stretch" Height="20">
-    							<Image Width="16" Height="16" Source="Images\Allocine_16.png"/>
+    						<Button Click="btnScraper_Click" x:Name="btnScraper" Width="36" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Stretch" Height="36">
+    							<Image Width="32" Height="32" Source="Images\IE_128.png"/>
     						</Button>
-    						<Button Click="btnSave_Click"  x:Name="btnSave" Width="20" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Stretch" Height="20">
-    							<Image Width="16" Height="16" Source="Images\Allocine_16.png"/>
+    						<Button Click="btnSave_Click"  x:Name="btnSave" Width="36" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Stretch" Height="36">
+    							<Image Width="32" Height="32" Source="Images\Save_128.png"/>
     						</Button>
     					</StackPanel>
     				</Border>
     				<Border BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" d:LayoutOverrides="Height" Margin="5,5,5,5">
-    					<local:FilmDetails x:Name="ucFilmDetails" Margin="5,5,5,5">
-                            <local:FilmDetails.DataContext>
-                                
-                                <Binding ElementName="Windows" Path="MonFilm" />
-                                
-                            </local:FilmDetails.DataContext>
-                        </local:FilmDetails>
+    					<local:FilmDetails x:Name="ucFilmDetails" Margin="5,5,5,5" />
     				</Border>
     			</DockPanel>
     		</DockPanel>

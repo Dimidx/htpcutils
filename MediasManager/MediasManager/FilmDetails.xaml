@@ -109,6 +109,8 @@
     	<Converters:TableauToString x:Key="TableauToString"/>
     	<Converters:PersonneToString x:Key="PersonneToString"/>
         <Converters:StringToImageSource x:Key="StringToImageSource"/>
+        <Converters:DateTimeConverter x:Key="DateTimeConverter"/>
+		
     	<ItemsPanelTemplate x:Key="ItemsPanelTemplate_Acteurs">
     			<WrapPanel/>
     	</ItemsPanelTemplate>
@@ -332,7 +334,7 @@
 								<Label Width="90" Content="ANNEE :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
 								<TextBox Width="Auto" Text="{Binding Path=Annee}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_Annee" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
 								<Label Width="Auto" Content="DATE DE SORTIE :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="10,2,0,2"/>
-								<TextBox Width="Auto" Text="{Binding Path=DateSortie}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_DateSortie" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
+								<TextBox Width="Auto" Text="{Binding Path=DateSortie, Converter={StaticResource DateTimeConverter}, Mode=Default}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_DateSortie" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
 								<Label Width="Auto" Content="DUREE :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="10,2,0,2"/>
 								<TextBox Width="Auto" Text="{Binding Path=DureeChaine}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_Duree" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
 							</DockPanel>
@@ -356,10 +358,23 @@
 					<Border Width="Auto" Height="Auto" DockPanel.Dock="Top" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="0,1,0,0" Padding="5,5,5,5">
 						<TextBox Text="{Binding Path=Critique}"  Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_Plot" TextAlignment="Justify" Foreground="{DynamicResource TextBrush}" Style="{DynamicResource TextBoxStyleEdit}" AcceptsReturn="True"/>
 					</Border>
+					<Border x:Name="bdDivers" Width="Auto" Height="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="0,1,0,0" Padding="5,5,5,5" DockPanel.Dock="Bottom">
+                    	<Expander Header="Divers" Style="{DynamicResource ExpanderStyle1}" >
+								<StackPanel>
+							<DockPanel Width="Auto" Height="Auto">
+								<Label Width="90" Content="ID Allociné :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
+								<TextBox Width="Auto" Text="{Binding Path=AlloID}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_AlloId" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
+							</DockPanel>
+							<DockPanel Width="Auto" Height="Auto">
+								<Label Width="90" Content="ID IMDB :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
+								<TextBox Width="Auto" Text="{Binding Path=ID}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_ImdbId" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
+							</DockPanel>
+								</StackPanel>
+						</Expander>
+					</Border>
 					<Border Width="Auto" Height="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="0,1,0,0" Padding="5,5,5,5" DockPanel.Dock="Top">
 						<TextBox Text="{Binding Path=Synopsis}" Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_Tagline" TextAlignment="Justify" Foreground="{DynamicResource TextBrush}" Style="{DynamicResource TextBoxStyleEdit}" AcceptsReturn="True"/>
                     </Border>
-					
 				</DockPanel>
 			</DockPanel>
 		</Grid>

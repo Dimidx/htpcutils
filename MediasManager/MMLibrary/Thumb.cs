@@ -149,7 +149,7 @@ namespace MediaManager.Library
             set
             {
                 m_URLImage = value;
-                _FichierCache = defaultCacheDir + m_URLImage.Replace(@"\", "_").Replace(@"/", "_").Replace(":", "_");
+                _FichierCache = defaultCacheDir + m_URLImage.Replace(@"\", "_").Replace(@"/", "_").Replace(":", "_").Replace("?","_");
                 OnPropertyChanged("URLImage");
             }
         }
@@ -305,7 +305,7 @@ namespace MediaManager.Library
                 _Miniature.BeginInit();
                 _Miniature.CreateOptions = BitmapCreateOptions.IgnoreColorProfile | BitmapCreateOptions.DelayCreation;
                 _Miniature.CacheOption = BitmapCacheOption.OnDemand;
-                _Miniature.DecodePixelWidth = 200;
+                _Miniature.DecodePixelWidth = 100;
                 _Miniature.UriSource = new Uri(_FichierCache, UriKind.RelativeOrAbsolute);
                 _Miniature.EndInit();
                 _Miniature.Freeze();
