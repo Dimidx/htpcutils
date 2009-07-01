@@ -163,6 +163,8 @@ namespace MediaManager
             //_mov.updateItem();
             _MonFilm = MaMovie.updateItem();
             if (_MonFilm.Titre == null) _MonFilm.Titre = MaMovie.MovieName;
+            _MonFilm.Cover.GetImage();
+            _MonFilm.Fanart.GetImage();
             System.Threading.Thread thread = new System.Threading.Thread(
     new System.Threading.ThreadStart(
       delegate()
@@ -216,6 +218,8 @@ namespace MediaManager
             ScraperSelect _scraper = new ScraperSelect(_MonFilm);
             _scraper.ShowDialog();
             _MonFilm = _scraper.FilmValid;
+            _MonFilm.Cover.GetImage(true);
+            _MonFilm.Fanart.GetImage(true);
             ucFilmDetails.DataContext = _MonFilm;
 
 

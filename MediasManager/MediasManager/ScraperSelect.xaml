@@ -9,7 +9,7 @@
     
 	x:Name="Window"
 	Title="Scraper"
-	Width="640" Height="480" Background="{DynamicResource WindowBackgroundBrush}">
+	Width="1024" Height="768" Background="{DynamicResource WindowBackgroundBrush}">
 	<Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <Converters:PersonneToString x:Key="PersonneToString"/>
@@ -44,9 +44,10 @@
 		</DataTemplate>
 		<DataTemplate x:Key="dtChamps">
 			<Grid>
-				<CheckBox Content="{Binding Path=PropertyInfo.Name}" IsChecked="{Binding Path=IsModifiable}"/>
+				<CheckBox Content="{Binding Path=PropertyInfo.Name}" IsChecked="{Binding Path=IsModifiable}" IsThreeState="False" OverridesDefaultStyle="True" />
 			</Grid>
 		</DataTemplate>
+	
 	</Window.Resources>
 
 	<Grid x:Name="LayoutRoot">
@@ -119,6 +120,7 @@
 		<DockPanel LastChildFill="True" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="200">
 			<ComboBox x:Name="cbScraper" VerticalAlignment="Top" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplateScraper}" DockPanel.Dock="Top" Margin="5,5,5,5"/>
 			<ListBox x:Name="lstChamps" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="5,0,5,5" DockPanel.Dock="Bottom" Height="200" ItemTemplate="{DynamicResource dtChamps}"/>
+			<Button Content="Tous / Aucun" Click="Button_Click_1" DockPanel.Dock="Bottom" Margin="5,0,5,5"/>
 			<ListBox SelectionChanged="lstResult_SelectionChanged" x:Name="lstResult" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplateResult}" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="5,0,5,5" MinWidth="100" DockPanel.Dock="Bottom"/>
 		</DockPanel>
 	</Grid>

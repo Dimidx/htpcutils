@@ -260,7 +260,7 @@
 						<Border.Background>
 							<VisualBrush>
 								<VisualBrush.Visual>
-                                        <Image x:Name="Affiche" Source="{Binding Path=Cover.Image}" />
+                                        <Image x:Name="Affiche" Source="{Binding Path=Cover.Miniature}" />
      								</VisualBrush.Visual>
          					</VisualBrush>
 						</Border.Background>
@@ -281,7 +281,7 @@
                         <Border.Background>
 							<VisualBrush>
 								<VisualBrush.Visual>
-                                        <Image x:Name="Fanart" Source="{Binding Path=Fanart.Image}" />
+                                        <Image x:Name="Fanart" Source="{Binding Path=Fanart.Miniature}" />
                                         
                                     </VisualBrush.Visual>
          					</VisualBrush>
@@ -313,7 +313,7 @@
 							</DockPanel>
 							<DockPanel Width="Auto" Height="Auto">
 								<Label Width="90" Content="ACTEURS :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
-								<Expander Header="{Binding Path=Acteurs, Converter={StaticResource PersonneToString}}" BorderThickness="0,0,0,0" Style="{DynamicResource ExpanderStyle1}" Margin="10,0,0,0" MinHeight="0">
+								<Expander Header="{Binding Path=Acteurs, Converter={StaticResource PersonneToString}}" BorderThickness="0,0,0,0" Style="{DynamicResource ExpanderStyle1}" Margin="10,0,0,0" MinHeight="20" IsExpanded="False">
 								<Grid>
 								<Button Width="18" Height="18" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center">
 									<Image Width="16" Height="16" Source="Images\Scan_16.png" Stretch="UniformToFill"/>
