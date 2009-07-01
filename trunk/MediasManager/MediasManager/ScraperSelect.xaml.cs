@@ -34,7 +34,7 @@ namespace MediaManager
         public BackgroundWorker BackWorkerDetails = new BackgroundWorker();
         public ObservableCollection<ChampModifiable> _ListeChampsModif = new ObservableCollection<ChampModifiable>();
 
-        public class ChampModifiable
+        public class ChampModifiable : INotifyPropertyChanged
         {
             private bool _IsModifiable = false;
             private PropertyInfo _PropertyInfo;
@@ -42,15 +42,27 @@ namespace MediaManager
             public bool IsModifiable
             {
                 get { return _IsModifiable; }
-                set { _IsModifiable = value; }
+                set { _IsModifiable = value; OnPropertyChanged("IsModifiable"); }
             }
             public PropertyInfo PropertyInfo
             {
                 get { return _PropertyInfo; }
-                set { _PropertyInfo = value; }
+                set { _PropertyInfo = value; OnPropertyChanged("PropertyInfo"); }
             }
 
+            #region INotifyPropertyChanged Members
 
+            public event PropertyChangedEventHandler PropertyChanged;
+
+            public void OnPropertyChanged(string propertyName)
+            {
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                }
+            }
+
+            #endregion
         }
 
 
@@ -243,6 +255,19 @@ namespace MediaManager
             }
             this.Close();
         
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+            foreach (ChampModifiable c in _ListeChampsModif)
+            {
+                    c.IsModifiable = true;
+            }
+
+            //lstChamps.Items.Clear();
+            lstChamps.ItemsSource = _ListeChampsModif;
+
         }
     }
 }

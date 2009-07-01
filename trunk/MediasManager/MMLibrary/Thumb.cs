@@ -149,7 +149,7 @@ namespace MediaManager.Library
             set
             {
                 m_URLImage = value;
-                _FichierCache = defaultCacheDir + m_URLImage.Replace(@"\", "_").Replace(@"/", "_").Replace(":", "_").Replace("?","_");
+                _FichierCache = defaultCacheDir + m_URLImage.Replace(@"\", "_").Replace(@"/", "_").Replace(":", "_").Replace("?", "_");
                 OnPropertyChanged("URLImage");
             }
         }
@@ -167,7 +167,7 @@ namespace MediaManager.Library
         /// </summary>
         public bool IsLocal
         {
-            get 
+            get
             {
                 if (m_URLImage != "")
                 {
@@ -197,7 +197,7 @@ namespace MediaManager.Library
 
         private void SaveImage()
         {
-            if (!IsCached)
+            if (!IsCached & !IsLocal)
             {
                 using (FileStream stream = new FileStream(_FichierCache, FileMode.Create))
                 {
@@ -207,14 +207,25 @@ namespace MediaManager.Library
                     stream.Close();
                 }
             }
+            if (!IsCached & IsLocal)
+            {
+                File.Copy(m_URLImage, _FichierCache);
+            }
+
         }
 
-
-        /// <summary>
-        /// Télécharge l'image
-        /// </summary>
-        private void GetImage()
+        public void GetImage()
         {
+            GetImage(false);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Force">Supprime le cache</param>
+
+        public void GetImage(bool Force)
+        {
+
             IsLoading = true;
             if (bw.IsBusy)
             {
@@ -224,7 +235,7 @@ namespace MediaManager.Library
                     Thread.Sleep(1);
                 }
             }
-
+            if (Force) File.Delete(_FichierCache);
             bw = new BackgroundWorker();
 
             bw.WorkerSupportsCancellation = true;
@@ -249,19 +260,52 @@ namespace MediaManager.Library
             }
             else
             {
-                if (IsCached || IsLocal)
+
+                //L'image est locale et en cache
+                if (IsLocal & IsCached)
+                {
+                    _Image = new BitmapImage();
+                    _Image.BeginInit();
+                    _Image.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
+                    _Image.CacheOption = BitmapCacheOption.OnLoad;
+                    _Image.UriSource = new Uri(_FichierCache, UriKind.RelativeOrAbsolute);
+                    _Image.EndInit();
+                    _Image.Freeze();
+                    //SaveImage();
+                    goto Mini;
+                }
+
+                //L'image est locale mais n'est pas en cache
+                if (IsLocal & !IsCached)
+                {
+                    File.Delete(_FichierCache);
+                    _Image = new BitmapImage();
+                    _Image.BeginInit();
+                    _Image.CreateOptions = BitmapCreateOptions.IgnoreColorProfile | BitmapCreateOptions.DelayCreation;
+                    _Image.CacheOption = BitmapCacheOption.OnLoad;
+                    _Image.UriSource = new Uri(m_URLImage, UriKind.RelativeOrAbsolute);
+                    _Image.EndInit();
+                    _Image.Freeze();
+                    SaveImage();
+                    goto Mini;
+                }
+
+
+                //L'image est distante et en cache
+                if (IsCached & !IsLocal)
                 {
                     _Image = new BitmapImage();
                     _Image.BeginInit();
                     _Image.CreateOptions = BitmapCreateOptions.IgnoreColorProfile | BitmapCreateOptions.DelayCreation;
                     _Image.CacheOption = BitmapCacheOption.OnLoad;
-                    if (IsCached) _Image.UriSource = new Uri(_FichierCache,UriKind.RelativeOrAbsolute);
-                    if (IsLocal) _Image.UriSource = new Uri(m_URLImage, UriKind.RelativeOrAbsolute);
+                    _Image.UriSource = new Uri(_FichierCache, UriKind.RelativeOrAbsolute);
+                    //if (IsLocal) _Image.UriSource = new Uri(m_URLImage, UriKind.RelativeOrAbsolute);
                     _Image.EndInit();
                     _Image.Freeze();
-                    
+                    //SaveImage();
+                    goto Mini;
                 }
-                else
+                if (!IsCached & !IsLocal)
                 {
 
                     try
@@ -274,9 +318,6 @@ namespace MediaManager.Library
                         //client.Proxy = wProxy;
                         //#endregion
 
-                        //Téléchargement
-                        //client.DownloadDataCompleted += new DownloadDataCompletedEventHandler(Image_DownloadDataCompleted);
-                        //client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(Image_DownloadProgressChanged);
                         byte[] _result = client.DownloadData(new Uri(this.m_URLImage));
                         client.Dispose();
                         MemoryStream ms = new MemoryStream(_result);
@@ -288,11 +329,11 @@ namespace MediaManager.Library
                         _Image.StreamSource = ms;
                         _Image.EndInit();
                         _Image.Freeze();
-                        if (!IsLocal) SaveImage();
+                        SaveImage();
                     }
                     catch (Exception)
                     {
-                        
+
                         //throw;
                     }
 
@@ -300,12 +341,13 @@ namespace MediaManager.Library
 
                 }
 
+            Mini:
                 //Création de la miniature
                 _Miniature = new BitmapImage();
                 _Miniature.BeginInit();
-                _Miniature.CreateOptions = BitmapCreateOptions.IgnoreColorProfile | BitmapCreateOptions.DelayCreation;
-                _Miniature.CacheOption = BitmapCacheOption.OnDemand;
-                _Miniature.DecodePixelWidth = 100;
+                _Miniature.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
+                _Miniature.CacheOption = BitmapCacheOption.OnLoad;
+                _Miniature.DecodePixelWidth = 200;
                 _Miniature.UriSource = new Uri(_FichierCache, UriKind.RelativeOrAbsolute);
                 _Miniature.EndInit();
                 _Miniature.Freeze();
