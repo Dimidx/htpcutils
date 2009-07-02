@@ -58,7 +58,7 @@
 		<Button Click="Button_Click" HorizontalAlignment="Right" Margin="0,8,8,0" VerticalAlignment="Top" Width="53" Height="30" Content="Button"/>
         <Button x:Name="btn_OK" Click="btn_OK_Click" Margin="0,8,8,0" VerticalAlignment="Top" Width="53" Height="30" Content="OK"/>
 
-        <TabControl Margin="212.397,42,8,19" IsSynchronizedWithCurrentItem="True">
+        <TabControl Margin="212.397,42,8,19" >
 			<TabItem Header="Infos">
 				<Grid>
 					<Grid.ColumnDefinitions>
@@ -69,18 +69,21 @@
 				</Grid>
 			</TabItem>
 			<TabItem Header="Affiches">
-				<Grid x:Name="gridaffiches" DataContext="{Binding Path=ListeCover}">
+				<Grid x:Name="gridaffiches" DataContext="{Binding Path=ListeFanart}">
 					<DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True">
-						<ListBox ItemsSource="{Binding}" x:Name="lstAffiches" SelectionChanged="lstAffiches_SelectionChanged" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplateFanart}" Width="130" Margin="5,5,5,5" BorderBrush="{DynamicResource NormalBorderBrush}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" DockPanel.Dock="Left" />
+						<ListBox ItemsSource="{Binding}" x:Name="lstAffiches" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplateFanart}" Width="130" Margin="5,5,5,5" BorderBrush="{DynamicResource NormalBorderBrush}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" DockPanel.Dock="Left" />
 						<DockPanel>
 							<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,5">
 								<TextBlock Text="Largeur : " Foreground="#FF000000" />
-								<TextBlock x:Name="lib_AfficheLargeur" Text="" Foreground="{DynamicResource TextBrush}" Margin="5,0,5,0" />
+								<TextBlock x:Name="lib_AfficheLargeur" Text="{Binding Path=Largeur}" Foreground="{DynamicResource TextBrush}" Margin="5,0,5,0" />
 								<TextBlock Text="Hauteur : " Foreground="#FF000000" />
-								<TextBlock x:Name="lib_AfficheHauteur" Text="" Foreground="{DynamicResource TextBrush}" Margin="5,0,5,0" />
+								<TextBlock x:Name="lib_AfficheHauteur" Text="{Binding Path=Hauteur}" Foreground="{DynamicResource TextBrush}" Margin="5,0,5,0" />
 							</StackPanel>
-							<Grid VerticalAlignment="Stretch">
-								<Controls:Sablier Visibility="{Binding Path=IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default}"/>
+							<StackPanel VerticalAlignment="Bottom" Width="Auto" Height="Auto" HorizontalAlignment="Right" Orientation="Horizontal" DockPanel.Dock="Bottom">
+								<Button x:Name="btn_AffDefAffiche" Click="btn_DefAffiche_Click"  Width="100" Height="20" Content="Définir Affiche" HorizontalAlignment="Right"/>
+							</StackPanel>
+							<Grid VerticalAlignment="Stretch" DockPanel.Dock="Top">
+								<Controls:Sablier Visibility="{Binding Path=IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default, FallbackValue=Hidden}"/>
                                 <Image x:Name="imageafficheselect" Source="{Binding Path=Image}" />
 							</Grid>
 						</DockPanel>
@@ -90,17 +93,21 @@
 			<TabItem Header="Fanarts">
 				<Grid x:Name="gridfanarts" DataContext="{Binding Path=ListeFanart}"  >
 					<DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True">
-						<ListBox ItemsSource="{Binding}" x:Name="lstFanarts" SelectionChanged="lstFanarts_SelectionChanged" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplateFanart}" Width="130" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" DockPanel.Dock="Left" Margin="5,5,5,5" BorderBrush="{DynamicResource NormalBorderBrush}" />
+						<ListBox ItemsSource="{Binding}" x:Name="lstFanarts" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplateFanart}" Width="130" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" DockPanel.Dock="Left" Margin="5,5,5,5" BorderBrush="{DynamicResource NormalBorderBrush}" />
 						<DockPanel>
 							<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,5">
 								<TextBlock Text="Largeur : " Foreground="#FF000000" />
-								<TextBlock Text="" Foreground="{DynamicResource TextBrush}" Margin="5,0,5,0" />
+								<TextBlock Text="{Binding Path=Largeur}" Foreground="{DynamicResource TextBrush}" Margin="5,0,5,0" />
 								<TextBlock Text="Hauteur : " Foreground="#FF000000" />
-								<TextBlock Text="" Foreground="{DynamicResource TextBrush}" Margin="5,0,5,0" />
+								<TextBlock Text="{Binding Path=Hauteur}" Foreground="{DynamicResource TextBrush}" Margin="5,0,5,0" />
 							</StackPanel>
+							<StackPanel VerticalAlignment="Bottom" Width="Auto" Height="Auto" HorizontalAlignment="Right" Orientation="Horizontal" DockPanel.Dock="Bottom">
+								<Button x:Name="btn_AffDefFanart" Click="btn_DefFanart_Click" Width="100" Height="20" Content="Définir Fanart" HorizontalAlignment="Right" Margin="5,0,0,0"/>
+							</StackPanel>
+
 							<Grid VerticalAlignment="Stretch">
-								<Controls:Sablier Visibility="{Binding Path=IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default}"/>
-                                <Image x:Name="imagefanartselect" Source="{Binding Path=Image}" />
+								<Controls:Sablier Visibility="{Binding Path=IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default, FallbackValue=Hidden}"/>
+                                <Image x:Name="imagefanartselect" Source="{Binding Path=Image}"/>
 							</Grid>
 						</DockPanel>
 					</DockPanel>
@@ -121,7 +128,7 @@
 			<ComboBox x:Name="cbScraper" VerticalAlignment="Top" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplateScraper}" DockPanel.Dock="Top" Margin="5,5,5,5"/>
 			<ListBox x:Name="lstChamps" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="5,0,5,5" DockPanel.Dock="Bottom" Height="200" ItemTemplate="{DynamicResource dtChamps}"/>
 			<Button Content="Tous / Aucun" Click="Button_Click_1" DockPanel.Dock="Bottom" Margin="5,0,5,5"/>
-			<ListBox SelectionChanged="lstResult_SelectionChanged" x:Name="lstResult" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplateResult}" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="5,0,5,5" MinWidth="100" DockPanel.Dock="Bottom"/>
+			<ListBox SelectionChanged="lstResult_SelectionChanged" x:Name="lstResult" ItemTemplate="{DynamicResource DataTemplateResult}" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="5,0,5,5" MinWidth="100" DockPanel.Dock="Bottom"/>
 		</DockPanel>
 	</Grid>
 </Window>

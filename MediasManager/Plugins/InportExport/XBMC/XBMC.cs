@@ -54,6 +54,7 @@ namespace MediaManager.Plugins
                 MonFilm.Avis = Nfo.Mpaa;
                 MonFilm.Critique = Nfo.Outline;
                 MonFilm.AlloID = Nfo.AlloId;
+                MonFilm.Studio = Nfo.Studio;
                 #region Date de sortie
                 try
                 {
@@ -147,6 +148,7 @@ namespace MediaManager.Plugins
             Nfo.Mpaa = _Film.Avis;
             Nfo.Outline = _Film.Critique;
             Nfo.AlloId = _Film.AlloID;
+            Nfo.Studio = _Film.Studio;
             #region Date de sortie
             try
             {
@@ -178,7 +180,7 @@ namespace MediaManager.Plugins
                 Actor _act = new Actor();
                 _act.Name = act.Nom;
                 _act.Role = act.Role;
-                _act.Thumb = act.Photo.URLImage;
+                //_act.Thumb = act.Photo.URLImage;
                 Nfo.Actor.Add(_act);
             }
             #endregion

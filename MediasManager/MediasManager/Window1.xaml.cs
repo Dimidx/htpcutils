@@ -133,6 +133,7 @@ namespace MediaManager
                         Thread.Sleep(1);
                     }
                 }
+                ucFilmDetails.DataContext = null;
                 Storyboard FadeIn = (Storyboard)FindResource("FadeIn");
                 FadeIn.Begin(this);
                 MaMovie = (Movie)listBox_Films.SelectedItem;
@@ -148,29 +149,26 @@ namespace MediaManager
 
         void bwSelect_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-
+            //ucFilmDetails.DataContext = _MonFilm;
             Storyboard FadeOut = (Storyboard)FindResource("FadeOut");
             FadeOut.Begin(this);
+            bwSelect.Dispose();
 
         }
 
         void bwSelect_DoWork(object sender, DoWorkEventArgs e)
         {
 
-
+            _MonFilm = null;
             _MonFilm = new Film();
-            //Thread.Sleep(5000);
-            //_mov.updateItem();
             _MonFilm = MaMovie.updateItem();
             if (_MonFilm.Titre == null) _MonFilm.Titre = MaMovie.MovieName;
-            _MonFilm.Cover.GetImage();
-            _MonFilm.Fanart.GetImage();
             System.Threading.Thread thread = new System.Threading.Thread(
     new System.Threading.ThreadStart(
       delegate()
       {
           ucFilmDetails.Dispatcher.Invoke(
-            System.Windows.Threading.DispatcherPriority.Send,
+            System.Windows.Threading.DispatcherPriority.DataBind,
             new Action(
               delegate()
               {
@@ -217,11 +215,13 @@ namespace MediaManager
             //Movie _mov = (Movie)listBox_Films.SelectedItem;
             ScraperSelect _scraper = new ScraperSelect(_MonFilm);
             _scraper.ShowDialog();
-            _MonFilm = _scraper.FilmValid;
-            _MonFilm.Cover.GetImage(true);
-            _MonFilm.Fanart.GetImage(true);
-            ucFilmDetails.DataContext = _MonFilm;
-
+            if (_scraper.FilmValid != null)
+            {
+                _MonFilm = _scraper.FilmValid;
+                if (_MonFilm.Cover != null) _MonFilm.Cover.GetImage(true);
+                if (_MonFilm.Fanart != null) _MonFilm.Fanart.GetImage(true);
+                ucFilmDetails.DataContext = _MonFilm;
+            }
 
         }
 
@@ -248,9 +248,16 @@ namespace MediaManager
                 {
                     plug.Export(_MonFilm, _movie.fileInfo);
                 }
-                catch { }
+                catch (Exception exe)
+                {
+                    Console.WriteLine("Erreur Export " + plug.Name + Environment.NewLine + exe.Message);
+                }
 
             }
+            _MonFilm = _movie.updateItem();
+
+            if (_MonFilm.Cover != null) _MonFilm.Cover.GetImage(true);
+            if (_MonFilm.Fanart != null) _MonFilm.Fanart.GetImage(true);
 
         }
 
