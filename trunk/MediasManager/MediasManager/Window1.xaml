@@ -66,7 +66,7 @@
     			<Border Margin="5,5,5,5" Width="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10">
                     <DockPanel>
 						<TextBox TextChanged="txt_Recherche_TextChanged" x:Name="txt_Recherche" DockPanel.Dock="Top" Margin="5,5,5,0" BorderBrush="{DynamicResource NormalBorderBrush}"/>
-						<ListBox SelectionChanged="listBox_Films_SelectionChanged" x:Name="listBox_Films" ItemsPanel="{DynamicResource MovieTemplate}" Background="{x:Null}" BorderBrush="{DynamicResource NormalBorderBrush}" Foreground="#FF000000" Margin="5,5,5,5" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" d:LayoutOverrides="Height" ItemsSource="{Binding}" ItemTemplate="{DynamicResource MovieDataTemplate}" IsSynchronizedWithCurrentItem="True" IsTextSearchEnabled="True" MaxWidth="300" MinWidth="200" DockPanel.Dock="Top" />
+						<ListBox SelectionChanged="listBox_Films_SelectionChanged" x:Name="listBox_Films" ItemsPanel="{DynamicResource MovieTemplate}" Background="{x:Null}" BorderBrush="{DynamicResource NormalBorderBrush}" Foreground="#FF000000" Margin="5,5,5,5" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" d:LayoutOverrides="Height" ItemsSource="{Binding}" ItemTemplate="{DynamicResource MovieDataTemplate}" IsSynchronizedWithCurrentItem="False" IsTextSearchEnabled="True" MaxWidth="300" MinWidth="200" DockPanel.Dock="Top" />
                 	</DockPanel>
 				</Border>
     			<DockPanel LastChildFill="True">

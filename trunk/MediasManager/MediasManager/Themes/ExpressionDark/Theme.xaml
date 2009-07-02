@@ -91,6 +91,37 @@
             </Setter.Value>
         </Setter>
     </Style>
+	
+	<Style x:Key="{x:Type ToolTip}" TargetType="ToolTip">
+  <Setter Property="OverridesDefaultStyle" Value="true"/>
+  <Setter Property="HasDropShadow" Value="True"/>
+  <Setter Property="Template">
+    <Setter.Value>
+      <ControlTemplate TargetType="ToolTip">
+        <Border Name="Border"
+          Background="{StaticResource NormalBrush}"
+          BorderBrush="{StaticResource NormalBorderBrush}"
+          BorderThickness="1"
+		  CornerRadius="5,5,5,5"
+          Width="{TemplateBinding Width}"
+          Height="{TemplateBinding Height}">
+          <ContentPresenter
+            Margin="4" 
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
+        </Border>
+        <ControlTemplate.Triggers>
+          <Trigger Property="HasDropShadow" Value="true">
+            <Setter TargetName="Border" Property="CornerRadius" Value="4"/>
+            <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="true"/>
+          </Trigger>
+        </ControlTemplate.Triggers>
+      </ControlTemplate>
+    </Setter.Value>
+  </Setter>
+</Style>
+
+	
     <Style TargetType="{x:Type Button}" BasedOn="{x:Null}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource NuclearButtonFocusVisual}" />
         <Setter Property="Background" Value="{DynamicResource NormalBrush}" />

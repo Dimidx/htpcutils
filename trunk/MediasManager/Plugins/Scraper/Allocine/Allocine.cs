@@ -51,7 +51,7 @@ namespace MediaManager.Plugins
             Film MonFilm = null;
 
             MonFilm = new Film();
-            string s = Utils.GetSourceHTML("http://www.allocine.fr/film/fichefilm_gen_cfilm=" + _Film.AlloID+ ".html");
+            string s = Utils.GetSourceHTML("http://www.allocine.fr/film/fichefilm_gen_cfilm=" + _Film.AlloID + ".html");
 
             s = Regex.Replace(s, "[\r\n]", "");
 
@@ -59,7 +59,7 @@ namespace MediaManager.Plugins
             MonFilm.Titre = Utils.removeUnwantedChars(Regex.Match(s, "<h1[^>]*>(.*?)</h1>").ToString());
             MonFilm.TitreOriginal = Utils.removeUnwantedChars(Regex.Match(s, @"<h3 class=""SpProse"">Titre original : <i>(.*?)</i>").Groups[1].ToString());
             MonFilm.Annee = Utils.removeUnwantedChars(Regex.Match(s, "Année de production : (\\d{4})").Groups[1].ToString());
-            //MonFilm.Realisateurs = Utils.removeUnwantedChars(Regex.Match(s, @"<h3 class=""SpProse"">Réalisé par(.*?)</h3>").Groups[1].ToString()).Replace(", ", ",").Split(',');
+            MonFilm.Studio = Utils.removeUnwantedChars(Regex.Match(s, "Distribué par (.*?)>(.*?)</a>").Groups[2].ToString());
             #region Réalisateurs
             string[] _Réalisateurs;
             _Réalisateurs = Utils.removeUnwantedChars(Regex.Match(s, @"<h3 class=""SpProse"">Réalisé par(.*?)</h3>").Groups[1].ToString()).Replace(", ", ",").Split(',');
@@ -163,7 +163,7 @@ namespace MediaManager.Plugins
 
             #region Jaquette Allocine
 
-            string strThumbURL = @"/film/galerievignette_gen_cfilm=" + _Film.AlloID+ ".html";
+            string strThumbURL = @"/film/galerievignette_gen_cfilm=" + _Film.AlloID + ".html";
             if (strThumbURL != "")
             {
                 strThumbURL = "http://www.allocine.fr" + strThumbURL;
@@ -173,10 +173,8 @@ namespace MediaManager.Plugins
                     strBodyThumb = Regex.Replace(strBodyThumb, "[\r\n]", "");
                     //L'affiche
                     strThumbURL = Utils.removeUnwantedChars(Regex.Match(strBodyThumb, "id=['\"]imgNormal['\"] class=['\"]photo['\"] src=['\"](.*?)['\"]").Groups[1].ToString());
-                    Thumb _cover = new Thumb();
-                    _cover.URLImage = strThumbURL;
-                    MonFilm.ListeCover.Add(_cover);
-                    
+                    if (strThumbURL != "") MonFilm.ListeCover.Add(new Thumb(strThumbURL));
+
                     //Les autres images
                     Regex regImage = new Regex("\"fichier\":\"(.*?)\"");
                     Match matchImage = regImage.Match(strBodyThumb);
@@ -184,9 +182,9 @@ namespace MediaManager.Plugins
                     {
                         Thumb _fanart = new Thumb();
                         _fanart.URLImage = "http://a69.g.akamai.net/n/69/10688/v1/img5.allocine.fr/acmedia/medias" + matchImage.Groups[1].ToString();
-                        _fanart.URLMiniature = "http://a69.g.akamai.net/n/69/10688/v1/img5.allocine.fr/acmedia/crp/200/200/x/x/medias" + matchImage.Groups[1].ToString();
+                        //_fanart.URLMiniature = "http://a69.g.akamai.net/n/69/10688/v1/img5.allocine.fr/acmedia/crp/200/200/x/x/medias" + matchImage.Groups[1].ToString();
 
-                        if (_fanart.URLImage != _cover.URLImage)
+                        if (_fanart.URLImage != strThumbURL)
                         {
                             MonFilm.ListeFanart.Add(_fanart);
                             MonFilm.ListeCover.Add(_fanart);
@@ -214,13 +212,13 @@ namespace MediaManager.Plugins
                 MonFilm.Acteurs.Add(_acteur);
                 matchResult = matchResult.NextMatch();
             }
-            
+
             #endregion
 
             return MonFilm;
 
         }
-  
+
         /// <summary>
         /// Recherche un film sur Allociné
         /// </summary>
@@ -231,72 +229,80 @@ namespace MediaManager.Plugins
         {
             List<Film> ListeFilm = new List<Film>();
 
-            //Recupère le resultats des films
-            string strURL = "http://iphone.allocine.fr/recherche/default.html?motcle=" + HttpUtility.UrlEncode(_Film.Titre, Encoding.Default) + "&rub=1";
-            int _NbrFilms;
-            int _NbrPages;
-
-            string strBody = Utils.GetSourceHTML(strURL);
-            if (strBody.Contains("Films (0)") == false)
+            if (_Film.AlloID != null & _Film.AlloID != "")
             {
-                _NbrFilms = Convert.ToInt32(Regex.Match(strBody, @"<b>Film \((.*)\)").Groups[1].ToString());
-                _NbrPages = _NbrFilms / 10;
+                ListeFilm.Add(GetMovie(_Film));
+            }
+            else
+            {
+                //Recupère le resultats des films
+                string strURL = "http://iphone.allocine.fr/recherche/default.html?motcle=" + HttpUtility.UrlEncode(_Film.Titre, Encoding.Default) + "&rub=1";
 
-                for (int i = 1; i <= _NbrPages + 1; i++)
+                int _NbrFilms;
+                int _NbrPages;
+
+                string strBody = Utils.GetSourceHTML(strURL);
+                if (strBody.Contains("Films (0)") == false)
                 {
-                    strURL = "http://iphone.allocine.fr/recherche/default.html?motcle=" + HttpUtility.UrlEncode(_Film.Titre, Encoding.Default) + "&rub=1&page=" + i.ToString();
-                    strBody = Utils.GetSourceHTML(strURL);
-                    strBody = Regex.Replace(strBody, "[\r\n]", "");
+                    _NbrFilms = Convert.ToInt32(Regex.Match(strBody, @"<b>Film \((.*)\)").Groups[1].ToString());
+                    _NbrPages = _NbrFilms / 10;
 
-                    MatchCollection myMatches = Regex.Matches(strBody, @"<a href=""/film/fichefilm_gen_cfilm=[0-9]+.*?</tr>");
-
-                    foreach (Match movieCode in myMatches)
+                    for (int i = 1; i <= _NbrPages + 1; i++)
                     {
-                        Film MonFilm = new Film();
+                        strURL = "http://iphone.allocine.fr/recherche/default.html?motcle=" + HttpUtility.UrlEncode(_Film.Titre, Encoding.Default) + "&rub=1&page=" + i.ToString();
+                        strBody = Utils.GetSourceHTML(strURL);
+                        strBody = Regex.Replace(strBody, "[\r\n]", "");
 
-                        string strMovieCode = movieCode.ToString();
+                        MatchCollection myMatches = Regex.Matches(strBody, @"<a href=""/film/fichefilm_gen_cfilm=[0-9]+.*?</tr>");
 
-                        MonFilm.AlloID = Regex.Match(strMovieCode, "/film/fichefilm_gen_cfilm=([0-9]+).html").Groups[1].ToString();
-
-                        #region Cover
-                        string URLThumbnail = Regex.Match(strMovieCode, @".*src=""(.*gif|.*jpg)"".*").Groups[1].ToString();
-                        if (URLThumbnail.Contains("novignette") == false)
+                        foreach (Match movieCode in myMatches)
                         {
-                            Thumb _cover = new Thumb();
-                            _cover.URLMiniature = URLThumbnail;
-                            MonFilm.ListeCover.Add(_cover);
-                            
+                            Film MonFilm = new Film();
+
+                            string strMovieCode = movieCode.ToString();
+
+                            MonFilm.AlloID = Regex.Match(strMovieCode, "/film/fichefilm_gen_cfilm=([0-9]+).html").Groups[1].ToString();
+
+                            #region Cover
+                            //string URLThumbnail = Regex.Match(strMovieCode, @".*src=""(.*gif|.*jpg)"".*").Groups[1].ToString();
+                            //if (URLThumbnail.Contains("novignette") == false & URLThumbnail != "")
+                            //{
+                            //    Thumb _cover = new Thumb();
+                            //    _cover.URLMiniature = URLThumbnail;
+                            //    MonFilm.ListeCover.Add(_cover);
+
+                            //}
+                            #endregion
+
+                            MonFilm.Titre = Utils.removeUnwantedChars(Regex.Match(strMovieCode, @".*.html"">(.*?)</a>").Groups[1].ToString());
+                            MonFilm.TitreOriginal = Utils.removeUnwantedChars(Regex.Match(strMovieCode, @"&nbsp;\((.*?)\)").Groups[1].ToString());
+                            MonFilm.Annee = Utils.removeUnwantedChars(Regex.Match(strMovieCode, ">(\\d{4})<").Groups[1].ToString());
+
+                            #region Réalisateurs
+                            string[] _Réalisateurs;
+                            _Réalisateurs = Utils.removeUnwantedChars(Regex.Match(strMovieCode, ".*de (.*?)<").Groups[1].ToString()).Replace(", ", ",").Split(',');
+                            foreach (string item in _Réalisateurs)
+                            {
+                                Personne _real = new Personne();
+                                _real.Nom = item;
+                                MonFilm.Realisateurs.Add(_real);
+                            }
+                            #endregion
+
+                            #region Acteurs
+                            //string[] _Acteurs;
+                            //_Acteurs = Utils.removeUnwantedChars(Regex.Match(strMovieCode, ".*avec (.*?)<").Groups[1].ToString()).Replace(", ", ",").Split(',');
+                            //foreach (string item in _Acteurs)
+                            //{
+                            //    Personne _act = new Personne();
+                            //    _act.Nom = item;
+                            //    MonFilm.Acteurs.Add(_act);
+                            //}
+                            #endregion
+
+                            ListeFilm.Add(MonFilm);
+
                         }
-                        #endregion
-
-                        MonFilm.Titre = Utils.removeUnwantedChars(Regex.Match(strMovieCode, @".*.html"">(.*?)</a>").Groups[1].ToString());
-                        MonFilm.TitreOriginal = Utils.removeUnwantedChars(Regex.Match(strMovieCode, @"&nbsp;\((.*?)\)").Groups[1].ToString());
-                        MonFilm.Annee = Utils.removeUnwantedChars(Regex.Match(strMovieCode, ">(\\d{4})<").Groups[1].ToString());
-
-                        #region Réalisateurs
-                        string[] _Réalisateurs;
-                        _Réalisateurs = Utils.removeUnwantedChars(Regex.Match(strMovieCode, ".*de (.*?)<").Groups[1].ToString()).Replace(", ", ",").Split(',');
-                        foreach (string item in _Réalisateurs)
-                        {
-                            Personne _real = new Personne();
-                            _real.Nom = item;
-                            MonFilm.Realisateurs.Add(_real);
-                        }
-                        #endregion
-
-                        #region Acteurs
-                        string[] _Acteurs;
-                        _Acteurs = Utils.removeUnwantedChars(Regex.Match(strMovieCode, ".*avec (.*?)<").Groups[1].ToString()).Replace(", ", ",").Split(',');
-                        foreach (string item in _Acteurs)
-                        {
-                            Personne _act = new Personne();
-                            _act.Nom = item;
-                            MonFilm.Acteurs.Add(_act);
-                        }
-                        #endregion
-
-                        ListeFilm.Add(MonFilm);
-
                     }
                 }
             }
@@ -306,7 +312,7 @@ namespace MediaManager.Plugins
 
 
 
- 
+
     }
 
 

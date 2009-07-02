@@ -27,9 +27,9 @@ namespace MediaManager
         private ObservableCollection<IMMPluginScraper> MovieScrapers = new ObservableCollection<IMMPluginScraper>();
         public static IMMPluginScraper Scraper;
         public Film FilmRecherche; //Film a recherché (provient de la fenetre précédente)
-        public List<Film> _Resultats = new List<Film>();
-        public Film FilmSelectionne = new Film(); //le film sélectionné dans les résultats
-        public Film FilmValid = new Film(); //le film sélectionné dans les résultats
+        public List<Film> _Resultats = null;
+        public Film FilmSelectionne = null; //le film sélectionné dans les résultats
+        public Film FilmValid = null; //le film sélectionné dans les résultats
         public BackgroundWorker BackWorkerRecherche = new BackgroundWorker();
         public BackgroundWorker BackWorkerDetails = new BackgroundWorker();
         public ObservableCollection<ChampModifiable> _ListeChampsModif = new ObservableCollection<ChampModifiable>();
@@ -70,12 +70,12 @@ namespace MediaManager
         {
             this.InitializeComponent();
             FilmRecherche = _FilmRecherche;
-            ThreadPool.SetMaxThreads(5, 5);
+            //ThreadPool.SetMaxThreads(5, 1);
 
 
             Type _TypeFilm = typeof(Film);
             PropertyInfo[] _Properties = _TypeFilm.GetProperties();
-            
+
             foreach (PropertyInfo t in _Properties)
             {
                 ChampModifiable c = new ChampModifiable();
@@ -110,7 +110,7 @@ namespace MediaManager
                     if (ScraperPlugin != null)
                     {
                         MovieScrapers.Add(ScraperPlugin);
-                        
+
                     }
 
                 }
@@ -180,12 +180,12 @@ namespace MediaManager
                 if (BackWorkerDetails.IsBusy == true)
                 {
                     BackWorkerDetails.CancelAsync();
-                    while (!BackWorkerDetails.CancellationPending)
+                    while (!BackWorkerDetails.IsBusy)
                     {
                         Thread.Sleep(1);
                     }
                 }
-                
+
                 
                 GridRecherche.Visibility = Visibility.Visible;
                 Scraper = (IMMPluginScraper)cbScraper.SelectedItem;
@@ -201,7 +201,7 @@ namespace MediaManager
 
         void BackWorkerDetails_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.DataContext = FilmSelectionne;
+            //this.DataContext = FilmSelectionne;
             //this.gridfanarts.DataContext = FilmSelectionne.ListeFanart;
             //this.gridaffiches.DataContext = FilmSelectionne.ListeCover;
             GridRecherche.Visibility = Visibility.Collapsed;
@@ -210,40 +210,39 @@ namespace MediaManager
         void BackWorkerDetails_DoWork(object sender, DoWorkEventArgs e)
         {
             FilmSelectionne = Scraper.GetMovie(FilmSelectionne);
-        }
-
-        private void lstAffiches_SelectionChanged(object sender, SelectionChangedEventArgs e)
+            System.Threading.Thread thread = new System.Threading.Thread(
+new System.Threading.ThreadStart(
+delegate()
+{
+    this.Dispatcher.Invoke(
+      System.Windows.Threading.DispatcherPriority.DataBind,
+      new Action(
+        delegate()
         {
-            if (lstAffiches.SelectedItem != null)
-            {
-                FilmSelectionne.ListeCover.Move(lstAffiches.SelectedIndex, 0);
-                FilmSelectionne.OnPropertyChanged("Cover");
+            gridaffiches.DataContext = FilmSelectionne.ListeCover;
+            gridfanarts.DataContext = FilmSelectionne.ListeFanart;
+            DetailsFilm.DataContext = FilmSelectionne;
+        }
+    ));
+}
+));
 
-                //imageafficheselect.Source = ((Thumb)lstAffiches.SelectedItem).Image;
-                //DetailsFilm.Affiche.Source = ((Thumb)lstAffiches.SelectedItem).Image;
-            }
+            thread.Start();
+
+
         }
 
-        private void lstFanarts_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (lstFanarts.SelectedItem != null)
-            {
-                FilmSelectionne.ListeFanart.Move(lstFanarts.SelectedIndex, 0);
-                FilmSelectionne.OnPropertyChanged("Fanart");
-                //imagefanartselect.Source = ((Thumb)lstFanarts.SelectedItem).Image;
-                //DetailsFilm.Fanart.Source = ((Thumb)lstFanarts.SelectedItem).Image;
-            }
-        }
 
         private void btn_OK_Click(object sender, RoutedEventArgs e)
         {
-            FilmValid = FilmSelectionne;
+            //FilmValid = FilmSelectionne;
+            FilmValid = new Film();
 
             foreach (ChampModifiable c in _ListeChampsModif)
             {
                 if (c.IsModifiable)
                 {
-                    c.PropertyInfo.SetValue(FilmValid, c.PropertyInfo.GetValue(FilmSelectionne, null),null);
+                    c.PropertyInfo.SetValue(FilmValid, c.PropertyInfo.GetValue(FilmSelectionne, null), null);
 
                 }
                 else
@@ -254,7 +253,7 @@ namespace MediaManager
 
             }
             this.Close();
-        
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -262,11 +261,34 @@ namespace MediaManager
 
             foreach (ChampModifiable c in _ListeChampsModif)
             {
-                    c.IsModifiable = true;
+                c.IsModifiable = true;
             }
 
             //lstChamps.Items.Clear();
             lstChamps.ItemsSource = _ListeChampsModif;
+
+        }
+
+        private void btn_DefAffiche_Click(object sender, RoutedEventArgs e)
+        {
+            if (lstAffiches.SelectedItem != null)
+            {
+                FilmSelectionne.ListeCover.Move(lstAffiches.SelectedIndex, 0);
+                FilmSelectionne.OnPropertyChanged("Cover");
+
+            }
+
+
+        }
+
+        private void btn_DefFanart_Click(object sender, RoutedEventArgs e)
+        {
+            if (lstFanarts.SelectedItem != null)
+            {
+                FilmSelectionne.ListeFanart.Move(lstFanarts.SelectedIndex, 0);
+                FilmSelectionne.OnPropertyChanged("Fanart");
+
+            }
 
         }
     }

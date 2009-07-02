@@ -71,7 +71,11 @@ namespace MediaManager
                 {
                     _Film = plug.Import(this.fileInfo);
                 }
-                catch { }
+                catch ( Exception e)
+                {
+                    Console.WriteLine("UpdateItem" + Environment.NewLine + e.Message);
+                }
+
 
             }
 

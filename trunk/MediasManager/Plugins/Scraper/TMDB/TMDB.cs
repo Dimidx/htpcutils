@@ -92,7 +92,7 @@ namespace MediaManager.Plugins
                 XmlNode th = nlMovie[0].SelectNodes("poster[@size='thumb']")[n];
                 Thumb p = new Thumb();
                 p.URLImage = x.InnerText;
-                if (th != null) p.URLMiniature = th.InnerText;
+                //if (th != null) p.URLMiniature = th.InnerText;
                 m.ListeCover.Add(p);
                 n++;
             }
@@ -107,7 +107,7 @@ namespace MediaManager.Plugins
                 XmlNode th = nlMovie[0].SelectNodes("backdrop[@size='thumb']")[j];
                 Thumb p = new Thumb();
                 p.URLImage = x.InnerText;
-                if (th != null ) p.URLMiniature = th.InnerText;
+                //if (th != null ) p.URLMiniature = th.InnerText;
  
                 m.ListeFanart.Add(p);
                 j++;
@@ -209,7 +209,7 @@ namespace MediaManager.Plugins
                     _affiche.URLImage = xnl[i].SelectSingleNode("poster[@size='original']").InnerText;
 
                 if (xnl[i].SelectSingleNode("poster[@size='thumb']") != null)
-                    _affiche.URLMiniature = xnl[i].SelectSingleNode("poster[@size='thumb']").InnerText;
+                    //_affiche.URLMiniature = xnl[i].SelectSingleNode("poster[@size='thumb']").InnerText;
 
                 _results.Add(m);
             }

@@ -27,6 +27,7 @@ namespace MediaManager.Library
         private string _Id;
         private string _Titre;
         private string _Annee;
+        private string _Studio;
         private DateTime _DateSortie;
         private string _TitreOriginal;
         private PersonneCollection _Realisateurs;
@@ -45,6 +46,15 @@ namespace MediaManager.Library
         {
             get { return _AlloId; }
             set { _AlloId = value; OnPropertyChanged("AlloID"); }
+        }
+
+        /// <summary>
+        /// Studio
+        /// </summary>
+        public string Studio
+        {
+            get { return _Studio; }
+            set { _Studio = value; OnPropertyChanged("Studio"); }
         }
 
         /// <summary>
@@ -181,7 +191,7 @@ namespace MediaManager.Library
                 {
                     return _ListeCover[0];
                 }
-                return new Thumb();
+                return null;
             }
         }
 
@@ -196,7 +206,7 @@ namespace MediaManager.Library
                 {
                     return _ListeFanart[0];
                 }
-                return new Thumb();
+                return null;
             }
         }
 
