@@ -29,6 +29,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <ApplicationIcon>Images\Icone.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -284,6 +285,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Images\Logo.xcf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -407,6 +409,8 @@
     <Resource Include="Images\IE_128.png" />
     <Resource Include="Images\IE_16.png" />
     <Resource Include="Images\Internet_128.png" />
+    <Resource Include="Images\Icone.ico" />
+    <Resource Include="Images\Logo.png" />
     <Content Include="Plugins\ImportExport\XBMC.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

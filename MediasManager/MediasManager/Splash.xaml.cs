@@ -41,6 +41,7 @@ namespace MediaManager
             {
                 LongOperationExecution();
             }), null);
+            
         }
 
         private void LongOperationExecution()
@@ -108,10 +109,14 @@ namespace MediaManager
             }
             #endregion
 
+            message.Message = "Création du cache...";
             if (!Directory.Exists(System.Environment.CurrentDirectory + @"\Cache\Images\")) Directory.CreateDirectory(System.Environment.CurrentDirectory + @"\Cache\Images\");
+            message.Message = "Chargement Terminé !";
 
             this.Dispatcher.BeginInvoke(DispatcherPriority.Send, new DispatcherOperationCallback(delegate(Object state)
             {
+
+                Thread.Sleep(2000);
                 this.Hide();
 
                 Window1 window = new Window1();

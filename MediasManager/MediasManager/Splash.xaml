@@ -5,17 +5,9 @@
 	x:Class="MediaManager.Splash"
 	x:Name="Window"
 	Title="Media Manager"
-	Height="261" Width="313" Loaded="SplashLoaded" AllowsTransparency="True" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="{x:Null}" mc:Ignorable="d">
-
+	Height="256" Width="256" Loaded="SplashLoaded" AllowsTransparency="True" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="{x:Null}" mc:Ignorable="d">
 	<Grid x:Name="LayoutRoot">
-		<Grid.Background>
-			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-				<GradientStop Color="#FFFFFFFF" Offset="0"/>
-				<GradientStop Color="#FF231E1E" Offset="0.595"/>
-				<GradientStop Color="#FF7D7A7A" Offset="0.211"/>
-			</LinearGradientBrush>
-		</Grid.Background>
-		<TextBlock VerticalAlignment="Top" FontSize="36" FontWeight="Bold" Text="Media Manager" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,8,0,0"/>
-		<TextBlock x:Name="Message" Text="{Binding Path=Message}"  Margin="8,0,8,8" VerticalAlignment="Bottom" Height="Auto" TextWrapping="Wrap" Foreground="#FFEFE2E2"/>
+        <Image Source="Images/Logo.png"/>
+        <TextBlock x:Name="Message" Text="{Binding Path=Message}"  Margin="30,0,30,12" VerticalAlignment="Bottom" Height="Auto" TextWrapping="Wrap" Foreground="#FFEFE2E2"/>
 	</Grid>
 </Window>
