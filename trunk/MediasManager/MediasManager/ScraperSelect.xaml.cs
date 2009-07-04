@@ -80,14 +80,23 @@ namespace MediaManager
             {
                 ChampModifiable c = new ChampModifiable();
                 c.PropertyInfo = t;
-                if (t.GetValue(_FilmRecherche, null) == null)
+                if (t.GetValue(_FilmRecherche, null) != null)
+                {
+                    if (t.GetValue(_FilmRecherche, null).ToString() == "")
+                    {
+                        c.IsModifiable = true;
+                    }
+                    else
+                    {
+                        c.IsModifiable = false;
+                    }
+                }
+
+                    else
                 {
                     c.IsModifiable = true;
                 }
-                else
-                {
-                    c.IsModifiable = false;
-                }
+
                 if (t.CanWrite) _ListeChampsModif.Add(c);
 
             }
@@ -258,10 +267,10 @@ delegate()
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
+            bool _coche = _ListeChampsModif[0].IsModifiable;
             foreach (ChampModifiable c in _ListeChampsModif)
             {
-                c.IsModifiable = true;
+                c.IsModifiable = _coche;
             }
 
             //lstChamps.Items.Clear();
