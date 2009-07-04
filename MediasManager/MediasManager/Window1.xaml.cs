@@ -218,8 +218,8 @@ namespace MediaManager
             if (_scraper.FilmValid != null)
             {
                 _MonFilm = _scraper.FilmValid;
-                if (_MonFilm.Cover != null) _MonFilm.Cover.GetImage(true);
-                if (_MonFilm.Fanart != null) _MonFilm.Fanart.GetImage(true);
+                if (_MonFilm.Cover != null) _MonFilm.Cover.GetImage();
+                if (_MonFilm.Fanart != null) _MonFilm.Fanart.GetImage();
                 ucFilmDetails.DataContext = _MonFilm;
             }
 
