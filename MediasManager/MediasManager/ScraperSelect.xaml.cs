@@ -82,7 +82,10 @@ namespace MediaManager
                 c.PropertyInfo = t;
                 if (t.GetValue(_FilmRecherche, null) != null)
                 {
-                    if (t.GetValue(_FilmRecherche, null).ToString() == "")
+                    string _valeur = t.GetValue(_FilmRecherche, null).ToString();
+
+
+                    if (_valeur == "")
                     {
                         c.IsModifiable = true;
                     }
@@ -101,7 +104,6 @@ namespace MediaManager
 
             }
             lstChamps.ItemsSource = _ListeChampsModif;
-
 
             Assembly PluginFile;
             IMMPluginScraper ScraperPlugin;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -164,6 +165,25 @@ namespace XBMC_Touch
                 Storyboard sbdshowMenu = (Storyboard)FindResource("ShowConfig");
                 sbdshowMenu.Begin(this);
 
+        }
+
+        private void btnLoadPlaylist_Click(object sender, RoutedEventArgs e)
+        {
+            string[] pl = XBMC.Playlist.Get(false, true);
+            ObservableCollection<MusicSong> plsong = new ObservableCollection<MusicSong>();
+            
+            foreach (string item in pl)
+            {
+                MusicSong song = new MusicSong(); ;
+                song = XBMC.Database.GetSongByFileName(item);
+                plsong.Add(song);
+
+            }
+
+            lstPlaylist.ItemsSource = plsong;
+            Console.WriteLine(lstPlaylist.Items.Count.ToString());
+
+            
         }
 
 

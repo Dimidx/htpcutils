@@ -159,11 +159,12 @@ namespace XBMC
                 Time = Get("time");
                 IsPlaying = true;
 
+
                 if (Changed || FistTime)
                 {
                     PlayStatus = Get("PlayStatus");
                     Type = Get("Type");
-                    Song = parent.Database.GetSongByFileName(Get("filename"));
+                    Song = parent.Database.GetSongByFileName(Get("url"));
                     FistTime = false;
 
                 }
