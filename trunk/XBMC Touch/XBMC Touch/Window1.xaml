@@ -3,9 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" xmlns:local="clr-namespace:XBMC_Touch" x:Class="XBMC_Touch.Window1"
     xmlns:conv="clr-namespace:XBMC_Touch.Utils.Converters"
-	Title="XBMC Touch" Height="480
-	" Width="640" Background="{DynamicResource BackGround}" MouseRightButtonDown="Window_MouseRightButtonDown" ResizeMode="CanResize" SizeToContent="Manual" WindowStartupLocation="CenterScreen" WindowState="Normal" WindowStyle="SingleBorderWindow" Cursor="Hand" Icon="Resources/Icone.ico">
-    
+	Title="XBMC Touch" Height="480" Width="640" Background="{DynamicResource BackGround}" MouseRightButtonDown="Window_MouseRightButtonDown" ResizeMode="CanResize" SizeToContent="Manual" WindowStartupLocation="CenterScreen" WindowState="Normal" WindowStyle="SingleBorderWindow" Cursor="Hand" Icon="Resources/Icone.ico">
 	<Window.Resources>
 		<conv:SecondesToTime x:Key="SecondesToTime"/>
 		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -52,6 +50,19 @@
 			</DoubleAnimationUsingKeyFrames>
 
 		</Storyboard>
+		<DataTemplate x:Key="dtPlaylist">
+			<DockPanel VerticalAlignment="Stretch" Width="Auto" >
+				<Image Source="{Binding Path=Thumb}" Width="30" Height="30" Margin="5,5,5,5"/>
+				<TextBlock x:Name="Track" Text="{Binding Path=Track}" VerticalAlignment="Stretch" Margin="5,0,0,0" Background="#4CFFFFFF" Width="30" TextAlignment="Center"/>
+				<TextBlock x:Name="Runtime" Text="{Binding Path=Duration}" VerticalAlignment="Stretch" Margin="5,0,10,0" Background="#4CFFFFFF" Width="30" DockPanel.Dock="Right"/>
+				<TextBlock x:Name="Title" Text="{Binding Path=Title}" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,0,0,0" DockPanel.Dock="Top"/>
+				<Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+			</DockPanel>
+		</DataTemplate>
+		<ItemsPanelTemplate x:Key="ItemsPanelTemplate1">
+			<VirtualizingStackPanel IsItemsHost="True"/>
+		</ItemsPanelTemplate>
+
 	</Window.Resources>
 	<Window.Triggers>
 		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
@@ -165,6 +176,38 @@
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
+		</Grid>
+		<Grid x:Name="GridPlaylist" Background="#99000000" Visibility="Visible">
+			
+			<StackPanel Margin="10,10,10,10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+				<Border Height="10" Background="#FF4A4949" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="5,5,0,0" DockPanel.Dock="Top"/>
+				<Border Height="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,0,1,0" CornerRadius="0,0,0,0" Background="#FFBBBBBB" DockPanel.Dock="Top">
+					<DockPanel x:Name="StackMenu1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="300" Visibility="Visible">
+						<Button Click="btnLoadPlaylist_Click"  x:Name="btnLoadPlaylist" DockPanel.Dock="Top" Content="LoadPlaylist" />
+						<StackPanel DockPanel.Dock="Right" >
+							<TextBlock Width="200" Height="35" Text="TextBlock" TextWrapping="Wrap"/>
+						</StackPanel>
+						<ListBox x:Name="lstPlaylist" DockPanel.Dock="Top" ItemTemplate="{DynamicResource dtPlaylist}" ItemsPanel="{DynamicResource ItemsPanelTemplate1}">
+							<ListBox.Background>
+							<VisualBrush>
+							<VisualBrush.Visual>
+								<Rectangle Width="1" Height="1">
+  <Rectangle.Fill>
+    <ImageBrush
+      Viewport="0,0,0.1,0.1"
+      TileMode="Tile"
+      ImageSource="Resources/fondliste.png" Stretch="UniformToFill" />
+  </Rectangle.Fill>
+</Rectangle>
+
+		</VisualBrush.Visual>					
+</VisualBrush>
+							</ListBox.Background>
+						</ListBox>
+					</DockPanel>
+				</Border>
+				<Border Background="#FF4A4949" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,0,1,1" CornerRadius="0,0,5,5" Height="10" DockPanel.Dock="Bottom"/>
+			</StackPanel>
 		</Grid>
 		<Grid x:Name="GridConfig" Background="#99000000" Visibility="Hidden" >
 			<StackPanel x:Name="stackPanel" Margin="150,30,150,30" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">

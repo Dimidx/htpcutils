@@ -188,6 +188,8 @@ namespace XBMC
                 _Song.Filename = _Infos[5];
                 _Song.Genre = _Infos[6];
                 _Song.Track = Convert.ToInt32(_Infos[7]);
+                //Convertion en int
+                _Song.Track = (_Song.Track / 65537) + ((_Song.Track % 65537) );
                 _Song.Duration = Convert.ToInt32(_Infos[8]);
                 _Song.Year = Convert.ToInt32(_Infos[9]);
                 _Song.Thumb = parent.Media.GetThumbByPath(_Infos[10]);
@@ -206,6 +208,7 @@ namespace XBMC
             string[] _Infos = parent.Request("QueryMusicDatabase", "SELECT idSong FROM song left join path on song.idPath = path.idPath where strPath || strFilename = '" + _FileName + "'");
             if (_Infos != null)
             {
+                if (_Infos[0] != "")
                 _Song = GetSongByID(Convert.ToInt32(_Infos[0]));
             }
             return _Song;
