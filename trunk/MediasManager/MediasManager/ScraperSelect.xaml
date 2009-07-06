@@ -54,9 +54,8 @@
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
-		<TextBox Margin="235.064,8,78,0" VerticalAlignment="Top" Height="30" Text="TextBox" TextWrapping="Wrap"/>
-		<Button Click="Button_Click" HorizontalAlignment="Right" Margin="0,8,8,0" VerticalAlignment="Top" Width="53" Height="30" Content="Button"/>
-        <Button x:Name="btn_OK" Click="btn_OK_Click" Margin="0,8,8,0" VerticalAlignment="Top" Width="53" Height="30" Content="OK"/>
+		<Button Click="Button_Click" HorizontalAlignment="Left" Margin="212.397,8,0,0" VerticalAlignment="Top" Width="78" Height="30" Content="Recherche"/>
+        <Button x:Name="btn_OK" Click="btn_OK_Click" Margin="294.397,8,0,0" VerticalAlignment="Top" Width="53" Height="30" Content="OK" d:LayoutOverrides="Width" HorizontalAlignment="Left" RenderTransformOrigin="1.502,0.2"/>
 
         <TabControl Margin="212.397,42,8,19" >
 			<TabItem Header="Infos">
