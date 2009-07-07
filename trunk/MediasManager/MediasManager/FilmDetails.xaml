@@ -10,9 +10,15 @@
 	mc:Ignorable="d"
 	x:Class="MediaManager.FilmDetails"
 	x:Name="UserControl_FilmDetails"
-	d:DesignWidth="640" d:DesignHeight="480" FontFamily="./Fonts/#Aeon Info" Loaded="UserControl_FilmDetails_Loaded">
+	d:DesignWidth="640" FontFamily="./Fonts/#Aeon Info" Loaded="UserControl_FilmDetails_Loaded">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+		<DataTemplate x:Key="DataTemplateThumbs">
+			<Grid VerticalAlignment="Stretch" Width="220">
+					<Controls:Sablier Visibility="{Binding Path=IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default}"/>
+                    <Image x:Name="ImageThumbs" Source="{Binding Path=Miniature}" />
+			</Grid>
+		</DataTemplate>
         <Style x:Key="TextBoxStyleEdit" TargetType="{x:Type TextBox}">
             <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -250,7 +256,7 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <ScrollViewer OverridesDefaultStyle="True" Width="Auto" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" VerticalScrollBarVisibility="Auto">
+    <ScrollViewer OverridesDefaultStyle="True" Width="Auto" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0" ClipToBounds="True">
         <Grid Width="Auto" Height="Auto" OverridesDefaultStyle="True" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
             <DockPanel LastChildFill="True">
                 <StackPanel Width="Auto" Height="Auto" Margin="0,0,5,0">
@@ -320,6 +326,13 @@
                             </Border.Background>
                         </Border>
                     </Grid>
+                    <Border x:Name="bdThumbs" Width="Auto" Height="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="0,1,0,0" Padding="5,5,5,5">
+                    	<Expander Header="Thumbs" Style="{DynamicResource ExpanderStyle1}" >
+                    		<StackPanel>
+								<ListBox ItemsSource="{Binding Path=ListeThumbs}" ItemTemplate="{DynamicResource DataTemplateThumbs}" IsSynchronizedWithCurrentItem="True"/>
+							</StackPanel>
+                    	</Expander>
+                    </Border>
                 </StackPanel>
                 <DockPanel Margin="5,0,5,5" Width="Auto" Height="Auto" LastChildFill="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <TextBox Text="{Binding Path=Titre}" Height="Auto" TextWrapping="Wrap" Width="Auto" Foreground="{DynamicResource TextBrush}" FontSize="16" FontWeight="Bold" x:Name="Titre" DockPanel.Dock="Top" VerticalAlignment="Top" Margin="0,0,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
@@ -381,6 +394,9 @@
                     <Border Width="Auto" Height="Auto" DockPanel.Dock="Top" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="0,1,0,0" Padding="5,5,5,5">
                         <TextBox Text="{Binding Path=Critique}"  Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_Plot" TextAlignment="Justify" Foreground="{DynamicResource TextBrush}" Style="{DynamicResource TextBoxStyleEdit}" AcceptsReturn="True"/>
                     </Border>
+                    <Border Width="Auto" Height="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="0,1,0,0" Padding="5,5,5,5" DockPanel.Dock="Top">
+                        <TextBox Text="{Binding Path=Synopsis}" Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_Tagline" TextAlignment="Justify" Foreground="{DynamicResource TextBrush}" Style="{DynamicResource TextBoxStyleEdit}" AcceptsReturn="True"/>
+                    </Border>
                     <Border x:Name="bdDivers" Width="Auto" Height="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="0,1,0,0" Padding="5,5,5,5" DockPanel.Dock="Bottom">
                         <Expander Header="Divers" Style="{DynamicResource ExpanderStyle1}" >
                             <StackPanel>
@@ -398,9 +414,6 @@
                                 </DockPanel>
                             </StackPanel>
                         </Expander>
-                    </Border>
-                    <Border Width="Auto" Height="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="0,1,0,0" Padding="5,5,5,5" DockPanel.Dock="Top">
-                        <TextBox Text="{Binding Path=Synopsis}" Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_Tagline" TextAlignment="Justify" Foreground="{DynamicResource TextBrush}" Style="{DynamicResource TextBoxStyleEdit}" AcceptsReturn="True"/>
                     </Border>
                 </DockPanel>
             </DockPanel>

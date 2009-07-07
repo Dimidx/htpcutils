@@ -12,8 +12,7 @@ using System.Globalization;
 
 namespace Converters
 {
-
-
+    
     #region DateTimeConverter
     public class DateTimeConverter : IValueConverter
     {
@@ -236,5 +235,7 @@ namespace Converters
 
     }
     #endregion
+
+
 
 }

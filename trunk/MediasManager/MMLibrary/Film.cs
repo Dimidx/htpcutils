@@ -33,7 +33,7 @@ namespace MediaManager.Library
         private PersonneCollection _Realisateurs;
         private PersonneCollection _Acteurs;
         private ObservableCollection<Thumb> _ListeCover;
-        
+        private ObservableCollection<Thumb> _ListeThumb;
         #endregion
 
         #region Public
@@ -220,6 +220,15 @@ namespace MediaManager.Library
             set { _ListeCover = value; OnPropertyChanged("ListeCover"); OnPropertyChanged("Cover"); }
         }
 
+        /// <summary>
+        /// Liste de miniatures pour le film
+        /// </summary>
+        public ObservableCollection<Thumb> ListeThumbs
+        {
+            get { return _ListeThumb; }
+            set { _ListeThumb = value; OnPropertyChanged("ListeThumbs"); }
+        }
+
         private ObservableCollection<Thumb> _ListeFanart;
         /// <summary>
         /// Liste de fanart pour le film
@@ -279,7 +288,7 @@ namespace MediaManager.Library
             this._Realisateurs = new PersonneCollection();
             this._ListeCover = new ObservableCollection<Thumb>();
             this._ListeFanart = new ObservableCollection<Thumb>();
-
+            this._ListeThumb = new ObservableCollection<Thumb>();
         }
 
         #region INotifyPropertyChanged Members

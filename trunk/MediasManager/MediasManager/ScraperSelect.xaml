@@ -44,7 +44,7 @@
 		</DataTemplate>
 		<DataTemplate x:Key="dtChamps">
 			<Grid>
-				<CheckBox Content="{Binding Path=PropertyInfo.Name}" IsChecked="{Binding Path=IsModifiable}" IsThreeState="False" OverridesDefaultStyle="True" />
+				<CheckBox Content="{Binding Path=NomChamp}" IsChecked="{Binding Path=IsModifiable}" IsThreeState="False" OverridesDefaultStyle="True" />
 			</Grid>
 		</DataTemplate>
 	
@@ -125,9 +125,19 @@
 		</Grid>
 		<DockPanel LastChildFill="True" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="200">
 			<ComboBox x:Name="cbScraper" VerticalAlignment="Top" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplateScraper}" DockPanel.Dock="Top" Margin="5,5,5,5"/>
-			<ListBox x:Name="lstChamps" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="5,0,5,5" DockPanel.Dock="Bottom" Height="200" ItemTemplate="{DynamicResource dtChamps}"/>
-			<Button Content="Tous / Aucun" Click="Button_Click_1" DockPanel.Dock="Bottom" Margin="5,0,5,5"/>
-			<ListBox SelectionChanged="lstResult_SelectionChanged" x:Name="lstResult" ItemTemplate="{DynamicResource DataTemplateResult}" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="5,0,5,5" MinWidth="100" DockPanel.Dock="Bottom"/>
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+			<ListBox SelectionChanged="lstResult_SelectionChanged" x:Name="lstResult" ItemTemplate="{DynamicResource DataTemplateResult}" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="5,0,5,10" MinWidth="100" DockPanel.Dock="Bottom"/>
+			<GridSplitter VerticalAlignment="Bottom" Width="40" Height="5" HorizontalAlignment="Center" ShowsPreview="True" Background="{DynamicResource HoverShineBrush}" Margin="0,0,0,0" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" ResizeDirection="Rows"/>
+			<DockPanel Grid.Row="1">
+				<Button Content="Tous / Aucun" Click="Button_Click_1" DockPanel.Dock="Bottom" Margin="5,5,5,5" Grid.Row="1"/>
+				<TextBlock Text="Champs Modifiables" DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0,5,0,5"/>
+				<ListBox x:Name="lstChamps" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="5,0,5,5" DockPanel.Dock="Bottom" ItemTemplate="{DynamicResource dtChamps}" IsSynchronizedWithCurrentItem="False" Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Stretch"/>
+			</DockPanel>
+			</Grid>
 		</DockPanel>
 	</Grid>
 </Window>
