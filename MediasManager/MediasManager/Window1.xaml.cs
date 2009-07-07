@@ -35,6 +35,8 @@ namespace MediaManager
         //public MovieCollection _Movies = new MovieCollection();
         public BackgroundWorker BackWorker = new BackgroundWorker();
         public BackgroundWorker bwSelect = new BackgroundWorker();
+        public BackgroundWorker bwScrapeAll = new BackgroundWorker();
+
         public bool _RechercheTerminée = true;
         public ImageSource PosterSource = null;
         public ImageSource FanartSource = null;
@@ -212,15 +214,25 @@ namespace MediaManager
 
         private void btnScraper_Click(object sender, RoutedEventArgs e)
         {
-            //Movie _mov = (Movie)listBox_Films.SelectedItem;
             ScraperSelect _scraper = new ScraperSelect(_MonFilm);
-            _scraper.ShowDialog();
-            if (_scraper.FilmValid != null)
+            try
             {
-                _MonFilm = _scraper.FilmValid;
-                if (_MonFilm.Cover != null) _MonFilm.Cover.GetImage();
-                if (_MonFilm.Fanart != null) _MonFilm.Fanart.GetImage();
-                ucFilmDetails.DataContext = _MonFilm;
+                //Movie _mov = (Movie)listBox_Films.SelectedItem;
+
+                _scraper.ShowDialog();
+                if (_scraper.FilmValid != null)
+                {
+                    _MonFilm = _scraper.FilmValid;
+                    if (_MonFilm.Cover != null) _MonFilm.Cover.GetImage();
+                    if (_MonFilm.Fanart != null) _MonFilm.Fanart.GetImage();
+                    ucFilmDetails.DataContext = _MonFilm;
+                }
+            }
+            catch (Exception de)
+            {
+                Console.WriteLine(de.Message + " " + de.Source);
+                _scraper.Close();
+                //throw;
             }
 
         }
@@ -259,6 +271,118 @@ namespace MediaManager
             if (_MonFilm.Cover != null) _MonFilm.Cover.GetImage(true);
             if (_MonFilm.Fanart != null) _MonFilm.Fanart.GetImage(true);
 
+        }
+
+        private void mnuToutScrape_Click(object sender, RoutedEventArgs e)
+        {
+            if (bwScrapeAll.IsBusy == false)
+            {
+                bwScrapeAll = new BackgroundWorker();
+                bwScrapeAll.DoWork += new DoWorkEventHandler(bwScrapeAll_DoWork);
+                bwScrapeAll.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bwScrapeAll_RunWorkerCompleted);
+                bwScrapeAll.ProgressChanged += new ProgressChangedEventHandler(bwScrapeAll_ProgressChanged);
+                bwScrapeAll.WorkerReportsProgress = true;
+                //ObservableCollection<Movie> _Movies = this.Resources["MovieCollectionDataSource"] as MovieCollection;
+                //_Movies.Clear();
+                this.jauge_progress.Visibility = Visibility.Visible;
+                this.jauge_progress.IsIndeterminate = false;
+                this.jauge_progress.Maximum = 100;
+                this.lib_BarreEtat.Visibility = Visibility.Visible;
+                bwScrapeAll.RunWorkerAsync();
+            }
+        }
+
+        void bwScrapeAll_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            
+            this.lib_BarreEtat.Text = e.UserState.ToString();
+            this.jauge_progress.Value = e.ProgressPercentage;
+            //throw new NotImplementedException();
+        }
+
+        void bwScrapeAll_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.jauge_progress.Visibility = Visibility.Hidden;
+            this.lib_BarreEtat.Visibility = Visibility.Hidden;
+            //throw new NotImplementedException();
+        }
+
+        void bwScrapeAll_DoWork(object sender, DoWorkEventArgs e)
+        {
+            //Movie _movie = (Movie)listBox_Films.SelectedItem;
+
+            int i = 0; int _progress = 0; int _nbrfilm = MovieManager.Movies.Count;
+            foreach (Movie item in MovieManager.Movies)
+            {
+                i+=1;
+                _progress = (int)((float)i / (float)_nbrfilm * (float)100);
+                bwScrapeAll.ReportProgress((int)_progress, "Scrape " + item.MovieName);
+                Film _ScrapeFilm = new Film(); //Le film a scraper
+                _ScrapeFilm = item.updateItem();
+                List<Film> _ListResult = new List<Film>();
+                _ListResult = Settings.PluginsScraper[0].SearchMovie(_ScrapeFilm);
+
+                if (_ListResult != null & _ListResult.Count > 0)
+                {
+                    bwScrapeAll.ReportProgress((int)_progress, "Charge les détails de " + _ListResult[0].Titre);
+                    Film _ScrapeFilmResult = new Film(); //Le film resultat du scraper
+                    _ScrapeFilmResult = Settings.PluginsScraper[0].GetMovie(_ListResult[0]);
+                    if (_ScrapeFilmResult != null)
+                    {
+                        foreach (IMMPluginImportExport plug in Settings.PluginsImportExport)
+                        {
+                            try
+                            {
+                                bwScrapeAll.ReportProgress((int)_progress, "Export " + plug.Name + " " + item.MovieName);
+                                _ScrapeFilmResult.Cover.GetImage(true);
+                                _ScrapeFilmResult.Fanart.GetImage(true);
+
+                                while (_ScrapeFilmResult.Cover.IsLoading)
+                                {
+                                    Thread.Sleep(1);
+                                }
+                                while (_ScrapeFilmResult.Fanart.IsLoading)
+                                {
+                                    Thread.Sleep(1);
+                                }
+
+                                plug.Export(_ScrapeFilmResult, item.fileInfo);
+                            }
+                            catch (Exception exe)
+                            {
+                                Console.WriteLine("Erreur Export " + plug.Name + Environment.NewLine + exe.Message);
+                            }
+
+                        }
+                        _ScrapeFilm = item.updateItem();
+
+                        if (_ScrapeFilm.Cover != null) _ScrapeFilm.Cover.GetImage(true);
+                        if (_ScrapeFilm.Fanart != null) _ScrapeFilm.Fanart.GetImage(true);
+                    }
+                }
+
+
+            }
+
+
+            //foreach (IMMPluginImportExport plug in Settings.PluginsImportExport)
+            //{
+            //    try
+            //    {
+            //        plug.Export(_MonFilm, _movie.fileInfo);
+            //    }
+            //    catch (Exception exe)
+            //    {
+            //        Console.WriteLine("Erreur Export " + plug.Name + Environment.NewLine + exe.Message);
+            //    }
+
+            //}
+            //_MonFilm = _movie.updateItem();
+
+            //if (_MonFilm.Cover != null) _MonFilm.Cover.GetImage(true);
+            //if (_MonFilm.Fanart != null) _MonFilm.Fanart.GetImage(true);
+
+            //throw new NotImplementedException();
         }
 
     }

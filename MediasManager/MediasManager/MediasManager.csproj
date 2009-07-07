@@ -411,6 +411,7 @@
     <Resource Include="Images\Internet_128.png" />
     <Resource Include="Images\Icone.ico" />
     <Resource Include="Images\Logo.png" />
+    <Resource Include="Images\Erreur_250.png" />
     <Content Include="Plugins\ImportExport\XBMC.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -133,6 +133,17 @@ namespace MediaManager.Plugins
 
             #endregion
 
+            #region Chargement des Thumbs
+            string _PathThumbs = _FileInfo.DirectoryName + "/extrathumbs/";
+            if (Directory.Exists(_PathThumbs))
+            {
+                foreach (string item in Directory.GetFiles(_PathThumbs, "*.jpg"))
+                {
+                    MonFilm.ListeThumbs.Add(new Thumb(item));
+
+                }
+            }
+            #endregion
 
             return MonFilm;
 
@@ -200,7 +211,7 @@ namespace MediaManager.Plugins
                     File.Copy(_Film.Cover.URLImage, _PostersPath);
                 }
             }
-            catch {}
+            catch { }
             #endregion
 
             #region Fanart

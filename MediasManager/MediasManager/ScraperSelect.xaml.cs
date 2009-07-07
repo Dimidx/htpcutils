@@ -47,7 +47,13 @@ namespace MediaManager
             public PropertyInfo PropertyInfo
             {
                 get { return _PropertyInfo; }
-                set { _PropertyInfo = value; OnPropertyChanged("PropertyInfo"); }
+                set { _PropertyInfo = value; OnPropertyChanged("PropertyInfo"); OnPropertyChanged("NomChamp"); }
+            }
+
+            public string NomChamp
+            {
+                get { return _PropertyInfo.Name; }
+
             }
 
             #region INotifyPropertyChanged Members
@@ -80,10 +86,13 @@ namespace MediaManager
             {
                 ChampModifiable c = new ChampModifiable();
                 c.PropertyInfo = t;
+
                 if (t.GetValue(_FilmRecherche, null) != null)
                 {
                     string _valeur = t.GetValue(_FilmRecherche, null).ToString();
 
+                    //Console.WriteLine(c.NomChamp + " - " + c.PropertyInfo.PropertyType + " - " + _valeur);
+                    
 
                     if (_valeur == "")
                     {
@@ -91,11 +100,12 @@ namespace MediaManager
                     }
                     else
                     {
+
                         c.IsModifiable = false;
                     }
                 }
 
-                    else
+                else
                 {
                     c.IsModifiable = true;
                 }
@@ -103,7 +113,9 @@ namespace MediaManager
                 if (t.CanWrite) _ListeChampsModif.Add(c);
 
             }
-            lstChamps.ItemsSource = _ListeChampsModif;
+            ListCollectionView lcv = new ListCollectionView(_ListeChampsModif);
+            lcv.SortDescriptions.Add(new System.ComponentModel.SortDescription("NomChamp", System.ComponentModel.ListSortDirection.Ascending));
+            lstChamps.ItemsSource = lcv;
 
             Assembly PluginFile;
             IMMPluginScraper ScraperPlugin;
@@ -197,7 +209,7 @@ namespace MediaManager
                     }
                 }
 
-                
+
                 GridRecherche.Visibility = Visibility.Visible;
                 Scraper = (IMMPluginScraper)cbScraper.SelectedItem;
                 FilmSelectionne = (Film)lstResult.SelectedItem;
@@ -269,14 +281,14 @@ delegate()
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            bool _coche = _ListeChampsModif[0].IsModifiable;
+            bool _coche = ((ChampModifiable)lstChamps.Items[0]).IsModifiable;
             foreach (ChampModifiable c in _ListeChampsModif)
             {
                 c.IsModifiable = _coche;
             }
 
             //lstChamps.Items.Clear();
-            lstChamps.ItemsSource = _ListeChampsModif;
+            //lstChamps.ItemsSource = _ListeChampsModif;
 
         }
 

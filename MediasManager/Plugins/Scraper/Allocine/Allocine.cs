@@ -56,13 +56,13 @@ namespace MediaManager.Plugins
             s = Regex.Replace(s, "[\r\n]", "");
 
             MonFilm.AlloID = _Film.AlloID;
-            MonFilm.Titre = Utils.removeUnwantedChars(Regex.Match(s, "<h1[^>]*>(.*?)</h1>").ToString());
-            MonFilm.TitreOriginal = Utils.removeUnwantedChars(Regex.Match(s, @"<h3 class=""SpProse"">Titre original : <i>(.*?)</i>").Groups[1].ToString());
-            MonFilm.Annee = Utils.removeUnwantedChars(Regex.Match(s, "Année de production : (\\d{4})").Groups[1].ToString());
-            MonFilm.Studio = Utils.removeUnwantedChars(Regex.Match(s, "Distribué par (.*?)>(.*?)</a>").Groups[2].ToString());
+            MonFilm.Titre = Utils.RemoveUnwantedChars(Regex.Match(s, "<h1[^>]*>(.*?)</h1>").ToString());
+            MonFilm.TitreOriginal = Utils.RemoveUnwantedChars(Regex.Match(s, @"<h3 class=""SpProse"">Titre original : <i>(.*?)</i>").Groups[1].ToString());
+            MonFilm.Annee = Utils.RemoveUnwantedChars(Regex.Match(s, "Année de production : (\\d{4})").Groups[1].ToString());
+            MonFilm.Studio = Utils.RemoveUnwantedChars(Regex.Match(s, "Distribué par (.*?)>(.*?)</a>").Groups[2].ToString());
             #region Réalisateurs
             string[] _Réalisateurs;
-            _Réalisateurs = Utils.removeUnwantedChars(Regex.Match(s, @"<h3 class=""SpProse"">Réalisé par(.*?)</h3>").Groups[1].ToString()).Replace(", ", ",").Split(',');
+            _Réalisateurs = Utils.RemoveUnwantedChars(Regex.Match(s, @"<h3 class=""SpProse"">Réalisé par(.*?)</h3>").Groups[1].ToString()).Replace(", ", ",").Split(',');
             foreach (string item in _Réalisateurs)
             {
                 Personne _real = new Personne();
@@ -72,15 +72,15 @@ namespace MediaManager.Plugins
             #endregion
 
             #region Genres
-            MonFilm.Genres = Utils.removeUnwantedChars(Regex.Match(s, "Genre :(.*?)</h3>").Groups[1].ToString()).Replace(", ", ",").Split(',');
+            MonFilm.Genres = Utils.RemoveUnwantedChars(Regex.Match(s, "Genre :(.*?)</h3>").Groups[1].ToString()).Replace(", ", ",").Split(',');
             #endregion
 
             #region Pays
-            MonFilm.Pays = Utils.removeUnwantedChars(Regex.Match(s, "<h3 class=\"SpProse\">Film ([^:]*).&nbsp;</h3>").Groups[1].ToString()).Replace(", ", ",").Split(',');
+            MonFilm.Pays = Utils.RemoveUnwantedChars(Regex.Match(s, "<h3 class=\"SpProse\">Film ([^:]*).&nbsp;</h3>").Groups[1].ToString()).Replace(", ", ",").Split(',');
             #endregion
 
             #region Durée
-            MonFilm.DureeChaine = Utils.removeUnwantedChars(Regex.Match(s, @"<h3 class=""SpProse"">Durée : (.*?)\.").Groups[1].ToString());
+            MonFilm.DureeChaine = Utils.RemoveUnwantedChars(Regex.Match(s, @"<h3 class=""SpProse"">Durée : (.*?)\.").Groups[1].ToString());
             try
             {
                 int Heures = Convert.ToInt32(Regex.Match(MonFilm.DureeChaine, @"(\d*)h (\d*)min").Groups[1].ToString());
@@ -95,7 +95,7 @@ namespace MediaManager.Plugins
             #region Date de sortie
 
             string sDateSortie = "";
-            sDateSortie = Utils.removeUnwantedChars(Regex.Match(s, "agenda_gen_date=(.*?).html").Groups[1].ToString());
+            sDateSortie = Utils.RemoveUnwantedChars(Regex.Match(s, "agenda_gen_date=(.*?).html").Groups[1].ToString());
             try
             {
                 MonFilm.DateSortie = DateTime.Parse(sDateSortie);
@@ -106,7 +106,7 @@ namespace MediaManager.Plugins
 
             #region Note Presse
 
-            string sNotePresse = Utils.removeUnwantedChars(Regex.Match(s, "Presse.*?class=['\"]etoile_(\\d)['\"]").Groups[1].ToString());
+            string sNotePresse = Utils.RemoveUnwantedChars(Regex.Match(s, "Presse.*?class=['\"]etoile_(\\d)['\"]").Groups[1].ToString());
             try
             {
                 MonFilm.NotePresse = (float)(System.Double.Parse(sNotePresse) * 2.5);
@@ -117,7 +117,7 @@ namespace MediaManager.Plugins
 
             #region Note Spectateurs
 
-            string sNoteSpectateur = Utils.removeUnwantedChars(Regex.Match(s, "Spectateurs.*?class=['\"]etoile_(\\d)['\"]").Groups[1].ToString());
+            string sNoteSpectateur = Utils.RemoveUnwantedChars(Regex.Match(s, "Spectateurs.*?class=['\"]etoile_(\\d)['\"]").Groups[1].ToString());
             try
             {
                 MonFilm.NoteSpectateurs = (float)(System.Double.Parse(sNotePresse) * 2.5);
@@ -126,8 +126,8 @@ namespace MediaManager.Plugins
 
             #endregion
 
-            MonFilm.Synopsis = Utils.removeUnwantedChars(Regex.Match(s, "Synopsis(.*?)</h4></div>").Groups[1].ToString());
-            MonFilm.Critique = Utils.removeUnwantedChars(Regex.Match(s, "<div align=\"justify\" style=\"padding: 5 0 5 0\"><h4>([^<]*)</h4>").Groups[1].ToString());
+            MonFilm.Synopsis = Utils.RemoveUnwantedChars(Regex.Match(s, "Synopsis(.*?)</h4></div>").Groups[1].ToString());
+            MonFilm.Critique = Utils.RemoveUnwantedChars(Regex.Match(s, "<div align=\"justify\" style=\"padding: 5 0 5 0\"><h4>([^<]*)</h4>").Groups[1].ToString());
 
             #region Avis
             if (Regex.Match(s, "Film pour enfants à partir de 3 ans").Success)
@@ -172,7 +172,7 @@ namespace MediaManager.Plugins
                 {
                     strBodyThumb = Regex.Replace(strBodyThumb, "[\r\n]", "");
                     //L'affiche
-                    strThumbURL = Utils.removeUnwantedChars(Regex.Match(strBodyThumb, "id=['\"]imgNormal['\"] class=['\"]photo['\"] src=['\"](.*?)['\"]").Groups[1].ToString());
+                    strThumbURL = Utils.RemoveUnwantedChars(Regex.Match(strBodyThumb, "id=['\"]imgNormal['\"] class=['\"]photo['\"] src=['\"](.*?)['\"]").Groups[1].ToString());
                     if (strThumbURL != "") MonFilm.ListeCover.Add(new Thumb(strThumbURL));
 
                     //Les autres images
@@ -274,13 +274,13 @@ namespace MediaManager.Plugins
                             //}
                             #endregion
 
-                            MonFilm.Titre = Utils.removeUnwantedChars(Regex.Match(strMovieCode, @".*.html"">(.*?)</a>").Groups[1].ToString());
-                            MonFilm.TitreOriginal = Utils.removeUnwantedChars(Regex.Match(strMovieCode, @"&nbsp;\((.*?)\)").Groups[1].ToString());
-                            MonFilm.Annee = Utils.removeUnwantedChars(Regex.Match(strMovieCode, ">(\\d{4})<").Groups[1].ToString());
+                            MonFilm.Titre = Utils.RemoveUnwantedChars(Regex.Match(strMovieCode, @".*.html"">(.*?)</a>").Groups[1].ToString());
+                            MonFilm.TitreOriginal = Utils.RemoveUnwantedChars(Regex.Match(strMovieCode, @"&nbsp;\((.*?)\)").Groups[1].ToString());
+                            MonFilm.Annee = Utils.RemoveUnwantedChars(Regex.Match(strMovieCode, ">(\\d{4})<").Groups[1].ToString());
 
                             #region Réalisateurs
                             string[] _Réalisateurs;
-                            _Réalisateurs = Utils.removeUnwantedChars(Regex.Match(strMovieCode, ".*de (.*?)<").Groups[1].ToString()).Replace(", ", ",").Split(',');
+                            _Réalisateurs = Utils.RemoveUnwantedChars(Regex.Match(strMovieCode, ".*de (.*?)<").Groups[1].ToString()).Replace(", ", ",").Split(',');
                             foreach (string item in _Réalisateurs)
                             {
                                 Personne _real = new Personne();
@@ -291,7 +291,7 @@ namespace MediaManager.Plugins
 
                             #region Acteurs
                             //string[] _Acteurs;
-                            //_Acteurs = Utils.removeUnwantedChars(Regex.Match(strMovieCode, ".*avec (.*?)<").Groups[1].ToString()).Replace(", ", ",").Split(',');
+                            //_Acteurs = Utils.RemoveUnwantedChars(Regex.Match(strMovieCode, ".*avec (.*?)<").Groups[1].ToString()).Replace(", ", ",").Split(',');
                             //foreach (string item in _Acteurs)
                             //{
                             //    Personne _act = new Personne();

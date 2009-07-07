@@ -85,11 +85,11 @@
     <AspNetConfiguration>$(Configuration)</AspNetConfiguration>
   </PropertyGroup>
   <PropertyGroup>
-    <SolutionDir>C:\Dev\HTPCUtils\MediasManager\</SolutionDir>
+    <SolutionDir>D:\Perso\Dev\HTPCUtils\MediasManager\</SolutionDir>
     <SolutionExt>.sln</SolutionExt>
     <SolutionFileName>MediasManager.sln</SolutionFileName>
     <SolutionName>MediasManager</SolutionName>
-    <SolutionPath>C:\Dev\HTPCUtils\MediasManager\MediasManager.sln</SolutionPath>
+    <SolutionPath>D:\Perso\Dev\HTPCUtils\MediasManager\MediasManager.sln</SolutionPath>
   </PropertyGroup>
   <PropertyGroup>
     <TargetFrameworkVersion Condition="'$(TargetFrameworkVersion)' == '' and '$(MSBuildToolsVersion)' == '2.0'">v2.0</TargetFrameworkVersion>

@@ -57,7 +57,7 @@
 						</MenuItem.Icon>
 					</MenuItem>
     				<Separator/>
-    				<MenuItem x:Name="mnuEditer" Header="Editer"/>
+    				<MenuItem x:Name="mnuToutScrape" Header="Tout Scrapper" Click="mnuToutScrape_Click"/>
     			</MenuItem>
     		</Menu>
     		<ProgressBar BorderThickness="1,1,1,1" IsIndeterminate="True" x:Name="jauge_progress" Visibility="Collapsed" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Height="16" DockPanel.Dock="Bottom"/>

@@ -28,7 +28,6 @@ namespace MediaManager.Library
 
         private string defaultCacheDir = System.Environment.CurrentDirectory + @"\Cache\Images\";
         private bool _IsLoading = false;
-        private string _URLMiniature = "";
         private string _URLImage = "";
         private BitmapImage _Image;
         private BitmapImage _Miniature;
@@ -47,7 +46,7 @@ namespace MediaManager.Library
         {
             get
             {
-                if (_Image == null & !IsLoading)
+                if (_Image == null & !_IsLoading & _URLImage != "")
                 {
                     GetImage();
                     return null;
@@ -75,7 +74,7 @@ namespace MediaManager.Library
         {
             get
             {
-                if (_Image == null & !IsLoading)
+                if (_Image == null & !_IsLoading & _URLImage != "")
                 {
                     GetImage();
                     return null;
@@ -138,7 +137,11 @@ namespace MediaManager.Library
             set
             {
                 _URLImage = value;
-                _FichierCache = defaultCacheDir + _URLImage.Replace(@"\", "_").Replace(@"/", "_").Replace(":", "_").Replace("?", "_");
+                string _hash = Utils.Hash(_URLImage);
+                if (!Directory.Exists(defaultCacheDir + _hash.Substring(0, 1) + @"\")) Directory.CreateDirectory(defaultCacheDir + _hash.Substring(0, 1) + @"\");
+                if (!Directory.Exists(defaultCacheDir + _hash.Substring(0, 1) + @"\" + _hash.Substring(1, 1) + @"\")) Directory.CreateDirectory(defaultCacheDir + _hash.Substring(0, 1) + @"\" + _hash.Substring(1, 1) + @"\");
+
+                _FichierCache = defaultCacheDir + _hash.Substring(0, 1) + @"\" + _hash.Substring(1, 1) + @"\" + _hash+ ".jpg";
                 OnPropertyChanged("URLImage");
             }
         }
@@ -265,12 +268,12 @@ namespace MediaManager.Library
         void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             _IsLoading = false;
+            OnPropertyChanged("IsLoading");
             OnPropertyChanged("Image");
             OnPropertyChanged("Miniature");
-            OnPropertyChanged("IsLoading");
             OnPropertyChanged("Largeur");
             OnPropertyChanged("Hauteur");
-            Console.WriteLine("Thread " + URLImage);
+            Console.WriteLine("Chargement Terminée : " + URLImage);
             bw.Dispose();
         }
 
@@ -319,43 +322,40 @@ namespace MediaManager.Library
                 }
                 if (!IsCached & !IsLocal)
                 {
-
-                    try
-                    {
-                        WebClient client = new WebClient();
-
-                        //#region Proxy
-                        //WebProxy wProxy = new WebProxy("10.126.71.12", 80);
-                        //wProxy.Credentials = new NetworkCredential("rfraftp", "Siberbo2000", "fr");
-                        //client.Proxy = wProxy;
-                        //#endregion
-
-                        byte[] _result = client.DownloadData(new Uri(this._URLImage));
-                        client.Dispose();
-                        MemoryStream ms = new MemoryStream(_result);
-                        _Image.StreamSource = ms;
-                        _Image.EndInit();
-                        _Image.Freeze();
-                        _result = null;
-                        ms = null;
-                        SaveImage();
-
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("Impossible de télécharger l'image " + _URLImage + Environment.NewLine + ex.Message);
-
-                    }
-
-
-
+                        MemoryStream ms = Utils.GetStreamImage(this._URLImage);
+                        if (ms != null)
+                        {
+                            _Image.StreamSource = ms;
+                            _Image.EndInit();
+                            _Image.Freeze();
+                            ms = null;
+                            SaveImage();
+                        }
+                        else
+                        {
+                            
+                            _URLImage = "pack://application:,,,/Images/Erreur_250.png";
+                            _Image.UriSource = new Uri(_URLImage, UriKind.RelativeOrAbsolute);
+                            _Image.EndInit();
+                            _Image.Freeze();
+                            ms = null;
+                            //Création de la miniature
+                            _Miniature = new BitmapImage();
+                            _Miniature.BeginInit();
+                            _Miniature.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
+                            _Miniature.CacheOption = BitmapCacheOption.OnLoad;
+                            _Miniature.DecodePixelWidth = 200;
+                            _Miniature.UriSource = new Uri(_URLImage, UriKind.RelativeOrAbsolute);
+                            _Miniature.EndInit();
+                            _Miniature.Freeze();
+                        }
                 }
 
             Mini:
                 if (_Image != null)
                 {
-                    _Largeur = Image.Width;
-                    _Hauteur = Image.Height;
+                    _Largeur = _Image.Width;
+                    _Hauteur = _Image.Height;
                 }
                 if (IsCached)
                 {
@@ -406,7 +406,7 @@ namespace MediaManager.Library
             this._Image = null;
             this._Miniature = null;
             this._IsLoading = false;
-            Console.WriteLine("Decharge le thumb " + URLImage);
+            Console.WriteLine("Decharge Thumb " + URLImage);
         }
 
         #region INotifyPropertyChanged Members
