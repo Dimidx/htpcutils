@@ -214,25 +214,28 @@ namespace MediaManager
 
         private void btnScraper_Click(object sender, RoutedEventArgs e)
         {
-            ScraperSelect _scraper = new ScraperSelect(_MonFilm);
-            try
+            if (listBox_Films.SelectedItem != null)
             {
-                //Movie _mov = (Movie)listBox_Films.SelectedItem;
-
-                _scraper.ShowDialog();
-                if (_scraper.FilmValid != null)
+                ScraperSelect _scraper = new ScraperSelect(_MonFilm);
+                try
                 {
-                    _MonFilm = _scraper.FilmValid;
-                    if (_MonFilm.Cover != null) _MonFilm.Cover.GetImage();
-                    if (_MonFilm.Fanart != null) _MonFilm.Fanart.GetImage();
-                    ucFilmDetails.DataContext = _MonFilm;
+                    //Movie _mov = (Movie)listBox_Films.SelectedItem;
+
+                    _scraper.ShowDialog();
+                    if (_scraper.FilmValid != null)
+                    {
+                        _MonFilm = _scraper.FilmValid;
+                        if (_MonFilm.Cover != null) _MonFilm.Cover.GetImage();
+                        if (_MonFilm.Fanart != null) _MonFilm.Fanart.GetImage();
+                        ucFilmDetails.DataContext = _MonFilm;
+                    }
                 }
-            }
-            catch (Exception de)
-            {
-                Console.WriteLine(de.Message + " " + de.Source);
-                _scraper.Close();
-                //throw;
+                catch (Exception de)
+                {
+                    Console.WriteLine("Scrap erreur" + de.Message + " " + de.Source);
+                    _scraper.Close();
+                    //throw;
+                }
             }
 
         }
@@ -252,25 +255,27 @@ namespace MediaManager
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            Movie _movie = (Movie)listBox_Films.SelectedItem;
-
-            foreach (IMMPluginImportExport plug in Settings.PluginsImportExport)
+            if (listBox_Films.SelectedItem != null)
             {
-                try
-                {
-                    plug.Export(_MonFilm, _movie.fileInfo);
-                }
-                catch (Exception exe)
-                {
-                    Console.WriteLine("Erreur Export " + plug.Name + Environment.NewLine + exe.Message);
-                }
+                Movie _movie = (Movie)listBox_Films.SelectedItem;
 
+                foreach (IMMPluginImportExport plug in Settings.PluginsImportExport)
+                {
+                    try
+                    {
+                        plug.Export(_MonFilm, _movie.fileInfo);
+                    }
+                    catch (Exception exe)
+                    {
+                        Console.WriteLine("Erreur Export " + plug.Name + Environment.NewLine + exe.Message);
+                    }
+
+                }
+                _MonFilm = _movie.updateItem();
+
+                if (_MonFilm.Cover != null) _MonFilm.Cover.GetImage(true);
+                if (_MonFilm.Fanart != null) _MonFilm.Fanart.GetImage(true);
             }
-            _MonFilm = _movie.updateItem();
-
-            if (_MonFilm.Cover != null) _MonFilm.Cover.GetImage(true);
-            if (_MonFilm.Fanart != null) _MonFilm.Fanart.GetImage(true);
-
         }
 
         private void mnuToutScrape_Click(object sender, RoutedEventArgs e)
@@ -294,7 +299,7 @@ namespace MediaManager
 
         void bwScrapeAll_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            
+
             this.lib_BarreEtat.Text = e.UserState.ToString();
             this.jauge_progress.Value = e.ProgressPercentage;
             //throw new NotImplementedException();
@@ -314,11 +319,16 @@ namespace MediaManager
             int i = 0; int _progress = 0; int _nbrfilm = MovieManager.Movies.Count;
             foreach (Movie item in MovieManager.Movies)
             {
-                i+=1;
+                i += 1;
                 _progress = (int)((float)i / (float)_nbrfilm * (float)100);
                 bwScrapeAll.ReportProgress((int)_progress, "Scrape " + item.MovieName);
-                Film _ScrapeFilm = new Film(); //Le film a scraper
+                
+                //Le film a scraper
+                Film _ScrapeFilm = new Film(); 
                 _ScrapeFilm = item.updateItem();
+                ObservableCollection<Utils.ChampModifiable> _ListeChampsModif = new ObservableCollection<Utils.ChampModifiable>();
+                _ListeChampsModif = Utils.GetChampsModifiables(_ScrapeFilm);
+
                 List<Film> _ListResult = new List<Film>();
                 _ListResult = Settings.PluginsScraper[0].SearchMovie(_ScrapeFilm);
 
@@ -328,7 +338,23 @@ namespace MediaManager
                     Film _ScrapeFilmResult = new Film(); //Le film resultat du scraper
                     _ScrapeFilmResult = Settings.PluginsScraper[0].GetMovie(_ListResult[0]);
                     if (_ScrapeFilmResult != null)
+
                     {
+                        foreach (Utils.ChampModifiable c in _ListeChampsModif)
+                        {
+                            if (c.IsModifiable)
+                            {
+                                c.PropertyInfo.SetValue(_ScrapeFilmResult, c.PropertyInfo.GetValue(_ScrapeFilmResult, null), null);
+
+                            }
+                            else
+                            {
+                                c.PropertyInfo.SetValue(_ScrapeFilmResult, c.PropertyInfo.GetValue(_ScrapeFilm, null), null);
+
+                            }
+
+                        }
+
                         foreach (IMMPluginImportExport plug in Settings.PluginsImportExport)
                         {
                             try

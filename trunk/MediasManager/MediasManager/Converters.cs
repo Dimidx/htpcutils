@@ -12,7 +12,7 @@ using System.Globalization;
 
 namespace Converters
 {
-    
+
     #region DateTimeConverter
     public class DateTimeConverter : IValueConverter
     {
@@ -38,7 +38,7 @@ namespace Converters
             }
             return value;
         }
-    } 
+    }
     #endregion
 
     #region UriToImageConverter
@@ -47,7 +47,7 @@ namespace Converters
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value == null | value == "" )
+            if (value == null | value == "")
             {
                 return null;
             }
@@ -69,7 +69,7 @@ namespace Converters
                 bi.EndInit();
                 return bi;
 
-   
+
 
             }
 
@@ -83,7 +83,7 @@ namespace Converters
         }
     }
 
-    
+
     #endregion
 
     #region ImageToImageSource
@@ -161,6 +161,37 @@ namespace Converters
                 bi3.EndInit();
                 //throw;
             }
+            return bi3;
+
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+    }
+    #endregion
+
+    #region AvisToImage
+    /// <summary>
+    /// Convertie un chemin string en ImageSource
+    /// </summary>
+    public class AvisToImage : IValueConverter
+    {
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            string toConvert = "";
+            if (value != null) { toConvert = (string)value; } else { toConvert = ""; }
+            
+            BitmapImage bi3 = new BitmapImage();
+            string _FileAvis = "./Images/Avis/" + toConvert.Replace("-", "") + ".png";
+            if (!File.Exists(_FileAvis)) _FileAvis = "./Images/Avis/T.png";
+
+            bi3.BeginInit();
+            bi3.UriSource = new Uri(_FileAvis,UriKind.Relative);
+            bi3.EndInit();
+            bi3.Freeze();
             return bi3;
 
         }
