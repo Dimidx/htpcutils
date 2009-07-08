@@ -8,7 +8,7 @@
     xmlns:MediaManager_Library="clr-namespace:MediaManager.Library;assembly=MMLibrary"
     x:Class="MediaManager.Window1"
 
-    Title="Window1" Height="768" Width="1024" Background="{DynamicResource WindowBackgroundBrush}" >
+    Title="Media Manager" Height="768" Width="1024" Background="{DynamicResource BackMain}" >
     <Window.Resources>
         <Converters:StringToImageSource x:Key="StringToImageSource"/>
         <ItemsPanelTemplate x:Key="MovieTemplate">
@@ -35,7 +35,8 @@
         <Converters:ToImage x:Key="ToImage"/>
 
     </Window.Resources>
-    <Grid >
+    <Grid x:Name="GridMain" >
+		<Grid/>    	
     	<DockPanel x:Name="dockPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True">
     		<Menu DockPanel.Dock="Top">
     			<MenuItem Header="Fichier">
@@ -72,10 +73,10 @@
     			<DockPanel LastChildFill="True">
     				<Border BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,5,5,5" VerticalAlignment="Stretch" DockPanel.Dock="Top" Background="{DynamicResource ControlBackgroundBrush}">
     					<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,5,5,5">
-    						<Button Click="btnScraper_Click" x:Name="btnScraper" Width="36" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Stretch" Height="36">
+    						<Button Click="btnScraper_Click" x:Name="btnScraper" Width="36" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Stretch" Height="36" ToolTip="Recherche les informations du film depuis internet.">
     							<Image Width="32" Height="32" Source="Images\IE_128.png"/>
     						</Button>
-    						<Button Click="btnSave_Click"  x:Name="btnSave" Width="36" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Stretch" Height="36">
+    						<Button Click="btnSave_Click"  x:Name="btnSave" Width="36" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Stretch" Height="36" ToolTip="Sauvegarde les informations du film.">
     							<Image Width="32" Height="32" Source="Images\Save_128.png"/>
     						</Button>
     					</StackPanel>

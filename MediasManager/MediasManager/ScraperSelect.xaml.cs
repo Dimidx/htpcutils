@@ -32,44 +32,7 @@ namespace MediaManager
         public Film FilmValid = null; //le film sélectionné dans les résultats
         public BackgroundWorker BackWorkerRecherche = new BackgroundWorker();
         public BackgroundWorker BackWorkerDetails = new BackgroundWorker();
-        public ObservableCollection<ChampModifiable> _ListeChampsModif = new ObservableCollection<ChampModifiable>();
-
-        public class ChampModifiable : INotifyPropertyChanged
-        {
-            private bool _IsModifiable = false;
-            private PropertyInfo _PropertyInfo;
-
-            public bool IsModifiable
-            {
-                get { return _IsModifiable; }
-                set { _IsModifiable = value; OnPropertyChanged("IsModifiable"); }
-            }
-            public PropertyInfo PropertyInfo
-            {
-                get { return _PropertyInfo; }
-                set { _PropertyInfo = value; OnPropertyChanged("PropertyInfo"); OnPropertyChanged("NomChamp"); }
-            }
-
-            public string NomChamp
-            {
-                get { return _PropertyInfo.Name; }
-
-            }
-
-            #region INotifyPropertyChanged Members
-
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            public void OnPropertyChanged(string propertyName)
-            {
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-                }
-            }
-
-            #endregion
-        }
+        public ObservableCollection<Utils.ChampModifiable> _ListeChampsModif  = new ObservableCollection<Utils.ChampModifiable>();
 
 
         public ScraperSelect(Film _FilmRecherche)
@@ -77,42 +40,7 @@ namespace MediaManager
             this.InitializeComponent();
             FilmRecherche = _FilmRecherche;
             //ThreadPool.SetMaxThreads(5, 1);
-
-
-            Type _TypeFilm = typeof(Film);
-            PropertyInfo[] _Properties = _TypeFilm.GetProperties();
-
-            foreach (PropertyInfo t in _Properties)
-            {
-                ChampModifiable c = new ChampModifiable();
-                c.PropertyInfo = t;
-
-                if (t.GetValue(_FilmRecherche, null) != null)
-                {
-                    string _valeur = t.GetValue(_FilmRecherche, null).ToString();
-
-                    //Console.WriteLine(c.NomChamp + " - " + c.PropertyInfo.PropertyType + " - " + _valeur);
-                    
-
-                    if (_valeur == "")
-                    {
-                        c.IsModifiable = true;
-                    }
-                    else
-                    {
-
-                        c.IsModifiable = false;
-                    }
-                }
-
-                else
-                {
-                    c.IsModifiable = true;
-                }
-
-                if (t.CanWrite) _ListeChampsModif.Add(c);
-
-            }
+            _ListeChampsModif = Utils.GetChampsModifiables(FilmRecherche);
             ListCollectionView lcv = new ListCollectionView(_ListeChampsModif);
             lcv.SortDescriptions.Add(new System.ComponentModel.SortDescription("NomChamp", System.ComponentModel.ListSortDirection.Ascending));
             lstChamps.ItemsSource = lcv;
@@ -259,21 +187,24 @@ delegate()
         private void btn_OK_Click(object sender, RoutedEventArgs e)
         {
             //FilmValid = FilmSelectionne;
-            FilmValid = new Film();
-
-            foreach (ChampModifiable c in _ListeChampsModif)
+            if (FilmSelectionne != null)
             {
-                if (c.IsModifiable)
+                FilmValid = new Film();
+
+                foreach (Utils.ChampModifiable c in _ListeChampsModif)
                 {
-                    c.PropertyInfo.SetValue(FilmValid, c.PropertyInfo.GetValue(FilmSelectionne, null), null);
+                    if (c.IsModifiable)
+                    {
+                        c.PropertyInfo.SetValue(FilmValid, c.PropertyInfo.GetValue(FilmSelectionne, null), null);
+
+                    }
+                    else
+                    {
+                        c.PropertyInfo.SetValue(FilmValid, c.PropertyInfo.GetValue(FilmRecherche, null), null);
+
+                    }
 
                 }
-                else
-                {
-                    c.PropertyInfo.SetValue(FilmValid, c.PropertyInfo.GetValue(FilmRecherche, null), null);
-
-                }
-
             }
             this.Close();
 
@@ -281,8 +212,8 @@ delegate()
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            bool _coche = ((ChampModifiable)lstChamps.Items[0]).IsModifiable;
-            foreach (ChampModifiable c in _ListeChampsModif)
+            bool _coche = ((Utils.ChampModifiable)lstChamps.Items[0]).IsModifiable;
+            foreach (Utils.ChampModifiable c in _ListeChampsModif)
             {
                 c.IsModifiable = _coche;
             }

@@ -274,7 +274,7 @@
     <Compile Include="UC_FilmDetails.xaml.cs">
       <DependentUpon>UC_FilmDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utils\FolderBrowserDialogEx.cs">
+    <Compile Include="Utile\FolderBrowserDialogEx.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Window2.xaml.cs">
@@ -412,6 +412,25 @@
     <Resource Include="Images\Icone.ico" />
     <Resource Include="Images\Logo.png" />
     <Resource Include="Images\Erreur_250.png" />
+    <None Include="Images\Avis\10.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\Avis\12.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\Avis\16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\Avis\18.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\Avis\6.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\Avis\T.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Resource Include="Images\Fond_Main.png" />
     <Content Include="Plugins\ImportExport\XBMC.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

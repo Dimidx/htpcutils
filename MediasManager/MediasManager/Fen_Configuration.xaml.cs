@@ -93,7 +93,7 @@ namespace MediaManager
 
         private void btnAjouterMoviePath_Click(object sender, RoutedEventArgs e)
         {
-            var dlg1 = new Utils.FolderBrowserDialogEx();
+            var dlg1 = new Utile.FolderBrowserDialogEx();
             dlg1.Description = "Select a folder to extract to:";
             dlg1.ShowNewFolderButton = true;
             dlg1.ShowEditBox = true;

@@ -8,39 +8,22 @@
 	Width="640" Height="480" Background="{DynamicResource WindowBackgroundBrush}" mc:Ignorable="d" Icon="Images\Config_16.png">
 	<Window.Resources>
 		<DataTemplate x:Key="MoviePathDataTemplate">
-			<Grid Height="Auto" Width="Auto">
+			<StackPanel >
 				<TextBlock Text="{Binding Path=path}" x:Name="txtPath" TextWrapping="Wrap" VerticalAlignment="Top" Margin="2,2,2,0" Foreground="#FFFFFFFF" FontSize="11" FontWeight="Bold"/>
-				<CheckBox IsChecked="{Binding Path=containsFolders}" Margin="8,25.276,0,0" Width="Auto" Height="Auto" Content="" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-				<TextBlock Margin="28,26.667,0,0" Text="Ce dossier contient des dossiers" TextWrapping="Wrap" Height="Auto" VerticalAlignment="Top" Width="159.093" Foreground="{DynamicResource TextBrush}"/>
-			</Grid>
+				<CheckBox IsChecked="{Binding Path=containsFolders}" Content="Ce dossier contient des dossiers" Width="Auto" Height="Auto" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+			</StackPanel>
 		</DataTemplate>
 	</Window.Resources>
 	
 
 	<Grid x:Name="LayoutRoot">
 		<TabControl Margin="0,0,0,40" IsSynchronizedWithCurrentItem="True">
-			<TabItem Header="Général">
-				<Grid/>
-			</TabItem>
 			<TabItem Header="Films">
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="*"/>
 					</Grid.ColumnDefinitions>
-					<GroupBox Margin="8,101,0,0" Height="71" Header="Fanarts" VerticalAlignment="Top" Width="205" HorizontalAlignment="Left">
-						<StackPanel Margin="5,5,5,5">
-							<CheckBox x:Name="chkSaveMovieNameFanart" Content="Sauver &lt;MovieName&gt;-fanart.jpg" Height="Auto" Margin="0,0,0,0"/>
-							<CheckBox x:Name="chkSaveFanartJpg" Margin="0,0,0,0" Height="Auto" Content="Sauver &lt;fanart.jpg&gt;"/>
-						</StackPanel>
-					</GroupBox>
-					<GroupBox HorizontalAlignment="Left" Margin="8,8,0,0" VerticalAlignment="Top" Width="205" Height="89" Header="Posters">
-						<StackPanel Margin="5,5,5,5">
-							<CheckBox x:Name="chkSaveMovieNameTbn" Content="Sauver &lt;MovieName&gt;.tbn" Height="Auto" Margin="0,0,0,0"/>
-							<CheckBox x:Name="chkSaveFolderJpg" Margin="0,0,0,0" Height="Auto" Content="Sauver &lt;folder.jpg&gt;"/>
-							<CheckBox x:Name="chkSaveMovieTbn" Content="Sauver &lt;movie.tbn&gt;" Height="Auto" Margin="0,0,0,0"/>
-						</StackPanel>
-					</GroupBox>
-					<GroupBox Margin="217,8,8,8" Header="Dossiers">
+					<GroupBox Margin="8,8,8,8" Header="Dossiers">
 						<StackPanel Margin="5,5,5,5">
 							<DockPanel Height="222" LastChildFill="False">
 								<StackPanel Width="Auto" Height="Auto" DockPanel.Dock="Left">
@@ -57,9 +40,6 @@
 					</GroupBox>
 				</Grid>
 			</TabItem>
-            <TabItem Header="tabItem1" Name="tabItem1">
-                <Grid />
-            </TabItem>
         </TabControl>
 		<Button HorizontalAlignment="Right" Margin="0,0,8,8" VerticalAlignment="Bottom" Width="78" Height="24" Content="Sauver" Click="Button_Click" />
 	</Grid>

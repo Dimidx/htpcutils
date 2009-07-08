@@ -55,6 +55,13 @@ namespace MediaManager.Plugins
                 MonFilm.Critique = Nfo.Outline;
                 MonFilm.AlloID = Nfo.AlloId;
                 MonFilm.Studio = Nfo.Studio;
+                #region NotePresse
+                try
+                {
+                    MonFilm.NotePresse = Single.Parse(Nfo.Rating);
+                }
+                catch { }
+                #endregion
                 #region Date de sortie
                 try
                 {

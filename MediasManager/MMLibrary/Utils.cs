@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Reflection;
+using System.ComponentModel;
 
 namespace MediaManager.Library
 {
@@ -34,7 +37,7 @@ namespace MediaManager.Library
                 return "";
             }
 
-        } 
+        }
         #endregion
 
         #region GetSourceHTML
@@ -70,7 +73,7 @@ namespace MediaManager.Library
             return sourceHTML;
 
         }
-        
+
         #endregion
 
         #region GetStreamImage
@@ -104,7 +107,7 @@ namespace MediaManager.Library
                 return null;
             }
 
-        } 
+        }
         #endregion
 
         #region RemoveUnwantedChars
@@ -120,7 +123,7 @@ namespace MediaManager.Library
             tInput = tInput.Replace("\\s{2,}", " ");
             tInput = tInput.Replace("&nbsp;", "").Trim();
             return tInput;
-        } 
+        }
         #endregion
 
         #region GetStringBetweenTwoStrings
@@ -146,7 +149,7 @@ namespace MediaManager.Library
             }
 
             return retVal;
-        } 
+        }
         #endregion
 
         #region Hash
@@ -172,7 +175,129 @@ namespace MediaManager.Library
                 }
             }
             return String.Format("{0:x8}", m_crc);
-        } 
+        }
         #endregion
+
+        #region ChampModifiable
+
+        /// <summary>
+        /// Un champ d'une classe
+        /// </summary>
+        public class ChampModifiable : INotifyPropertyChanged
+        {
+            private bool _IsModifiable = false;
+            private PropertyInfo _PropertyInfo;
+
+            public bool IsModifiable
+            {
+                get { return _IsModifiable; }
+                set { _IsModifiable = value; OnPropertyChanged("IsModifiable"); }
+            }
+            public PropertyInfo PropertyInfo
+            {
+                get { return _PropertyInfo; }
+                set { _PropertyInfo = value; OnPropertyChanged("PropertyInfo"); OnPropertyChanged("NomChamp"); }
+            }
+
+            public string NomChamp
+            {
+                get { return _PropertyInfo.Name; }
+
+            }
+
+            #region INotifyPropertyChanged Members
+
+            public event PropertyChangedEventHandler PropertyChanged;
+
+            public void OnPropertyChanged(string propertyName)
+            {
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                }
+            }
+            #endregion
+        }
+
+        public static ObservableCollection<Utils.ChampModifiable> GetChampsModifiables(object _Classe)
+        {
+            ObservableCollection<Utils.ChampModifiable> _ListeChamps = new ObservableCollection<Utils.ChampModifiable>();
+            Type _TypeClasse = _Classe.GetType();
+            PropertyInfo[] _Properties = _TypeClasse.GetProperties();
+
+            foreach (PropertyInfo t in _Properties)
+            {
+                Utils.ChampModifiable c = new Utils.ChampModifiable();
+                c.PropertyInfo = t;
+
+                if (t.GetValue(_Classe, null) != null)
+                {
+                    string _valeur = t.GetValue(_Classe, null).ToString();
+
+                    Console.WriteLine(c.NomChamp + " - " + c.PropertyInfo.PropertyType + " - " + _valeur);
+
+                    switch (c.PropertyInfo.PropertyType.ToString())
+                    {
+                        case "System.String":
+                            if ((string)t.GetValue(_Classe, null) == "") _valeur = "";
+                            break;
+
+                        case "System.DateTime":
+                            if (((DateTime)t.GetValue(_Classe, null)).Year == 1) _valeur = "";
+                            break;
+
+                        case "MediaManager.Library.PersonneCollection":
+                            if (((PersonneCollection)t.GetValue(_Classe, null)).Count <= 0) _valeur = "";
+                            break;
+
+                        case "System.Int32":
+                            if (((int)t.GetValue(_Classe, null)) == 0) _valeur = "";
+                            break;
+
+                        case "MediaManager.Library.Thumb":
+                            if (((Thumb)t.GetValue(_Classe, null)).URLImage == "") _valeur = "";
+                            break;
+
+                        case "System.Collections.ObjectModel.ObservableCollection`1[MediaManager.Library.Thumb]":
+                            if (((ObservableCollection<Thumb>)t.GetValue(_Classe, null)).Count <= 0) _valeur = "";
+                            break;
+
+                        case "System.String[]":
+                            if (((string[])t.GetValue(_Classe, null)).Length <= 0) _valeur = "";
+                            break;
+
+                        case "System.Single":
+                            if (((Single)t.GetValue(_Classe, null)) == 0) _valeur = "";
+                            break;
+
+                        default:
+                            if (t.GetValue(_Classe, null).ToString() == "") _valeur = "";
+                            break;
+                    }
+
+                    if (_valeur == "")
+                    {
+                        c.IsModifiable = true;
+                    }
+                    else
+                    {
+                        c.IsModifiable = false;
+                    }
+                }
+
+                else
+                {
+                    c.IsModifiable = true;
+                }
+
+                if (t.CanWrite) _ListeChamps.Add(c);
+            }
+            return _ListeChamps;
+
+        }
+        #endregion
+
+
+
     }
 }

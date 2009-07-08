@@ -10,6 +10,12 @@
 			<ResourceDictionary.MergedDictionaries>
 			<ResourceDictionary Source="Themes/ExpressionDark/Theme.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
+			<VisualBrush x:Key="BackMain">
+				<VisualBrush.Visual>
+					<Image Source="./Images/Fond_Main.png"/>
+				</VisualBrush.Visual>
+			</VisualBrush>
+
 			<Style x:Key="ListBoxStyleWrap" TargetType="{x:Type ListBox}">
 			<Setter Property="SnapsToDevicePixels" Value="True"/>
 			<Setter Property="Background" Value="{x:Null}"/>
