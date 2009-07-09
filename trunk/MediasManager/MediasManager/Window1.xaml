@@ -10,6 +10,11 @@
 
     Title="Media Manager" Height="768" Width="1024" Background="{DynamicResource BackMain}" >
     <Window.Resources>
+			<DataTemplate x:Key="dtChamps">
+			<Grid>
+				<CheckBox Content="{Binding Path=NomChamp}" IsChecked="{Binding Path=IsModifiable}" IsThreeState="False" OverridesDefaultStyle="True" />
+			</Grid>
+		</DataTemplate>
         <Converters:StringToImageSource x:Key="StringToImageSource"/>
         <ItemsPanelTemplate x:Key="MovieTemplate">
         	<StackPanel Width="Auto" Height="Auto"/>
@@ -35,8 +40,7 @@
         <Converters:ToImage x:Key="ToImage"/>
 
     </Window.Resources>
-    <Grid x:Name="GridMain" >
-		<Grid/>    	
+    <Grid x:Name="GridMain" >    	
     	<DockPanel x:Name="dockPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True">
     		<Menu DockPanel.Dock="Top">
     			<MenuItem Header="Fichier">
@@ -58,11 +62,13 @@
 						</MenuItem.Icon>
 					</MenuItem>
     				<Separator/>
-    				<MenuItem x:Name="mnuToutScrape" Header="Tout Scrapper" Click="mnuToutScrape_Click"/>
+    				<MenuItem x:Name="mnuToutScrape" Header="Tout Scrapper" Click="mnuToutScrape_Click">
+						<MenuItem.Icon>
+						    <Image Source="Images/IE_16.png"/>
+						</MenuItem.Icon>
+					</MenuItem>
     			</MenuItem>
     		</Menu>
-    		<ProgressBar BorderThickness="1,1,1,1" IsIndeterminate="True" x:Name="jauge_progress" Visibility="Collapsed" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Height="16" DockPanel.Dock="Bottom"/>
-    		<TextBlock x:Name="lib_BarreEtat" Width="Auto" Text="Recherche en cours..." TextWrapping="Wrap" DockPanel.Dock="Bottom" Visibility="Collapsed"/>
     		<DockPanel DockPanel.Dock="Top" LastChildFill="True" d:LayoutOverrides="Height">
     			<Border Margin="5,5,5,5" Width="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10">
                     <DockPanel>
@@ -87,5 +93,25 @@
     			</DockPanel>
     		</DockPanel>
     	</DockPanel>
+		<Grid x:Name="GridPatientez" Background="#99000000" Visibility="Collapsed">
+			<GroupBox x:Name="gbWait" Header="Patientez" Width="400" Height="100">
+				<StackPanel>
+					<TextBlock x:Name="lib_BarreEtat" Text="Recherche en cours..." Margin="10,10,10,10"/>
+					<ProgressBar BorderThickness="1,1,1,1" IsIndeterminate="True" x:Name="jauge_progress" Height="16" Margin="10,10,10,10"/>
+				
+				</StackPanel>
+			</GroupBox>
+		</Grid>
+		<Grid x:Name="GridConfigScraper" Background="#99000000" Visibility="Collapsed">
+			<GroupBox Header="Scraper" Width="400" Height="300">
+				<StackPanel>
+					<TextBlock Text="Champs à mettre à jour" HorizontalAlignment="Center" Margin="0,5,0,5"/>
+					<ListBox x:Name="lstChamps" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="5,0,5,5" ItemTemplate="{DynamicResource dtChamps}" IsSynchronizedWithCurrentItem="False" VerticalContentAlignment="Stretch"/>
+					<Button Content="OK" />
+					<Button Content="Annuler" />
+					
+				</StackPanel>
+			</GroupBox>
+		</Grid>
     </Grid>
 </Window>

@@ -54,16 +54,10 @@ namespace MediaManager
                 //conf.ShowDialog();
             }
             InitializeComponent();
-            //ucFilmDetails.DataContext = MonFilm;
-            //this.DataContext = MonFilm;
-
-
             ListCollectionView lcv = new ListCollectionView(MovieManager.Movies);
             lcv.SortDescriptions.Add(new System.ComponentModel.SortDescription("MovieName", System.ComponentModel.ListSortDirection.Ascending));
             listBox_Films.ItemsSource = lcv;
-            //this.DataContext = lcv;
-            //lcv.Filter = film => ((Film)film).Titre.ToLower().Contains(this.txt_Recherche);
-            //ucFilmDetails.DataContext = _MonFilm;
+
             ScanDir();
 
         }
@@ -91,8 +85,7 @@ namespace MediaManager
                 BackWorker.WorkerReportsProgress = true;
                 //ObservableCollection<Movie> _Movies = this.Resources["MovieCollectionDataSource"] as MovieCollection;
                 //_Movies.Clear();
-                this.jauge_progress.Visibility = Visibility.Visible;
-                this.lib_BarreEtat.Visibility = Visibility.Visible;
+				GridPatientez.Visibility = Visibility.Visible;
                 BackWorker.RunWorkerAsync();
             }
         }
@@ -107,16 +100,13 @@ namespace MediaManager
 
         private void ScanDir_DoWork(object sender, DoWorkEventArgs e)
         {
-            //ObservableCollection<Movie> _Movies = this.Resources["MovieCollectionDataSource"] as ObservableCollection<Movie>;
             MovieManager.scanMovieDirs();
-            //_Movies.scanMovieDirs();
         }
 
         private void ScanDir_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
 
-            this.jauge_progress.Visibility = Visibility.Collapsed;
-            this.lib_BarreEtat.Visibility = Visibility.Collapsed;
+			GridPatientez.Visibility = Visibility.Collapsed;
 
         }
 
@@ -289,10 +279,18 @@ namespace MediaManager
                 bwScrapeAll.WorkerReportsProgress = true;
                 //ObservableCollection<Movie> _Movies = this.Resources["MovieCollectionDataSource"] as MovieCollection;
                 //_Movies.Clear();
-                this.jauge_progress.Visibility = Visibility.Visible;
-                this.jauge_progress.IsIndeterminate = false;
-                this.jauge_progress.Maximum = 100;
-                this.lib_BarreEtat.Visibility = Visibility.Visible;
+                //GridPatientez.Visibility = Visibility.Visible;
+                GridConfigScraper.Visibility = Visibility.Visible;
+
+                ObservableCollection<Utils.ChampModifiable> _ListeChampReplace = new ObservableCollection<Utils.ChampModifiable>();
+                _ListeChampReplace = Utils.GetChampsModifiables(new Film());
+                ListCollectionView lcv = new ListCollectionView(_ListeChampReplace);
+                lcv.SortDescriptions.Add(new System.ComponentModel.SortDescription("NomChamp", System.ComponentModel.ListSortDirection.Ascending));
+                lstChamps.ItemsSource = lcv;
+
+                jauge_progress.IsIndeterminate = false;
+                jauge_progress.Maximum = 100;
+                
                 bwScrapeAll.RunWorkerAsync();
             }
         }
@@ -300,16 +298,13 @@ namespace MediaManager
         void bwScrapeAll_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
 
-            this.lib_BarreEtat.Text = e.UserState.ToString();
-            this.jauge_progress.Value = e.ProgressPercentage;
-            //throw new NotImplementedException();
+            lib_BarreEtat.Text = e.UserState.ToString();
+            jauge_progress.Value = e.ProgressPercentage;
         }
 
         void bwScrapeAll_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.jauge_progress.Visibility = Visibility.Hidden;
-            this.lib_BarreEtat.Visibility = Visibility.Hidden;
-            //throw new NotImplementedException();
+            GridPatientez.Visibility = Visibility.Collapsed;
         }
 
         void bwScrapeAll_DoWork(object sender, DoWorkEventArgs e)
@@ -389,26 +384,6 @@ namespace MediaManager
 
 
             }
-
-
-            //foreach (IMMPluginImportExport plug in Settings.PluginsImportExport)
-            //{
-            //    try
-            //    {
-            //        plug.Export(_MonFilm, _movie.fileInfo);
-            //    }
-            //    catch (Exception exe)
-            //    {
-            //        Console.WriteLine("Erreur Export " + plug.Name + Environment.NewLine + exe.Message);
-            //    }
-
-            //}
-            //_MonFilm = _movie.updateItem();
-
-            //if (_MonFilm.Cover != null) _MonFilm.Cover.GetImage(true);
-            //if (_MonFilm.Fanart != null) _MonFilm.Fanart.GetImage(true);
-
-            //throw new NotImplementedException();
         }
 
     }
