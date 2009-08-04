@@ -14,13 +14,6 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <Converters:PersonneToString x:Key="PersonneToString"/>
 		<Converters:UriToImageConverter x:Key="UriToImageConverter"/>
-		<DataTemplate x:Key="DataTemplateScraper">
-			<StackPanel HorizontalAlignment="Stretch" Margin="0,0,0,0">
-				<TextBlock Text="{Binding Path=Name}" FontWeight="Bold" />
-				<TextBlock Text="{Binding Path=Author}" FontStyle="Italic" FontSize="9" />
-				<TextBlock Text="{Binding Path=URL}" FontSize="9" Foreground="#FF1B7CD0" />
-			</StackPanel>
-		</DataTemplate>
 		<DataTemplate x:Key="DataTemplateResult">
 					<StackPanel HorizontalAlignment="Stretch" Margin="0,0,0,0" Width="Auto">
 				<DockPanel Width="Auto" Height="Auto" LastChildFill="False">

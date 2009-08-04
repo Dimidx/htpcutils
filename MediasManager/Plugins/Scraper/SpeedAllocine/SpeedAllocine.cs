@@ -50,16 +50,17 @@ namespace MediaManager.Plugins
 
 
             //Affiches
-            //MatchCollection _MatchesAffiches = Regex.Matches(_source, @"<thumbs>(.*?)</thumbs");
+            string _Affiches = Regex.Match(_source, @"<thumbs>(.*?)</thumbs>").Groups[1].ToString();
+            MatchCollection _MatchesAffiches = Regex.Matches(_source, @"<thumb>(.*?)</thumb>");
 
-            //foreach (Match _Match in _MatchesAffiches)
-            //{
+            foreach (Match _Match in _MatchesAffiches)
+            {
                 
-            //    string strMovieCode = _Match.ToString();
-            //    if (Regex.Match(strMovieCode, "<thumb>(.*?)</thumb>").Success)
-            //        MonFilm.ListeCover.Add(new Thumb(Regex.Match(strMovieCode, "<thumb>(.*?)</thumb>").Groups[0].ToString()));
+                string strMovieCode = _Match.ToString();
+                if (Regex.Match(strMovieCode, "<thumb>(.*?)</thumb>").Success)
+                    MonFilm.ListeCover.Add(new Thumb(_Match.Groups[1].ToString()));
                 
-            //}
+            }
 
             //Fanart
 
