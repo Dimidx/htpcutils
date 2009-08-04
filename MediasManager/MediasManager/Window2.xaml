@@ -53,9 +53,6 @@
 	</Window.Resources>
 
 	<Grid x:Name="LayoutRoot">
-		<UniformGrid HorizontalAlignment="Left" d:LayoutOverrides="Width, Height">
-				<Border Height="128" ClipToBounds="False" BorderBrush="#FF000000" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10"/>
-		</UniformGrid>
-		<Rectangle Margin="105,31,193,124"/>
-	</Grid>
+        <Button Height="47" HorizontalAlignment="Left" Margin="132,49,0,0" Name="button1" VerticalAlignment="Top" Width="127" Click="button1_Click">Button</Button>
+    </Grid>
 </Window>
