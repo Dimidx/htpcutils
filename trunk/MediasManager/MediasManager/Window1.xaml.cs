@@ -42,6 +42,11 @@ namespace MediaManager
         public ImageSource FanartSource = null;
         public MovieManager MovieManager = new MovieManager();
         public Movie MaMovie = null;
+
+        public IMMPluginScraper Scraper = null;
+        public ObservableCollection<Utils.ChampModifiable> ListeChampReplace = new ObservableCollection<Utils.ChampModifiable>();
+
+
         public Window1()
         {
 
@@ -78,6 +83,7 @@ namespace MediaManager
 
             if (BackWorker.IsBusy == false)
             {
+                
                 BackWorker = new BackgroundWorker();
                 BackWorker.DoWork += new DoWorkEventHandler(ScanDir_DoWork);
                 BackWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ScanDir_RunWorkerCompleted);
@@ -272,26 +278,15 @@ namespace MediaManager
         {
             if (bwScrapeAll.IsBusy == false)
             {
-                bwScrapeAll = new BackgroundWorker();
-                bwScrapeAll.DoWork += new DoWorkEventHandler(bwScrapeAll_DoWork);
-                bwScrapeAll.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bwScrapeAll_RunWorkerCompleted);
-                bwScrapeAll.ProgressChanged += new ProgressChangedEventHandler(bwScrapeAll_ProgressChanged);
-                bwScrapeAll.WorkerReportsProgress = true;
-                //ObservableCollection<Movie> _Movies = this.Resources["MovieCollectionDataSource"] as MovieCollection;
-                //_Movies.Clear();
-                //GridPatientez.Visibility = Visibility.Visible;
+                //Charge les scrapers
+                cbScraper.ItemsSource = Settings.PluginsScraper;
+                //Charge la liste des champs modifiables
                 GridConfigScraper.Visibility = Visibility.Visible;
-
-                ObservableCollection<Utils.ChampModifiable> _ListeChampReplace = new ObservableCollection<Utils.ChampModifiable>();
-                _ListeChampReplace = Utils.GetChampsModifiables(new Film());
-                ListCollectionView lcv = new ListCollectionView(_ListeChampReplace);
+                ListeChampReplace = Utils.GetChampsModifiables(new Film());
+                ListCollectionView lcv = new ListCollectionView(ListeChampReplace);
                 lcv.SortDescriptions.Add(new System.ComponentModel.SortDescription("NomChamp", System.ComponentModel.ListSortDirection.Ascending));
                 lstChamps.ItemsSource = lcv;
 
-                jauge_progress.IsIndeterminate = false;
-                jauge_progress.Maximum = 100;
-                
-                bwScrapeAll.RunWorkerAsync();
             }
         }
 
@@ -316,27 +311,29 @@ namespace MediaManager
             {
                 i += 1;
                 _progress = (int)((float)i / (float)_nbrfilm * (float)100);
-                bwScrapeAll.ReportProgress((int)_progress, "Scrape " + item.MovieName);
+                bwScrapeAll.ReportProgress((int)_progress, "Recherche " + item.MovieName);
                 
                 //Le film a scraper
                 Film _ScrapeFilm = new Film(); 
                 _ScrapeFilm = item.updateItem();
-                ObservableCollection<Utils.ChampModifiable> _ListeChampsModif = new ObservableCollection<Utils.ChampModifiable>();
-                _ListeChampsModif = Utils.GetChampsModifiables(_ScrapeFilm);
+                //ObservableCollection<Utils.ChampModifiable> _ListeChampsModif = new ObservableCollection<Utils.ChampModifiable>();
+                //_ListeChampsModif = Utils.GetChampsModifiables(_ScrapeFilm);
+
 
                 List<Film> _ListResult = new List<Film>();
-                _ListResult = Settings.PluginsScraper[0].SearchMovie(_ScrapeFilm);
+                _ListResult = Scraper.SearchMovie(_ScrapeFilm);
 
                 if (_ListResult != null & _ListResult.Count > 0)
                 {
                     bwScrapeAll.ReportProgress((int)_progress, "Charge les détails de " + _ListResult[0].Titre);
                     Film _ScrapeFilmResult = new Film(); //Le film resultat du scraper
-                    _ScrapeFilmResult = Settings.PluginsScraper[0].GetMovie(_ListResult[0]);
+                    _ScrapeFilmResult = Scraper.GetMovie(_ListResult[0]);
                     if (_ScrapeFilmResult != null)
 
                     {
-                        foreach (Utils.ChampModifiable c in _ListeChampsModif)
+                        foreach (Utils.ChampModifiable c in ListeChampReplace)
                         {
+
                             if (c.IsModifiable)
                             {
                                 c.PropertyInfo.SetValue(_ScrapeFilmResult, c.PropertyInfo.GetValue(_ScrapeFilmResult, null), null);
@@ -384,6 +381,35 @@ namespace MediaManager
 
 
             }
+        }
+
+        private void btn_ScrapeAllOK_Click(object sender, RoutedEventArgs e)
+        {
+            if (bwScrapeAll.IsBusy == false)
+            {
+                bwScrapeAll = new BackgroundWorker();
+                bwScrapeAll.DoWork += new DoWorkEventHandler(bwScrapeAll_DoWork);
+                bwScrapeAll.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bwScrapeAll_RunWorkerCompleted);
+                bwScrapeAll.ProgressChanged += new ProgressChangedEventHandler(bwScrapeAll_ProgressChanged);
+                bwScrapeAll.WorkerReportsProgress = true;
+                //ObservableCollection<Movie> _Movies = this.Resources["MovieCollectionDataSource"] as MovieCollection;
+                //_Movies.Clear();
+                GridConfigScraper.Visibility = Visibility.Collapsed;
+                GridPatientez.Visibility = Visibility.Visible;
+                jauge_progress.IsIndeterminate = false;
+                jauge_progress.Maximum = 100;
+
+                Scraper = (IMMPluginScraper)cbScraper.SelectedItem;
+
+                bwScrapeAll.RunWorkerAsync();
+            }
+
+
+        }
+
+        private void btn_ScrapeAllCancel_Click(object sender, RoutedEventArgs e)
+        {
+            GridConfigScraper.Visibility = Visibility.Collapsed;
         }
 
     }

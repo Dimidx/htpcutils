@@ -103,14 +103,15 @@
 			</GroupBox>
 		</Grid>
 		<Grid x:Name="GridConfigScraper" Background="#99000000" Visibility="Collapsed">
-			<GroupBox Header="Scraper" Width="400" Height="300">
-				<StackPanel>
-					<TextBlock Text="Champs à mettre à jour" HorizontalAlignment="Center" Margin="0,5,0,5"/>
-					<ListBox x:Name="lstChamps" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="5,0,5,5" ItemTemplate="{DynamicResource dtChamps}" IsSynchronizedWithCurrentItem="False" VerticalContentAlignment="Stretch"/>
-					<Button Content="OK" />
-					<Button Content="Annuler" />
+			<GroupBox Header="Scraper" Width="400" Height="300" Visibility="Visible">
+				<DockPanel>
+					<ComboBox x:Name="cbScraper" VerticalAlignment="Top" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplateScraper}" DockPanel.Dock="Top" Margin="5,5,5,5"/>
+					<TextBlock Text="Champs à mettre à jour" HorizontalAlignment="Center" Margin="0,5,0,5" DockPanel.Dock="Top"/>
+					<Button x:Name="btn_ScrapeAllOK" Click="btn_ScrapeAllOK_Click" Content="OK" DockPanel.Dock="Bottom" />
+					<Button x:Name="btn_ScrapeAllCancel" Click="btn_ScrapeAllCancel_Click" Content="Annuler" DockPanel.Dock="Bottom" />
+					<ListBox x:Name="lstChamps" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="5,0,5,5" ItemTemplate="{DynamicResource dtChamps}" IsSynchronizedWithCurrentItem="False" VerticalContentAlignment="Stretch" DockPanel.Dock="Bottom"/>
 					
-				</StackPanel>
+				</DockPanel>
 			</GroupBox>
 		</Grid>
     </Grid>

@@ -55,9 +55,9 @@ namespace MediaManager.Library
                 WebClient m_webClient = new WebClient();
 
                 #region Proxy
-                WebProxy wProxy = new WebProxy("10.126.71.12", 80);
-                wProxy.Credentials = new NetworkCredential("rfraftp", "Siberbo2000", "fr");
-                m_webClient.Proxy = wProxy;
+                //WebProxy wProxy = new WebProxy("10.126.71.12", 80);
+                //wProxy.Credentials = new NetworkCredential("rfraftp", "Siberbo2000", "fr");
+                //m_webClient.Proxy = wProxy;
                 #endregion
 
                 //m_webClient.Encoding = Encoding.UTF8;
@@ -89,9 +89,9 @@ namespace MediaManager.Library
                 WebClient client = new WebClient();
 
                 //#region Proxy
-                WebProxy wProxy = new WebProxy("10.126.71.12", 80);
-                wProxy.Credentials = new NetworkCredential("rfraftp", "Siberbo2000", "fr");
-                client.Proxy = wProxy;
+                //WebProxy wProxy = new WebProxy("10.126.71.12", 80);
+                //wProxy.Credentials = new NetworkCredential("rfraftp", "Siberbo2000", "fr");
+                //client.Proxy = wProxy;
                 //#endregion
 
                 byte[] _result = client.DownloadData(new Uri(url));
