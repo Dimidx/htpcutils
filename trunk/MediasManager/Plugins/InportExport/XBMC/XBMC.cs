@@ -206,16 +206,19 @@ namespace MediaManager.Plugins
             #region Affiche
             try
             {
-                string _PostersPath = _FileInfo.FullName.Replace(_FileInfo.Extension, ".tbn");
-                if (_Film.Cover.IsCached)
+                if (_Film.Cover != null)
                 {
-                    if (File.Exists(_PostersPath)) File.Delete(_PostersPath);
-                    File.Copy(_Film.Cover.FichierCache, _PostersPath);
-                }
-                if (_Film.Cover.IsLocal && _Film.Cover.URLImage != _PostersPath)
-                {
-                    if (File.Exists(_PostersPath)) File.Delete(_PostersPath);
-                    File.Copy(_Film.Cover.URLImage, _PostersPath);
+                    string _PostersPath = _FileInfo.FullName.Replace(_FileInfo.Extension, ".tbn");
+                    if (_Film.Cover.IsCached)
+                    {
+                        if (File.Exists(_PostersPath)) File.Delete(_PostersPath);
+                        File.Copy(_Film.Cover.FichierCache, _PostersPath);
+                    }
+                    if (_Film.Cover.IsLocal && _Film.Cover.URLImage != _PostersPath)
+                    {
+                        if (File.Exists(_PostersPath)) File.Delete(_PostersPath);
+                        File.Copy(_Film.Cover.URLImage, _PostersPath);
+                    }
                 }
             }
             catch { }
@@ -224,16 +227,19 @@ namespace MediaManager.Plugins
             #region Fanart
             try
             {
-                string _FanartPath = _FileInfo.FullName.Replace(_FileInfo.Extension, "-fanart.jpg");
-                if (_Film.Fanart.IsCached)
+                if (_Film.Fanart != null)
                 {
-                    if (File.Exists(_FanartPath)) File.Delete(_FanartPath);
-                    File.Copy(_Film.Fanart.FichierCache, _FanartPath);
-                }
-                if (_Film.Fanart.IsLocal && _Film.Fanart.URLImage != _FanartPath)
-                {
-                    if (File.Exists(_FanartPath)) File.Delete(_FanartPath);
-                    File.Copy(_Film.Fanart.URLImage, _FanartPath);
+                    string _FanartPath = _FileInfo.FullName.Replace(_FileInfo.Extension, "-fanart.jpg");
+                    if (_Film.Fanart.IsCached)
+                    {
+                        if (File.Exists(_FanartPath)) File.Delete(_FanartPath);
+                        File.Copy(_Film.Fanart.FichierCache, _FanartPath);
+                    }
+                    if (_Film.Fanart.IsLocal && _Film.Fanart.URLImage != _FanartPath)
+                    {
+                        if (File.Exists(_FanartPath)) File.Delete(_FanartPath);
+                        File.Copy(_Film.Fanart.URLImage, _FanartPath);
+                    }
                 }
             }
             catch { }

@@ -316,6 +316,7 @@ namespace MediaManager
                 //Le film a scraper
                 Film _ScrapeFilm = new Film(); 
                 _ScrapeFilm = item.updateItem();
+                if (_ScrapeFilm.Titre == null) _ScrapeFilm.Titre = item.MovieName;
                 //ObservableCollection<Utils.ChampModifiable> _ListeChampsModif = new ObservableCollection<Utils.ChampModifiable>();
                 //_ListeChampsModif = Utils.GetChampsModifiables(_ScrapeFilm);
 
