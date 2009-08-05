@@ -25,30 +25,32 @@ namespace MediaManager
 		{
             
 			this.InitializeComponent();
-			Settings.xmlPath = System.IO.Path.GetDirectoryName(System.Windows.Application.ResourceAssembly.Location) + @"\settings.xml";
-            Settings.XML = new Configuration.XmlSettings();
-            
-            if (!Settings.Load())
+
+            Master.Settings.xmlPath = System.IO.Path.GetDirectoryName(System.Windows.Application.ResourceAssembly.Location) + @"\settings.xml";
+            Master.Settings.XML = new Master.XmlSettings();
+
+            if (!Master.Settings.Load())
             {
                 System.Windows.MessageBox.Show("No valid settings.xml found. Loading defaults");
                 //conf.ShowDialog();
             }
 
-            #region Films
-
-            ConfigMovie conf = Settings.XML.Config.confMovie;
+            this.DataContext = Master.Settings.XML.Config;
             
 
-            //La liste des paths
-            if (conf.MovieFolders != null)
-            {
-                foreach (MovieFolder p in conf.MovieFolders)
-                {
-                    lstMoviePaths.Items.Add(p);
-                }
-            }
+            //#region Films
+
+            //ConfigMovie conf = Settings.XML.Config.confMovie;
+            ////La liste des paths
+            //if (conf.MovieFolders != null)
+            //{
+            //    foreach (MovieFolder p in conf.MovieFolders)
+            //    {
+            //        lstMoviePaths.Items.Add(p);
+            //    }
+            //}
             
-            #endregion
+            //#endregion
 
 
 
@@ -85,7 +87,9 @@ namespace MediaManager
             {
                 if (lstMoviePaths.SelectedItem != null)
                 {
-                    lstMoviePaths.Items.RemoveAt(lstMoviePaths.SelectedIndex);
+					Master.Settings.XML.Config.confMovie.MovieFolders.RemoveAt(lstMoviePaths.SelectedIndex);
+					
+                    //lstMoviePaths.Items.RemoveAt(lstMoviePaths.SelectedIndex);
                 }
             }
 
@@ -107,17 +111,18 @@ namespace MediaManager
                 MovieFolder fp = new MovieFolder();
                 fp.path = dlg1.SelectedPath;
                 fp.containsFolders = true;
-                lstMoviePaths.Items.Add(fp);
+                Master.Settings.XML.Config.confMovie.MovieFolders.Add(fp);
+                //lstMoviePaths.Items.Add(fp);
     
             }
         }
 
         private bool SaveSettings()
         {
-            Console.WriteLine("SAVING: " + Settings.xmlPath);
+            Console.WriteLine("SAVING: " + Master.Settings.xmlPath);
             try
             {
-                ConfigMovie conf = Settings.XML.Config.confMovie;
+                //ConfigMovie conf = Settings.XML.Config.confMovie;
 
 
                 //conf.savePosterJpg = chkAutoPoster.Checked;
@@ -125,16 +130,17 @@ namespace MediaManager
                 
 
                 //MovieFolder[] paths = new MovieFolder[lstMoviePaths.Items.Count];
-                conf.MovieFolders.Clear();
-                for (int i = 0; i < lstMoviePaths.Items.Count; i++)
-                {
-                    MovieFolder p = ((MovieFolder)lstMoviePaths.Items[i]);
-                    conf.MovieFolders.Add(p);
+                //conf.MovieFolders.Clear();
+                //for (int i = 0; i < lstMoviePaths.Items.Count; i++)
+                //{
+                //    MovieFolder p = ((MovieFolder)lstMoviePaths.Items[i]);
+                //    conf.MovieFolders.Add(p);
                     //paths[i] = p;
-                }
+                //}
                 //conf.MovieFolders = paths;
-
-                Settings.Save();
+                Master.Settings.Save();
+				
+                //Settings.Save();
                 Console.WriteLine("SAVE OK");
             }
             catch (Exception)
