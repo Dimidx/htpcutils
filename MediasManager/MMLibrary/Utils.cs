@@ -66,7 +66,7 @@ namespace MediaManager.Library
             }
             catch (Exception e)
             {
-                throw new Exception("An exception occured when you tried to download the file: " + e.Message);
+                //throw new Exception("An exception occured when you tried to download the file: " + e.Message);
                 sourceHTML = "";
             }
 

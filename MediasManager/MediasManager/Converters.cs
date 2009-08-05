@@ -9,6 +9,8 @@ using System.Collections.ObjectModel;
 using MediaManager;
 using MediaManager.Library;
 using System.Globalization;
+using System.Xml.Linq;
+using System.Linq;
 
 namespace Converters
 {
@@ -267,6 +269,50 @@ namespace Converters
     }
     #endregion
 
+    #region StudioToImage
+    /// <summary>
+    /// Convertie un chemin string en ImageSource
+    /// </summary>
+    public class StudioToImage : IValueConverter
+    {
 
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            string toConvert = "";
+            if (value != null) { toConvert = (string)value; } else { toConvert = ""; }
+
+            BitmapImage bi3 = new BitmapImage();
+            //Charge le fichier XML des studios
+            XDocument _StudiosXML = XDocument.Load("./Images/Studios/Studios.xml");
+            if (_StudiosXML.Nodes() != null)
+
+            {
+                var xDefaut = from xDef 
+                          in _StudiosXML.Element("default").Elements("icon")
+                          select xDef;
+
+            
+            }
+
+
+
+
+            string _FileAvis = "./Images/Avis/" + toConvert.Replace("-", "") + ".png";
+            if (!File.Exists(_FileAvis)) _FileAvis = "./Images/Avis/T.png";
+
+            bi3.BeginInit();
+            bi3.UriSource = new Uri(_FileAvis, UriKind.Relative);
+            bi3.EndInit();
+            bi3.Freeze();
+            return bi3;
+
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+    }
+    #endregion
 
 }
