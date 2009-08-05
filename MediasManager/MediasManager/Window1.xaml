@@ -16,6 +16,7 @@
 			</Grid>
 		</DataTemplate>
         <Converters:StringToImageSource x:Key="StringToImageSource"/>
+		 <Converters:StudioToImage x:Key="StudioToImage"/>
         <ItemsPanelTemplate x:Key="MovieTemplate">
         	<StackPanel Width="Auto" Height="Auto"/>
         </ItemsPanelTemplate>
@@ -87,9 +88,16 @@
     						</Button>
     					</StackPanel>
     				</Border>
+					<Border BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" d:LayoutOverrides="Height" Margin="5,5,5,5" DockPanel.Dock="Bottom">
+    					<StackPanel Height="110">
+						<Image Source="{Binding Path=Studio, Converter={StaticResource StudioToImage}, Mode=Default}" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Stretch" Height="22" SnapsToDevicePixels="True" DockPanel.Dock="Left" Width="150"/>
+
+						</StackPanel>
+    				</Border>
     				<Border BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" d:LayoutOverrides="Height" Margin="5,5,5,5">
     					<local:FilmDetails x:Name="ucFilmDetails" Margin="5,5,5,5" />
     				</Border>
+
     			</DockPanel>
     		</DockPanel>
     	</DockPanel>

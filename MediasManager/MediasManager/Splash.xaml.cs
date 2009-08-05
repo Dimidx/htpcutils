@@ -66,7 +66,7 @@ namespace MediaManager
                                                              , ScraperFile.Name.Length - 4)) as IMMPluginScraper;
                     if (ScraperPlugin != null)
                     {
-                        Settings.PluginsScraper.Add(ScraperPlugin);
+                        Master.Settings.PluginsScraper.Add(ScraperPlugin);
 
                     }
 
@@ -95,7 +95,7 @@ namespace MediaManager
                                                              , InportExport.Name.Length - 4)) as IMMPluginImportExport;
                     if (ImportExportPlugin != null)
                     {
-                        Settings.PluginsImportExport.Add(ImportExportPlugin);
+                        Master.Settings.PluginsImportExport.Add(ImportExportPlugin);
 
                     }
 

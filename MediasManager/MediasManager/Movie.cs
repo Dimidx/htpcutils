@@ -65,7 +65,7 @@ namespace MediaManager
         {
             Film _Film = new Film();
 
-            foreach (IMMPluginImportExport plug in Settings.PluginsImportExport)
+            foreach (IMMPluginImportExport plug in Master.Settings.PluginsImportExport)
             {
                 try
                 {

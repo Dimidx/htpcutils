@@ -106,7 +106,7 @@ namespace MediaManager
         public void scanMovieDirs() //object sender)
         {
 
-            ObservableCollection<MovieFolder> paths = Settings.XML.Config.confMovie.MovieFolders;
+            ObservableCollection<MovieFolder> paths = Master.Settings.XML.Config.confMovie.MovieFolders;
             //Récupère le thread
             Application app = System.Windows.Application.Current;
             if (app != null)
@@ -130,7 +130,7 @@ namespace MediaManager
                     {
                         foreach (DirectoryInfo dinf in dir.GetDirectories())
                         {
-                            foreach (String ext in Settings.XML.Config.confMovie.extensions)
+                            foreach (String ext in Master.Settings.XML.Config.confMovie.extensions)
                             {
                                 foreach (FileInfo fileInfo in dinf.GetFiles(ext))
                                 {
@@ -152,7 +152,7 @@ namespace MediaManager
                     }
                     else
                     {
-                        foreach (String ext in Settings.XML.Config.confMovie.extensions)
+                        foreach (String ext in Master.Settings.XML.Config.confMovie.extensions)
                         {
                             foreach (FileInfo fileInfo in dir.GetFiles(ext))
                             {

@@ -1,7 +1,7 @@
 ﻿<Window
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	xmlns:MediaManager_Properties="clr-namespace:MediaManager.Properties" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:MediaManager_Config="clr-namespace:MediaManager.Configuration"
+	xmlns:MediaManager_Properties="clr-namespace:MediaManager.Properties" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	x:Class="MediaManager.Fen_Configuration"
 	x:Name="Window"
 	Title="Configuration"
@@ -34,9 +34,40 @@
 										<Image Width="16" Height="16" Source="Images\Moins_16.png" />
 									</Button>
 								</StackPanel>
-								<ListBox x:Name="lstMoviePaths" VerticalAlignment="Stretch" Width="Auto" Height="Auto" IsSynchronizedWithCurrentItem="True" DockPanel.Dock="Top" ItemTemplate="{DynamicResource MoviePathDataTemplate}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" />
+								<ListBox x:Name="lstMoviePaths" ItemsSource="{Binding Path=confMovie.MovieFolders}" VerticalAlignment="Stretch" Width="Auto" Height="Auto" IsSynchronizedWithCurrentItem="True" DockPanel.Dock="Top" ItemTemplate="{DynamicResource MoviePathDataTemplate}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" />
 							</DockPanel>
 						</StackPanel>
+					</GroupBox>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Réseau">
+				<Grid>
+					<GroupBox Margin="8,8,8,8" Header="Proxy">
+						<Grid Margin="8,8,8,8">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="1*"/>
+								<ColumnDefinition Width="1*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="22"/>
+								<RowDefinition Height="22"/>
+								<RowDefinition Height="22"/>
+								<RowDefinition Height="22"/>
+								<RowDefinition Height="22"/>
+								<RowDefinition Height="22"/>
+							</Grid.RowDefinitions>
+							<CheckBox IsChecked="{Binding Path=confProxy.UseProxy}" Content="Utiliser un proxy" Grid.ColumnSpan="2"/>
+							<TextBlock Text="Adresse" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+							<TextBox x:Name="txtAdresse" Text="{Binding Path=confProxy.ProxyAdress}" Grid.Row="1" Grid.Column="2"/>
+							<TextBlock Text="Port" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+							<TextBox x:Name="txtPort" Text="{Binding Path=confProxy.ProxyPort}" Grid.Row="2" Grid.Column="2"/>
+							<TextBlock Text="Utilisateur" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+							<TextBox x:Name="txtUsername" Text="{Binding Path=confProxy.ProxyUser}" Grid.Row="3" Grid.Column="2"/>
+							<TextBlock Text="Mot de passe" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+							<TextBox x:Name="txtPassword" Text="{Binding Path=confProxy.ProxyPassword}" Grid.Row="4" Grid.Column="2"/>
+							<TextBlock Text="Domaine" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+							<TextBox x:Name="txtDomaine" Text="{Binding Path=confProxy.ProxyDomain}" Grid.Row="5" Grid.Column="2"/>
+						</Grid>
 					</GroupBox>
 				</Grid>
 			</TabItem>

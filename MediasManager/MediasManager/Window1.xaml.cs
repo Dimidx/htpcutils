@@ -50,12 +50,12 @@ namespace MediaManager
         public Window1()
         {
 
-            Settings.xmlPath = System.IO.Path.GetDirectoryName(Application.ResourceAssembly.Location) + @"\settings.xml";
-            Settings.XML = new Configuration.XmlSettings();
-            if (!Settings.Load())
+            Master.Settings.xmlPath = System.IO.Path.GetDirectoryName(Application.ResourceAssembly.Location) + @"\settings.xml";
+            Master.Settings.XML = new Master.XmlSettings();
+            if (!Master.Settings.Load())
             {
                 //MessageBox.Show("No valid settings.xml found. Loading defaults");
-                Settings.Save();
+                Master.Settings.Save();
                 //conf.ShowDialog();
             }
             InitializeComponent();
@@ -195,9 +195,9 @@ namespace MediaManager
             Fen_Configuration conf = new Fen_Configuration();
 
             conf.ShowDialog();
-            Settings.xmlPath = System.IO.Path.GetDirectoryName(Application.ResourceAssembly.Location) + @"\settings.xml";
-            Settings.XML = new Configuration.XmlSettings();
-            Settings.Load();
+            Master.Settings.xmlPath = System.IO.Path.GetDirectoryName(Application.ResourceAssembly.Location) + @"\settings.xml";
+            Master.Settings.XML = new Master.XmlSettings();
+            Master.Settings.Load();
         }
 
 
@@ -255,7 +255,7 @@ namespace MediaManager
             {
                 Movie _movie = (Movie)listBox_Films.SelectedItem;
 
-                foreach (IMMPluginImportExport plug in Settings.PluginsImportExport)
+                foreach (IMMPluginImportExport plug in Master.Settings.PluginsImportExport)
                 {
                     try
                     {
@@ -279,7 +279,7 @@ namespace MediaManager
             if (bwScrapeAll.IsBusy == false)
             {
                 //Charge les scrapers
-                cbScraper.ItemsSource = Settings.PluginsScraper;
+                cbScraper.ItemsSource = Master.Settings.PluginsScraper;
                 //Charge la liste des champs modifiables
                 GridConfigScraper.Visibility = Visibility.Visible;
                 ListeChampReplace = Utils.GetChampsModifiables(new Film());
@@ -348,7 +348,7 @@ namespace MediaManager
 
                         }
 
-                        foreach (IMMPluginImportExport plug in Settings.PluginsImportExport)
+                        foreach (IMMPluginImportExport plug in Master.Settings.PluginsImportExport)
                         {
                             try
                             {
