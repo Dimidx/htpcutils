@@ -47,22 +47,86 @@ namespace MediaManager.Plugins
                 MonFilm.Titre = Regex.Match(_source, "<title>(.*)</title>").Groups[1].ToString();
             if (Regex.Match(_source, "<year>(.*)</year>").Success)
                 MonFilm.Annee = Regex.Match(_source, "<year>(.*)</year>").Groups[1].ToString();
+            if (Regex.Match(_source, "<director>(.*)</director>").Success)
+                MonFilm.Realisateurs.Add(new Personne(Regex.Match(_source, "<director>(.*)</director>").Groups[1].ToString(),"Réalisateur"));
+            if (Regex.Match(_source, "<tagline>(.*)</tagline>").Success)
+                MonFilm.Critique = Regex.Match(_source, "<tagline>(.*)</tagline>").Groups[1].ToString();
+            if (Regex.Match(_source, "<runtime>(.*)</runtime>").Success)
+                MonFilm.DureeChaine = Regex.Match(_source, "<runtime>(.*)</runtime>").Groups[1].ToString();
+            if (Regex.Match(_source, "<studio>(.*)</studio>").Success)
+                MonFilm.Studio = Regex.Match(_source, "<studio>(.*)</studio>").Groups[1].ToString();
+            
+            MonFilm.AlloID = _Film.AlloID;
 
+            #region Notes
+            if (Regex.Match(_source, "<rating>(.*)</rating>").Success)
+            {
+                try
+                {
+                    MonFilm.NotePresse = (float)System.Double.Parse(Regex.Match(_source, "<rating>(.*)</rating>").Groups[1].ToString());
+                    MonFilm.NoteSpectateurs = (float)System.Double.Parse(Regex.Match(_source, "<rating>(.*)</rating>").Groups[1].ToString());
 
-            //Affiches
+                }
+                catch { }
+            } 
+            #endregion
+            
+            if (Regex.Match(_source, "<mpaa>(.*)</mpaa>").Success)
+                MonFilm.Avis = Regex.Match(_source, "<mpaa>(.*)</mpaa>").Groups[1].ToString();
+                        
+            #region Genres
+            if (Regex.Match(_source, "<genre>(.*)</genre>").Success)
+            {
+                MonFilm.Genres = Regex.Match(_source, "<genre>(.*)</genre>").Groups[1].ToString().Split('/');
+                //Suppression des espaces
+                for (int i = 0; i < MonFilm.Genres.Length; i++)
+                {
+                    MonFilm.Genres[i] = MonFilm.Genres[i].Trim();  
+                }
+            }
+
+            #endregion
+
+            if (Regex.Match(_source, "<outline>(.*)</outline>").Success)
+                MonFilm.Synopsis = Regex.Match(_source, "<outline>(.*)</outline>").Groups[1].ToString();
+
+            #region Acteurs
+
+            string _Acteurs = Regex.Match(_source, @"<thumbs>(.*?)</thumbs>").Groups[1].ToString();
+            MatchCollection _MatchesActeurs = Regex.Matches(_source, @"<actor>(.*?)</actor>");
+
+            foreach (Match _Match in _MatchesActeurs)
+            {
+                string strMovieCode = _Match.ToString();
+                Personne _act = new Personne();
+
+                if (Regex.Match(strMovieCode, "<name>(.*?)</name>").Success)
+                    _act.Nom = Regex.Match(strMovieCode, "<name>(.*?)</name>").Groups[1].ToString();
+                if (Regex.Match(strMovieCode, "<role>(.*?)</role>").Success)
+                    _act.Role = Regex.Match(strMovieCode, "<role>(.*?)</role>").Groups[1].ToString();
+                if (Regex.Match(strMovieCode, "<thumb>(.*?)</thumb>").Success)
+                    _act.Photo = new Thumb(Regex.Match(strMovieCode, "<thumb>(.*?)</thumb>").Groups[1].ToString());
+                if (!String.IsNullOrEmpty(_act.Nom)) MonFilm.Acteurs.Add(_act);
+            }
+
+            #endregion
+
+            #region Affiches
+
             string _Affiches = Regex.Match(_source, @"<thumbs>(.*?)</thumbs>").Groups[1].ToString();
-            MatchCollection _MatchesAffiches = Regex.Matches(_source, @"<thumb>(.*?)</thumb>");
+            MatchCollection _MatchesAffiches = Regex.Matches(_Affiches, @"<thumb>(.*?)</thumb>");
 
             foreach (Match _Match in _MatchesAffiches)
             {
-                
                 string strMovieCode = _Match.ToString();
                 if (Regex.Match(strMovieCode, "<thumb>(.*?)</thumb>").Success)
                     MonFilm.ListeCover.Add(new Thumb(_Match.Groups[1].ToString()));
-                
-            }
 
-            //Fanart
+            } 
+
+            #endregion
+
+            #region Fanart
 
             string _Fanarts = Regex.Match(_source, @"<fanart>(.*?)</fanart>").Groups[1].ToString();
             MatchCollection _MatchesFanart = Regex.Matches(_Fanarts, @"<thumb>(.*?)</thumb>");
@@ -73,7 +137,9 @@ namespace MediaManager.Plugins
                 if (Regex.Match(strMovieCode, "<thumb>(.*?)</thumb>").Success)
                     MonFilm.ListeFanart.Add(new Thumb(_Match.Groups[1].ToString()));
 
-            }
+            } 
+
+            #endregion
 
             return MonFilm;
 

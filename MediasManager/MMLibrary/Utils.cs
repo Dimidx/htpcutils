@@ -304,6 +304,18 @@ namespace MediaManager.Library
         }
         #endregion
 
+        #region RemoveAccents
+        /// <summary>
+        /// Supprime les caractères accentués
+        /// </summary>
+        /// <param name="inputString"></param>
+        /// <returns></returns>
+        public static string RemoveAccents(string inputString)
+        {
+            byte[] tabString = System.Text.Encoding.GetEncoding(1251).GetBytes(inputString);
+            return System.Text.Encoding.ASCII.GetString(tabString);
+        } 
+        #endregion
 
 
     }

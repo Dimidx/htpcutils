@@ -94,7 +94,11 @@ namespace MediaManager.Plugins
                 #region Acteurs
                 foreach (Actor act in Nfo.Actor)
                 {
-                    MonFilm.Acteurs.Add(new Personne(act.Name.Trim(), act.Role));
+                    Personne _act = new Personne();
+                    _act.Nom = act.Name.Trim();
+                    _act.Role = act.Role.Trim();
+                    if (!String.IsNullOrEmpty(act.Thumb)) _act.Photo = new Thumb(act.Thumb);
+                    MonFilm.Acteurs.Add(_act);
                 }
                 #endregion
 
@@ -198,7 +202,7 @@ namespace MediaManager.Plugins
                 Actor _act = new Actor();
                 _act.Name = act.Nom;
                 _act.Role = act.Role;
-                //_act.Thumb = act.Photo.URLImage;
+                if (!String.IsNullOrEmpty(act.Photo.URLImage)) _act.Thumb = act.Photo.URLImage;
                 Nfo.Actor.Add(_act);
             }
             #endregion

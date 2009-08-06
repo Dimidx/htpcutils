@@ -183,18 +183,43 @@ namespace Converters
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            string toConvert = "";
-            if (value != null) { toConvert = (string)value; } else { toConvert = ""; }
-            
+            string toConvert = "--aucun--";
+            if (!String.IsNullOrEmpty((string)value)) { toConvert = (string)value; } else { toConvert = "--aucun--"; }
+            toConvert = Utils.RemoveAccents(toConvert).Trim().ToLower();
+
             BitmapImage bi3 = new BitmapImage();
-            string _FileAvis = "./Images/Avis/" + toConvert.Replace("-", "") + ".png";
-            if (!File.Exists(_FileAvis)) _FileAvis = "./Images/Avis/T.png";
+            string _fimage = "";
+            //Charge le fichier XML des avis
+            XDocument _RatingsXML = XDocument.Load("./Images/Ratings/Ratings.xml");
+            if (_RatingsXML.Nodes() != null)
+            {
+                //Cherche l'avis dans le XML
+                var xAvis = from xDef in _RatingsXML.Descendants("name")
+                            where toConvert.Contains(xDef.Attribute("searchstring").Value.ToLower()) == true
+                              select (string)xDef.Element("icon");
+                foreach (string name in xAvis)
+                {
+                    _fimage = name;
+
+                }
+
+            }
+            if (String.IsNullOrEmpty(_fimage))
+            {
+                _fimage = "./Images/blank.png";
+            }
+            else
+            {
+                _fimage = "./Images/Ratings/" + _fimage;
+            }
 
             bi3.BeginInit();
-            bi3.UriSource = new Uri(_FileAvis,UriKind.Relative);
+            bi3.UriSource = new Uri(_fimage, UriKind.Relative);
             bi3.EndInit();
             bi3.Freeze();
             return bi3;
+
+
 
         }
 
@@ -278,21 +303,19 @@ namespace Converters
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            string toConvert = "";
-            if (value != null) { toConvert = (string)value; } else { toConvert = ""; }
+            string toConvert = "--aucun--";
+            if (!String.IsNullOrEmpty((string)value)) { toConvert = (string)value; } else { toConvert = "--aucun--"; }
+            toConvert = Utils.RemoveAccents(toConvert).Trim().ToLower();
 
             BitmapImage bi3 = new BitmapImage();
             string _fimage = "";
             //Charge le fichier XML des studios
             XDocument _StudiosXML = XDocument.Load("./Images/Studios/Studios.xml");
             if (_StudiosXML.Nodes() != null)
-
             {
-
-
-
+                //Cherche le studio dans le XML
                 var xStudio = from xDef in _StudiosXML.Descendants("name")
-                              where xDef.Attribute("searchstring").Value.Normalize().Contains(toConvert.Trim().ToLower().Normalize()) == true
+                              where xDef.Attribute("searchstring").Value.Contains(toConvert) == true
                               select (string)xDef.Element("icon");
                 foreach (string name in xStudio)
                 {
@@ -300,6 +323,7 @@ namespace Converters
 
                 }
                 
+                //Si pas d'image trouvé on prend celle par defaut
                 if (_fimage == "")
                 {
                     var xDefaut = from xDef in _StudiosXML.Descendants("default")
@@ -316,11 +340,7 @@ namespace Converters
             
             }
 
-
-
-
             _fimage = "./Images/Studios/" + _fimage;
-            
 
             bi3.BeginInit();
             bi3.UriSource = new Uri(_fimage, UriKind.Relative);

@@ -12,7 +12,6 @@
 	x:Name="UserControl_FilmDetails"
 	d:DesignWidth="640" FontFamily="./Fonts/#Aeon Info" Loaded="UserControl_FilmDetails_Loaded">
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 		<DataTemplate x:Key="DataTemplateThumbs">
 			<Grid VerticalAlignment="Stretch" Width="220">
 					<Controls:Sablier Visibility="{Binding Path=IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default}"/>
@@ -25,6 +24,7 @@
                 <Image Source="Images/list_movieicon_glass.png"/>
             </VisualBrush.Visual>
         </VisualBrush>
+		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <Converters:UriToImageConverter x:Key="UriToImageConverter"/>
         <Converters:TableauToString x:Key="TableauToString"/>
         <Converters:PersonneToString x:Key="PersonneToString"/>
@@ -142,11 +142,15 @@
                                 <Label Width="90" Content="ACTEURS :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
                                 <Expander Header="{Binding Path=Acteurs, Converter={StaticResource PersonneToString}, Mode=Default, FallbackValue=' '}" BorderThickness="0,0,0,0" Style="{DynamicResource ExpanderStyle1}" Margin="10,0,0,0" MinHeight="20" IsExpanded="False">
                                     <Grid>
-                                        <Button Width="18" Height="18" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                            <Image Width="16" Height="16" Source="Images\Scan_16.png" Stretch="UniformToFill"/>
-                                        </Button>
-                                        <ListBox ItemsSource="{Binding Path=Acteurs}" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplate_Acteurs}" />
-                                    </Grid>
+										<DockPanel>
+											<Grid DataContext="{Binding Path=Acteurs}" VerticalAlignment="Top" Height="120" Width="90" DockPanel.Dock="Right">
+												<Controls:Sablier Visibility="{Binding Path=Photo.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default, FallbackValue=Hidden}"/>
+                                				<Image x:Name="imageacteur" Source="{Binding Path=Photo.Image}" Margin="5,0,5,0" />
+											</Grid>
+                                        	<ListBox ItemsSource="{Binding Path=Acteurs}" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplate_Acteurs}" Width="Auto" DockPanel.Dock="Right" />
+
+										</DockPanel>
+									</Grid>
                                 </Expander>
                             </DockPanel>
                             <DockPanel Width="Auto" Height="Auto">
@@ -168,7 +172,6 @@
                             <DockPanel Width="Auto" Height="Auto">
                                 <Label Width="90" Content="Avis :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
                                 <TextBox Width="Auto" Text="{Binding Path=Avis}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_Mpaa" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
-                            	<Image Source="{Binding Path=Avis, Converter={StaticResource AvisToImage}, Mode=Default, FallbackValue=./Images/Avis/T.png}" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Stretch" Height="22" SnapsToDevicePixels="True" DockPanel.Dock="Left" Width="150"/>
 							</DockPanel>
                             <DockPanel Width="Auto" Height="Auto">
                                 <Label Width="90" Content="LECTURES :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
