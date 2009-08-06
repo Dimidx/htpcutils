@@ -282,14 +282,36 @@ namespace Converters
             if (value != null) { toConvert = (string)value; } else { toConvert = ""; }
 
             BitmapImage bi3 = new BitmapImage();
+            string _fimage = "";
             //Charge le fichier XML des studios
             XDocument _StudiosXML = XDocument.Load("./Images/Studios/Studios.xml");
             if (_StudiosXML.Nodes() != null)
 
             {
-                var xDefaut = from xDef 
-                          in _StudiosXML.Element("default").Elements("icon")
-                          select xDef;
+
+
+
+                var xStudio = from xDef in _StudiosXML.Descendants("name")
+                              where xDef.Attribute("searchstring").Value.Normalize().Contains(toConvert.Trim().ToLower().Normalize()) == true
+                              select (string)xDef.Element("icon");
+                foreach (string name in xStudio)
+                {
+                    _fimage = name;
+
+                }
+                
+                if (_fimage == "")
+                {
+                    var xDefaut = from xDef in _StudiosXML.Descendants("default")
+                                  select (string)xDef.Element("icon");
+                    foreach (string name in xDefaut)
+                    {
+                        _fimage = name;
+
+                    }
+                
+                }
+
 
             
             }
@@ -297,11 +319,11 @@ namespace Converters
 
 
 
-            string _FileAvis = "./Images/Avis/" + toConvert.Replace("-", "") + ".png";
-            if (!File.Exists(_FileAvis)) _FileAvis = "./Images/Avis/T.png";
+            _fimage = "./Images/Studios/" + _fimage;
+            
 
             bi3.BeginInit();
-            bi3.UriSource = new Uri(_FileAvis, UriKind.Relative);
+            bi3.UriSource = new Uri(_fimage, UriKind.Relative);
             bi3.EndInit();
             bi3.Freeze();
             return bi3;

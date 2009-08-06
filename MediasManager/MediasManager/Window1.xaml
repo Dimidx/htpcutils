@@ -88,9 +88,9 @@
     						</Button>
     					</StackPanel>
     				</Border>
-					<Border BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" d:LayoutOverrides="Height" Margin="5,5,5,5" DockPanel.Dock="Bottom">
-    					<StackPanel Height="110">
-						<Image Source="{Binding Path=Studio, Converter={StaticResource StudioToImage}, Mode=Default}" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Stretch" Height="22" SnapsToDevicePixels="True" DockPanel.Dock="Left" Width="150"/>
+					<Border x:Name="bdFlags" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,5,5,5" DockPanel.Dock="Bottom">
+    					<StackPanel Height="80">
+						<Image Source="{Binding Path=Studio, Converter={StaticResource StudioToImage}, Mode=Default}" HorizontalAlignment="Left" Margin="5,5,5,5" Stretch="UniformToFill" Height="70" Width="100" />
 
 						</StackPanel>
     				</Border>

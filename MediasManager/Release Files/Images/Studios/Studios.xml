@@ -15,6 +15,9 @@
       <name searchstring="aardman">
             <icon>aardman.png</icon>
       </name>
+	  <name searchstring="metropolitan filmexport">
+            <icon>metropolitanfilmexport.png</icon>
+      </name>
       <name searchstring="a band apart">
             <icon>abandapart.png</icon>
       </name>
@@ -117,7 +120,7 @@
       <name searchstring="brightlight pictures">
             <icon>brightlight.png</icon>
       </name>
-      <name searchstring="buena">
+      <name searchstring="buena|buena vista international">
             <icon>buenavistainternational.png</icon>
       </name>
       <name searchstring="canal">
@@ -531,7 +534,10 @@
       <name searchstring="picturehouse">
             <icon>picturehouse.png</icon>
       </name>
-      <name searchstring="pixar">
+	  <name searchstring="tfm distribution|tfm">
+            <icon>tfm.png</icon>
+      </name>
+      <name searchstring="pixar|pixar animation studios">
             <icon>pixar.png</icon>
       </name>
       <name searchstring="platige">
@@ -732,7 +738,10 @@
       <name searchstring="warner indpendent">
             <icon>warnerindependentpictures.png</icon>
       </name>
-      <name searchstring="warner">
+	  <name searchstring="arp selection|arp">
+            <icon>arp.png</icon>
+      </name>
+      <name searchstring="warner|warner bros. france">
             <icon>warner.png</icon>
       </name>
       <name searchstring="wdr">
