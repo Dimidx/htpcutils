@@ -170,6 +170,7 @@ namespace MediaManager
             new Action(
               delegate()
               {
+                  bdFlags.DataContext = _MonFilm;
                   ucFilmDetails.DataContext = _MonFilm;
               }
           ));
