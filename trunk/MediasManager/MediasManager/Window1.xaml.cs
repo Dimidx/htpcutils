@@ -131,7 +131,7 @@ namespace MediaManager
                         Thread.Sleep(1);
                     }
                 }
-                ucFilmDetails.DataContext = null;
+                dpInfosFilm.DataContext = null;
                 Storyboard FadeIn = (Storyboard)FindResource("FadeIn");
                 FadeIn.Begin(this);
                 MaMovie = (Movie)listBox_Films.SelectedItem;
@@ -170,8 +170,7 @@ namespace MediaManager
             new Action(
               delegate()
               {
-                  bdFlags.DataContext = _MonFilm;
-                  ucFilmDetails.DataContext = _MonFilm;
+                  dpInfosFilm.DataContext = _MonFilm;
               }
           ));
       }
@@ -224,13 +223,14 @@ namespace MediaManager
                         _MonFilm = _scraper.FilmValid;
                         if (_MonFilm.Cover != null) _MonFilm.Cover.GetImage();
                         if (_MonFilm.Fanart != null) _MonFilm.Fanart.GetImage();
-                        ucFilmDetails.DataContext = _MonFilm;
+                        dpInfosFilm.DataContext = _MonFilm;
                     }
                 }
                 catch (Exception de)
                 {
                     Console.WriteLine("Scrap erreur" + de.Message + " " + de.Source);
                     _scraper.Close();
+                    dpInfosFilm.DataContext = _MonFilm;
                     //throw;
                 }
             }
@@ -272,6 +272,7 @@ namespace MediaManager
 
                 if (_MonFilm.Cover != null) _MonFilm.Cover.GetImage(true);
                 if (_MonFilm.Fanart != null) _MonFilm.Fanart.GetImage(true);
+                dpInfosFilm.DataContext = _MonFilm;
             }
         }
 

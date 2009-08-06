@@ -17,6 +17,7 @@
 		</DataTemplate>
         <Converters:StringToImageSource x:Key="StringToImageSource"/>
 		 <Converters:StudioToImage x:Key="StudioToImage"/>
+		 <Converters:AvisToImage x:Key="AvisToImage"/>
         <ItemsPanelTemplate x:Key="MovieTemplate">
         	<StackPanel Width="Auto" Height="Auto"/>
         </ItemsPanelTemplate>
@@ -26,13 +27,13 @@
         	</Grid>
         </DataTemplate>
         <Storyboard x:Key="FadeIn">
-        	<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ucFilmDetails" Storyboard.TargetProperty="(UIElement.Opacity)">
+        	<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="dpInfosFilm" Storyboard.TargetProperty="(UIElement.Opacity)">
         		<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
         		<SplineDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
         	</DoubleAnimationUsingKeyFrames>
         </Storyboard>
     	<Storyboard x:Key="FadeOut">
-    		<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ucFilmDetails" Storyboard.TargetProperty="(UIElement.Opacity)">
+    		<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="dpInfosFilm" Storyboard.TargetProperty="(UIElement.Opacity)">
     			<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
     			<SplineDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
     		</DoubleAnimationUsingKeyFrames>
@@ -77,7 +78,7 @@
 						<ListBox SelectionChanged="listBox_Films_SelectionChanged" x:Name="listBox_Films" ItemsPanel="{DynamicResource MovieTemplate}" Background="{x:Null}" BorderBrush="{DynamicResource NormalBorderBrush}" Foreground="#FF000000" Margin="5,5,5,5" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" d:LayoutOverrides="Height" ItemsSource="{Binding}" ItemTemplate="{DynamicResource MovieDataTemplate}" IsSynchronizedWithCurrentItem="False" IsTextSearchEnabled="True" MaxWidth="300" MinWidth="200" DockPanel.Dock="Top" />
                 	</DockPanel>
 				</Border>
-    			<DockPanel LastChildFill="True">
+    			<DockPanel x:Name="dpInfosFilm" LastChildFill="True">
     				<Border BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,5,5,5" VerticalAlignment="Stretch" DockPanel.Dock="Top" Background="{DynamicResource ControlBackgroundBrush}">
     					<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,5,5,5">
     						<Button Click="btnScraper_Click" x:Name="btnScraper" Width="36" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Stretch" Height="36" ToolTip="Recherche les informations du film depuis internet.">
@@ -89,8 +90,9 @@
     					</StackPanel>
     				</Border>
 					<Border x:Name="bdFlags" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,5,5,5" DockPanel.Dock="Bottom">
-    					<StackPanel Height="80">
-						<Image Source="{Binding Path=Studio, Converter={StaticResource StudioToImage}, Mode=Default}" HorizontalAlignment="Left" Margin="5,5,5,5" Stretch="UniformToFill" Height="70" Width="100" />
+    					<StackPanel Height="80" Orientation="Horizontal">
+						<Image Source="{Binding Path=Studio, Converter={StaticResource StudioToImage}, Mode=Default}" HorizontalAlignment="Left" Margin="5,5,5,5" Stretch="Fill" Height="70" Width="100" ToolTip="{Binding Path=Studio}" />
+						<Image Source="{Binding Path=Avis, Converter={StaticResource AvisToImage}, Mode=Default}" HorizontalAlignment="Left" Margin="5,5,5,5" Stretch="Uniform" Height="70" Width="100" ToolTip="{Binding Path=Avis}" />
 
 						</StackPanel>
     				</Border>

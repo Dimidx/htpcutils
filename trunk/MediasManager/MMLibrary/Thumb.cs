@@ -267,14 +267,15 @@ namespace MediaManager.Library
 
         void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            _IsLoading = false;
-            OnPropertyChanged("IsLoading");
+
             OnPropertyChanged("Image");
             OnPropertyChanged("Miniature");
             OnPropertyChanged("Largeur");
             OnPropertyChanged("Hauteur");
             Console.WriteLine("Chargement Terminée : " + URLImage);
             bw.Dispose();
+            _IsLoading = false;
+            OnPropertyChanged("IsLoading");
         }
 
         void bw_DoWork(object sender, DoWorkEventArgs e)
@@ -354,8 +355,8 @@ namespace MediaManager.Library
             Mini:
                 if (_Image != null)
                 {
-                    _Largeur = _Image.Width;
-                    _Hauteur = _Image.Height;
+                    _Largeur = Math.Round(_Image.Width,0);
+                    _Hauteur = Math.Round(_Image.Height,0);
                 }
                 if (IsCached)
                 {
@@ -377,12 +378,12 @@ namespace MediaManager.Library
 
         public Thumb()
         {
-            Console.WriteLine("Charge le thumb");
+            //Console.WriteLine("Charge le thumb");
         }
 
         public Thumb(string _URL)
         {
-            Console.WriteLine("Charge le thumb");
+            Console.WriteLine("Charge le thumb" + _URL);
             URLImage = _URL;
         }
 

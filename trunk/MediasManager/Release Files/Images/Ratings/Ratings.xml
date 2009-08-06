@@ -84,4 +84,32 @@
       <icon>au/australia_ma.png</icon>
     </name>
   </australia>
+  
+<france>
+    <name searchstring="interdit aux moins de 10 ans">
+      <icon>fr/fr-10.png</icon>
+    </name>
+    <name searchstring="-10">
+      <icon>fr/fr-10.png</icon>
+    </name>
+    <name searchstring="interdit aux moins de 12 ans">
+      <icon>fr/fr-12.png</icon>
+    </name>
+	<name searchstring="france:-12">
+      <icon>fr/fr-12.png</icon>
+    </name>
+    <name searchstring="interdit aux moins de 16 ans">
+      <icon>fr/fr-16.png</icon>
+    </name>
+	<name searchstring="france:-16">
+      <icon>fr/fr-16.png</icon>
+    </name>
+    <name searchstring="interdit aux moins de 18 ans">
+      <icon>fr/fr-18.png</icon>
+    </name>
+	<name searchstring="france:-18">
+      <icon>fr/fr-18.png</icon>
+    </name>
+</france>
+  
 </ratings>

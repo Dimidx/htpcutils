@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <studios>
       <name searchstring="2929">
             <icon>2929.png</icon>
       </name>
-      <name searchstring="20th century|twentieth century|fox 2000">
+      <name searchstring="20th century|twentieth century|fox 2000|ufd|twentieth century fox france">
             <icon>20thcenturyfox.png</icon>
       </name>
       <name searchstring="57th and irving productions">
@@ -11,6 +11,12 @@
       </name>
       <name searchstring="a and m">
             <icon>aandm.png</icon>
+      </name>
+	  <name searchstring="buena vista international france|walt disney studios motion pictures france">
+            <icon>buenavistainternationalfrance.png</icon>
+      </name>
+	  <name searchstring="colifilms diffusion">
+            <icon>colifilms.png</icon>
       </name>
       <name searchstring="aardman">
             <icon>aardman.png</icon>
@@ -21,7 +27,10 @@
       <name searchstring="a band apart">
             <icon>abandapart.png</icon>
       </name>
-      <name searchstring="abandon">
+	  <name searchstring="studiocanal">
+            <icon>studiocanal.png</icon>
+      </name>
+	  <name searchstring="abandon">
             <icon>abandon.png</icon>
       </name>
       <name searchstring="abc">
@@ -243,8 +252,11 @@
       <name searchstring="eurimages">
             <icon>eurimages.png</icon>
       </name>
-      <name searchstring="europa">
+      <name searchstring="europa|europacorp distribution">
             <icon>europa.png</icon>
+      </name>
+	  <name searchstring="la fabrique de films">
+            <icon>fabriquefilms.png</icon>
       </name>
       <name searchstring="excel">
             <icon>excel.png</icon>
@@ -294,8 +306,14 @@
       <name searchstring="fuji">
             <icon>fuji.png</icon>
       </name>
-      <name searchstring="gaumont">
+      <name searchstring="gaumont|gaumont distribution">
             <icon>gaumont.png</icon>
+      </name>
+	  <name searchstring="gaumont columbia tristar films">
+            <icon>gaumontcolumbia.png</icon>
+      </name>
+	  <name searchstring="gaumont buena vista international">
+            <icon>gaumontbuenavista.png</icon>
       </name>
       <name searchstring="geffen">
             <icon>geffen.png</icon>
@@ -384,6 +402,9 @@
       <name searchstring="kennedy/marshall">
             <icon>kennedymarshall.png</icon>
       </name>
+	  <name searchstring="mars distribution">
+            <icon>marsdistribution.png</icon>
+      </name>
       <name searchstring="kinowelt">
             <icon>kinowelt.png</icon>
       </name>
@@ -447,8 +468,14 @@
       <name searchstring="mediapro">
             <icon>mediapro.png</icon>
       </name>
+	  <name searchstring="diaphana films">
+            <icon>diaphana.png</icon>
+      </name>
       <name searchstring="mibac">
             <icon>mibac.png</icon>
+      </name>
+	  <name searchstring="bac films">
+            <icon>bacfilms.png</icon>
       </name>
       <name searchstring="mike zoss">
             <icon>mikezossproductions.png</icon>
@@ -516,11 +543,17 @@
       <name searchstring="paramount vantage">
             <icon>pvantage.png</icon>
       </name>
-      <name searchstring="paramount">
+      <name searchstring="paramount|paramount pictures france">
             <icon>paramount.png</icon>
+      </name>
+	  <name searchstring="pyramide distribution">
+            <icon>pyramidedistribution.png</icon>
       </name>
       <name searchstring="participant">
             <icon>participant.png</icon>
+      </name>
+	  <name searchstring="pathe|pathe distribution">
+            <icon>pathe.png</icon>
       </name>
       <name searchstring="peace arch">
             <icon>peacearch.png</icon>
@@ -648,7 +681,7 @@
       <name searchstring="sony classic">
             <icon>SPC.png</icon>
       </name>
-      <name searchstring="sony">
+      <name searchstring="sony|sony pictures releasing france">
             <icon>sonypictures.png</icon>
       </name>
       <name searchstring="space">
@@ -720,13 +753,13 @@
       <name searchstring="ugc">
             <icon>ugc.png</icon>
       </name>
-      <name searchstring="uip|united international pictures">
+      <name searchstring="uip|united international pictures|united international pictures (uip)">
             <icon>uip.png</icon>
       </name>
       <name searchstring="village roadshow">
             <icon>villageroadshow.png</icon>
       </name>
-      <name searchstring="universal">
+      <name searchstring="universal|universal pictures international france">
             <icon>universal.png</icon>
       </name>
       <name searchstring="view askew">
@@ -753,8 +786,11 @@
       <name searchstring="wfdif">
             <icon>wfdif.png</icon>
       </name>
-      <name searchstring="wild bunch">
+      <name searchstring="wild bunch|wild bunch distribution">
             <icon>wildbunch.png</icon>
+      </name>
+      <name searchstring="snd">
+            <icon>snd.png</icon>
       </name>
       <name searchstring="working title">
             <icon>workingtitle.png</icon>
