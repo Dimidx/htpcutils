@@ -119,18 +119,22 @@ namespace MediaManager
 
         private void listBox_Films_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            _MonFilm = null;
             if (listBox_Films.SelectedItem != null)
             {
 
                 if (bwSelect.IsBusy == true)
                 {
+                    Console.WriteLine("Attente bw select");
                     bwSelect.CancelAsync();
                     while (!bwSelect.CancellationPending)
                     {
+                        Console.WriteLine("Attente bw select");
                         Thread.Sleep(1);
                     }
                 }
+                bwSelect.Dispose();
+
                 dpInfosFilm.DataContext = null;
                 Storyboard FadeIn = (Storyboard)FindResource("FadeIn");
                 FadeIn.Begin(this);
@@ -212,6 +216,7 @@ namespace MediaManager
         {
             if (listBox_Films.SelectedItem != null)
             {
+                dpInfosFilm.DataContext = null;
                 ScraperSelect _scraper = new ScraperSelect(_MonFilm);
                 try
                 {
@@ -254,6 +259,7 @@ namespace MediaManager
         {
             if (listBox_Films.SelectedItem != null)
             {
+                dpInfosFilm.DataContext = null;
                 Movie _movie = (Movie)listBox_Films.SelectedItem;
 
                 foreach (IMMPluginImportExport plug in Master.Settings.PluginsImportExport)

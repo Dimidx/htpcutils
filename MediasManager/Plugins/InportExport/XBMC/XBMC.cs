@@ -202,7 +202,10 @@ namespace MediaManager.Plugins
                 Actor _act = new Actor();
                 _act.Name = act.Nom;
                 _act.Role = act.Role;
-                if (!String.IsNullOrEmpty(act.Photo.URLImage)) _act.Thumb = act.Photo.URLImage;
+                if (act.Photo != null)
+                {
+                    if (!String.IsNullOrEmpty(act.Photo.URLImage)) _act.Thumb = act.Photo.URLImage;
+                }
                 Nfo.Actor.Add(_act);
             }
             #endregion
