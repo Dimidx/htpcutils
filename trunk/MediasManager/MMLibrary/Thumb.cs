@@ -34,7 +34,7 @@ namespace MediaManager.Library
         private double _Hauteur;
         private double _Largeur;
         private string _FichierCache;
-        private BackgroundWorker bw = new BackgroundWorker();
+        private BackgroundWorker bw;// = new BackgroundWorker();
 
         #endregion
 
@@ -46,8 +46,11 @@ namespace MediaManager.Library
         {
             get
             {
-                if (_Image == null & !_IsLoading & _URLImage != "")
+                if (_Image == null & !_IsLoading & !String.IsNullOrEmpty(_URLImage))
                 {
+                    Console.WriteLine("Chargement Normal : " + URLImage);
+                    _IsLoading = true;
+                    OnPropertyChanged("IsLoading");
                     GetImage();
                     return null;
 
@@ -74,8 +77,11 @@ namespace MediaManager.Library
         {
             get
             {
-                if (_Image == null & !_IsLoading & _URLImage != "")
+                if (_Image == null & !_IsLoading & !String.IsNullOrEmpty(_URLImage))
                 {
+                    Console.WriteLine("Chargement Mini : " + URLImage);
+                    _IsLoading = true;
+                    OnPropertyChanged("IsLoading");
                     GetImage();
                     return null;
                 }
@@ -110,7 +116,7 @@ namespace MediaManager.Library
         {
             get { return _FichierCache; }
         }
-        
+
 
         /// <summary>
         /// Hauteur de l'image
@@ -141,7 +147,7 @@ namespace MediaManager.Library
                 if (!Directory.Exists(defaultCacheDir + _hash.Substring(0, 1) + @"\")) Directory.CreateDirectory(defaultCacheDir + _hash.Substring(0, 1) + @"\");
                 if (!Directory.Exists(defaultCacheDir + _hash.Substring(0, 1) + @"\" + _hash.Substring(1, 1) + @"\")) Directory.CreateDirectory(defaultCacheDir + _hash.Substring(0, 1) + @"\" + _hash.Substring(1, 1) + @"\");
 
-                _FichierCache = defaultCacheDir + _hash.Substring(0, 1) + @"\" + _hash.Substring(1, 1) + @"\" + _hash+ ".jpg";
+                _FichierCache = defaultCacheDir + _hash.Substring(0, 1) + @"\" + _hash.Substring(1, 1) + @"\" + _hash + ".jpg";
                 OnPropertyChanged("URLImage");
             }
         }
@@ -169,7 +175,7 @@ namespace MediaManager.Library
                         string _protocole = _uri.GetLeftPart(UriPartial.Scheme);
                         return _protocole.Contains("file://");
                     }
-                    catch (Exception e )
+                    catch (Exception e)
                     {
                         Console.WriteLine("IsLocal" + Environment.NewLine + e.Message);
                         return false;
@@ -195,6 +201,7 @@ namespace MediaManager.Library
                 {
                     using (FileStream stream = new FileStream(_FichierCache, FileMode.Create))
                     {
+                        Console.WriteLine("Save Thumb " + _FichierCache);
                         JpegBitmapEncoder encoder = new JpegBitmapEncoder();
                         encoder.Frames.Add(BitmapFrame.Create(_Image));
                         encoder.Save(stream);
@@ -235,12 +242,15 @@ namespace MediaManager.Library
 
             _IsLoading = true;
             OnPropertyChanged("IsLoading");
-            if (bw.IsBusy)
+            if (bw != null)
             {
-                bw.CancelAsync();
-                while (bw.IsBusy)
+                if (bw.IsBusy)
                 {
-                    Thread.Sleep(1);
+                    bw.CancelAsync();
+                    while (bw.IsBusy)
+                    {
+                        Thread.Sleep(1);
+                    }
                 }
             }
             if (Force)
@@ -258,7 +268,6 @@ namespace MediaManager.Library
 
             bw = new BackgroundWorker();
             bw.WorkerSupportsCancellation = true;
-            
             bw.DoWork += new DoWorkEventHandler(bw_DoWork);
             bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
             bw.RunWorkerAsync();
@@ -272,10 +281,10 @@ namespace MediaManager.Library
             OnPropertyChanged("Miniature");
             OnPropertyChanged("Largeur");
             OnPropertyChanged("Hauteur");
-            Console.WriteLine("Chargement Terminée : " + URLImage);
             bw.Dispose();
             _IsLoading = false;
             OnPropertyChanged("IsLoading");
+            Console.WriteLine("Chargement Terminée : " + URLImage);
         }
 
         void bw_DoWork(object sender, DoWorkEventArgs e)
@@ -286,17 +295,27 @@ namespace MediaManager.Library
             }
             else
             {
-                _Image = new BitmapImage();
-                _Image.BeginInit();
-                _Image.CreateOptions = BitmapCreateOptions.IgnoreColorProfile | BitmapCreateOptions.DelayCreation;
-                _Image.CacheOption = BitmapCacheOption.OnLoad;
+                BitmapImage binormal = new BitmapImage();
+                binormal.BeginInit();
+                binormal.CreateOptions = BitmapCreateOptions.IgnoreColorProfile | BitmapCreateOptions.DelayCreation;
+                binormal.CacheOption = BitmapCacheOption.OnLoad;
 
                 //L'image est locale et en cache
                 if (IsLocal & IsCached)
                 {
-                    _Image.UriSource = new Uri(_FichierCache, UriKind.RelativeOrAbsolute);
-                    _Image.EndInit();
-                    _Image.Freeze();
+                    try
+                    {
+                        Console.WriteLine("Chargement de puis le cache" + _FichierCache);
+                        binormal.UriSource = new Uri(_FichierCache, UriKind.RelativeOrAbsolute);
+                        binormal.EndInit();
+                        binormal.Freeze();
+                        _Image = binormal;
+
+                    }
+                    catch (InvalidOperationException ex)
+                    {
+                        Console.WriteLine("Invalid operation: " + ex.ToString());
+                    }
                     goto Mini;
                 }
 
@@ -304,10 +323,18 @@ namespace MediaManager.Library
                 if (IsLocal & !IsCached)
                 {
                     File.Delete(_FichierCache);
-                    _Image.UriSource = new Uri(_URLImage, UriKind.RelativeOrAbsolute);
-                    _Image.EndInit();
-                    _Image.Freeze();
-                    SaveImage();
+                    try
+                    {
+                        binormal.UriSource = new Uri(_URLImage, UriKind.RelativeOrAbsolute);
+                        binormal.EndInit();
+                        binormal.Freeze();
+                        _Image = binormal;
+                        SaveImage();
+                    }
+                    catch (InvalidOperationException ex)
+                    {
+                        Console.WriteLine("Invalid operation: " + ex.ToString());
+                    }
                     goto Mini;
                 }
 
@@ -315,60 +342,110 @@ namespace MediaManager.Library
                 //L'image est distante et en cache
                 if (IsCached & !IsLocal)
                 {
-                    _Image.UriSource = new Uri(_FichierCache, UriKind.RelativeOrAbsolute);
-                    _Image.EndInit();
-                    _Image.Freeze();
-                    //SaveImage();
+                    try
+                    {
+                        binormal.UriSource = new Uri(_FichierCache, UriKind.RelativeOrAbsolute);
+                        binormal.EndInit();
+                        binormal.Freeze();
+                        _Image = binormal;
+                    }
+                    catch (InvalidOperationException ex)
+                    {
+                        Console.WriteLine("Invalid operation: " + ex.ToString());
+                    }
+                    SaveImage();
                     goto Mini;
                 }
                 if (!IsCached & !IsLocal)
                 {
-                        MemoryStream ms = Utils.GetStreamImage(this._URLImage);
-                        if (ms != null)
+                    MemoryStream ms = Utils.GetStreamImage(this._URLImage);
+                    if (ms != null)
+                    {
+                        try
                         {
-                            _Image.StreamSource = ms;
-                            _Image.EndInit();
-                            _Image.Freeze();
-                            ms = null;
-                            SaveImage();
+                            binormal.StreamSource = ms;
+                            binormal.EndInit();
+                            binormal.Freeze();
+                            _Image = binormal;
                         }
-                        else
+                        catch (InvalidOperationException ex)
                         {
-                            
+                            Console.WriteLine("Invalid operation: " + ex.ToString());
+                        }
+                        ms = null;
+                        SaveImage();
+                        goto Mini;
+                    }
+                    else
+                    {
+                        try
+                        {
                             _URLImage = "pack://application:,,,/Images/Erreur_250.png";
-                            _Image.UriSource = new Uri(_URLImage, UriKind.RelativeOrAbsolute);
-                            _Image.EndInit();
-                            _Image.Freeze();
+                            binormal.UriSource = new Uri(_URLImage, UriKind.RelativeOrAbsolute);
+                            binormal.EndInit();
+                            binormal.Freeze();
+                            _Image = binormal;
                             ms = null;
                             //Création de la miniature
-                            _Miniature = new BitmapImage();
-                            _Miniature.BeginInit();
-                            _Miniature.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
-                            _Miniature.CacheOption = BitmapCacheOption.OnLoad;
-                            _Miniature.DecodePixelWidth = 200;
-                            _Miniature.UriSource = new Uri(_URLImage, UriKind.RelativeOrAbsolute);
-                            _Miniature.EndInit();
-                            _Miniature.Freeze();
+                            BitmapImage bimini = new BitmapImage();
+
+                            bimini = new BitmapImage();
+                            bimini.BeginInit();
+                            bimini.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
+                            bimini.CacheOption = BitmapCacheOption.OnLoad;
+                            bimini.DecodePixelWidth = 200;
+                            bimini.UriSource = new Uri(_URLImage, UriKind.RelativeOrAbsolute);
+                            bimini.EndInit();
+                            bimini.Freeze();
+
+                            _Miniature = bimini;
                         }
+                        catch (InvalidOperationException ex)
+                        {
+                            Console.WriteLine("Invalid operation: " + ex.ToString());
+                        }
+                    }
                 }
 
             Mini:
                 if (_Image != null)
                 {
-                    _Largeur = Math.Round(_Image.Width,0);
-                    _Hauteur = Math.Round(_Image.Height,0);
+
+                    try
+                    {
+                        _Largeur = Math.Round(_Image.Width, 0);
+                        _Hauteur = Math.Round(_Image.Height, 0);
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Erreur sur l'image :" + _FichierCache);
+                        //throw;
+                    }
                 }
                 if (IsCached)
                 {
-                    //Création de la miniature
-                    _Miniature = new BitmapImage();
-                    _Miniature.BeginInit();
-                    _Miniature.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
-                    _Miniature.CacheOption = BitmapCacheOption.OnLoad;
-                    _Miniature.DecodePixelWidth = 200;
-                    _Miniature.UriSource = new Uri(_FichierCache, UriKind.RelativeOrAbsolute);
-                    _Miniature.EndInit();
-                    _Miniature.Freeze();
+                    try
+                    {
+                        //Création de la miniature
+                        BitmapImage bimini = new BitmapImage();
+
+                        bimini = new BitmapImage();
+                        bimini.BeginInit();
+                        bimini.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
+                        bimini.CacheOption = BitmapCacheOption.OnLoad;
+                        bimini.DecodePixelWidth = 200;
+                        bimini.UriSource = new Uri(_FichierCache, UriKind.RelativeOrAbsolute);
+                        bimini.EndInit();
+                        bimini.Freeze();
+                        
+                        _Miniature = bimini;
+
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Invalid operation: " + ex.ToString());
+                    }
 
                 }
             }
@@ -383,30 +460,36 @@ namespace MediaManager.Library
 
         public Thumb(string _URL)
         {
-            Console.WriteLine("Charge le thumb" + _URL);
             URLImage = _URL;
         }
 
         ~Thumb()
         {
-
-            if (bw.IsBusy)
+            if (bw != null)
             {
-                bw.CancelAsync();
-                while (bw.IsBusy)
+                if (bw.IsBusy)
                 {
-                    Thread.Sleep(1);
+                    bw.CancelAsync();
+                    while (bw.IsBusy)
+                    {
+                        Console.WriteLine("Attente bw");
+                        Thread.Sleep(10);
+                    }
                 }
+                bw.Dispose();
             }
-            bw.Dispose();
-            ////Image.Freeze();
-            ////Miniature.Freeze();
+            try
+            {
+                _Image = null;
+                _Miniature = null;
+                _IsLoading = false;
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine("Invalid operation: " + ex.ToString());
+            }
 
-            //this.Image = null;
-            //this.Miniature = null;
-            this._Image = null;
-            this._Miniature = null;
-            this._IsLoading = false;
+
             Console.WriteLine("Decharge Thumb " + URLImage);
         }
 
