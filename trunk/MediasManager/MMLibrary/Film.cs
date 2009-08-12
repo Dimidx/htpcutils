@@ -130,54 +130,101 @@ namespace MediaManager.Library
             set { _Synopsis = value; OnPropertyChanged("Synopsis"); }
         }
 
-        private string[] _Pays;
+        private string _Duree;
         /// <summary>
-        /// Pays
+        /// Durée du film
         /// </summary>
-        public string[] Pays
+        public string Duree
         {
-            get { return _Pays; }
-            set { _Pays = value; OnPropertyChanged("Pays"); }
+            get { return _Duree; }
+            set { _Duree = value; OnPropertyChanged("Duree"); }
         }
 
-        private int _DureeMin;
+        private bool _Vu;
         /// <summary>
-        /// Durée en minutes
+        /// Film déjà vu ou pas
         /// </summary>
-        public int DureeMin
+        public bool Vu
         {
-            get { return _DureeMin; }
-            set { _DureeMin = value; OnPropertyChanged("DureeMin"); }
+            get { return _Vu; }
+            set { 
+                _Vu = value;
+                OnPropertyChanged("Vu");
+                if (_Vu == true)
+                {
+                    if (_NombreLectures == 0)
+                    {
+                        _NombreLectures = 1;
+                        OnPropertyChanged("NombreLectures");
+                    }
+                }
+                else
+                {
+                    _NombreLectures = 0;
+                    OnPropertyChanged("NombreLectures");
+                }
+
+            }
         }
 
-        private string _DureeChaine;
+        private int _NombreLectures;
         /// <summary>
-        /// Durée au format __h __min
+        /// Nombre de fois ou le film a été lu
         /// </summary>
-        public string DureeChaine
+        public int NombreLectures
         {
-            get { return _DureeChaine; }
-            set { _DureeChaine = value; OnPropertyChanged("DureeChaine"); }
+            get { return _NombreLectures; }
+            set { _NombreLectures = value; OnPropertyChanged("NombreLectures"); }
         }
 
-        private string _Critique;
+        private string _Resume;
         /// <summary>
-        /// Critique presse
+        /// Court résumé du film
         /// </summary>
-        public string Critique
+        public string Resume
         {
-            get { return _Critique; }
-            set { _Critique = value; OnPropertyChanged("Critique"); }
+            get { return _Resume; }
+            set { _Resume = value; OnPropertyChanged("Resume"); }
         }
 
-        private string _Avis;
+        private string _Accroche;
         /// <summary>
-        /// Avis
+        /// Quelques mots sur le film
         /// </summary>
-        public string Avis
+        public string Accroche
         {
-            get { return _Avis; }
-            set { _Avis = value; OnPropertyChanged("Avis"); }
+            get { return _Accroche; }
+            set { _Accroche = value; OnPropertyChanged("Accroche"); }
+        }
+
+        private string _Certification;
+        /// <summary>
+        /// Certification
+        /// </summary>
+        public string Certification
+        {
+            get { return _Certification; }
+            set { _Certification = value; OnPropertyChanged("Certification"); }
+        }
+
+        private string _MPAA;
+        /// <summary>
+        /// MPAA
+        /// </summary>
+        public string MPAA
+        {
+            get { return _MPAA; }
+            set { _MPAA = value; OnPropertyChanged("MPAA"); }
+        }
+
+        private int _Top250;
+        /// <summary>
+        /// Top250 d'IMDB
+        /// </summary>
+        public int Top250
+        {
+            get { return _Top250; }
+            set { _Top250 = value; OnPropertyChanged("Top250"); }
         }
 
         /// <summary>
@@ -260,24 +307,24 @@ namespace MediaManager.Library
             set { _Genres = value; OnPropertyChanged("Genres"); }
         }
 
-        private float _NotePresse;
+        private float _Note;
         /// <summary>
-        /// Note de la presse (/10)
+        /// Note (/10)
         /// </summary>
-        public float NotePresse
+        public float Note
         {
-            get { return _NotePresse; }
-            set { _NotePresse = value; OnPropertyChanged("NotePresse"); }
+            get { return _Note; }
+            set { _Note = value; OnPropertyChanged("Note"); }
         }
 
-        private float _NoteSpectateurs;
+        private float _Votes;
         /// <summary>
-        /// Note des spectateurs (/10)
+        /// Nombre de Votes
         /// </summary>
-        public float NoteSpectateurs
+        public float Votes
         {
-            get { return _NoteSpectateurs; }
-            set { _NoteSpectateurs = value; OnPropertyChanged("NoteSpectateurs"); }
+            get { return _Votes; }
+            set { _Votes = value; OnPropertyChanged("Votes"); }
         }
 
         #endregion

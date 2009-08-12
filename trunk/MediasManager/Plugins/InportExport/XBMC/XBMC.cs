@@ -51,17 +51,18 @@ namespace MediaManager.Plugins
                 MonFilm.Titre = Nfo.Title;
                 MonFilm.TitreOriginal = Nfo.Title;
                 MonFilm.Annee = Nfo.Year;
-                MonFilm.Avis = Nfo.Mpaa;
-                MonFilm.Critique = Nfo.Outline;
+                MonFilm.MPAA = Nfo.Mpaa;
+                MonFilm.Certification = Nfo.Certification;
+                MonFilm.Resume= Nfo.Outline;
+                MonFilm.Accroche = Nfo.Tagline;
+                MonFilm.Synopsis = Nfo.Plot;
                 MonFilm.AlloID = Nfo.AlloId;
                 MonFilm.Studio = Nfo.Studio;
-                #region NotePresse
-                try
-                {
-                    MonFilm.NotePresse = Single.Parse(Nfo.Rating);
-                }
-                catch { }
-                #endregion
+                MonFilm.Duree = Nfo.Runtime;
+                MonFilm.Genres = Nfo.Genre.Split('/');
+                MonFilm.ID = Nfo.Id;
+
+
                 #region Date de sortie
                 try
                 {
@@ -70,19 +71,38 @@ namespace MediaManager.Plugins
                 catch { }
                 #endregion
 
-                MonFilm.DureeChaine = Nfo.Runtime;
-                MonFilm.Genres = Nfo.Genre.Split('/');
-                MonFilm.ID = Nfo.Id;
-
                 #region Note
                 try
                 {
-                    MonFilm.NotePresse = Convert.ToInt32(Nfo.Rating);
+                    MonFilm.Note = Convert.ToInt32(Nfo.Rating);
                 }
                 catch { }
                 #endregion
 
-                MonFilm.Synopsis = Nfo.Plot;
+                #region Nombre lectures
+                try
+                {
+                    MonFilm.NombreLectures = Convert.ToInt32(Nfo.Playcount);
+                    if (MonFilm.NombreLectures > 0) MonFilm.Vu = true;
+                }
+                catch { }
+                #endregion
+
+                #region Votes
+                try
+                {
+                    MonFilm.Votes = Convert.ToInt32(Nfo.Votes);
+                }
+                catch { }
+                #endregion
+
+                #region Top250
+                try
+                {
+                    MonFilm.Top250 = Convert.ToInt32(Nfo.Top250);
+                }
+                catch { }
+                #endregion
 
                 #region Réalisateurs
                 foreach (string dir in Nfo.Director.Split(','))
@@ -167,10 +187,20 @@ namespace MediaManager.Plugins
             Nfo.Title = _Film.Titre;
             Nfo.OriginalTitle = _Film.TitreOriginal;
             Nfo.Year = _Film.Annee;
-            Nfo.Mpaa = _Film.Avis;
-            Nfo.Outline = _Film.Critique;
+            Nfo.Mpaa = _Film.MPAA;
+            Nfo.Outline = _Film.Resume;
+            Nfo.Id = _Film.ID;
+            Nfo.Rating = _Film.Note.ToString();
+            Nfo.Plot = _Film.Synopsis;
+            Nfo.Tagline = _Film.Accroche;
+            Nfo.Votes = _Film.Votes.ToString();
+            Nfo.Top250 = _Film.Top250.ToString();
             Nfo.AlloId = _Film.AlloID;
             Nfo.Studio = _Film.Studio;
+            Nfo.Certification = _Film.Certification;
+            Nfo.Playcount = _Film.NombreLectures.ToString() ;
+            if ((Nfo.Playcount == "0") && (_Film.Vu = true)) Nfo.Playcount = "1";
+
             #region Date de sortie
             try
             {
@@ -178,7 +208,7 @@ namespace MediaManager.Plugins
             }
             catch { }
             #endregion
-            Nfo.Runtime = _Film.DureeChaine;
+            Nfo.Runtime = _Film.Duree;
             #region Genres
             foreach (string item in _Film.Genres)
             {
@@ -186,9 +216,7 @@ namespace MediaManager.Plugins
             }
             if (Nfo.Genre.Length > 0) Nfo.Genre = Nfo.Genre.Substring(0, Nfo.Genre.Length - 1);
             #endregion
-            Nfo.Id = _Film.ID;
-            Nfo.Rating = _Film.NotePresse.ToString();
-            Nfo.Plot = _Film.Synopsis;
+
             #region Réalisateurs
             foreach (Personne real in _Film.Realisateurs)
             {

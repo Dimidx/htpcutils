@@ -43,19 +43,28 @@ namespace MediaManager.Plugins
             string _source = Utils.GetSourceHTML(@"http://passion-xbmc.org/scraper/index.php?id=" + _Film.AlloID);
             _source = Regex.Replace(_source, "[\r\n]", "");
 
-            if (Regex.Match(_source, "<title>(.*)</title>").Success)        
+            if (Regex.Match(_source, "<title>(.*)</title>").Success)
                 MonFilm.Titre = Regex.Match(_source, "<title>(.*)</title>").Groups[1].ToString();
             if (Regex.Match(_source, "<year>(.*)</year>").Success)
                 MonFilm.Annee = Regex.Match(_source, "<year>(.*)</year>").Groups[1].ToString();
             if (Regex.Match(_source, "<director>(.*)</director>").Success)
-                MonFilm.Realisateurs.Add(new Personne(Regex.Match(_source, "<director>(.*)</director>").Groups[1].ToString(),"Réalisateur"));
+                MonFilm.Realisateurs.Add(new Personne(Regex.Match(_source, "<director>(.*)</director>").Groups[1].ToString(), "Réalisateur"));
             if (Regex.Match(_source, "<tagline>(.*)</tagline>").Success)
-                MonFilm.Critique = Regex.Match(_source, "<tagline>(.*)</tagline>").Groups[1].ToString();
+                MonFilm.Accroche = Regex.Match(_source, "<tagline>(.*)</tagline>").Groups[1].ToString();
             if (Regex.Match(_source, "<runtime>(.*)</runtime>").Success)
-                MonFilm.DureeChaine = Regex.Match(_source, "<runtime>(.*)</runtime>").Groups[1].ToString();
+                MonFilm.Duree = Regex.Match(_source, "<runtime>(.*)</runtime>").Groups[1].ToString();
             if (Regex.Match(_source, "<studio>(.*)</studio>").Success)
                 MonFilm.Studio = Regex.Match(_source, "<studio>(.*)</studio>").Groups[1].ToString();
+            if (Regex.Match(_source, "<outline>(.*)</outline>").Success)
+                MonFilm.Resume = Regex.Match(_source, "<outline>(.*)</outline>").Groups[1].ToString();
+            if (Regex.Match(_source, "<plot>(.*)</plot>").Success)
+                MonFilm.Synopsis = Regex.Match(_source, "<plot>(.*)</plot>").Groups[1].ToString();
+            if (Regex.Match(_source, "<mpaa>(.*)</mpaa>").Success)
+                MonFilm.MPAA = Regex.Match(_source, "<mpaa>(.*)</mpaa>").Groups[1].ToString();
+            if (Regex.Match(_source, "<certification>(.*)</certification>").Success)
+                MonFilm.Certification = Regex.Match(_source, "<certification>(.*)</certification>").Groups[1].ToString();
             
+
             MonFilm.AlloID = _Film.AlloID;
 
             #region Notes
@@ -63,17 +72,34 @@ namespace MediaManager.Plugins
             {
                 try
                 {
-                    MonFilm.NotePresse = (float)System.Double.Parse(Regex.Match(_source, "<rating>(.*)</rating>").Groups[1].ToString());
-                    MonFilm.NoteSpectateurs = (float)System.Double.Parse(Regex.Match(_source, "<rating>(.*)</rating>").Groups[1].ToString());
-
+                    MonFilm.Note = (float)System.Double.Parse(Regex.Match(_source, "<rating>(.*)</rating>").Groups[1].ToString());
                 }
                 catch { }
-            } 
+            }
             #endregion
-            
-            if (Regex.Match(_source, "<mpaa>(.*)</mpaa>").Success)
-                MonFilm.Avis = Regex.Match(_source, "<mpaa>(.*)</mpaa>").Groups[1].ToString();
-                        
+
+            #region Votes
+            if (Regex.Match(_source, "<votes>(.*)</votes>").Success)
+            {
+                try
+                {
+                    MonFilm.Votes = (float)System.Double.Parse(Regex.Match(_source, "<votes>(.*)</votes>").Groups[1].ToString());
+                }
+                catch { }
+            }
+            #endregion
+
+            #region Top250
+            if (Regex.Match(_source, "<top250>(.*)</top250>").Success)
+            {
+                try
+                {
+                    MonFilm.Top250 = (int)System.Double.Parse(Regex.Match(_source, "<top250>(.*)</top250>").Groups[1].ToString());
+                }
+                catch { }
+            }
+            #endregion
+
             #region Genres
             if (Regex.Match(_source, "<genre>(.*)</genre>").Success)
             {
@@ -81,14 +107,11 @@ namespace MediaManager.Plugins
                 //Suppression des espaces
                 for (int i = 0; i < MonFilm.Genres.Length; i++)
                 {
-                    MonFilm.Genres[i] = MonFilm.Genres[i].Trim();  
+                    MonFilm.Genres[i] = MonFilm.Genres[i].Trim();
                 }
             }
 
             #endregion
-
-            if (Regex.Match(_source, "<outline>(.*)</outline>").Success)
-                MonFilm.Synopsis = Regex.Match(_source, "<outline>(.*)</outline>").Groups[1].ToString();
 
             #region Acteurs
 
@@ -122,7 +145,7 @@ namespace MediaManager.Plugins
                 if (Regex.Match(strMovieCode, "<thumb>(.*?)</thumb>").Success)
                     MonFilm.ListeCover.Add(new Thumb(_Match.Groups[1].ToString()));
 
-            } 
+            }
 
             #endregion
 
@@ -137,14 +160,14 @@ namespace MediaManager.Plugins
                 if (Regex.Match(strMovieCode, "<thumb>(.*?)</thumb>").Success)
                     MonFilm.ListeFanart.Add(new Thumb(_Match.Groups[1].ToString()));
 
-            } 
+            }
 
             #endregion
 
             return MonFilm;
 
         }
-  
+
         /// <summary>
         /// Recherche un film sur Allociné
         /// </summary>
@@ -167,7 +190,7 @@ namespace MediaManager.Plugins
                 ListeFilm.Add(MonFilm);
             }
 
-           return ListeFilm;
+            return ListeFilm;
 
         }
 

@@ -9,7 +9,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using TechNuts;
 
 namespace MediaManager
 {
@@ -27,14 +26,7 @@ namespace MediaManager
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            TechNuts.ScraperXML.ScraperManager s = new TechNuts.ScraperXML.ScraperManager(@"D:\Perso\Dev\HTPCUtils\MediasManager\MediasManager\bin\Debug\Plugins\ScraperXML\", @"D:\Perso\Dev\HTPCUtils\MediasManager\MediasManager\bin\Debug\Cache\Scraper\");
-            foreach (TechNuts.ScraperXML.ScraperInfo item in s.Movies)
-
-            {
-                Console.WriteLine(item.ScraperName);
-
-            }
-            Console.WriteLine(s.Log);
+            
         }
 	}
 }
