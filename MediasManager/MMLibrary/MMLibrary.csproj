@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Database.cs" />
     <Compile Include="Fileinfo.cs" />
     <Compile Include="Film.cs" />
     <Compile Include="Personne.cs" />

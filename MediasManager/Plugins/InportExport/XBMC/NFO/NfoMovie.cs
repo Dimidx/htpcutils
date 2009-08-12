@@ -34,6 +34,7 @@ namespace XBMC
         private String studio = "";
         private String trailer = "";
         private String alloid = "";
+        private string certification = "";
         private string _OriginalTitle = "";
         private List<Actor> actors  = new List<Actor>();
 
@@ -119,6 +120,13 @@ namespace XBMC
         {
             get { return thumb; }
             set { thumb = value; OnPropertyChanged("Thumb"); }
+        }
+
+        [XmlElement(ElementName = "certification")]
+        public String Certification
+        {
+            get { return certification; }
+            set { certification = value; OnPropertyChanged("Certification"); }
         }
 
         [XmlElement(ElementName = "mpaa")]

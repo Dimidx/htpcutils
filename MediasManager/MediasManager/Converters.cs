@@ -185,7 +185,7 @@ namespace Converters
         {
             string toConvert = "--aucun--";
             if (!String.IsNullOrEmpty((string)value)) { toConvert = (string)value; } else { toConvert = "--aucun--"; }
-            toConvert = Utils.RemoveAccents(toConvert).Trim().ToLower();
+            toConvert = Utils.RemoveAccents(toConvert).Trim();
 
             BitmapImage bi3 = new BitmapImage();
             string _fimage = "";
@@ -195,7 +195,7 @@ namespace Converters
             {
                 //Cherche l'avis dans le XML
                 var xAvis = from xDef in _RatingsXML.Descendants("name")
-                            where toConvert.Contains(xDef.Attribute("searchstring").Value.ToLower()) == true
+                            where toConvert.Contains(xDef.Attribute("searchstring").Value) == true
                               select (string)xDef.Element("icon");
                 foreach (string name in xAvis)
                 {

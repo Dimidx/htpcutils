@@ -76,20 +76,11 @@ namespace MediaManager.Plugins
             #endregion
 
             #region Pays
-            MonFilm.Pays = Utils.RemoveUnwantedChars(Regex.Match(s, "<h3 class=\"SpProse\">Film ([^:]*).&nbsp;</h3>").Groups[1].ToString()).Replace(", ", ",").Split(',');
+            //MonFilm.Pays = Utils.RemoveUnwantedChars(Regex.Match(s, "<h3 class=\"SpProse\">Film ([^:]*).&nbsp;</h3>").Groups[1].ToString()).Replace(", ", ",").Split(',');
             #endregion
 
             #region Durée
-            MonFilm.DureeChaine = Utils.RemoveUnwantedChars(Regex.Match(s, @"<h3 class=""SpProse"">Durée : (.*?)\.").Groups[1].ToString());
-            try
-            {
-                int Heures = Convert.ToInt32(Regex.Match(MonFilm.DureeChaine, @"(\d*)h (\d*)min").Groups[1].ToString());
-                int Minutes = Convert.ToInt32(Regex.Match(MonFilm.DureeChaine, @"(\d*)h (\d*)min").Groups[2].ToString());
-                MonFilm.DureeMin = (Heures * 60) + Minutes;
-
-            }
-            catch { }
-
+            MonFilm.Duree= Utils.RemoveUnwantedChars(Regex.Match(s, @"<h3 class=""SpProse"">Durée : (.*?)\.").Groups[1].ToString());
             #endregion
 
             #region Date de sortie
@@ -109,54 +100,44 @@ namespace MediaManager.Plugins
             string sNotePresse = Utils.RemoveUnwantedChars(Regex.Match(s, "Presse.*?class=['\"]etoile_(\\d)['\"]").Groups[1].ToString());
             try
             {
-                MonFilm.NotePresse = (float)(System.Double.Parse(sNotePresse) * 2.5);
+                MonFilm.Note = (float)(System.Double.Parse(sNotePresse) * 2.5);
             }
             catch { }
 
             #endregion
-
-            #region Note Spectateurs
-
-            string sNoteSpectateur = Utils.RemoveUnwantedChars(Regex.Match(s, "Spectateurs.*?class=['\"]etoile_(\\d)['\"]").Groups[1].ToString());
-            try
-            {
-                MonFilm.NoteSpectateurs = (float)(System.Double.Parse(sNotePresse) * 2.5);
-            }
-            catch { }
-
-            #endregion
+                       
 
             MonFilm.Synopsis = Utils.RemoveUnwantedChars(Regex.Match(s, "Synopsis(.*?)</h4></div>").Groups[1].ToString());
-            MonFilm.Critique = Utils.RemoveUnwantedChars(Regex.Match(s, "<div align=\"justify\" style=\"padding: 5 0 5 0\"><h4>([^<]*)</h4>").Groups[1].ToString());
+            MonFilm.Resume = Utils.RemoveUnwantedChars(Regex.Match(s, "<div align=\"justify\" style=\"padding: 5 0 5 0\"><h4>([^<]*)</h4>").Groups[1].ToString());
 
             #region Avis
             if (Regex.Match(s, "Film pour enfants à partir de 3 ans").Success)
             {
-                MonFilm.Avis = "-3";
+                MonFilm.Certification = "France:-3";
             }
             if (Regex.Match(s, "Film pour enfants à partir de 6 ans").Success)
             {
-                MonFilm.Avis = "-6";
+                MonFilm.Certification = "France:-6";
             }
             if (Regex.Match(s, "Film pour enfants à partir de 10 ans").Success)
             {
-                MonFilm.Avis = "-10";
+                MonFilm.Certification = "France:-10";
             }
             if (Regex.Match(s, "Interdit aux moins de 12 ans").Success)
             {
-                MonFilm.Avis = "-12";
+                MonFilm.Certification = "France:-12";
             }
             if (Regex.Match(s, "Interdit aux moins de 16 ans").Success)
             {
-                MonFilm.Avis = "-16";
+                MonFilm.Certification = "France:-16";
             }
             if (Regex.Match(s, "Des images ou des idées peuvent choquer").Success)
             {
-                MonFilm.Avis = "-16";
+                MonFilm.Certification = "France:-16";
             }
             if (Regex.Match(s, "Interdit aux moins de 18 ans").Success)
             {
-                MonFilm.Avis = "-18";
+                MonFilm.Certification = "France:-18";
             }
 
             #endregion

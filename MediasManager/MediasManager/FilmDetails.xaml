@@ -5,13 +5,13 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:MediaManager="clr-namespace:MediaManager"
     xmlns:Controls="clr-namespace:MediaManager.Controls"
-    xmlns:Converters="clr-namespace:Converters"
-    
+   
 	mc:Ignorable="d"
 	x:Class="MediaManager.FilmDetails"
 	x:Name="UserControl_FilmDetails"
 	d:DesignWidth="640" FontFamily="./Fonts/#Aeon Info" Loaded="UserControl_FilmDetails_Loaded">
     <UserControl.Resources>
+
 		<DataTemplate x:Key="DataTemplateThumbs">
 			<Grid VerticalAlignment="Stretch" Width="220">
 					<Controls:Sablier Visibility="{Binding Path=IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default}"/>
@@ -24,13 +24,7 @@
                 <Image Source="Images/list_movieicon_glass.png"/>
             </VisualBrush.Visual>
         </VisualBrush>
-		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-        <Converters:UriToImageConverter x:Key="UriToImageConverter"/>
-        <Converters:TableauToString x:Key="TableauToString"/>
-        <Converters:PersonneToString x:Key="PersonneToString"/>
-        <Converters:StringToImageSource x:Key="StringToImageSource"/>
-        <Converters:DateTimeConverter x:Key="DateTimeConverter"/>
-        <Converters:AvisToImage x:Key="AvisToImage"/>
+		
         <ItemsPanelTemplate x:Key="ItemsPanelTemplate_Acteurs">
             <WrapPanel/>
         </ItemsPanelTemplate>
@@ -83,6 +77,7 @@
                                 </VisualBrush>
                             </Border.Background>
                         </Border>
+                        <Image Source="Images/OverlayWatched.png" HorizontalAlignment="Right" Margin="0,0,0,10" VerticalAlignment="Bottom" Width="30" Height="30" Visibility="{Binding Path=Vu, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Hidden}"/>
                     </Grid>
                     <Grid Width="253" Height="143" Margin="0,0,0,5">
                         <Border BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" BorderBrush="{DynamicResource NormalBorderBrush}" >
@@ -163,47 +158,62 @@
                             </DockPanel>
                             <DockPanel Width="Auto" Height="Auto">
                                 <Label Width="90" Content="ANNEE :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
-                                <TextBox Width="Auto" Text="{Binding Path=Annee}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_Annee" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
+                                <TextBox Width="Auto" Text="{Binding Path=Annee}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_Annee" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}" MinWidth="30"/>
                                 <Label Width="Auto" Content="DATE DE SORTIE :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="10,2,0,2"/>
                                 <TextBox Width="Auto" Text="{Binding Path=DateSortie, Converter={StaticResource DateTimeConverter}, Mode=Default}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_DateSortie" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
                                 <Label Width="Auto" Content="DUREE :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="10,2,0,2"/>
-                                <TextBox Width="Auto" Text="{Binding Path=DureeChaine}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_Duree" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
+                                <TextBox Width="Auto" Text="{Binding Path=Duree}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_Duree" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
                             </DockPanel>
                             <DockPanel Width="Auto" Height="Auto">
-                                <Label Width="90" Content="Avis :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
-                                <TextBox Width="Auto" Text="{Binding Path=Avis}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_Mpaa" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
-							</DockPanel>
-                            <DockPanel Width="Auto" Height="Auto">
-                                <Label Width="90" Content="LECTURES :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
-                                <TextBox Width="Auto" Text="" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_Playcount" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
-                                <Label Width="Auto" Content="Note Presse :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="10,2,0,2"/>
-                                <TextBox Width="Auto" Text="{Binding Path=NotePresse}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_NotePresse" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
-                                <Label Width="Auto" Content="Note Spectateurs :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="10,2,0,0"/>
-                                <TextBox Width="Auto" Text="{Binding Path=NoteSpectateurs}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_NotePresseSpectateurs" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
+                                <Label Width="Auto" Content="Note :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="1,2,0,2"/>
+                                <TextBox Width="Auto" Text="{Binding Path=Note}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_Note" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}" MinWidth="20"/>
+                                <Label Width="Auto" Content="Votes :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="10,2,0,0"/>
+                                <TextBox Width="Auto" Text="{Binding Path=Votes}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_Votes" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
                             </DockPanel>
                         </StackPanel>
                     </DockPanel>
+					<Border Width="Auto" Height="Auto" DockPanel.Dock="Top" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="0,1,0,0" Padding="5,5,5,5">
+                        <TextBox Text="{Binding Path=Accroche}"  Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_Accroche" TextAlignment="Justify" Foreground="{DynamicResource TextBrush}" Style="{DynamicResource TextBoxStyleEdit}" AcceptsReturn="True" ToolTip="Accroche"/>
+                    </Border>
                     <Border Width="Auto" Height="Auto" DockPanel.Dock="Top" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="0,1,0,0" Padding="5,5,5,5">
-                        <TextBox Text="{Binding Path=Critique}"  Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_Plot" TextAlignment="Justify" Foreground="{DynamicResource TextBrush}" Style="{DynamicResource TextBoxStyleEdit}" AcceptsReturn="True" ToolTip="Critique"/>
+                        <TextBox Text="{Binding Path=Resume}"  Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_Resume" TextAlignment="Justify" Foreground="{DynamicResource TextBrush}" Style="{DynamicResource TextBoxStyleEdit}" AcceptsReturn="True" ToolTip="Résumé"/>
                     </Border>
                     <Border Width="Auto" Height="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="0,1,0,0" Padding="5,5,5,5" DockPanel.Dock="Top">
-                        <TextBox Text="{Binding Path=Synopsis}" Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_Tagline" TextAlignment="Justify" Foreground="{DynamicResource TextBrush}" Style="{DynamicResource TextBoxStyleEdit}" AcceptsReturn="True" ToolTip="Synopsis"/>
+                        <TextBox Text="{Binding Path=Synopsis}" Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_Synopsis" TextAlignment="Justify" Foreground="{DynamicResource TextBrush}" Style="{DynamicResource TextBoxStyleEdit}" AcceptsReturn="True" ToolTip="Synopsis"/>
                     </Border>
                     <Border x:Name="bdDivers" Width="Auto" Height="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="0,1,0,0" Padding="5,5,5,5" DockPanel.Dock="Bottom">
                         <Expander Header="Divers" Style="{DynamicResource ExpanderStyle1}" >
                             <StackPanel>
                                 <DockPanel Width="Auto" Height="Auto">
-                                    <Label Width="90" Content="ID Allociné :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
-                                    <TextBox Width="Auto" Text="{Binding Path=AlloID}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_AlloId" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
-                                </DockPanel>
-                                <DockPanel Width="Auto" Height="Auto">
-                                    <Label Width="90" Content="ID IMDB :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
+                                    <Label Content="ID Allociné :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
+                                    <TextBox Text="{Binding Path=AlloID}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_AlloId" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}" MinWidth="50"/>
+                                    <Label  Content="ID IMDB :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
                                     <TextBox Width="Auto" Text="{Binding Path=ID}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_ImdbId" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
-                                </DockPanel>
-								<DockPanel Width="Auto" Height="Auto">
-                                    <Label Width="90" Content="Studio :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
+ 								</DockPanel>
+ 								<DockPanel Width="Auto" Height="Auto">
+                                    <Label Content="Studio :" Foreground="#FF000000" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,2,0,2"/>
                                     <TextBox Width="Auto" Text="{Binding Path=Studio}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_Studio" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
                                 </DockPanel>
+                             <DockPanel>
+                                <Label Content="MPAA :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
+                                <TextBox Text="{Binding Path=MPAA}" Foreground="{DynamicResource TextBrush}" x:Name="lib_Mpaa" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}" TextWrapping="WrapWithOverflow"/>
+							</DockPanel>
+							<DockPanel Width="Auto" Height="Auto">
+                                <Label Content="Certification :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
+                                <ComboBox SelectedValue="{Binding Path=Certification}"
+									
+					              SelectedValuePath="@searchstring"
+								Foreground="{DynamicResource TextBrush}" 
+								x:Name="cb_Certification" 
+								Margin="10,2,0,2" ItemsSource="{Binding Source={StaticResource XMLCertifications},Mode=Default, XPath=/ratings/france/name}" ItemTemplate="{DynamicResource DataTemplateCertifications}" />
+							</DockPanel>
+							<DockPanel>
+                                <Label Content="Vu :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
+  							    <CheckBox IsChecked="{Binding Path=Vu}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
+								<Label Content="Nombre de lectures :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
+                                <TextBox Text="{Binding Path=NombreLectures}" Foreground="{DynamicResource TextBrush}" x:Name="lib_NombreLectures" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}" TextWrapping="WrapWithOverflow"/>
+
+							</DockPanel>
                             </StackPanel>
                         </Expander>
                     </Border>

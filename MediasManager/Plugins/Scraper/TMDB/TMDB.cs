@@ -81,7 +81,7 @@ namespace MediaManager.Plugins
                 m.Synopsis = nlMovie[0].SelectSingleNode("short_overview").InnerText;
 
             if (nlMovie[0].SelectSingleNode("runtime") != null)
-                m.DureeChaine = nlMovie[0].SelectSingleNode("runtime").InnerText;
+                m.Duree = nlMovie[0].SelectSingleNode("runtime").InnerText;
 
             #region Affiches
 

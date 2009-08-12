@@ -92,7 +92,7 @@
 					<Border x:Name="bdFlags" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,5,5,5" DockPanel.Dock="Bottom">
     					<StackPanel Height="80" Orientation="Horizontal">
 						<Image Source="{Binding Path=Studio, Converter={StaticResource StudioToImage}, Mode=Default}" HorizontalAlignment="Left" Margin="5,5,5,5" Stretch="Fill" Height="70" Width="100" ToolTip="{Binding Path=Studio}" />
-						<Image Source="{Binding Path=Avis, Converter={StaticResource AvisToImage}, Mode=Default}" HorizontalAlignment="Left" Margin="5,5,5,5" Stretch="Uniform" Height="70" Width="100" ToolTip="{Binding Path=Avis}" />
+						<Image Source="{Binding Path=Certification, Converter={StaticResource AvisToImage}, Mode=Default}" HorizontalAlignment="Left" Margin="5,5,5,5" Stretch="Uniform" Height="70" Width="100" ToolTip="{Binding Path=Avis}" />
 
 						</StackPanel>
     				</Border>
