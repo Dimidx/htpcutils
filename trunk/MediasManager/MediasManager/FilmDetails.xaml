@@ -9,7 +9,7 @@
 	mc:Ignorable="d"
 	x:Class="MediaManager.FilmDetails"
 	x:Name="UserControl_FilmDetails"
-	d:DesignWidth="640" FontFamily="./Fonts/#Aeon Info" Loaded="UserControl_FilmDetails_Loaded">
+	d:DesignWidth="640" FontFamily="./Fonts/#Aeon Info">
     <UserControl.Resources>
 
 		<DataTemplate x:Key="DataTemplateThumbs">
@@ -40,12 +40,49 @@
                 <Border BorderThickness="0,0,0,0" CornerRadius="10,10,10,10" BorderBrush="#FFFFFFFF" Background="#FFFFFFFF" Width="{Binding Path=ActualWidth, ElementName=ImagePoster, Mode=Default}" Height="{Binding Path=ActualHeight, ElementName=ImagePoster, Mode=Default}"/>
             </VisualBrush.Visual>
         </VisualBrush>
+        <Storyboard x:Key="sbRefletCover">
+		
+        	<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ellipse" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+        		<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.5"/>
+        		<SplineDoubleKeyFrame KeyTime="00:00:01" Value="80.5" KeySpline="1,0,1,1"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ellipse" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+        		<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-90.167"/>
+        		<SplineDoubleKeyFrame KeyTime="00:00:01" Value="337.166" KeySpline="1,0,1,1"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ellipse" Storyboard.TargetProperty="(FrameworkElement.Width)">
+        		<SplineDoubleKeyFrame KeyTime="00:00:00" Value="60"/>
+        		<SplineDoubleKeyFrame KeyTime="00:00:01" Value="60" KeySpline="1,0,1,1"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ellipse" Storyboard.TargetProperty="(FrameworkElement.Height)">
+        		<SplineDoubleKeyFrame KeyTime="00:00:00" Value="60"/>
+        		<SplineDoubleKeyFrame KeyTime="00:00:01" Value="60" KeySpline="1,0,1,1"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ellipse" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
+        		<SplineColorKeyFrame KeyTime="00:00:00" Value="#00FFFFFF"/>
+        		<SplineColorKeyFrame KeyTime="00:00:01" Value="#00000000" KeySpline="1,0,1,1"/>
+        	</ColorAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ellipse" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Offset)">
+        		<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.264"/>
+        		<SplineDoubleKeyFrame KeyTime="00:00:01" Value="1" KeySpline="1,0,1,1"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ellipse" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+        		<SplineColorKeyFrame KeyTime="00:00:00" Value="#FFFFFFFF"/>
+        		<SplineColorKeyFrame KeyTime="00:00:01" Value="#00FFFFFF" KeySpline="1,0,1,1"/>
+        	</ColorAnimationUsingKeyFrames>
+        </Storyboard>
     </UserControl.Resources>
+	<UserControl.Triggers>
+		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
+			<ResumeStoryboard BeginStoryboardName="sbRefletCover_BeginStoryboard"/>
+			<BeginStoryboard x:Name="sbRefletCover_BeginStoryboard" Storyboard="{StaticResource sbRefletCover}"/>
+		</EventTrigger>
+	</UserControl.Triggers>
     <ScrollViewer OverridesDefaultStyle="True" Width="Auto" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0" ClipToBounds="True">
         <Grid Width="Auto" Height="Auto" OverridesDefaultStyle="True" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
             <DockPanel LastChildFill="True">
                 <StackPanel Width="Auto" Height="Auto" Margin="0,0,5,0">
-                    <Grid Width="253" Height="325" Margin="0,0,0,5">
+                    <Grid Width="253" Height="365" Margin="0,0,0,5">
                         <Border BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" BorderBrush="{DynamicResource NormalBorderBrush}" >
                             <Controls:Sablier Visibility="{Binding Path=Cover.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default, FallbackValue=Hidden}"/>
                             <Border.Background>
@@ -76,6 +113,22 @@
                                     </VisualBrush.Visual>
                                 </VisualBrush>
                             </Border.Background>
+                        	<Ellipse x:Name="ellipse" Margin="0,30.333,102.666,0" VerticalAlignment="Top" Height="30" RenderTransformOrigin="0.5,0.5" Width="30" HorizontalAlignment="Right">
+                        		<Ellipse.Fill>
+                        			<RadialGradientBrush>
+                        				<GradientStop Color="#00000000" Offset="1"/>
+                        				<GradientStop Color="#FFFFFFFF" Offset="0"/>
+                        			</RadialGradientBrush>
+                        		</Ellipse.Fill>
+                        		<Ellipse.RenderTransform>
+                        			<TransformGroup>
+                        				<ScaleTransform ScaleX="1" ScaleY="1"/>
+                        				<SkewTransform AngleX="0" AngleY="0"/>
+                        				<RotateTransform Angle="0"/>
+                        				<TranslateTransform X="0" Y="0"/>
+                        			</TransformGroup>
+                        		</Ellipse.RenderTransform>
+                        	</Ellipse>
                         </Border>
                         <Image Source="Images/OverlayWatched.png" HorizontalAlignment="Right" Margin="0,0,0,10" VerticalAlignment="Bottom" Width="30" Height="30" Visibility="{Binding Path=Vu, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Hidden}"/>
                     </Grid>
@@ -215,7 +268,12 @@
 
 							</DockPanel>
 							<DockPanel>
-								<MediaElement Source="{Binding Path=Trailer}" ScrubbingEnabled="True" Height="100"/>
+							    <Button x:Name="btnPlayTrailer" Click="btnPlayTrailer_Click" DockPanel.Dock="Right" Width="18" Height="18" Visibility="{Binding Path=HasTrailer, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Hidden}">
+									<Image Source="/Images/Play_16.png" Margin="2,2,2,2"/>
+								</Button>
+								<Label Content="Trailer :" Foreground="#FF000000" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
+                                <TextBox Text="{Binding Path=Trailer}" Foreground="{DynamicResource TextBrush}" x:Name="lib_Trailer" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}" TextWrapping="WrapWithOverflow" DockPanel.Dock="Right"/>
+								
 							</DockPanel>
                             </StackPanel>
                         </Expander>

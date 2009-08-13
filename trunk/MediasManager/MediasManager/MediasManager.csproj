@@ -90,6 +90,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="dlgPlayTrailer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Splash.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -146,6 +150,9 @@
   <ItemGroup>
     <Compile Include="Controls\EditableTextBlock.xaml.cs">
       <DependentUpon>EditableTextBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPlayTrailer.xaml.cs">
+      <DependentUpon>dlgPlayTrailer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Splash.xaml.cs">
       <DependentUpon>Splash.xaml</DependentUpon>
@@ -267,6 +274,8 @@
     <Resource Include="Images\Erreur_250.png" />
     <Resource Include="Images\Fond_Main.png" />
     <Resource Include="Images\OverlayWatched.png" />
+    <Resource Include="Images\Play_128.png" />
+    <Resource Include="Images\Play_16.png" />
     <Content Include="Plugins\ImportExport\XBMC.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
