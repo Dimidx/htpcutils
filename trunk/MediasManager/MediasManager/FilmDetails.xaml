@@ -214,6 +214,9 @@
                                 <TextBox Text="{Binding Path=NombreLectures}" Foreground="{DynamicResource TextBrush}" x:Name="lib_NombreLectures" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}" TextWrapping="WrapWithOverflow"/>
 
 							</DockPanel>
+							<DockPanel>
+								<MediaElement Source="{Binding Path=Trailer}" ScrubbingEnabled="True" Height="100"/>
+							</DockPanel>
                             </StackPanel>
                         </Expander>
                     </Border>

@@ -27,7 +27,11 @@ namespace MediaManager.Plugins
             List<MMPluginOption> options = new List<MMPluginOption>();
             return options;
         }
+        public Film GetMovie(Film _Film)
+        {
+            return GetMovie(_Film, false);
 
+        }
 
         /// <summary>
         /// Récupère les infos du film en spécifiant si on les charge depuis le cache ou pas
@@ -36,11 +40,20 @@ namespace MediaManager.Plugins
         /// </summary>
         /// <param name="IDFilm">ID du film</param>
         /// <returns>Infos du Film</returns>
-        public Film GetMovie(Film _Film)
+        public Film GetMovie(Film _Film, bool _ModeIMDB)
         {
 
             Film MonFilm = new Film();
-            string _source = Utils.GetSourceHTML(@"http://passion-xbmc.org/scraper/index.php?id=" + _Film.AlloID);
+            string _source = String.Empty;
+            if (!_ModeIMDB)
+            {
+                _source = Utils.GetSourceHTML(@"http://passion-xbmc.org/scraper/index.php?id=" + _Film.AlloID);
+            }
+            else
+            {
+                _source = Utils.GetSourceHTML(@"http://passion-xbmc.org/scraper/index.php?idimdb=" + _Film.ID);
+            }
+
             _source = Regex.Replace(_source, "[\r\n]", "");
 
             if (Regex.Match(_source, "<title>(.*)</title>").Success)
@@ -54,25 +67,67 @@ namespace MediaManager.Plugins
             if (Regex.Match(_source, "<runtime>(.*)</runtime>").Success)
                 MonFilm.Duree = Regex.Match(_source, "<runtime>(.*)</runtime>").Groups[1].ToString();
             if (Regex.Match(_source, "<studio>(.*)</studio>").Success)
-                MonFilm.Studio = Regex.Match(_source, "<studio>(.*)</studio>").Groups[1].ToString();
+                MonFilm.Studio = Regex.Match(_source, "<studio>(.*)</studio>").Groups[1].ToString().Replace("France", "").Trim();
             if (Regex.Match(_source, "<outline>(.*)</outline>").Success)
                 MonFilm.Resume = Regex.Match(_source, "<outline>(.*)</outline>").Groups[1].ToString();
             if (Regex.Match(_source, "<plot>(.*)</plot>").Success)
                 MonFilm.Synopsis = Regex.Match(_source, "<plot>(.*)</plot>").Groups[1].ToString();
             if (Regex.Match(_source, "<mpaa>(.*)</mpaa>").Success)
                 MonFilm.MPAA = Regex.Match(_source, "<mpaa>(.*)</mpaa>").Groups[1].ToString();
-            if (Regex.Match(_source, "<certification>(.*)</certification>").Success)
-                MonFilm.Certification = Regex.Match(_source, "<certification>(.*)</certification>").Groups[1].ToString();
-            
+            if (Regex.Match(_source, "<trailer>(.*)</trailer>").Success)
+                MonFilm.Trailer = Regex.Match(_source, "<trailer>(.*)</trailer>").Groups[1].ToString();
 
             MonFilm.AlloID = _Film.AlloID;
+
+            #region Certification
+            if (Regex.Match(_source, "<certification>(.*)</certification>").Success)
+            {
+
+                MonFilm.Certification = Regex.Match(_source, "<certification>(.*)</certification>").Groups[1].ToString();
+            }
+            else
+            {
+
+                if (Regex.Match(_source, "Film pour enfants à partir de 3 ans").Success)
+                {
+                    MonFilm.Certification = "France:-3";
+                }
+                if (Regex.Match(_source, "Film pour enfants à partir de 6 ans").Success)
+                {
+                    MonFilm.Certification = "France:-6";
+                }
+                if (Regex.Match(_source, "Film pour enfants à partir de 10 ans").Success)
+                {
+                    MonFilm.Certification = "France:-10";
+                }
+                if (Regex.Match(_source, "Interdit aux moins de 12 ans").Success)
+                {
+                    MonFilm.Certification = "France:-12";
+                }
+                if (Regex.Match(_source, "Interdit aux moins de 16 ans").Success)
+                {
+                    MonFilm.Certification = "France:-16";
+                }
+                if (Regex.Match(_source, "Des images ou des idées peuvent choquer").Success)
+                {
+                    MonFilm.Certification = "France:-12";
+                }
+                if (Regex.Match(_source, "Interdit aux moins de 18 ans").Success)
+                {
+                    MonFilm.Certification = "France:-18";
+                }
+
+
+
+            }
+            #endregion
 
             #region Notes
             if (Regex.Match(_source, "<rating>(.*)</rating>").Success)
             {
                 try
                 {
-                    MonFilm.Note = (float)System.Double.Parse(Regex.Match(_source, "<rating>(.*)</rating>").Groups[1].ToString());
+                    MonFilm.Note = (float)(System.Double.Parse(Regex.Match(_source, "<rating>(.*)</rating>").Groups[1].ToString()) * 2.5);
                 }
                 catch { }
             }
@@ -177,6 +232,31 @@ namespace MediaManager.Plugins
         public List<Film> SearchMovie(Film _Film)
         {
             List<Film> ListeFilm = new List<Film>();
+
+            //Si l'id Allociné est renseigné on lance direct le get
+            if (String.IsNullOrEmpty(_Film.AlloID))
+            {
+                Film _temp = new Film();
+                _temp = GetMovie(_Film);
+                if (String.IsNullOrEmpty(_temp.Titre))
+                {
+                    ListeFilm.Add(GetMovie(_Film));
+                    return ListeFilm;
+                }
+            }
+
+            //Si l'id IMDB est renseigné on lance direct le get en mode imdb
+            if (String.IsNullOrEmpty(_Film.ID))
+            {
+                Film _temp = new Film();
+                _temp = GetMovie(_Film,true);
+                if (String.IsNullOrEmpty(_temp.Titre))
+                {
+                    ListeFilm.Add(GetMovie(_Film));
+                    return ListeFilm;
+                }
+            }
+
             string _source = Utils.GetSourceHTML(@"http://passion-xbmc.org/scraper/index.php?search=" + HttpUtility.UrlEncode(_Film.Titre, Encoding.Default));
             MatchCollection myMatches = Regex.Matches(_source, @"<title>(.*) \( (.*) \)</title><url>(.*)</url><id>(.*)</id>");
             foreach (Match movieCode in myMatches)

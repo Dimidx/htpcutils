@@ -25,6 +25,7 @@ namespace MediaManager.Library
         
         private string _AlloId;
         private string _Id;
+        private string _Trailer;
         private string _Titre;
         private string _Annee;
         private string _Studio;
@@ -55,6 +56,15 @@ namespace MediaManager.Library
         {
             get { return _Studio; }
             set { _Studio = value; OnPropertyChanged("Studio"); }
+        }
+
+        /// <summary>
+        /// Trailer
+        /// </summary>
+        public string Trailer
+        {
+            get { return _Trailer; }
+            set { _Trailer = value; OnPropertyChanged("Trailer"); }
         }
 
         /// <summary>
@@ -149,7 +159,7 @@ namespace MediaManager.Library
             get { return _Vu; }
             set { 
                 _Vu = value;
-                OnPropertyChanged("Vu");
+                
                 if (_Vu == true)
                 {
                     if (_NombreLectures == 0)
@@ -163,6 +173,7 @@ namespace MediaManager.Library
                     _NombreLectures = 0;
                     OnPropertyChanged("NombreLectures");
                 }
+                OnPropertyChanged("Vu");
 
             }
         }
