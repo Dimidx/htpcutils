@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using MediaManager.Library;
-using MediaManager.Plugins;
 using XBMC;
 
 namespace MediaManager.Plugins
@@ -61,7 +58,7 @@ namespace MediaManager.Plugins
                 MonFilm.Duree = Nfo.Runtime;
                 MonFilm.Genres = Nfo.Genre.Split('/');
                 MonFilm.ID = Nfo.Id;
-
+                MonFilm.Trailer = Nfo.Trailer;
 
                 #region Date de sortie
                 try
@@ -74,7 +71,7 @@ namespace MediaManager.Plugins
                 #region Note
                 try
                 {
-                    MonFilm.Note = Convert.ToInt32(Nfo.Rating);
+                    MonFilm.Note = (float)(System.Double.Parse(Nfo.Rating));
                 }
                 catch { }
                 #endregion
@@ -176,6 +173,15 @@ namespace MediaManager.Plugins
             }
             #endregion
 
+            #region Chargement du Trailer
+
+            foreach (string item in Directory.GetFiles(_FileInfo.DirectoryName, "*trailer*"))
+            {
+                if (File.Exists(item)) MonFilm.Trailer = item;
+            }
+
+            #endregion
+
             return MonFilm;
 
         }
@@ -195,6 +201,7 @@ namespace MediaManager.Plugins
             Nfo.Tagline = _Film.Accroche;
             Nfo.Votes = _Film.Votes.ToString();
             Nfo.Top250 = _Film.Top250.ToString();
+            Nfo.Trailer = _Film.Trailer;
             Nfo.AlloId = _Film.AlloID;
             Nfo.Studio = _Film.Studio;
             Nfo.Certification = _Film.Certification;

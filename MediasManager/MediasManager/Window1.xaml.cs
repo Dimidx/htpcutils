@@ -33,7 +33,7 @@ namespace MediaManager
         private Film _MonFilm = new Film();
 
         //public MovieCollection _Movies = new MovieCollection();
-        public BackgroundWorker BackWorker = new BackgroundWorker();
+        public BackgroundWorker bwScanDossier = new BackgroundWorker();
         public BackgroundWorker bwSelect = new BackgroundWorker();
         public BackgroundWorker bwScrapeAll = new BackgroundWorker();
 
@@ -81,22 +81,23 @@ namespace MediaManager
         {
             MovieManager.Movies.OrderBy(m => m.MovieName);
 
-            if (BackWorker.IsBusy == false)
+            if (bwScanDossier.IsBusy == false)
             {
-                
-                BackWorker = new BackgroundWorker();
-                BackWorker.DoWork += new DoWorkEventHandler(ScanDir_DoWork);
-                BackWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ScanDir_RunWorkerCompleted);
-                BackWorker.ProgressChanged += new ProgressChangedEventHandler(BackWorker_ProgressChanged);
-                BackWorker.WorkerReportsProgress = true;
+
+                bwScanDossier = new BackgroundWorker();
+                bwScanDossier.DoWork += new DoWorkEventHandler(ScanDir_DoWork);
+                bwScanDossier.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ScanDir_RunWorkerCompleted);
+                bwScanDossier.ProgressChanged += new ProgressChangedEventHandler(bwScanDossier_ProgressChanged);
+                bwScanDossier.WorkerReportsProgress = true;
+                bwScanDossier.WorkerSupportsCancellation = true;
                 //ObservableCollection<Movie> _Movies = this.Resources["MovieCollectionDataSource"] as MovieCollection;
                 //_Movies.Clear();
-				GridPatientez.Visibility = Visibility.Visible;
-                BackWorker.RunWorkerAsync();
+                GridPatientez.Visibility = Visibility.Visible;
+                bwScanDossier.RunWorkerAsync();
             }
         }
 
-        private void BackWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void bwScanDossier_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             //ObservableCollection<Movie> _Movies = this.Resources["MovieCollectionDataSource"] as ObservableCollection<Movie>;
             //this.lib_BarreEtat.Text = "Nombre de films trouvés : " + _Movies.Count.ToString() + " - " + e.UserState.ToString();
@@ -112,7 +113,7 @@ namespace MediaManager
         private void ScanDir_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
 
-			GridPatientez.Visibility = Visibility.Collapsed;
+            GridPatientez.Visibility = Visibility.Collapsed;
 
         }
 
@@ -317,78 +318,116 @@ namespace MediaManager
             int i = 0; int _progress = 0; int _nbrfilm = MovieManager.Movies.Count;
             foreach (Movie item in MovieManager.Movies)
             {
+                if (bwScrapeAll.CancellationPending) goto Cancel;
                 i += 1;
                 _progress = (int)((float)i / (float)_nbrfilm * (float)100);
-                bwScrapeAll.ReportProgress((int)_progress, "Recherche " + item.MovieName);
-                
+                if (!bwScrapeAll.CancellationPending) bwScrapeAll.ReportProgress((int)_progress, "Recherche " + item.MovieName);
+
                 //Le film a scraper
-                Film _ScrapeFilm = new Film(); 
+                Film _ScrapeFilm = new Film();
                 _ScrapeFilm = item.updateItem();
-                if (_ScrapeFilm.Titre == null) _ScrapeFilm.Titre = item.MovieName;
-                //ObservableCollection<Utils.ChampModifiable> _ListeChampsModif = new ObservableCollection<Utils.ChampModifiable>();
-                //_ListeChampsModif = Utils.GetChampsModifiables(_ScrapeFilm);
+                if (String.IsNullOrEmpty(_ScrapeFilm.Titre)) _ScrapeFilm.Titre = item.MovieName;
+                ObservableCollection<Utils.ChampModifiable> _ListeChampsModif = new ObservableCollection<Utils.ChampModifiable>();
+                _ListeChampsModif = Utils.GetChampsModifiables(_ScrapeFilm);
 
+                //Teste si il y a des champs à mettre à jour
+                bool _MAJAfaire = false;
 
-                List<Film> _ListResult = new List<Film>();
-                _ListResult = Scraper.SearchMovie(_ScrapeFilm);
-
-                if (_ListResult != null & _ListResult.Count > 0)
+                foreach (Utils.ChampModifiable c in ListeChampReplace)
                 {
-                    bwScrapeAll.ReportProgress((int)_progress, "Charge les détails de " + _ListResult[0].Titre);
-                    Film _ScrapeFilmResult = new Film(); //Le film resultat du scraper
-                    _ScrapeFilmResult = Scraper.GetMovie(_ListResult[0]);
-                    if (_ScrapeFilmResult != null)
-
-                    {
-                        foreach (Utils.ChampModifiable c in ListeChampReplace)
+                    if (c.IsModifiable)
+                    { //Le champ est paramétré comme modifiable
+                        foreach (Utils.ChampModifiable ChampOriginal in _ListeChampsModif)
                         {
-
-                            if (c.IsModifiable)
+                            if (ChampOriginal.NomChamp == c.NomChamp) //On cherche le champ original pour savoir si il est null
                             {
-                                c.PropertyInfo.SetValue(_ScrapeFilmResult, c.PropertyInfo.GetValue(_ScrapeFilmResult, null), null);
-
+                                if (ChampOriginal.IsModifiable) _MAJAfaire = true;
                             }
-                            else
-                            {
-                                c.PropertyInfo.SetValue(_ScrapeFilmResult, c.PropertyInfo.GetValue(_ScrapeFilm, null), null);
-
-                            }
-
                         }
-
-                        foreach (IMMPluginImportExport plug in Master.Settings.PluginsImportExport)
-                        {
-                            try
-                            {
-                                bwScrapeAll.ReportProgress((int)_progress, "Export " + plug.Name + " " + item.MovieName);
-                                _ScrapeFilmResult.Cover.GetImage(true);
-                                _ScrapeFilmResult.Fanart.GetImage(true);
-
-                                while (_ScrapeFilmResult.Cover.IsLoading)
-                                {
-                                    Thread.Sleep(1);
-                                }
-                                while (_ScrapeFilmResult.Fanart.IsLoading)
-                                {
-                                    Thread.Sleep(1);
-                                }
-
-                                plug.Export(_ScrapeFilmResult, item.fileInfo);
-                            }
-                            catch (Exception exe)
-                            {
-                                Console.WriteLine("Erreur Export " + plug.Name + Environment.NewLine + exe.Message);
-                            }
-
-                        }
-                        _ScrapeFilm = item.updateItem();
-
-                        if (_ScrapeFilm.Cover != null) _ScrapeFilm.Cover.GetImage(true);
-                        if (_ScrapeFilm.Fanart != null) _ScrapeFilm.Fanart.GetImage(true);
                     }
                 }
+                if (_MAJAfaire)
+                {
+
+                    List<Film> _ListResult = new List<Film>();
+                    _ListResult = Scraper.SearchMovie(_ScrapeFilm);
+
+                    if (_ListResult != null & _ListResult.Count > 0)
+                    {
+                        if (!bwScrapeAll.CancellationPending) bwScrapeAll.ReportProgress((int)_progress, "Charge les détails de " + _ListResult[0].Titre);
+                        Film _ScrapeFilmResult = new Film(); //Le film resultat du scraper
+                        _ScrapeFilmResult = Scraper.GetMovie(_ListResult[0]);
+                        if (_ScrapeFilmResult != null)
+                        {
+                            foreach (Utils.ChampModifiable c in ListeChampReplace)
+                            {
+
+                                if (c.IsModifiable)
+                                { //Le champ est paramétré comme modifiable
+                                    foreach (Utils.ChampModifiable ChampOriginal in _ListeChampsModif)
+                                    {
+                                        if (ChampOriginal.NomChamp == c.NomChamp) //On cherche le champ original pour savoir si il est null
+                                        {
+                                            if (ChampOriginal.IsModifiable) //Il est null on le remplace par le champ du scrapper
+                                            {
+                                                c.PropertyInfo.SetValue(_ScrapeFilmResult, c.PropertyInfo.GetValue(_ScrapeFilmResult, null), null);
+                                            }
+                                            else //Il est déjà renseigné on garde tel quel
+                                            {
+                                                c.PropertyInfo.SetValue(_ScrapeFilmResult, c.PropertyInfo.GetValue(_ScrapeFilm, null), null);
+                                            }
+
+                                        }
+                                    }
 
 
+                                }
+                                else
+                                {
+                                    c.PropertyInfo.SetValue(_ScrapeFilmResult, c.PropertyInfo.GetValue(_ScrapeFilm, null), null);
+
+                                }
+
+                            }
+
+                            foreach (IMMPluginImportExport plug in Master.Settings.PluginsImportExport)
+                            {
+                                try
+                                {
+                                    if (!bwScrapeAll.CancellationPending) bwScrapeAll.ReportProgress((int)_progress, "Export " + plug.Name + " " + item.MovieName);
+                                    _ScrapeFilmResult.Cover.GetImage(true);
+                                    _ScrapeFilmResult.Fanart.GetImage(true);
+
+                                    while (_ScrapeFilmResult.Cover.IsLoading)
+                                    {
+                                        Thread.Sleep(1);
+                                    }
+                                    while (_ScrapeFilmResult.Fanart.IsLoading)
+                                    {
+                                        Thread.Sleep(1);
+                                    }
+
+                                    plug.Export(_ScrapeFilmResult, item.fileInfo);
+                                }
+                                catch (Exception exe)
+                                {
+                                    Console.WriteLine("Erreur Export " + plug.Name + Environment.NewLine + exe.Message);
+                                }
+
+                            }
+                            _ScrapeFilm = item.updateItem();
+
+                            if (_ScrapeFilm.Cover != null) _ScrapeFilm.Cover.GetImage(true);
+                            if (_ScrapeFilm.Fanart != null) _ScrapeFilm.Fanart.GetImage(true);
+                        }
+                    }
+
+
+
+                }
+            }
+        Cancel:
+            {
             }
         }
 
@@ -401,6 +440,7 @@ namespace MediaManager
                 bwScrapeAll.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bwScrapeAll_RunWorkerCompleted);
                 bwScrapeAll.ProgressChanged += new ProgressChangedEventHandler(bwScrapeAll_ProgressChanged);
                 bwScrapeAll.WorkerReportsProgress = true;
+                bwScrapeAll.WorkerSupportsCancellation = true;
                 //ObservableCollection<Movie> _Movies = this.Resources["MovieCollectionDataSource"] as MovieCollection;
                 //_Movies.Clear();
                 GridConfigScraper.Visibility = Visibility.Collapsed;
@@ -419,6 +459,19 @@ namespace MediaManager
         private void btn_ScrapeAllCancel_Click(object sender, RoutedEventArgs e)
         {
             GridConfigScraper.Visibility = Visibility.Collapsed;
+        }
+
+        private void btn_Annuler_Click(object sender, RoutedEventArgs e)
+        {
+            if (bwScrapeAll.IsBusy)
+            {
+                bwScrapeAll.ReportProgress(100, "Annulation en cours...");
+                bwScrapeAll.CancelAsync();
+
+
+            }
+            if (bwScanDossier.IsBusy) bwScrapeAll.CancelAsync();
+
         }
 
     }

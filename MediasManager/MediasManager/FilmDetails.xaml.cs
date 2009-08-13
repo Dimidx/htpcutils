@@ -10,6 +10,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
+using System.Windows.Media.Animation;
+using System.Windows.Threading;
 
 namespace MediaManager
 {
@@ -18,13 +21,40 @@ namespace MediaManager
 	/// </summary>
 	public partial class FilmDetails
 	{
-		public FilmDetails()
+		
+        public FilmDetails()
 		{
 			this.InitializeComponent();
-		}
+            DispatcherTimer dp = new System.Windows.Threading.DispatcherTimer();
+            dp.Tick += new EventHandler(dp_Tick);
+            dp.Interval = new TimeSpan(0, 0, 0, 0, 5000);
+            dp.Start();
+            //TimerCallback _RefletCallBack = new TimerCallback(
+            //Timer _Reflet = new Timer(RefletCallBack,false,100,500);
+            
+        }
 
-        private void UserControl_FilmDetails_Loaded(object sender, RoutedEventArgs e)
+        void dp_Tick(object sender, EventArgs e)
         {
+            Storyboard _sbReflet = (Storyboard)FindResource("sbRefletCover");
+            _sbReflet.Begin(this);
+        }
+
+        public void RefletCallBack(Object stateInfo)
+        {
+
+        }
+
+
+
+        private void btnPlayTrailer_Click(object sender, RoutedEventArgs e)
+        {
+            if (!String.IsNullOrEmpty(lib_Trailer.Text))
+            {
+                System.Diagnostics.Process.Start(lib_Trailer.Text);
+
+            }
+
 
         }
 

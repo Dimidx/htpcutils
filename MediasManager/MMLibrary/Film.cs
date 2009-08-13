@@ -50,6 +50,30 @@ namespace MediaManager.Library
         }
 
         /// <summary>
+        /// Une Affiche est présente
+        /// </summary>
+        public bool HasCover
+        {
+            get { return Cover != null; }
+        }
+
+        /// <summary>
+        /// Un fanart est présent
+        /// </summary>
+        public bool HasFanart
+        {
+            get { return Fanart != null; }
+        }
+
+        /// <summary>
+        /// Un traile est présent
+        /// </summary>
+        public bool HasTrailer
+        {
+            get { return !String.IsNullOrEmpty(Trailer); }
+        }
+
+        /// <summary>
         /// Studio
         /// </summary>
         public string Studio

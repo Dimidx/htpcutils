@@ -8,7 +8,7 @@
     xmlns:MediaManager_Library="clr-namespace:MediaManager.Library;assembly=MMLibrary"
     x:Class="MediaManager.Window1"
 
-    Title="Media Manager" Height="768" Width="1024" Background="{DynamicResource BackMain}" >
+    Title="Media Manager" Height="768" Width="1024" Background="{DynamicResource BackMain}" SizeToContent="Manual" WindowState="Maximized" >
     <Window.Resources>
 			<DataTemplate x:Key="dtChamps">
 			<Grid>
@@ -43,7 +43,7 @@
 
     </Window.Resources>
     <Grid x:Name="GridMain" >    	
-    	<DockPanel x:Name="dockPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True">
+    	<DockPanel x:Name="dockPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True" Visibility="Visible">
     		<Menu DockPanel.Dock="Top">
     			<MenuItem Header="Fichier">
     				<MenuItem x:Name="mnuQuitter" Header="Quitter" ToolTip="Quitte l'application" Click="mnuQuitter_Click">
@@ -92,7 +92,7 @@
 					<Border x:Name="bdFlags" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,5,5,5" DockPanel.Dock="Bottom">
     					<StackPanel Height="80" Orientation="Horizontal">
 						<Image Source="{Binding Path=Studio, Converter={StaticResource StudioToImage}, Mode=Default}" HorizontalAlignment="Left" Margin="5,5,5,5" Stretch="Fill" Height="70" Width="100" ToolTip="{Binding Path=Studio}" />
-						<Image Source="{Binding Path=Certification, Converter={StaticResource AvisToImage}, Mode=Default}" HorizontalAlignment="Left" Margin="5,5,5,5" Stretch="Uniform" Height="70" Width="100" ToolTip="{Binding Path=Avis}" />
+						<Image Source="{Binding Path=Certification, Converter={StaticResource AvisToImage}, Mode=Default}" HorizontalAlignment="Left" Margin="5,5,5,5" Stretch="Uniform" Height="70" Width="100" ToolTip="{Binding Path=Certification}" />
 
 						</StackPanel>
     				</Border>
@@ -104,11 +104,11 @@
     		</DockPanel>
     	</DockPanel>
 		<Grid x:Name="GridPatientez" Background="#99000000" Visibility="Collapsed">
-			<GroupBox x:Name="gbWait" Header="Patientez" Width="400" Height="100">
+			<GroupBox x:Name="gbWait" Header="Patientez" Width="400" Height="130">
 				<StackPanel>
 					<TextBlock x:Name="lib_BarreEtat" Text="Recherche en cours..." Margin="10,10,10,10"/>
 					<ProgressBar BorderThickness="1,1,1,1" IsIndeterminate="True" x:Name="jauge_progress" Height="16" Margin="10,10,10,10"/>
-				
+					<Button x:Name="btn_Annuler" Click="btn_Annuler_Click" Height="20" HorizontalAlignment="Right" Content="  Annuler  " IsCancel="True" Margin="0,0,10,0" />
 				</StackPanel>
 			</GroupBox>
 		</Grid>
