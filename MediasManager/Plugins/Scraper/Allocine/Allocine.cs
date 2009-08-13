@@ -133,7 +133,7 @@ namespace MediaManager.Plugins
             }
             if (Regex.Match(s, "Des images ou des idées peuvent choquer").Success)
             {
-                MonFilm.Certification = "France:-16";
+                MonFilm.Certification = "France:-12";
             }
             if (Regex.Match(s, "Interdit aux moins de 18 ans").Success)
             {

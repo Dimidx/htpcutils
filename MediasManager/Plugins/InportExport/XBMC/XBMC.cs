@@ -199,7 +199,7 @@ namespace MediaManager.Plugins
             Nfo.Studio = _Film.Studio;
             Nfo.Certification = _Film.Certification;
             Nfo.Playcount = _Film.NombreLectures.ToString() ;
-            if ((Nfo.Playcount == "0") && (_Film.Vu = true)) Nfo.Playcount = "1";
+            if ((Nfo.Playcount == "0") && (_Film.Vu == true)) Nfo.Playcount = "1";
 
             #region Date de sortie
             try
