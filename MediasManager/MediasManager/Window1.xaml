@@ -113,7 +113,7 @@
 			</GroupBox>
 		</Grid>
 		<Grid x:Name="GridConfigScraper" Background="#99000000" Visibility="Collapsed">
-			<GroupBox Header="Scraper" Width="400" Height="300" Visibility="Visible">
+			<GroupBox Header="Scraper" Width="400" Height="600" Visibility="Visible">
 				<DockPanel>
 					<ComboBox x:Name="cbScraper" VerticalAlignment="Top" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplateScraper}" DockPanel.Dock="Top" Margin="5,5,5,5"/>
 					<TextBlock Text="Champs à mettre à jour" HorizontalAlignment="Center" Margin="0,5,0,5" DockPanel.Dock="Top"/>

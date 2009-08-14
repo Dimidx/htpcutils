@@ -48,6 +48,14 @@ namespace MediaManager
         {
             // Here, put the code which take a long time to execute
             // BEGIN
+            Master.Settings.xmlPath = System.IO.Path.GetDirectoryName(Application.ResourceAssembly.Location) + @"\settings.xml";
+            Master.Settings.XML = new Master.XmlSettings();
+            if (!Master.Settings.Load())
+            {
+                //MessageBox.Show("No valid settings.xml found. Loading defaults");
+                Master.Settings.Save();
+                //conf.ShowDialog();
+            }
 
             #region Scrapers
             message.Message = "Chargement des scraper...";
@@ -111,6 +119,8 @@ namespace MediaManager
 
             message.Message = "Création du cache...";
             if (!Directory.Exists(System.Environment.CurrentDirectory + @"\Cache\Images\")) Directory.CreateDirectory(System.Environment.CurrentDirectory + @"\Cache\Images\");
+            if (!Directory.Exists(System.Environment.CurrentDirectory + @"\Cache\Series\")) Directory.CreateDirectory(System.Environment.CurrentDirectory + @"\Cache\Series\");
+ 
             message.Message = "Chargement Terminé !";
 
             this.Dispatcher.BeginInvoke(DispatcherPriority.Send, new DispatcherOperationCallback(delegate(Object state)
@@ -119,7 +129,7 @@ namespace MediaManager
                 Thread.Sleep(2000);
                 this.Hide();
 
-                Window1 window = new Window1();
+                Window2 window = new Window2();
                 window.Show();
 
                 return null;

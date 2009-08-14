@@ -50,14 +50,7 @@ namespace MediaManager
         public Window1()
         {
 
-            Master.Settings.xmlPath = System.IO.Path.GetDirectoryName(Application.ResourceAssembly.Location) + @"\settings.xml";
-            Master.Settings.XML = new Master.XmlSettings();
-            if (!Master.Settings.Load())
-            {
-                //MessageBox.Show("No valid settings.xml found. Loading defaults");
-                Master.Settings.Save();
-                //conf.ShowDialog();
-            }
+            
             InitializeComponent();
             ListCollectionView lcv = new ListCollectionView(MovieManager.Movies);
             lcv.SortDescriptions.Add(new System.ComponentModel.SortDescription("MovieName", System.ComponentModel.ListSortDirection.Ascending));

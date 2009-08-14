@@ -1,0 +1,48 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	xmlns:MediaManager_Controls="clr-namespace:MediaManager.Controls"
+	x:Class="MediaManager.SerieDetails"
+	x:Name="UserControl" d:DesignHeight="480" Width="774">
+
+	<Grid x:Name="LayoutRoot">
+		<Grid Width="758" Height="140" Margin="8,8,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+			<Border BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" BorderBrush="{DynamicResource NormalBorderBrush}" >
+				<Border.Background>
+					<VisualBrush>
+						<VisualBrush.Visual>
+							<Image x:Name="Fanart" Source="{Binding Path=Banner.Image}" />
+						</VisualBrush.Visual>
+					</VisualBrush>
+				</Border.Background>
+				<MediaManager_Controls:Sablier Visibility="{Binding Path=Banner.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default, FallbackValue=Hidden}"/>
+			</Border>
+			<Border x:Name="border" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" BorderBrush="{DynamicResource NormalBorderBrush}" >
+				<Border.ToolTip>
+					<StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="Largeur : "/>
+							<TextBlock Text="{Binding Path=Banner.Largeur}"/>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="Hauteur : "/>
+							<TextBlock Text="{Binding Path=Banner.Hauteur}"/>
+						</StackPanel>
+					</StackPanel>
+				</Border.ToolTip>
+				<Border.Background>
+					<VisualBrush>
+						<VisualBrush.Visual>
+							<Image Stretch="Fill" Source="Images\list_movieicon_glass.png"/>
+						</VisualBrush.Visual>
+					</VisualBrush>
+				</Border.Background>
+			</Border>
+		</Grid>
+		<TextBlock x:Name="txtNomSerie" HorizontalAlignment="Left" Margin="18,161,0,0" VerticalAlignment="Top" Width="214" Height="20" Text="TextBlock" TextWrapping="Wrap"/>
+		<Button Click="btn_ChargeDetails_Click" x:Name="btn_ChargeDetails" HorizontalAlignment="Left" Margin="19,206,0,0" VerticalAlignment="Top" Width="109" Height="28" Content="Button"/>
+	</Grid>
+</UserControl>
