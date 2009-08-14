@@ -234,7 +234,7 @@ namespace MediaManager.Plugins
             List<Film> ListeFilm = new List<Film>();
 
             //Si l'id Allociné est renseigné on lance direct le get
-            if (String.IsNullOrEmpty(_Film.AlloID))
+            if (!String.IsNullOrEmpty(_Film.AlloID))
             {
                 Film _temp = new Film();
                 _temp = GetMovie(_Film);
@@ -246,7 +246,7 @@ namespace MediaManager.Plugins
             }
 
             //Si l'id IMDB est renseigné on lance direct le get en mode imdb
-            if (String.IsNullOrEmpty(_Film.ID))
+            if (!String.IsNullOrEmpty(_Film.ID))
             {
                 Film _temp = new Film();
                 _temp = GetMovie(_Film,true);
