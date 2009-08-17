@@ -120,7 +120,9 @@ namespace MediaManager
             message.Message = "Création du cache...";
             if (!Directory.Exists(System.Environment.CurrentDirectory + @"\Cache\Images\")) Directory.CreateDirectory(System.Environment.CurrentDirectory + @"\Cache\Images\");
             if (!Directory.Exists(System.Environment.CurrentDirectory + @"\Cache\Series\")) Directory.CreateDirectory(System.Environment.CurrentDirectory + @"\Cache\Series\");
- 
+
+            message.Message = "Création de la base de données...";
+            MediaManager.Database.Database.CreateDB();
             message.Message = "Chargement Terminé !";
 
             this.Dispatcher.BeginInvoke(DispatcherPriority.Send, new DispatcherOperationCallback(delegate(Object state)
@@ -129,7 +131,7 @@ namespace MediaManager
                 Thread.Sleep(2000);
                 this.Hide();
 
-                Window2 window = new Window2();
+                Window1 window = new Window1();
                 window.Show();
 
                 return null;

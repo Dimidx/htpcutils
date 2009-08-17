@@ -210,7 +210,7 @@ namespace MediaManager
         {
             if (listBox_Films.SelectedItem != null)
             {
-                dpInfosFilm.DataContext = null;
+                //dpInfosFilm.DataContext = null;
                 ScraperSelect _scraper = new ScraperSelect(_MonFilm);
                 try
                 {
@@ -273,6 +273,8 @@ namespace MediaManager
                 if (_MonFilm.Cover != null) _MonFilm.Cover.GetImage(true);
                 if (_MonFilm.Fanart != null) _MonFilm.Fanart.GetImage(true);
                 dpInfosFilm.DataContext = _MonFilm;
+                Database.Database.SaveFilmToDB(_MonFilm);
+
             }
         }
 

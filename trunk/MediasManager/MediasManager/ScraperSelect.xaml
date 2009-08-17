@@ -15,18 +15,12 @@
         <Converters:PersonneToString x:Key="PersonneToString"/>
 		<Converters:UriToImageConverter x:Key="UriToImageConverter"/>
 		<DataTemplate x:Key="DataTemplateResult">
-					<StackPanel HorizontalAlignment="Stretch" Margin="0,0,0,0" Width="Auto">
-				<DockPanel Width="Auto" Height="Auto" LastChildFill="False">
-					<StackPanel VerticalAlignment="Top" Height="Auto" Margin="5,0,0,0">
-						<TextBlock Text="{Binding Path=Titre}" Width="Auto" Height="Auto" TextWrapping="WrapWithOverflow" x:Name="txt_Titre" FontWeight="Bold"/>
-						<TextBlock Text="{Binding Path=TitreOriginal}" Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_TitreOriginal" FontStyle="Italic"/>
-						<TextBlock Text="{Binding Path=Annee}" Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_Année"/>
-						<DockPanel Width="Auto" Height="Auto" LastChildFill="False">
-							<TextBlock Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_de" Text="de "/>
-							<TextBlock Text="{Binding Path=Realisateurs, Converter={StaticResource PersonneToString}}" Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_realisateurs"/>
-						</DockPanel>
-					</StackPanel>
-				</DockPanel>
+		<StackPanel Orientation="Horizontal">
+						<TextBlock Text="{Binding Path=Titre}" x:Name="txt_Titre" FontWeight="Bold"/>
+						<TextBlock Text=" - ("/>
+						<TextBlock Text="{Binding Path=Annee}" x:Name="txt_Année"/>
+						<TextBlock Text=")"/>
+						
 			</StackPanel>
 		</DataTemplate>
 		<DataTemplate x:Key="DataTemplateFanart">

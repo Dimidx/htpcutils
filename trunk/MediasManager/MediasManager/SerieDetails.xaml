@@ -7,9 +7,17 @@
 	xmlns:MediaManager_Controls="clr-namespace:MediaManager.Controls"
 	x:Class="MediaManager.SerieDetails"
 	x:Name="UserControl" d:DesignHeight="480" Width="774">
+	<UserControl.Resources>
+		<DataTemplate x:Key="DataTemplateSaisons">
+			<Grid>
+				<Image Source="{Binding Path=Image}" Width="140" />
+			</Grid>
+					</DataTemplate>
+	</UserControl.Resources>
 
 	<Grid x:Name="LayoutRoot">
-		<Grid Width="758" Height="140" Margin="8,8,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+	<DockPanel>
+		<Grid Width="758" Height="140" Margin="8,8,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" DockPanel.Dock="Top">
 			<Border BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" BorderBrush="{DynamicResource NormalBorderBrush}" >
 				<Border.Background>
 					<VisualBrush>
@@ -42,7 +50,12 @@
 				</Border.Background>
 			</Border>
 		</Grid>
-		<TextBlock x:Name="txtNomSerie" HorizontalAlignment="Left" Margin="18,161,0,0" VerticalAlignment="Top" Width="214" Height="20" Text="TextBlock" TextWrapping="Wrap"/>
-		<Button Click="btn_ChargeDetails_Click" x:Name="btn_ChargeDetails" HorizontalAlignment="Left" Margin="19,206,0,0" VerticalAlignment="Top" Width="109" Height="28" Content="Button"/>
+		<DockPanel DockPanel.Dock="Left">
+		</DockPanel>
+			
+			<Border Width="Auto" Height="Auto" DockPanel.Dock="Top" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="0,1,0,0" Padding="5,5,5,5">
+                        <TextBox Text="{Binding Path=Overview}"  Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_Accroche" TextAlignment="Justify" Foreground="{DynamicResource TextBrush}" Style="{DynamicResource TextBoxStyleEdit}" AcceptsReturn="True" ToolTip="Accroche"/>
+                    </Border>
+		</DockPanel>
 	</Grid>
 </UserControl>

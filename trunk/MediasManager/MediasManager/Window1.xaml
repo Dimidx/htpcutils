@@ -8,7 +8,7 @@
     xmlns:MediaManager_Library="clr-namespace:MediaManager.Library;assembly=MMLibrary"
     x:Class="MediaManager.Window1"
 
-    Title="Media Manager" Height="768" Width="1024" Background="{DynamicResource BackMain}" SizeToContent="Manual" WindowState="Maximized" >
+    Title="Media Manager" Height="768" Width="1024" SizeToContent="Manual" WindowState="Maximized" Background="{DynamicResource BackMain}" >
     <Window.Resources>
 			<DataTemplate x:Key="dtChamps">
 			<Grid>
@@ -27,13 +27,13 @@
         	</Grid>
         </DataTemplate>
         <Storyboard x:Key="FadeIn">
-        	<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="dpInfosFilm" Storyboard.TargetProperty="(UIElement.Opacity)">
+        	<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="dpInfosFilmDetails" Storyboard.TargetProperty="(UIElement.Opacity)">
         		<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
         		<SplineDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
         	</DoubleAnimationUsingKeyFrames>
         </Storyboard>
     	<Storyboard x:Key="FadeOut">
-    		<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="dpInfosFilm" Storyboard.TargetProperty="(UIElement.Opacity)">
+    		<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="dpInfosFilmDetails" Storyboard.TargetProperty="(UIElement.Opacity)">
     			<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
     			<SplineDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
     		</DoubleAnimationUsingKeyFrames>
@@ -71,14 +71,14 @@
 					</MenuItem>
     			</MenuItem>
     		</Menu>
-    		<DockPanel DockPanel.Dock="Top" LastChildFill="True" d:LayoutOverrides="Height">
+    		<DockPanel x:Name="dpInfosFilm" DockPanel.Dock="Top" LastChildFill="True" d:LayoutOverrides="Height">
     			<Border Margin="5,5,5,5" Width="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10">
                     <DockPanel>
 						<TextBox TextChanged="txt_Recherche_TextChanged" x:Name="txt_Recherche" DockPanel.Dock="Top" Margin="5,5,5,0" BorderBrush="{DynamicResource NormalBorderBrush}"/>
 						<ListBox SelectionChanged="listBox_Films_SelectionChanged" x:Name="listBox_Films" ItemsPanel="{DynamicResource MovieTemplate}" Background="{x:Null}" BorderBrush="{DynamicResource NormalBorderBrush}" Foreground="#FF000000" Margin="5,5,5,5" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" d:LayoutOverrides="Height" ItemsSource="{Binding}" ItemTemplate="{DynamicResource MovieDataTemplate}" IsSynchronizedWithCurrentItem="False" IsTextSearchEnabled="True" MaxWidth="300" MinWidth="200" DockPanel.Dock="Top" />
                 	</DockPanel>
 				</Border>
-    			<DockPanel x:Name="dpInfosFilm" LastChildFill="True">
+    			<DockPanel x:Name="dpInfosFilmDetails" LastChildFill="True">
     				<Border BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,5,5,5" VerticalAlignment="Stretch" DockPanel.Dock="Top" Background="{DynamicResource ControlBackgroundBrush}">
     					<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,5,5,5">
     						<Button Click="btnScraper_Click" x:Name="btnScraper" Width="36" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Stretch" Height="36" ToolTip="Recherche les informations du film depuis internet.">
