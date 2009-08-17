@@ -7,7 +7,7 @@
 	x:Class="MediaManager.Window2"
 	x:Name="Window"
 	Title="Window2"
-	Width="816" Height="602" Background="{DynamicResource WindowBackgroundBrush}">
+	Width="1004" Height="602" Background="{DynamicResource WindowBackgroundBrush}">
 	<Window.Resources>
 		<ItemsPanelTemplate x:Key="ItemsPanelTemplate1">
 			<WrapPanel Width="Auto" Height="Auto"/>
@@ -54,6 +54,8 @@
 	</Window.Resources>
 
 	<Grid x:Name="LayoutRoot">
-		<local:SerieDetails Margin="8,8,8,8"/>
+		<local:SerieDetails Margin="195,8,28,8"/>
+		<ListBox x:Name="lstSeries" HorizontalAlignment="Left" Margin="8,43,0,8" Width="183" IsSynchronizedWithCurrentItem="True"/>
+		<Button Click="btn_ChargeDetails_Click" x:Name="btn_ChargeDetails" HorizontalAlignment="Left" Margin="8,8,0,0" VerticalAlignment="Top" Width="109" Height="28" Content="Button"/>
     </Grid>
 </Window>

@@ -17,6 +17,11 @@
 					<Image Source="./Images/Fond_Main.png"/>
 				</VisualBrush.Visual>
 			</VisualBrush>
+			<VisualBrush x:Key="BackFanart">
+				<VisualBrush.Visual>
+					<Image Source="{Binding Path=Fanart.Image}"/>
+				</VisualBrush.Visual>
+			</VisualBrush>
 							<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <Converters:UriToImageConverter x:Key="UriToImageConverter"/>
         <Converters:TableauToString x:Key="TableauToString"/>

@@ -140,7 +140,7 @@
   <Target Name="ValidateToolsVersions">
     <Error Text="La version des outils &quot;$(MSBuildToolsVersion)&quot; de la solution ne prend pas en charge la génération de projets avec une autre version d'outils." Code="MSB4149" HelpKeyword="MSBuild.SolutionToolsVersionDoesNotSupportProjectToolsVersion" Condition="'$(MSBuildToolsVersion)' == '2.0' and ('$(ProjectToolsVersion)' != '2.0' and '$(ProjectToolsVersion)' != '')" />
   </Target>
-  <Target Name="MediasManager" DependsOnTargets="TMDB;XBMC;MediaInfo;Allocine;SpeedAllocine;MMLibrary" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(MediasManagerBuildOutput)">
+  <Target Name="MediasManager" DependsOnTargets="TMDB;XBMC;MediaInfo;Allocine;SpeedAllocine;TvdbLib;MMLibrary" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(MediasManagerBuildOutput)">
     <MSBuild Projects="MediasManager\MediasManager.csproj" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
       <Output TaskParameter="TargetOutputs" ItemName="MediasManagerBuildOutput" />
     </MSBuild>
@@ -148,11 +148,11 @@
       <Output TaskParameter="TargetOutputs" ItemName="MediasManagerBuildOutput" />
     </MSBuild>
   </Target>
-  <Target Name="MediasManager:Clean" DependsOnTargets="TMDB:Clean;XBMC:Clean;MediaInfo:Clean;Allocine:Clean;SpeedAllocine:Clean;MMLibrary:Clean" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
+  <Target Name="MediasManager:Clean" DependsOnTargets="TMDB:Clean;XBMC:Clean;MediaInfo:Clean;Allocine:Clean;SpeedAllocine:Clean;TvdbLib:Clean;MMLibrary:Clean" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
     <MSBuild Projects="MediasManager\MediasManager.csproj" Targets="Clean" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " />
     <MSBuild Projects="MediasManager\MediasManager.csproj" Targets="Clean" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
   </Target>
-  <Target Name="MediasManager:Rebuild" DependsOnTargets="TMDB:Rebuild;XBMC:Rebuild;MediaInfo:Rebuild;Allocine:Rebuild;SpeedAllocine:Rebuild;MMLibrary:Rebuild" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(MediasManagerBuildOutput)">
+  <Target Name="MediasManager:Rebuild" DependsOnTargets="TMDB:Rebuild;XBMC:Rebuild;MediaInfo:Rebuild;Allocine:Rebuild;SpeedAllocine:Rebuild;TvdbLib:Rebuild;MMLibrary:Rebuild" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(MediasManagerBuildOutput)">
     <MSBuild Projects="MediasManager\MediasManager.csproj" Targets="Rebuild" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
       <Output TaskParameter="TargetOutputs" ItemName="MediasManagerBuildOutput" />
     </MSBuild>
@@ -160,7 +160,7 @@
       <Output TaskParameter="TargetOutputs" ItemName="MediasManagerBuildOutput" />
     </MSBuild>
   </Target>
-  <Target Name="MediasManager:Publish" DependsOnTargets="TMDB:Publish;XBMC:Publish;MediaInfo:Publish;Allocine:Publish;SpeedAllocine:Publish;MMLibrary:Publish" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
+  <Target Name="MediasManager:Publish" DependsOnTargets="TMDB:Publish;XBMC:Publish;MediaInfo:Publish;Allocine:Publish;SpeedAllocine:Publish;TvdbLib:Publish;MMLibrary:Publish" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
     <MSBuild Projects="MediasManager\MediasManager.csproj" Targets="Publish" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " />
     <MSBuild Projects="MediasManager\MediasManager.csproj" Targets="Publish" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
   </Target>

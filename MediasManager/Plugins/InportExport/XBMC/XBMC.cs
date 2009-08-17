@@ -46,7 +46,7 @@ namespace MediaManager.Plugins
             if (Nfo != null)
             {
                 MonFilm.Titre = Nfo.Title;
-                MonFilm.TitreOriginal = Nfo.Title;
+                MonFilm.TitreOriginal = Nfo.OriginalTitle;
                 MonFilm.Annee = Nfo.Year;
                 MonFilm.MPAA = Nfo.Mpaa;
                 MonFilm.Certification = Nfo.Certification;
