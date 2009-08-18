@@ -126,6 +126,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\BureauBlack\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\BureauBlue\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\ExpressionDark\Theme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -229,13 +237,13 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\TVDBLib\TvdbLib\TvdbLib.csproj">
-      <Project>{23C34CF0-4E66-4F02-9EDC-83F292C6005C}</Project>
-      <Name>TvdbLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MMLibrary\MMLibrary.csproj">
       <Project>{40437BC5-5D5A-4473-87C0-AE9813AE153D}</Project>
       <Name>MMLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TvdbLib\TvdbLib.csproj">
+      <Project>{23C34CF0-4E66-4F02-9EDC-83F292C6005C}</Project>
+      <Name>TvdbLib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

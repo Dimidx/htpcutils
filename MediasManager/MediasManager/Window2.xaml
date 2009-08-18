@@ -4,58 +4,34 @@
 	xmlns:vsm="clr-namespace:System.Windows;assembly=WPFToolkit"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" xmlns:local="clr-namespace:MediaManager"
+    xmlns:tvdb="clr-namespace:TvdbLib.Data;assembly=TvdbLib"
 	x:Class="MediaManager.Window2"
 	x:Name="Window"
 	Title="Window2"
 	Width="1004" Height="602" Background="{DynamicResource WindowBackgroundBrush}">
 	<Window.Resources>
-		<ItemsPanelTemplate x:Key="ItemsPanelTemplate1">
-			<WrapPanel Width="Auto" Height="Auto"/>
-		</ItemsPanelTemplate>
-		<Style x:Key="ListBoxStyle1" TargetType="{x:Type ListBox}">
-			<Setter Property="SnapsToDevicePixels" Value="True"/>
-			<Setter Property="Background" Value="{x:Null}"/>
-			<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
-			<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-			<Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="{x:Type ListBox}">
-						<Grid>
-							<Border x:Name="Border" Background="{x:Null}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2,2,2,2"/>
-							<ScrollViewer Margin="1,1,1,1" Style="{DynamicResource NuclearScrollViewer}" Background="{x:Null}" Focusable="False" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" OverridesDefaultStyle="False" ForceCursor="False">
-								<WrapPanel Margin="1,1,1,1" IsItemsHost="True"/>
-							</ScrollViewer>
-						</Grid>
-						<ControlTemplate.Triggers>
-							<Trigger Property="IsEnabled" Value="False">
-								<Setter Property="Background" TargetName="Border" Value="{DynamicResource DisabledBackgroundBrush}"/>
-								<Setter Property="BorderBrush" TargetName="Border" Value="{DynamicResource DisabledBorderBrush}"/>
-							</Trigger>
-						</ControlTemplate.Triggers>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-		<Style x:Key="ImageStyle1" TargetType="{x:Type Image}">
-			<Style.Triggers>
-				<Trigger Property="DataContext" Value="{x:Null}"/>
-				<EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
-			</Style.Triggers>
-		</Style>
+	<local:ListeSeries x:Key="MyList"/>
 
-		<VisualBrush x:Key="VisualBrush4">
-      <VisualBrush.Visual>
-		  	<UniformGrid >
-		  			<Border CornerRadius="10,10,10,10" Background="#FFFFFFFF" BorderBrush="#FFFFFFFF" BorderThickness="1,1,1,1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Disabled" Width="10" Height="10" OverridesDefaultStyle="True" SnapsToDevicePixels="True" />
-				</UniformGrid>
-      </VisualBrush.Visual>
-    </VisualBrush>
+      <HierarchicalDataTemplate DataType    = "{x:Type local:Serie}"
+                                ItemsSource = "{Binding Path=ListeSaisons}">
+        <TextBlock Text="{Binding Path=SerieName}"/>
+      </HierarchicalDataTemplate>
+
+        <HierarchicalDataTemplate DataType    = "{x:Type local:Saison}"
+                                ItemsSource = "{Binding Path=ListeEpisodes}">
+            <TextBlock Text="{Binding Path=NomSaison}"/>
+        </HierarchicalDataTemplate>
+
+        <DataTemplate DataType="{x:Type tvdb:TvdbEpisode}">
+        <TextBlock Text="{Binding Path=EpisodeName}"/>
+      </DataTemplate>
+
 	</Window.Resources>
 
 	<Grid x:Name="LayoutRoot">
-		<local:SerieDetails Margin="195,8,28,8"/>
-		<ListBox x:Name="lstSeries" HorizontalAlignment="Left" Margin="8,43,0,8" Width="183" IsSynchronizedWithCurrentItem="True"/>
+		<local:SerieDetails x:Name="dtSerieDetails" Margin="195,8,28,8"/>
 		<Button Click="btn_ChargeDetails_Click" x:Name="btn_ChargeDetails" HorizontalAlignment="Left" Margin="8,8,0,0" VerticalAlignment="Top" Width="109" Height="28" Content="Button"/>
+		<TreeView TreeView.SelectedItemChanged="tvSeries_SelectedItemChanged" x:Name="tvSeries" HorizontalAlignment="Left" Margin="8,40,0,8" Width="183" ItemsSource="{Binding Source={StaticResource MyList}}">
+        </TreeView>
     </Grid>
 </Window>

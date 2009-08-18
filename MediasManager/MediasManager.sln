@@ -22,7 +22,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaInfo", "Plugins\Inport
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeedAllocine", "Plugins\Scraper\SpeedAllocine\SpeedAllocine.csproj", "{28DD90E5-91AC-4526-87F4-7036645F0DF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TvdbLib", "..\..\TVDBLib\TvdbLib\TvdbLib.csproj", "{23C34CF0-4E66-4F02-9EDC-83F292C6005C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TvdbLib", "TvdbLib\TvdbLib.csproj", "{23C34CF0-4E66-4F02-9EDC-83F292C6005C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

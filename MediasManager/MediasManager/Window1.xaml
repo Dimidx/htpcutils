@@ -8,7 +8,7 @@
     xmlns:MediaManager_Library="clr-namespace:MediaManager.Library;assembly=MMLibrary"
     x:Class="MediaManager.Window1"
 
-    Title="Media Manager" Height="768" Width="1024" SizeToContent="Manual" WindowState="Maximized" Background="{DynamicResource BackMain}" >
+    Title="Media Manager" Height="768" Width="1024" SizeToContent="Manual" WindowState="Maximized" Background="{DynamicResource WindowBackgroundBrush}" >
     <Window.Resources>
 			<DataTemplate x:Key="dtChamps">
 			<Grid>
@@ -79,13 +79,13 @@
                 	</DockPanel>
 				</Border>
     			<DockPanel x:Name="dpInfosFilmDetails" LastChildFill="True">
-    				<Border BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,5,5,5" VerticalAlignment="Stretch" DockPanel.Dock="Top" Background="{DynamicResource ControlBackgroundBrush}">
+    				<Border BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,5,5,5" VerticalAlignment="Stretch" DockPanel.Dock="Top" Background="{x:Null}">
     					<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,5,5,5">
-    						<Button Click="btnScraper_Click" x:Name="btnScraper" Width="36" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Stretch" Height="36" ToolTip="Recherche les informations du film depuis internet.">
-    							<Image Width="32" Height="32" Source="Images\IE_128.png"/>
+    						<Button Click="btnScraper_Click" x:Name="btnScraper" Width="36" HorizontalAlignment="Center" Margin="5,0,5,0" VerticalAlignment="Center" Height="36" ToolTip="Recherche les informations du film depuis internet.">
+    							<Image Width="32" Height="32" Source="Images\IE_128.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     						</Button>
     						<Button Click="btnSave_Click"  x:Name="btnSave" Width="36" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Stretch" Height="36" ToolTip="Sauvegarde les informations du film.">
-    							<Image Width="32" Height="32" Source="Images\Save_128.png"/>
+    							<Image Width="32" Height="32" Source="Images\Save_128.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     						</Button>
     					</StackPanel>
     				</Border>

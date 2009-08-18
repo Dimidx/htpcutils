@@ -5,7 +5,6 @@
     <_SolutionProjectCacheVersion>3.5</_SolutionProjectCacheVersion>
   </PropertyGroup>
   <ItemGroup>
-    <_SolutionProjectProjects Include="..\..\TVDBLib\TvdbLib\TvdbLib.csproj" />
     <_SolutionProjectProjects Include="MediasManager\MediasManager.csproj" />
     <_SolutionProjectProjects Include="MMLibrary\MMLibrary.csproj" />
     <_SolutionProjectProjects Include="Plugins\InportExport\MediaInfo\MediaInfo.csproj" />
@@ -13,6 +12,7 @@
     <_SolutionProjectProjects Include="Plugins\Scraper\Allocine\Allocine.csproj" />
     <_SolutionProjectProjects Include="Plugins\Scraper\SpeedAllocine\SpeedAllocine.csproj" />
     <_SolutionProjectProjects Include="Plugins\Scraper\TMDB\TMDB.csproj" />
+    <_SolutionProjectProjects Include="TvdbLib\TvdbLib.csproj" />
   </ItemGroup>
   <ItemGroup Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
     <BuildLevel2 Include="MediasManager\MediasManager.csproj">
@@ -23,10 +23,6 @@
       <Configuration>Debug</Configuration>
       <Platform>AnyCPU</Platform>
     </BuildLevel0>
-    <BuildLevel1 Include="..\..\TVDBLib\TvdbLib\TvdbLib.csproj">
-      <Configuration>Debug</Configuration>
-      <Platform>AnyCPU</Platform>
-    </BuildLevel1>
     <BuildLevel1 Include="Plugins\InportExport\MediaInfo\MediaInfo.csproj">
       <Configuration>Debug</Configuration>
       <Platform>AnyCPU</Platform>
@@ -44,6 +40,10 @@
       <Platform>AnyCPU</Platform>
     </BuildLevel1>
     <BuildLevel1 Include="Plugins\Scraper\TMDB\TMDB.csproj">
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </BuildLevel1>
+    <BuildLevel1 Include="TvdbLib\TvdbLib.csproj">
       <Configuration>Debug</Configuration>
       <Platform>AnyCPU</Platform>
     </BuildLevel1>
@@ -57,10 +57,6 @@
       <Configuration>Release</Configuration>
       <Platform>AnyCPU</Platform>
     </BuildLevel0>
-    <BuildLevel1 Include="..\..\TVDBLib\TvdbLib\TvdbLib.csproj">
-      <Configuration>Release</Configuration>
-      <Platform>AnyCPU</Platform>
-    </BuildLevel1>
     <BuildLevel1 Include="Plugins\InportExport\MediaInfo\MediaInfo.csproj">
       <Configuration>Release</Configuration>
       <Platform>AnyCPU</Platform>
@@ -78,6 +74,10 @@
       <Platform>AnyCPU</Platform>
     </BuildLevel1>
     <BuildLevel1 Include="Plugins\Scraper\TMDB\TMDB.csproj">
+      <Configuration>Release</Configuration>
+      <Platform>AnyCPU</Platform>
+    </BuildLevel1>
+    <BuildLevel1 Include="TvdbLib\TvdbLib.csproj">
       <Configuration>Release</Configuration>
       <Platform>AnyCPU</Platform>
     </BuildLevel1>
@@ -140,7 +140,7 @@
   <Target Name="ValidateToolsVersions">
     <Error Text="La version des outils &quot;$(MSBuildToolsVersion)&quot; de la solution ne prend pas en charge la génération de projets avec une autre version d'outils." Code="MSB4149" HelpKeyword="MSBuild.SolutionToolsVersionDoesNotSupportProjectToolsVersion" Condition="'$(MSBuildToolsVersion)' == '2.0' and ('$(ProjectToolsVersion)' != '2.0' and '$(ProjectToolsVersion)' != '')" />
   </Target>
-  <Target Name="MediasManager" DependsOnTargets="TMDB;XBMC;MediaInfo;Allocine;SpeedAllocine;TvdbLib;MMLibrary" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(MediasManagerBuildOutput)">
+  <Target Name="MediasManager" DependsOnTargets="TMDB;XBMC;MediaInfo;Allocine;SpeedAllocine;MMLibrary;TvdbLib" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(MediasManagerBuildOutput)">
     <MSBuild Projects="MediasManager\MediasManager.csproj" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
       <Output TaskParameter="TargetOutputs" ItemName="MediasManagerBuildOutput" />
     </MSBuild>
@@ -148,11 +148,11 @@
       <Output TaskParameter="TargetOutputs" ItemName="MediasManagerBuildOutput" />
     </MSBuild>
   </Target>
-  <Target Name="MediasManager:Clean" DependsOnTargets="TMDB:Clean;XBMC:Clean;MediaInfo:Clean;Allocine:Clean;SpeedAllocine:Clean;TvdbLib:Clean;MMLibrary:Clean" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
+  <Target Name="MediasManager:Clean" DependsOnTargets="TMDB:Clean;XBMC:Clean;MediaInfo:Clean;Allocine:Clean;SpeedAllocine:Clean;MMLibrary:Clean;TvdbLib:Clean" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
     <MSBuild Projects="MediasManager\MediasManager.csproj" Targets="Clean" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " />
     <MSBuild Projects="MediasManager\MediasManager.csproj" Targets="Clean" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
   </Target>
-  <Target Name="MediasManager:Rebuild" DependsOnTargets="TMDB:Rebuild;XBMC:Rebuild;MediaInfo:Rebuild;Allocine:Rebuild;SpeedAllocine:Rebuild;TvdbLib:Rebuild;MMLibrary:Rebuild" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(MediasManagerBuildOutput)">
+  <Target Name="MediasManager:Rebuild" DependsOnTargets="TMDB:Rebuild;XBMC:Rebuild;MediaInfo:Rebuild;Allocine:Rebuild;SpeedAllocine:Rebuild;MMLibrary:Rebuild;TvdbLib:Rebuild" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(MediasManagerBuildOutput)">
     <MSBuild Projects="MediasManager\MediasManager.csproj" Targets="Rebuild" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
       <Output TaskParameter="TargetOutputs" ItemName="MediasManagerBuildOutput" />
     </MSBuild>
@@ -160,7 +160,7 @@
       <Output TaskParameter="TargetOutputs" ItemName="MediasManagerBuildOutput" />
     </MSBuild>
   </Target>
-  <Target Name="MediasManager:Publish" DependsOnTargets="TMDB:Publish;XBMC:Publish;MediaInfo:Publish;Allocine:Publish;SpeedAllocine:Publish;TvdbLib:Publish;MMLibrary:Publish" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
+  <Target Name="MediasManager:Publish" DependsOnTargets="TMDB:Publish;XBMC:Publish;MediaInfo:Publish;Allocine:Publish;SpeedAllocine:Publish;MMLibrary:Publish;TvdbLib:Publish" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
     <MSBuild Projects="MediasManager\MediasManager.csproj" Targets="Publish" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " />
     <MSBuild Projects="MediasManager\MediasManager.csproj" Targets="Publish" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
   </Target>
@@ -309,28 +309,28 @@
     <MSBuild Projects="Plugins\Scraper\SpeedAllocine\SpeedAllocine.csproj" Targets="Publish" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
   </Target>
   <Target Name="TvdbLib" DependsOnTargets="MMLibrary" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(TvdbLibBuildOutput)">
-    <MSBuild Projects="..\..\TVDBLib\TvdbLib\TvdbLib.csproj" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
+    <MSBuild Projects="TvdbLib\TvdbLib.csproj" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
       <Output TaskParameter="TargetOutputs" ItemName="TvdbLibBuildOutput" />
     </MSBuild>
-    <MSBuild Projects="..\..\TVDBLib\TvdbLib\TvdbLib.csproj" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') ">
+    <MSBuild Projects="TvdbLib\TvdbLib.csproj" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') ">
       <Output TaskParameter="TargetOutputs" ItemName="TvdbLibBuildOutput" />
     </MSBuild>
   </Target>
   <Target Name="TvdbLib:Clean" DependsOnTargets="MMLibrary:Clean" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
-    <MSBuild Projects="..\..\TVDBLib\TvdbLib\TvdbLib.csproj" Targets="Clean" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " />
-    <MSBuild Projects="..\..\TVDBLib\TvdbLib\TvdbLib.csproj" Targets="Clean" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
+    <MSBuild Projects="TvdbLib\TvdbLib.csproj" Targets="Clean" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " />
+    <MSBuild Projects="TvdbLib\TvdbLib.csproj" Targets="Clean" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
   </Target>
   <Target Name="TvdbLib:Rebuild" DependsOnTargets="MMLibrary:Rebuild" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(TvdbLibBuildOutput)">
-    <MSBuild Projects="..\..\TVDBLib\TvdbLib\TvdbLib.csproj" Targets="Rebuild" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
+    <MSBuild Projects="TvdbLib\TvdbLib.csproj" Targets="Rebuild" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
       <Output TaskParameter="TargetOutputs" ItemName="TvdbLibBuildOutput" />
     </MSBuild>
-    <MSBuild Projects="..\..\TVDBLib\TvdbLib\TvdbLib.csproj" Targets="Rebuild" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') ">
+    <MSBuild Projects="TvdbLib\TvdbLib.csproj" Targets="Rebuild" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') ">
       <Output TaskParameter="TargetOutputs" ItemName="TvdbLibBuildOutput" />
     </MSBuild>
   </Target>
   <Target Name="TvdbLib:Publish" DependsOnTargets="MMLibrary:Publish" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
-    <MSBuild Projects="..\..\TVDBLib\TvdbLib\TvdbLib.csproj" Targets="Publish" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " />
-    <MSBuild Projects="..\..\TVDBLib\TvdbLib\TvdbLib.csproj" Targets="Publish" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
+    <MSBuild Projects="TvdbLib\TvdbLib.csproj" Targets="Publish" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " />
+    <MSBuild Projects="TvdbLib\TvdbLib.csproj" Targets="Publish" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
   </Target>
   <Target Name="Build" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(CollectedBuildOutput)">
     <MSBuild Condition="@(BuildLevel0) != ''" Projects="@(BuildLevel0)" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)">
