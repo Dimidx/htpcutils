@@ -90,10 +90,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="dlgPlayTrailer.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="SerieDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -162,9 +158,6 @@
   <ItemGroup>
     <Compile Include="Controls\EditableTextBlock.xaml.cs">
       <DependentUpon>EditableTextBlock.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="dlgPlayTrailer.xaml.cs">
-      <DependentUpon>dlgPlayTrailer.xaml</DependentUpon>
     </Compile>
     <Compile Include="SerieDetails.xaml.cs">
       <DependentUpon>SerieDetails.xaml</DependentUpon>

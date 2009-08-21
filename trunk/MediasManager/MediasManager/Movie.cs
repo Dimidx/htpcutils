@@ -54,7 +54,16 @@ namespace MediaManager
             fileInfo = movie;
             //downloadMgr = dlMgr;
             movieFolder = mf;
-            _MovieName = cleanMovieFilename(movie.Name.Replace(movie.Extension, ""));
+            if (movieFolder.containsFolders)
+            {//Si c'est unj dossier on prend le nom du dossier
+                _MovieName = cleanMovieFilename(movie.Directory.Name);
+            }
+            else
+            {//si c'est un fichier on prend le nom des fichier
+                _MovieName = cleanMovieFilename(movie.Name.Replace(movie.Extension, ""));
+            }
+
+
             //this.Infos.Titre = _MovieName;
             //this.Infos.TitreOriginal = _MovieName;
             //updateItem();

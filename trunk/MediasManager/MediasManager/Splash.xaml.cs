@@ -131,7 +131,7 @@ namespace MediaManager
                 Thread.Sleep(2000);
                 this.Hide();
 
-                Window2 window = new Window2();
+                Window1 window = new Window1();
                 window.Show();
 
                 return null;
