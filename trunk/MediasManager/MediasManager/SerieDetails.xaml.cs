@@ -10,11 +10,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TvdbLib;
-using TvdbLib.Cache;
-using TvdbLib.Data;
+//using TvdbLib;
+//using TvdbLib.Cache;
+//using TvdbLib.Data;
 using MediaManager.Library;
-using TvdbLib.Data.Banner;
+//using TvdbLib.Data.Banner;
 
 namespace MediaManager
 {
