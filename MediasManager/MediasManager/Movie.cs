@@ -163,11 +163,11 @@ namespace MediaManager
             }
 
             // remove unwanted text
-            file = file.ToLower();
-            foreach (String[] s in replace)
-            {
-                file = file.Replace(s[0], s[1]);
-            }
+            //file = file.ToLower();
+            //foreach (String[] s in replace)
+            //{
+            //    file = file.Replace(s[0], s[1]);
+            //}
             file = file.Trim();
             return file;
         }

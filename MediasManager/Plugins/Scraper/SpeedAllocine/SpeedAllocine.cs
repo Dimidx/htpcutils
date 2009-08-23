@@ -51,7 +51,7 @@ namespace MediaManager.Plugins
             }
             else
             {
-                _source = Utils.GetSourceHTML(@"http://passion-xbmc.org/scraper/index.php?idimdb=" + _Film.ID);
+                _source = Utils.GetSourceHTML(@"http://passion-xbmc.org/scraper/index.php?idimdb=" + _Film.ID.Replace("tt",""));
             }
 
             _source = Regex.Replace(_source, "[\r\n]", "");
@@ -76,6 +76,11 @@ namespace MediaManager.Plugins
                 MonFilm.MPAA = Regex.Match(_source, "<mpaa>(.*)</mpaa>").Groups[1].ToString();
             if (Regex.Match(_source, "<trailer>(.*)</trailer>").Success)
                 MonFilm.Trailer = Regex.Match(_source, "<trailer>(.*)</trailer>").Groups[1].ToString();
+            if (Regex.Match(_source, "<originaltitle>(.*)</originaltitle>").Success)
+                MonFilm.TitreOriginal = Regex.Match(_source, "<originaltitle>(.*)</originaltitle>").Groups[1].ToString();
+            if (Regex.Match(_source, "<id>(.*)</id>").Success)
+                MonFilm.ID = Regex.Match(_source, "<id>(.*)</id>").Groups[1].ToString();
+
 
             MonFilm.AlloID = _Film.AlloID;
 
@@ -238,7 +243,7 @@ namespace MediaManager.Plugins
             {
                 Film _temp = new Film();
                 _temp = GetMovie(_Film);
-                if (String.IsNullOrEmpty(_temp.Titre))
+                if (!String.IsNullOrEmpty(_temp.Titre))
                 {
                     ListeFilm.Add(GetMovie(_Film));
                     return ListeFilm;
@@ -250,7 +255,7 @@ namespace MediaManager.Plugins
             {
                 Film _temp = new Film();
                 _temp = GetMovie(_Film,true);
-                if (String.IsNullOrEmpty(_temp.Titre))
+                if (!String.IsNullOrEmpty(_temp.Titre))
                 {
                     ListeFilm.Add(GetMovie(_Film));
                     return ListeFilm;
