@@ -66,7 +66,7 @@ namespace MediaManager
 
             //this.Infos.Titre = _MovieName;
             //this.Infos.TitreOriginal = _MovieName;
-            //updateItem();
+            updateItem();
         }
 
 
@@ -87,6 +87,7 @@ namespace MediaManager
 
 
             }
+            MediaManager.Database.Database.SaveFilmToDB(_Film, this.fileInfo.FullName);
 
             return _Film;
 

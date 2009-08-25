@@ -273,7 +273,7 @@ namespace MediaManager
                 if (_MonFilm.Cover != null) _MonFilm.Cover.GetImage(true);
                 if (_MonFilm.Fanart != null) _MonFilm.Fanart.GetImage(true);
                 dpInfosFilm.DataContext = _MonFilm;
-                Database.Database.SaveFilmToDB(_MonFilm);
+                //Database.Database.SaveFilmToDB(_MonFilm,_mov);
 
             }
         }
