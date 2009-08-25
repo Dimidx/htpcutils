@@ -76,58 +76,112 @@ namespace MediaManager.Database
 
         public static Film GetFilm(string Path)
         {
-            
+             
 
             return new Film();
 
         }
 
-        public static bool SaveFilmToDB(Film Film)
+        public static long GetIDFilm(string _path)
+        {
+            long _IDFilm = 0;
+            SQLiteConnection SqliteConnEx = new SQLiteConnection(_SqliteConnString);
+            SQLiteCommand SqliteComEx = SqliteConnEx.CreateCommand();
+            SqliteConnEx.Open();
+            SqliteComEx.CommandText = "SELECT IDFilm FROM Films WHERE Path = @Path;";
+            SqliteComEx.Parameters.AddWithValue("@Path", _path);
+            SQLiteDataReader _SQLReader = SqliteComEx.ExecuteReader();
+            if (!DBNull.Value.Equals(_SQLReader["IDFilm"]))
+            {
+                _IDFilm = Convert.ToInt64(_SQLReader["IDFilm"]);
+            }
+
+            SqliteConnEx.Close();
+            return _IDFilm;
+
+        }
+
+
+        public static bool SaveFilmToDB(Film Film,string _Path)
         {
             //StringBuilder _SQLUpdate = new StringBuilder();
-
-
-
-
 
             SQLiteConnection SqliteConnEx = new SQLiteConnection(_SqliteConnString);
 
             SQLiteCommand SqliteComEx = SqliteConnEx.CreateCommand();
 
             SqliteConnEx.Open();
-            SqliteComEx.CommandText = "INSERT OR REPLACE INTO Films (Titre,Note,Path) VALUES (?,?,?);";
+            SqliteComEx.CommandText = @"INSERT OR REPLACE INTO Films (
+                IDFilm,
+                Titre ,
+                TitreOriginal ,
+                ImdbID ,
+                AlloID ,
+                Annee ,
+                Accroche ,
+                Resume ,
+                Synopsis ,
+                Duree ,
+                Note ,
+                Votes ,
+                MPAA ,
+                Certification ,
+                Top250 ,
+                Studio ,
+                DateSortie ,
+                Vu ,
+                Path,
+                PathCover,
+                PathFanart
+                ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+            long _IDFilm = GetIDFilm(_Path);
+            if (_IDFilm == 0)
+            {
+                SqliteComEx.CommandText.Replace("IDFilm,", "").Replace("(?,", "(");
+            }
+            else
+            {
+                 SqliteComEx.Parameters.AddWithValue("IDFilm", _IDFilm);
+            }
             SqliteComEx.Parameters.AddWithValue("Titre", Film.Titre);
+            SqliteComEx.Parameters.AddWithValue("TitreOriginal", Film.TitreOriginal);
+            SqliteComEx.Parameters.AddWithValue("ImdbID", Film.ID);
+            SqliteComEx.Parameters.AddWithValue("AlloID", Film.AlloID);
+            SqliteComEx.Parameters.AddWithValue("Annee", Film.Annee);
+            SqliteComEx.Parameters.AddWithValue("Accroche", Film.Accroche);
+            SqliteComEx.Parameters.AddWithValue("Resume", Film.Resume);
+            SqliteComEx.Parameters.AddWithValue("Synopsis", Film.Synopsis);
+            SqliteComEx.Parameters.AddWithValue("Duree", Film.Duree);
             SqliteComEx.Parameters.AddWithValue("Note", Film.Note);
-            SqliteComEx.Parameters.AddWithValue("Path", Film.Titre);
+            SqliteComEx.Parameters.AddWithValue("Votes", Film.Votes);
+            SqliteComEx.Parameters.AddWithValue("MPAA", Film.MPAA);
+            SqliteComEx.Parameters.AddWithValue("Certification", Film.Certification);
+            SqliteComEx.Parameters.AddWithValue("Top250", Film.Top250);
+            SqliteComEx.Parameters.AddWithValue("Studio", Film.Studio);
+            SqliteComEx.Parameters.AddWithValue("DateSortie", Film.DateSortie);
+            SqliteComEx.Parameters.AddWithValue("Vu", Film.Vu);
+            SqliteComEx.Parameters.AddWithValue("Path", _Path);
+            if (Film.Cover != null)
+            {
+                SqliteComEx.Parameters.AddWithValue("PathCover", Film.Cover.URLImage);
+            }
+            else
+            {
+                SqliteComEx.Parameters.AddWithValue("PathCover", "");
+            }
+            if (Film.Fanart != null)
+            {
+                SqliteComEx.Parameters.AddWithValue("PathFanart", Film.Fanart.URLImage);
+            }
+            else
+            {
+                SqliteComEx.Parameters.AddWithValue("PathFanart", "");
+            }
             SqliteComEx.ExecuteNonQuery();
 
             SqliteConnEx.Close();
 
-            //_SQLUpdate.Append(@"INSERT INTO Films (Titre,TitreOriginal,ImdbID,AlloID,Annee,Accroche,Resume,Synopsis,Duree,Note,Votes,MPAA,Certification,Top250,Studio,DateSortie,Vu,Path,PathCover,PathFanart,PathNFO,PathBA) VALUES (" +
-            //    "'" + Film.Titre + "'," +
-            //    "'" + Film.TitreOriginal + "'," +
-            //    "'" + Film.ID + "'," +
-            //    "'" + Film.AlloID + "'," +
-            //    "'" + Film.Annee + "'," +
-            //    "'" + Film.Accroche + "'," +
-            //    "'" + Film.Resume + "'," +
-            //    "'" + Film.Synopsis + "'," +
-            //    "'" + Film.Duree + "'," +
-            //    "'" + Film.Note + "'," +
-            //    "'" + Film.Votes + "'," +
-            //    "'" + Film.MPAA + "'," +
-            //    "'" + Film.Certification + "'," +
-            //    "'" + Film.Top250 + "'," +
-            //    "'" + Film.Studio + "'," +
-            //    "'" + Film.DateSortie + "'," +
-            //    "'" + Film.Vu + "'" +
-            //    //"'" + Film.Path + "'," +
-            //    //"'" + Film.PathCover + "'," +
-            //    //"'" + Film.PathFanart + "'," +
-            //    //"'" + Film.PathNFO + "'," +
-            //    //"'" + Film.PathBA + "'," +
-            //    ");");
-            //ExecuteSQL(_SQLUpdate.ToString());
+         
             return true;
 
         }
