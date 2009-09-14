@@ -50,7 +50,7 @@ namespace MediaManager
         public Window1()
         {
 
-            
+
             InitializeComponent();
             ListCollectionView lcv = new ListCollectionView(MovieManager.Movies);
             lcv.SortDescriptions.Add(new System.ComponentModel.SortDescription("MovieName", System.ComponentModel.ListSortDirection.Ascending));
@@ -469,8 +469,23 @@ namespace MediaManager
 
         }
 
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            if (listBox_Films.SelectedItem != null)
+            {
+                dpInfosFilm.DataContext = null;
+                Movie _movie = (Movie)listBox_Films.SelectedItem;
+                _MonFilm = _movie.updateItem();
+                if (_MonFilm.Cover != null) _MonFilm.Cover.GetImage(true);
+                if (_MonFilm.Fanart != null) _MonFilm.Fanart.GetImage(true);
+
+                dpInfosFilm.DataContext = _MonFilm;
+            }
+
+        }
+
+
     }
 
-
-
 }
+

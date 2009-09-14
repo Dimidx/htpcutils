@@ -102,6 +102,8 @@ namespace MediaManager.Database
         }
 
 
+
+
         public static bool SaveFilmToDB(Film Film,string _Path)
         {
             //StringBuilder _SQLUpdate = new StringBuilder();
@@ -137,7 +139,7 @@ namespace MediaManager.Database
             long _IDFilm = GetIDFilm(_Path);
             if (_IDFilm == 0)
             {
-                SqliteComEx.CommandText.Replace("IDFilm,", "").Replace("(?,", "(");
+                SqliteComEx.CommandText = SqliteComEx.CommandText.Replace("IDFilm,", "").Replace("(?,", "(");
             }
             else
             {

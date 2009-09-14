@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeedAllocine", "Plugins\Sc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TvdbLib", "TvdbLib\TvdbLib.csproj", "{23C34CF0-4E66-4F02-9EDC-83F292C6005C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XBMCSync", "XBMCSync\XBMCSync.csproj", "{7436CE8F-1BB2-4B06-9E35-C1A9F969BFFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{23C34CF0-4E66-4F02-9EDC-83F292C6005C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23C34CF0-4E66-4F02-9EDC-83F292C6005C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23C34CF0-4E66-4F02-9EDC-83F292C6005C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7436CE8F-1BB2-4B06-9E35-C1A9F969BFFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7436CE8F-1BB2-4B06-9E35-C1A9F969BFFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7436CE8F-1BB2-4B06-9E35-C1A9F969BFFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7436CE8F-1BB2-4B06-9E35-C1A9F969BFFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

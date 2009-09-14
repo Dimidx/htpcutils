@@ -5,8 +5,8 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:MediaManager="clr-namespace:MediaManager"
     xmlns:Controls="clr-namespace:MediaManager.Controls"
-   
 	mc:Ignorable="d"
+	xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" xmlns:ic="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
 	x:Class="MediaManager.FilmDetails"
 	x:Name="UserControl_FilmDetails"
 	d:DesignWidth="640" FontFamily="./Fonts/#Aeon Info">
@@ -14,8 +14,8 @@
 
 		<DataTemplate x:Key="DataTemplateThumbs">
 			<Grid VerticalAlignment="Stretch" Width="220">
-					<Controls:Sablier Visibility="{Binding Path=IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default}"/>
-                    <Image x:Name="ImageThumbs" Source="{Binding Path=Miniature}" />
+					<Controls:Sablier Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default}"/>
+                    <Image x:Name="ImageThumbs" Source="{Binding Miniature}" />
 			</Grid>
 		</DataTemplate>
 
@@ -30,14 +30,14 @@
         </ItemsPanelTemplate>
         <DataTemplate x:Key="DataTemplate_Acteurs">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <TextBlock Text="{Binding Path=Nom}" x:Name="Nom" Margin="2,0,0,0"/>
+                <TextBlock Text="{Binding Nom}" x:Name="Nom" Margin="2,0,0,0"/>
                 <TextBlock FontStyle="Italic" Foreground="{DynamicResource DisabledForegroundBrush}"><Run Text=" est "/></TextBlock>
-                <TextBlock Text="{Binding Path=Role}" x:Name="Role" FontStyle="Italic" Margin="0,0,2,0" Foreground="{DynamicResource DisabledForegroundBrush}"/>
+                <TextBlock Text="{Binding Role}" x:Name="Role" FontStyle="Italic" Margin="0,0,2,0" Foreground="{DynamicResource DisabledForegroundBrush}"/>
             </StackPanel>
         </DataTemplate>
         <VisualBrush x:Key="maskposter">
             <VisualBrush.Visual>
-                <Border BorderThickness="0,0,0,0" CornerRadius="10,10,10,10" BorderBrush="#FFFFFFFF" Background="#FFFFFFFF" Width="{Binding Path=ActualWidth, ElementName=ImagePoster, Mode=Default}" Height="{Binding Path=ActualHeight, ElementName=ImagePoster, Mode=Default}"/>
+                <Border BorderThickness="0,0,0,0" CornerRadius="10,10,10,10" BorderBrush="#FFFFFFFF" Background="#FFFFFFFF" Width="{Binding ActualWidth, ElementName=ImagePoster, Mode=Default}" Height="{Binding ActualHeight, ElementName=ImagePoster, Mode=Default}"/>
             </VisualBrush.Visual>
         </VisualBrush>
         <Storyboard x:Key="sbRefletCover">
@@ -82,37 +82,28 @@
         <Grid Width="Auto" Height="Auto" OverridesDefaultStyle="True" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
             <DockPanel LastChildFill="True">
                 <StackPanel Width="Auto" Height="Auto" Margin="0,0,5,0">
-                    <Grid Width="253" Height="365" Margin="0,0,0,5">
-                        <Border BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" BorderBrush="{DynamicResource NormalBorderBrush}" >
-                            <Controls:Sablier Visibility="{Binding Path=Cover.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default, FallbackValue=Hidden}"/>
-                            <Border.Background>
-                                <VisualBrush>
-                                    <VisualBrush.Visual>
-                                        <Image x:Name="Affiche" Source="{Binding Path=Cover.Miniature}" />
-                                    </VisualBrush.Visual>
-                                </VisualBrush>
-                            </Border.Background>
+                    <Grid Width="253" Margin="0,0,0,10">
+                         <Border BorderThickness="1,1,1,1" CornerRadius="10" Background="{DynamicResource ControlBackgroundBrush}" >
+                         	<Border.Effect>
+                         		<DropShadowEffect Color="{DynamicResource HoverColor}"/>
+                         	</Border.Effect>
+                            <Controls:Sablier Visibility="{Binding Cover.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default, FallbackValue=Hidden}"/>
                         </Border>
-                        <Border BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" BorderBrush="{DynamicResource NormalBorderBrush}" >
-                            <Border.ToolTip>
-                                <StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Largeur : "/>
-                                        <TextBlock Text="{Binding Path=Cover.Largeur}"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Hauteur : "/>
-                                        <TextBlock Text="{Binding Path=Cover.Hauteur}"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Border.ToolTip>
-                            <Border.Background>
-                                <VisualBrush>
-                                    <VisualBrush.Visual>
-                                        <Image Stretch="Fill" Source="Images\list_movieicon_glass.png"/>
-                                    </VisualBrush.Visual>
-                                </VisualBrush>
-                            </Border.Background>
+                         <Image x:Name="Affiche" Source="{Binding Cover.Miniature}" Margin="10" MinHeight="300" />
+                        <Image Source="Images/OverlayWatched.png" HorizontalAlignment="Right" Margin="0,0,10,20" VerticalAlignment="Bottom" Width="30" Height="30" Visibility="{Binding Vu, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Hidden}"/>
+                        <Border x:Name="border1" BorderThickness="1" CornerRadius="10" BorderBrush="{DynamicResource NormalBorderBrush}" Background="{DynamicResource Reflet_Poster}" >
+                        	<Border.ToolTip>
+                        		<StackPanel>
+                        			<StackPanel Orientation="Horizontal">
+                        				<TextBlock Text="Largeur : "/>
+                        				<TextBlock Text="{Binding Cover.Largeur}"/>
+                        			</StackPanel>
+                        			<StackPanel Orientation="Horizontal">
+                        				<TextBlock Text="Hauteur : "/>
+                        				<TextBlock Text="{Binding Cover.Hauteur}"/>
+                        			</StackPanel>
+                        		</StackPanel>
+                        	</Border.ToolTip>
                         	<Ellipse x:Name="ellipse" Margin="0,30.333,102.666,0" VerticalAlignment="Top" Height="30" RenderTransformOrigin="0.5,0.5" Width="30" HorizontalAlignment="Right">
                         		<Ellipse.Fill>
                         			<RadialGradientBrush>
@@ -130,72 +121,62 @@
                         		</Ellipse.RenderTransform>
                         	</Ellipse>
                         </Border>
-                        <Image Source="Images/OverlayWatched.png" HorizontalAlignment="Right" Margin="0,0,0,10" VerticalAlignment="Bottom" Width="30" Height="30" Visibility="{Binding Path=Vu, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Hidden}"/>
                     </Grid>
-                    <Grid Width="253" Height="143" Margin="0,0,0,5">
-                        <Border BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" BorderBrush="{DynamicResource NormalBorderBrush}" >
-                            <Controls:Sablier Visibility="{Binding Path=Fanart.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default, FallbackValue=Hidden}"/>
-                            <Border.Background>
-                                <VisualBrush>
-                                    <VisualBrush.Visual>
-                                        <Image x:Name="Fanart" Source="{Binding Path=Fanart.Miniature}" />
-                                    </VisualBrush.Visual>
-                                </VisualBrush>
-                            </Border.Background>
-                        </Border>
-                        <Border x:Name="border" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" BorderBrush="{DynamicResource NormalBorderBrush}" >
+                    <Grid Width="253" Margin="0,0,0,10">
+                        <Border BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Background="{DynamicResource ControlBackgroundBrush}" >
+                        	<Border.Effect>
+                        		<DropShadowEffect Color="{DynamicResource HoverColor}"/>
+                        	</Border.Effect>
+                    		<Controls:Sablier Visibility="{Binding Fanart.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default, FallbackValue=Hidden}"/>
+                    	</Border>
+                        <Image x:Name="Fanart" Source="{Binding Fanart.Miniature}" MinHeight="120" Margin="10" />
+                        <Border x:Name="border" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" BorderBrush="{DynamicResource NormalBorderBrush}" Background="{DynamicResource Reflet_Poster}" >
 							<Border.ToolTip>
                                 <StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Largeur : "/>
-                                        <TextBlock Text="{Binding Path=Fanart.Largeur}"/>
+                                        <TextBlock Text="{Binding Fanart.Largeur}"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Hauteur : "/>
-                                        <TextBlock Text="{Binding Path=Fanart.Hauteur}"/>
+                                        <TextBlock Text="{Binding Fanart.Hauteur}"/>
                                     </StackPanel>
                                 </StackPanel>
                             </Border.ToolTip>
-                            <Border.Background>
-                                <VisualBrush>
-                                    <VisualBrush.Visual>
-                                        <Image Stretch="Fill" Source="Images\list_movieicon_glass.png"/>
-                                    </VisualBrush.Visual>
-                                </VisualBrush>
-                            </Border.Background>
+ 
                         </Border>
                     </Grid>
                     <Border x:Name="bdThumbs" Width="Auto" Height="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="0,1,0,0" Padding="5,5,5,5">
                     	<Expander Header="Thumbs" Style="{DynamicResource ExpanderStyle1}" >
                     		<StackPanel>
-								<ListBox ItemsSource="{Binding Path=ListeThumbs}" ItemTemplate="{DynamicResource DataTemplateThumbs}" IsSynchronizedWithCurrentItem="True"/>
+								<ListBox ItemsSource="{Binding ListeThumbs}" ItemTemplate="{DynamicResource DataTemplateThumbs}" IsSynchronizedWithCurrentItem="True"/>
 							</StackPanel>
                     	</Expander>
                     </Border>
                 </StackPanel>
                 <DockPanel Margin="5,0,5,5" Width="Auto" Height="Auto" LastChildFill="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
-                    <TextBox Text="{Binding Path=Titre}" Height="Auto" TextWrapping="Wrap" Width="Auto" Foreground="{DynamicResource TextBrush}" FontSize="16" FontWeight="Bold" x:Name="Titre" DockPanel.Dock="Top" VerticalAlignment="Top" Margin="0,0,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
-                    <TextBox Text="{Binding Path=TitreOriginal}" Height="Auto" Width="Auto" Foreground="{DynamicResource TextBrush}" FontSize="12" FontWeight="Bold" x:Name="Titre_Original" DockPanel.Dock="Top" FontStyle="Italic" Style="{DynamicResource TextBoxStyleEdit}" />
+                    <TextBox Text="{Binding Titre}" Height="Auto" TextWrapping="Wrap" Width="Auto" Foreground="{DynamicResource TextBrush}" FontSize="16" FontWeight="Bold" x:Name="Titre" DockPanel.Dock="Top" VerticalAlignment="Top" Margin="0,0,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
+                    <TextBox Text="{Binding TitreOriginal}" Height="Auto" Width="Auto" Foreground="{DynamicResource TextBrush}" FontSize="12" FontWeight="Bold" x:Name="Titre_Original" DockPanel.Dock="Top" FontStyle="Italic" Style="{DynamicResource TextBoxStyleEdit}" />
                     <DockPanel Width="Auto" Height="Auto" DockPanel.Dock="Top" LastChildFill="True">
                         <StackPanel Width="Auto" Height="Auto" DockPanel.Dock="Left">
                             <DockPanel Width="Auto" Height="Auto" LastChildFill="True">
                                 <Label Width="90" Content="Réalisateurs :" Foreground="{DynamicResource DisabledForegroundBrush}" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,2,0,2"/>
-                                <Expander Header="{Binding Path=Realisateurs, Converter={StaticResource PersonneToString}, Mode=Default, FallbackValue=' '}" BorderThickness="0,0,0,0" Style="{DynamicResource ExpanderStyle1}" Margin="10,0,0,0" MinHeight="0">
+                                <Expander Header="{Binding Realisateurs, Converter={StaticResource PersonneToString}, Mode=Default, FallbackValue=' '}" BorderThickness="0,0,0,0" Style="{DynamicResource ExpanderStyle1}" Margin="10,0,0,0" MinHeight="0">
                                     <Grid>
-                                        <ListBox ItemsSource="{Binding Path=Realisateurs}" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplate_Acteurs}"/>
+                                        <ListBox ItemsSource="{Binding Realisateurs}" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplate_Acteurs}"/>
                                     </Grid>
                                 </Expander>
                             </DockPanel>
                             <DockPanel Width="Auto" Height="Auto">
                                 <Label Width="90" Content="ACTEURS :" Foreground="{DynamicResource DisabledForegroundBrush}" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
-                                <Expander Header="{Binding Path=Acteurs, Converter={StaticResource PersonneToString}, Mode=Default, FallbackValue=' '}" BorderThickness="0,0,0,0" Style="{DynamicResource ExpanderStyle1}" Margin="10,0,0,0" MinHeight="20" IsExpanded="False">
+                                <Expander x:Name="expander" Header="{Binding Acteurs, Converter={StaticResource PersonneToString}, Mode=Default, FallbackValue=' '}" BorderThickness="0,0,0,0" Style="{DynamicResource ExpanderStyle1}" Margin="10,0,0,0" MinHeight="20" IsExpanded="False">
                                     <Grid>
 										<DockPanel>
-											<Grid DataContext="{Binding Path=Acteurs}" VerticalAlignment="Top" Height="120" Width="90" DockPanel.Dock="Right">
-												<Controls:Sablier Visibility="{Binding Path=Photo.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default, FallbackValue=Hidden}"/>
-                                				<Image x:Name="imageacteur" Source="{Binding Path=Photo.Image}" Margin="5,0,5,0" />
+											<Grid DataContext="{Binding Acteurs}" VerticalAlignment="Top" Height="120" Width="90" DockPanel.Dock="Right">
+												<Controls:Sablier Visibility="{Binding Photo.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default, FallbackValue=Hidden}"/>
+                                				<Image x:Name="imageacteur" Source="{Binding Photo.Image}" Margin="5,0,5,0" />
 											</Grid>
-                                        	<ListBox ItemsSource="{Binding Path=Acteurs}" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplate_Acteurs}" Width="Auto" DockPanel.Dock="Right" />
+                                        	<ListBox ItemsSource="{Binding Acteurs}" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplate_Acteurs}" Width="Auto" DockPanel.Dock="Right" />
 
 										</DockPanel>
 									</Grid>
@@ -203,76 +184,76 @@
                             </DockPanel>
                             <DockPanel Width="Auto" Height="Auto">
                                 <Label Width="90" Content="GENRES :" Foreground="{DynamicResource DisabledForegroundBrush}" Background="{x:Null}" HorizontalAlignment="Left" Height="Auto" Margin="0,2,0,2" VerticalAlignment="Center"/>
-                                <Expander Header="{Binding Path=Genres, Converter={StaticResource TableauToString}, Mode=Default, FallbackValue=' '}" Style="{DynamicResource ExpanderStyle1}" Margin="10,0,0,0">
+                                <Expander Header="{Binding Genres, Converter={StaticResource TableauToString}, Mode=Default, FallbackValue=' '}" Style="{DynamicResource ExpanderStyle1}" Margin="10,0,0,0">
                                     <Grid>
-                                        <ListBox ItemsSource="{Binding Path=Genres}" IsSynchronizedWithCurrentItem="True"/>
+                                        <ListBox ItemsSource="{Binding Genres}" IsSynchronizedWithCurrentItem="True"/>
                                     </Grid>
                                 </Expander>
                             </DockPanel>
                             <DockPanel Width="Auto" Height="Auto">
                                 <Label Width="90" Content="ANNEE :" Foreground="{DynamicResource DisabledForegroundBrush}" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
-                                <TextBox Width="Auto" Text="{Binding Path=Annee}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_Annee" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}" MinWidth="30"/>
+                                <TextBox Width="Auto" Text="{Binding Annee}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_Annee" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}" MinWidth="30"/>
                                 <Label Width="Auto" Content="DATE DE SORTIE :" Foreground="{DynamicResource DisabledForegroundBrush}" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="10,2,0,2"/>
-                                <TextBox Width="Auto" Text="{Binding Path=DateSortie, Converter={StaticResource DateTimeConverter}, Mode=Default}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_DateSortie" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
+                                <TextBox Width="Auto" Text="{Binding DateSortie, Converter={StaticResource DateTimeConverter}, Mode=Default}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_DateSortie" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
                                 <Label Width="Auto" Content="DUREE :" Foreground="{DynamicResource DisabledForegroundBrush}" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="10,2,0,2"/>
-                                <TextBox Width="Auto" Text="{Binding Path=Duree}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_Duree" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
+                                <TextBox Width="Auto" Text="{Binding Duree}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_Duree" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
                             </DockPanel>
                             <DockPanel Width="Auto" Height="Auto">
                                 <Label Width="Auto" Content="Note :" Foreground="{DynamicResource DisabledForegroundBrush}" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="1,2,0,2"/>
-                                <TextBox Width="Auto" Text="{Binding Path=Note}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_Note" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}" MinWidth="20"/>
+                                <TextBox Width="Auto" Text="{Binding Note}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_Note" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}" MinWidth="20"/>
                                 <Label Width="Auto" Content="Votes :" Foreground="{DynamicResource DisabledForegroundBrush}" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="10,2,0,0"/>
-                                <TextBox Width="Auto" Text="{Binding Path=Votes}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_Votes" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
+                                <TextBox Width="Auto" Text="{Binding Votes}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_Votes" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
                             </DockPanel>
                         </StackPanel>
                     </DockPanel>
 					<Border Width="Auto" Height="Auto" DockPanel.Dock="Top" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="0,1,0,0" Padding="5,5,5,5">
-                        <TextBox Text="{Binding Path=Accroche}"  Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_Accroche" TextAlignment="Justify" Foreground="{DynamicResource TextBrush}" Style="{DynamicResource TextBoxStyleEdit}" AcceptsReturn="True" ToolTip="Accroche"/>
+                        <TextBox Text="{Binding Accroche}"  Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_Accroche" TextAlignment="Justify" Foreground="{DynamicResource TextBrush}" Style="{DynamicResource TextBoxStyleEdit}" AcceptsReturn="True" ToolTip="Accroche"/>
                     </Border>
                     <Border Width="Auto" Height="Auto" DockPanel.Dock="Top" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="0,1,0,0" Padding="5,5,5,5">
-                        <TextBox Text="{Binding Path=Resume}"  Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_Resume" TextAlignment="Justify" Foreground="{DynamicResource TextBrush}" Style="{DynamicResource TextBoxStyleEdit}" AcceptsReturn="True" ToolTip="Résumé"/>
+                        <TextBox Text="{Binding Resume}"  Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_Resume" TextAlignment="Justify" Foreground="{DynamicResource TextBrush}" Style="{DynamicResource TextBoxStyleEdit}" AcceptsReturn="True" ToolTip="Résumé"/>
                     </Border>
                     <Border Width="Auto" Height="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="0,1,0,0" Padding="5,5,5,5" DockPanel.Dock="Top">
-                        <TextBox Text="{Binding Path=Synopsis}" Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_Synopsis" TextAlignment="Justify" Foreground="{DynamicResource TextBrush}" Style="{DynamicResource TextBoxStyleEdit}" AcceptsReturn="True" ToolTip="Synopsis"/>
+                        <TextBox Text="{Binding Synopsis}" Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_Synopsis" TextAlignment="Justify" Foreground="{DynamicResource TextBrush}" Style="{DynamicResource TextBoxStyleEdit}" AcceptsReturn="True" ToolTip="Synopsis"/>
                     </Border>
                     <Border x:Name="bdDivers" Width="Auto" Height="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="0,1,0,0" Padding="5,5,5,5" DockPanel.Dock="Bottom">
                         <Expander Header="Divers" Style="{DynamicResource ExpanderStyle1}" >
                             <StackPanel>
                                 <DockPanel Width="Auto" Height="Auto">
                                     <Label Content="ID Allociné :" Foreground="{DynamicResource DisabledForegroundBrush}" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
-                                    <TextBox Text="{Binding Path=AlloID}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_AlloId" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}" MinWidth="50"/>
+                                    <TextBox Text="{Binding AlloID}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_AlloId" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}" MinWidth="50"/>
                                     <Label  Content="ID IMDB :" Foreground="{DynamicResource DisabledForegroundBrush}" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
-                                    <TextBox Width="Auto" Text="{Binding Path=ID}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_ImdbId" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
+                                    <TextBox Width="Auto" Text="{Binding ID}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_ImdbId" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
  								</DockPanel>
  								<DockPanel Width="Auto" Height="Auto">
                                     <Label Content="Studio :" Foreground="{DynamicResource DisabledForegroundBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,2,0,2"/>
-                                    <TextBox Width="Auto" Text="{Binding Path=Studio}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_Studio" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
+                                    <TextBox Width="Auto" Text="{Binding Studio}" Foreground="{DynamicResource TextBrush}" Height="Auto" x:Name="lib_Studio" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}"/>
                                 </DockPanel>
                              <DockPanel>
                                 <Label Content="MPAA :" Foreground="{DynamicResource DisabledForegroundBrush}" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
-                                <TextBox Text="{Binding Path=MPAA}" Foreground="{DynamicResource TextBrush}" x:Name="lib_Mpaa" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}" TextWrapping="WrapWithOverflow"/>
+                                <TextBox Text="{Binding MPAA}" Foreground="{DynamicResource TextBrush}" x:Name="lib_Mpaa" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}" TextWrapping="WrapWithOverflow"/>
 							</DockPanel>
 							<DockPanel Width="Auto" Height="Auto">
                                 <Label Content="Certification :" Foreground="{DynamicResource DisabledForegroundBrush}" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
-                                <ComboBox SelectedValue="{Binding Path=Certification}"
+                                <ComboBox SelectedValue="{Binding Certification}"
 									
 					              SelectedValuePath="@searchstring"
 								Foreground="{DynamicResource TextBrush}" 
 								x:Name="cb_Certification" 
-								Margin="10,2,0,2" ItemsSource="{Binding Source={StaticResource XMLCertifications},Mode=Default, XPath=/ratings/france/name}" ItemTemplate="{DynamicResource DataTemplateCertifications}" />
+								Margin="10,2,0,2" ItemsSource="{Binding Mode=Default, Source={StaticResource XMLCertifications}, XPath=/ratings/france/name}" ItemTemplate="{DynamicResource DataTemplateCertifications}" />
 							</DockPanel>
 							<DockPanel>
                                 <Label Content="Vu :" Foreground="{DynamicResource DisabledForegroundBrush}" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
-  							    <CheckBox IsChecked="{Binding Path=Vu}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
+  							    <CheckBox IsChecked="{Binding Vu}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
 								<Label Content="Nombre de lectures :" Foreground="{DynamicResource DisabledForegroundBrush}" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
-                                <TextBox Text="{Binding Path=NombreLectures}" Foreground="{DynamicResource TextBrush}" x:Name="lib_NombreLectures" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}" TextWrapping="WrapWithOverflow"/>
+                                <TextBox Text="{Binding NombreLectures}" Foreground="{DynamicResource TextBrush}" x:Name="lib_NombreLectures" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}" TextWrapping="WrapWithOverflow"/>
 
 							</DockPanel>
 							<DockPanel>
-							    <Button x:Name="btnPlayTrailer" Click="btnPlayTrailer_Click" DockPanel.Dock="Right" Width="18" Height="18" Visibility="{Binding Path=HasTrailer, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Hidden}">
+							    <Button x:Name="btnPlayTrailer" Click="btnPlayTrailer_Click" DockPanel.Dock="Right" Width="18" Height="18" Visibility="{Binding HasTrailer, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Hidden}">
 									<Image Source="/Images/Play_16.png" Margin="2,2,2,2"/>
 								</Button>
 								<Label Content="Trailer :" Foreground="{DynamicResource DisabledForegroundBrush}" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
-                                <TextBox Text="{Binding Path=Trailer}" Foreground="{DynamicResource TextBrush}" x:Name="lib_Trailer" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}" TextWrapping="WrapWithOverflow" DockPanel.Dock="Right"/>
+                                <TextBox Text="{Binding Trailer}" Foreground="{DynamicResource TextBrush}" x:Name="lib_Trailer" Margin="10,2,0,2" Style="{DynamicResource TextBoxStyleEdit}" TextWrapping="WrapWithOverflow" DockPanel.Dock="Right"/>
 								
 							</DockPanel>
                             </StackPanel>

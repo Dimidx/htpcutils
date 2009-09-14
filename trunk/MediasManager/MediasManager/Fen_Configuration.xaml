@@ -10,68 +10,78 @@
 		<DataTemplate x:Key="MoviePathDataTemplate">
 			<StackPanel >
 				<TextBlock Text="{Binding Path=path}" x:Name="txtPath" TextWrapping="Wrap" VerticalAlignment="Top" Margin="2,2,2,0" Foreground="#FFFFFFFF" FontSize="11" FontWeight="Bold"/>
-				<CheckBox IsChecked="{Binding Path=containsFolders}" Content="Ce dossier contient des dossiers" Width="Auto" Height="Auto" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+				<CheckBox x:Name="chkSousDossiers" IsChecked="{Binding Path=containsFolders}" Content="Les films sont organisés en sous-dossiers" Width="Auto" Height="Auto" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
 			</StackPanel>
 		</DataTemplate>
 	</Window.Resources>
 	
 
-	<Grid x:Name="LayoutRoot">
-		<TabControl Margin="0,0,0,40" IsSynchronizedWithCurrentItem="True">
-			<TabItem Header="Films">
-				<Grid>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*"/>
-					</Grid.ColumnDefinitions>
-					<GroupBox Margin="8,8,8,8" Header="Dossiers">
-						<StackPanel Margin="5,5,5,5">
-							<DockPanel Height="222" LastChildFill="False">
-								<StackPanel Width="Auto" Height="Auto" DockPanel.Dock="Left">
-									<Button x:Name="btnAjouterMoviePath" Width="20" Height="20" HorizontalAlignment="Left" Margin="0,0,5,5" ToolTip="Ajouter un dossier à analyser" Click="btnAjouterMoviePath_Click">
-										<Image Width="16" Height="16" Source="Images\Plus_16.png"/>
-									</Button>
-									<Button x:Name="btnSupprimerMoviePath" Width="20" Height="20" HorizontalAlignment="Left" Margin="0,0,5,5" ToolTip="Supprimer le dossier sélectionné" Click="btnSupprimerMoviePath_Click">
-										<Image Width="16" Height="16" Source="Images\Moins_16.png" />
-									</Button>
-								</StackPanel>
-								<ListBox x:Name="lstMoviePaths" ItemsSource="{Binding Path=confMovie.MovieFolders}" VerticalAlignment="Stretch" Width="Auto" Height="Auto" IsSynchronizedWithCurrentItem="True" DockPanel.Dock="Top" ItemTemplate="{DynamicResource MoviePathDataTemplate}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" />
-							</DockPanel>
-						</StackPanel>
-					</GroupBox>
-				</Grid>
-			</TabItem>
-			<TabItem Header="Réseau">
-				<Grid>
-					<GroupBox Margin="8,8,8,8" Header="Proxy">
-						<Grid Margin="8,8,8,8">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="1*"/>
-								<ColumnDefinition Width="1*"/>
-							</Grid.ColumnDefinitions>
-							<Grid.RowDefinitions>
-								<RowDefinition Height="22"/>
-								<RowDefinition Height="22"/>
-								<RowDefinition Height="22"/>
-								<RowDefinition Height="22"/>
-								<RowDefinition Height="22"/>
-								<RowDefinition Height="22"/>
-							</Grid.RowDefinitions>
-							<CheckBox IsChecked="{Binding Path=confProxy.UseProxy}" Content="Utiliser un proxy" Grid.ColumnSpan="2"/>
-							<TextBlock Text="Adresse" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-							<TextBox x:Name="txtAdresse" Text="{Binding Path=confProxy.ProxyAdress}" Grid.Row="1" Grid.Column="2"/>
-							<TextBlock Text="Port" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-							<TextBox x:Name="txtPort" Text="{Binding Path=confProxy.ProxyPort}" Grid.Row="2" Grid.Column="2"/>
-							<TextBlock Text="Utilisateur" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-							<TextBox x:Name="txtUsername" Text="{Binding Path=confProxy.ProxyUser}" Grid.Row="3" Grid.Column="2"/>
-							<TextBlock Text="Mot de passe" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-							<TextBox x:Name="txtPassword" Text="{Binding Path=confProxy.ProxyPassword}" Grid.Row="4" Grid.Column="2"/>
-							<TextBlock Text="Domaine" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-							<TextBox x:Name="txtDomaine" Text="{Binding Path=confProxy.ProxyDomain}" Grid.Row="5" Grid.Column="2"/>
-						</Grid>
-					</GroupBox>
-				</Grid>
-			</TabItem>
-        </TabControl>
-		<Button HorizontalAlignment="Right" Margin="0,0,8,8" VerticalAlignment="Bottom" Width="78" Height="24" Content="Sauver" Click="Button_Click" />
-	</Grid>
+	<DockPanel x:Name="LayoutRoot">
+	<Border BorderBrush="{DynamicResource NormalBorderBrush}" Background="{DynamicResource ControlBackgroundBrush}" BorderThickness="1" CornerRadius="10" Margin="5" DockPanel.Dock="Bottom" Height="40" Padding="5">
+			<Border.Effect>
+				<DropShadowEffect Color="{DynamicResource HoverColor}"/>
+			</Border.Effect>
+			<DockPanel>
+				<Button HorizontalAlignment="Right" VerticalAlignment="Center" Width="78" Height="24" Content="Sauver" Click="Button_Click" />
+			</DockPanel>
+		</Border>
+		<Border Margin="5" Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1" CornerRadius="10" DockPanel.Dock="Top">
+			<Border.Effect>
+				<DropShadowEffect Color="{DynamicResource HoverColor}"/>
+			</Border.Effect>
+			<TabControl Margin="5" IsSynchronizedWithCurrentItem="True" DockPanel.Dock="Top">
+				<TabItem Header="Films">
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+						<GroupBox Margin="8,8,8,8" Header="Dossiers">
+								<DockPanel Margin="0,5,0,0">
+									<StackPanel Width="Auto" Height="Auto" DockPanel.Dock="Left">
+										<Button x:Name="btnAjouterMoviePath" Width="20" Height="20" HorizontalAlignment="Left" Margin="0,0,5,5" ToolTip="Ajouter un dossier à analyser" Click="btnAjouterMoviePath_Click">
+											<Image Width="16" Height="16" Source="Images\Plus_16.png"/>
+										</Button>
+										<Button x:Name="btnSupprimerMoviePath" Width="20" Height="20" HorizontalAlignment="Left" Margin="0,0,5,5" ToolTip="Supprimer le dossier sélectionné" Click="btnSupprimerMoviePath_Click">
+											<Image Width="16" Height="16" Source="Images\Moins_16.png" />
+										</Button>
+									</StackPanel>
+									<ListBox x:Name="lstMoviePaths" ItemsSource="{Binding confMovie.MovieFolders}" VerticalAlignment="Stretch" Width="Auto" Height="Auto" IsSynchronizedWithCurrentItem="True" DockPanel.Dock="Top" ItemTemplate="{DynamicResource MoviePathDataTemplate}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" />
+								</DockPanel>
+						</GroupBox>
+					</Grid>
+				</TabItem>
+				<TabItem Header="Réseau">
+					<Grid>
+						<GroupBox Margin="8,8,8,8" Header="Proxy">
+							<Grid Margin="8,8,8,8">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="1*"/>
+									<ColumnDefinition Width="1*"/>
+								</Grid.ColumnDefinitions>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="22"/>
+									<RowDefinition Height="22"/>
+									<RowDefinition Height="22"/>
+									<RowDefinition Height="22"/>
+									<RowDefinition Height="22"/>
+									<RowDefinition Height="22"/>
+								</Grid.RowDefinitions>
+								<CheckBox IsChecked="{Binding confProxy.UseProxy}" Content="Utiliser un proxy" Grid.ColumnSpan="2"/>
+								<TextBlock Text="Adresse" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+								<TextBox x:Name="txtAdresse" Text="{Binding confProxy.ProxyAdress}" Grid.Row="1" Grid.Column="2"/>
+								<TextBlock Text="Port" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+								<TextBox x:Name="txtPort" Text="{Binding confProxy.ProxyPort}" Grid.Row="2" Grid.Column="2"/>
+								<TextBlock Text="Utilisateur" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+								<TextBox x:Name="txtUsername" Text="{Binding confProxy.ProxyUser}" Grid.Row="3" Grid.Column="2"/>
+								<TextBlock Text="Mot de passe" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+								<TextBox x:Name="txtPassword" Text="{Binding confProxy.ProxyPassword}" Grid.Row="4" Grid.Column="2"/>
+								<TextBlock Text="Domaine" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+								<TextBox x:Name="txtDomaine" Text="{Binding confProxy.ProxyDomain}" Grid.Row="5" Grid.Column="2"/>
+							</Grid>
+						</GroupBox>
+					</Grid>
+				</TabItem>
+			</TabControl>
+		</Border>
+	</DockPanel>
 </Window>

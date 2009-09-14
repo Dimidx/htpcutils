@@ -30,6 +30,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <ApplicationIcon>Images\Icone.ico</ApplicationIcon>
+    <ExpressionBlendVersion>3.0.1927.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,6 +50,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Expression.Interactions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -60,6 +62,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -290,12 +293,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="SubsetFont.targets">
-      <Visible>False</Visible>
-    </None>
-    <None Include="SubsetFontTask.dll">
-      <Visible>False</Visible>
-    </None>
     <None Include="Themes\ExpressionDark\.svn\all-wcprops" />
     <None Include="Themes\ExpressionDark\.svn\entries" />
     <None Include="Themes\ExpressionDark\.svn\text-base\Theme.xaml.svn-base" />
@@ -339,12 +336,10 @@
     <Resource Include="Images\list_movieicon_glass.png" />
     <Resource Include="Images\list_movieicon_mask.png" />
     <Resource Include="Images\mask.png" />
-    <Resource Include="Images\Matrix bluray.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Allocine_16.png" />
     <Resource Include="Images\defaultVideoBigPoster.png" />
-    <Resource Include="Images\Matrix bluray-fanart.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Save_128.png" />
@@ -360,6 +355,7 @@
     <Resource Include="Images\OverlayWatched.png" />
     <Resource Include="Images\Play_128.png" />
     <Resource Include="Images\Play_16.png" />
+    <Resource Include="Images\Recharger_128.png" />
     <Content Include="Plugins\ImportExport\XBMC.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -406,7 +402,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="SampleData\" />
     <Folder Include="Themes\ExpressionDark\.svn\prop-base\" />
     <Folder Include="Themes\ExpressionDark\.svn\props\" />
     <Folder Include="Themes\ExpressionDark\.svn\tmp\prop-base\" />
@@ -421,7 +416,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="SubsetFont.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Expression\Blend\3.0\WPF\Microsoft.Expression.Blend.WPF.targets" />
   <PropertyGroup>
     <!--<PreBuildEvent>call "$(SolutionDir)compile.cmd" $(SolutionDir) $(TargetDir)</PreBuildEvent>-->
   </PropertyGroup>

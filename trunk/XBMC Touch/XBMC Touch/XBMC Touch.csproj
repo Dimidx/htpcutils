@@ -126,12 +126,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="SubsetFont.targets">
-      <Visible>False</Visible>
-    </None>
-    <None Include="SubsetFontTask.dll">
-      <Visible>False</Visible>
-    </None>
+    
+    
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\default.png" />
@@ -213,7 +209,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="SubsetFont.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Expression\Blend\3.0\WPF\Microsoft.Expression.Blend.WPF.targets" />
   <!-- Import of the MSBuildCommunityTask targets -->
   <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
   <!-- to manage version number -->
