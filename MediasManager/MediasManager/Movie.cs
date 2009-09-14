@@ -87,7 +87,7 @@ namespace MediaManager
 
 
             }
-            MediaManager.Database.Database.SaveFilmToDB(_Film, this.fileInfo.FullName);
+            //MediaManager.Database.Database.SaveFilmToDB(_Film, this.fileInfo.FullName);
 
             return _Film;
 

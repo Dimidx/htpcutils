@@ -8,6 +8,8 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Reflection;
 using System.ComponentModel;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using MediaManager.Library;
 
 namespace MediaManager.Library
@@ -56,9 +58,9 @@ namespace MediaManager.Library
                 WebClient m_webClient = new WebClient();
 
                 #region Proxy
-                if( Master.Settings.XML.Config.confProxy.UseProxy)
+                if (Master.Settings.XML.Config.confProxy.UseProxy)
                 {
-                    WebProxy wProxy = new WebProxy(Master.Settings.XML.Config.confProxy.ProxyAdress,Convert.ToInt32(Master.Settings.XML.Config.confProxy.ProxyPort));
+                    WebProxy wProxy = new WebProxy(Master.Settings.XML.Config.confProxy.ProxyAdress, Convert.ToInt32(Master.Settings.XML.Config.confProxy.ProxyPort));
                     wProxy.Credentials = new NetworkCredential(Master.Settings.XML.Config.confProxy.ProxyUser, Master.Settings.XML.Config.confProxy.ProxyPassword, Master.Settings.XML.Config.confProxy.ProxyDomain);
                     m_webClient.Proxy = wProxy;
                 }
@@ -80,32 +82,100 @@ namespace MediaManager.Library
 
         #endregion
 
+        /// <summary>
+        /// Charge une image sans verroulller l'originale
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static BitmapImage GetImageSource(string path,int largeur)
+        {
+            // Ouverture d'une stream vers le fichier original
+            StreamReader reader = new StreamReader(path);
+
+            // Préparation d'un tableau de Byte pour lire la stream
+            Int32 length = Convert.ToInt32(reader.BaseStream.Length);
+            Byte[] data = new Byte[length];
+
+            // Lecture de la stream
+            reader.BaseStream.Read(data, 0, length);
+
+            // Création d'une nouvelle stream mémoire
+            // afin de copier le contenu de la stream originale
+            MemoryStream stream = new MemoryStream(data);
+
+            // Création de l'image à parir de la stream en mémoire
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.CreateOptions = BitmapCreateOptions.IgnoreColorProfile | BitmapCreateOptions.DelayCreation;
+            image.CacheOption = BitmapCacheOption.OnDemand;
+            if (largeur != 0) image.DecodePixelWidth = largeur; //Miniature
+            image.StreamSource = stream;
+            image.EndInit();
+            image.Freeze();
+            reader.Close();
+
+            // Libération des ressources
+            reader.Dispose();
+            reader = null;
+            data = null;
+            stream = null;
+
+            return image;
+        }
+
+                public static BitmapImage GetImageSource(string url)
+        {
+            return GetImageSource(url, 0);
+        }
+
+                        
+
         #region GetStreamImage
+
+
+
         /// <summary>
         /// Télécharge une image dans un stream
         /// </summary>
         /// <param name="url">URL de l'image a télécharger</param>
         /// <returns></returns>
-        public static MemoryStream GetStreamImage(string url)
+        public static BitmapImage GetStreamImage(string url)
         {
             try
             {
                 WebClient client = new WebClient();
 
-                //#region Proxy
+                #region Proxy
                 if (Master.Settings.XML.Config.confProxy.UseProxy)
                 {
                     WebProxy wProxy = new WebProxy(Master.Settings.XML.Config.confProxy.ProxyAdress, Convert.ToInt32(Master.Settings.XML.Config.confProxy.ProxyPort));
                     wProxy.Credentials = new NetworkCredential(Master.Settings.XML.Config.confProxy.ProxyUser, Master.Settings.XML.Config.confProxy.ProxyPassword, Master.Settings.XML.Config.confProxy.ProxyDomain);
                     client.Proxy = wProxy;
                 }
-                //#endregion
+                #endregion
 
                 byte[] _result = client.DownloadData(new Uri(url));
                 client.Dispose();
+                client = null;
                 MemoryStream ms = new MemoryStream(_result);
+
+                // Création de l'image à parir de la stream en mémoire
+                BitmapImage image = new BitmapImage();
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.IgnoreColorProfile | BitmapCreateOptions.DelayCreation;
+                image.CacheOption = BitmapCacheOption.OnDemand;
+
+                image.StreamSource = ms;
+                image.EndInit();
+                image.Freeze();
+
+                // Libération des ressources
                 _result = null;
-                return ms;
+                //ms.Dispose();
+                ms = null;
+
+                return image;
+
 
             }
             catch (WebException ex)
@@ -314,7 +384,7 @@ namespace MediaManager.Library
         {
             byte[] tabString = System.Text.Encoding.GetEncoding(1251).GetBytes(inputString);
             return System.Text.Encoding.ASCII.GetString(tabString);
-        } 
+        }
         #endregion
 
 
