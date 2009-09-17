@@ -203,9 +203,13 @@ namespace MediaManager.Library
                     {
                         Console.WriteLine("Save Thumb " + _FichierCache);
                         JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                        encoder.QualityLevel = 100;
                         encoder.Frames.Add(BitmapFrame.Create(_Image));
                         encoder.Save(stream);
                         stream.Close();
+                        encoder = null;
+                        stream.Dispose();
+                        //stream = null;
                     }
                 }
                 catch (Exception e)
@@ -232,10 +236,7 @@ namespace MediaManager.Library
         {
             GetImage(false);
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="Force">Supprime le cache</param>
+
 
         public void GetImage(bool Force)
         {
@@ -295,23 +296,14 @@ namespace MediaManager.Library
             }
             else
             {
-                //BitmapImage binormal = new BitmapImage();
-                //binormal.BeginInit();
-                //binormal.CreateOptions = BitmapCreateOptions.IgnoreColorProfile | BitmapCreateOptions.DelayCreation;
-                //binormal.CacheOption = BitmapCacheOption.OnDemand;
-
+    
                 //L'image est locale et en cache
                 if (IsLocal & IsCached)
                 {
                     try
                     {
-                        Console.WriteLine("Chargement de puis le cache" + _FichierCache);
+                        Console.WriteLine("Image Locale - Chargement depuis le cache : " + _FichierCache);
                         _Image = Utils.GetImageSource(_FichierCache);
-                        //binormal.UriSource = new Uri(_FichierCache, UriKind.RelativeOrAbsolute);
-                        //binormal.EndInit();
-                        //binormal.Freeze();
-                        //_Image = binormal;
-
                     }
                     catch (InvalidOperationException ex)
                     {
@@ -323,13 +315,11 @@ namespace MediaManager.Library
                 //L'image est locale mais n'est pas en cache
                 if (IsLocal & !IsCached)
                 {
-                    File.Delete(_FichierCache);
+
                     try
                     {
-                        //binormal.UriSource = new Uri(_URLImage, UriKind.RelativeOrAbsolute);
-                        //binormal.EndInit();
-                        //binormal.Freeze();
-                        //_Image = binormal;
+                        Console.WriteLine("Image Locale - Enregistrement dans le cache : " + _FichierCache);
+                        File.Delete(_FichierCache);
                         _Image = Utils.GetImageSource(_URLImage);
                         SaveImage();
                     }
@@ -344,56 +334,27 @@ namespace MediaManager.Library
                 //L'image est distante et en cache
                 if (IsCached & !IsLocal)
                 {
+                    Console.WriteLine("Image Distante - Chargement depuis le cache : " + _FichierCache);
                     try
                     {
-
-                        //binormal.UriSource = new Uri(_FichierCache, UriKind.RelativeOrAbsolute);
-                        //binormal.EndInit();
-                        //binormal.Freeze();
                         _Image = Utils.GetImageSource(_FichierCache);
-                        //_Image = binormal;
                     }
                     catch (InvalidOperationException ex)
                     {
                         Console.WriteLine("Invalid operation: " + ex.ToString());
                     }
-                    SaveImage();
                     goto Mini;
                 }
+
                 //L'image est Distante et Pas en cache
                 if (!IsCached & !IsLocal)
                 {
+                    Console.WriteLine("Image Distante - Enregistrement dans le cache : " + _FichierCache);
+                    _Image = Utils.GetStreamImage(_URLImage);
+                    SaveImage();
+                    goto Mini;
 
 
-                       _Image = Utils.GetStreamImage(this._URLImage);
-                       SaveImage();
-                       goto Mini;
-                    
-                    //        _URLImage = "pack://application:,,,/Images/Erreur_250.png";
-                    //        binormal.UriSource = new Uri(_URLImage, UriKind.RelativeOrAbsolute);
-                    //        binormal.EndInit();
-                    //        binormal.Freeze();
-                    //        _Image = binormal;
-                    //        ms = null;
-                    //        //Création de la miniature
-                    //        BitmapImage bimini = new BitmapImage();
-
-                    //        bimini = new BitmapImage();
-                    //        bimini.BeginInit();
-                    //        bimini.CreateOptions = BitmapCreateOptions.IgnoreColorProfile | BitmapCreateOptions.DelayCreation;
-                    //        bimini.CacheOption = BitmapCacheOption.OnDemand;
-                    //        bimini.DecodePixelWidth = 200;
-                    //        bimini.UriSource = new Uri(_URLImage, UriKind.RelativeOrAbsolute);
-                    //        bimini.EndInit();
-                    //        bimini.Freeze();
-
-                    //        _Miniature = bimini;
-                    //    }
-                    //    catch (InvalidOperationException ex)
-                    //    {
-                    //        Console.WriteLine("Invalid operation: " + ex.ToString());
-                    //    }
-                    //}
                 }
 
             Mini:
@@ -407,16 +368,16 @@ namespace MediaManager.Library
                     }
                     catch (Exception)
                     {
-                        Console.WriteLine("Erreur sur l'image :" + _FichierCache);
-                        //throw;
+                        Console.WriteLine("Erreur recup dimension image :" + _FichierCache);
                     }
                 }
+                //Si le fichier est bien en cache on crée la miniature
                 if (IsCached)
                 {
                     try
                     {
                         //Création de la miniature
-                        _Miniature = Utils.GetImageSource(_FichierCache,250);
+                        _Miniature = Utils.GetImageSource(_FichierCache, 250);
                     }
                     catch (Exception ex)
                     {

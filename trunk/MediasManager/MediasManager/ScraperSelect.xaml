@@ -1,7 +1,6 @@
 ﻿<Window
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	xmlns:Converters="clr-namespace:Converters"
     xmlns:Controls="clr-namespace:MediaManager.Controls"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" xmlns:local="clr-namespace:MediaManager"
@@ -11,9 +10,6 @@
 	Title="Scraper"
 	Width="1024" Height="768" Background="{DynamicResource WindowBackgroundBrush}">
 	<Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-        <Converters:PersonneToString x:Key="PersonneToString"/>
-		<Converters:UriToImageConverter x:Key="UriToImageConverter"/>
 		<DataTemplate x:Key="DataTemplateResult">
 		<StackPanel Orientation="Horizontal">
 						<TextBlock Text="{Binding Path=Titre}" x:Name="txt_Titre" FontWeight="Bold"/>
@@ -46,12 +42,12 @@
 						<RowDefinition/>
 						<RowDefinition/>
 					</Grid.RowDefinitions>
-					<ListBox SelectionChanged="lstResult_SelectionChanged" x:Name="lstResult" ItemTemplate="{DynamicResource DataTemplateResult}" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="5,0,5,10" MinWidth="100" DockPanel.Dock="Bottom"/>
+					<ListBox SelectionChanged="lstResult_SelectionChanged" x:Name="lstResult" ItemTemplate="{DynamicResource DataTemplateResult}" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="5,0,5,10" MinWidth="100" DockPanel.Dock="Bottom" Background="{x:Null}"/>
 					<GridSplitter VerticalAlignment="Bottom" Width="40" Height="5" HorizontalAlignment="Center" ShowsPreview="True" Background="{DynamicResource HoverShineBrush}" Margin="0,0,0,0" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" ResizeDirection="Rows"/>
 					<DockPanel Grid.Row="1">
 						<Button Content="Tous / Aucun" Click="Button_Click_1" DockPanel.Dock="Bottom" Margin="5,5,5,5" Grid.Row="1"/>
 						<TextBlock Text="Champs Modifiables" DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0,5,0,5"/>
-						<ListBox x:Name="lstChamps" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="5,0,5,5" DockPanel.Dock="Bottom" ItemTemplate="{DynamicResource dtChamps}" IsSynchronizedWithCurrentItem="False" Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Stretch"/>
+						<ListBox x:Name="lstChamps" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="5,0,5,5" DockPanel.Dock="Bottom" ItemTemplate="{DynamicResource dtChamps}" IsSynchronizedWithCurrentItem="False" Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Stretch" Background="{x:Null}"/>
 					</DockPanel>
 				</Grid>
 			</DockPanel>
@@ -73,7 +69,7 @@
 							<TabItem Header="Affiches">
 								<Grid x:Name="gridaffiches" DataContext="{Binding ListeFanart}">
 									<DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True">
-										<ListBox ItemsSource="{Binding}" x:Name="lstAffiches" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplateFanart}" Width="130" Margin="5,5,5,5" BorderBrush="{DynamicResource NormalBorderBrush}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" DockPanel.Dock="Left" />
+										<ListBox ItemsSource="{Binding}" x:Name="lstAffiches" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplateFanart}" Width="130" Margin="5,5,5,5" BorderBrush="{DynamicResource NormalBorderBrush}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" DockPanel.Dock="Left" Background="{x:Null}" />
 										<DockPanel>
 											<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,5">
 												<TextBlock Text="Largeur : " Foreground="#FF000000" />
@@ -95,7 +91,7 @@
 							<TabItem Header="Fanarts">
 								<Grid x:Name="gridfanarts" DataContext="{Binding ListeFanart}"  >
 									<DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True">
-										<ListBox ItemsSource="{Binding}" x:Name="lstFanarts" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplateFanart}" Width="130" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" DockPanel.Dock="Left" Margin="5,5,5,5" BorderBrush="{DynamicResource NormalBorderBrush}" />
+										<ListBox ItemsSource="{Binding}" x:Name="lstFanarts" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplateFanart}" Width="130" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" DockPanel.Dock="Left" Margin="5,5,5,5" BorderBrush="{DynamicResource NormalBorderBrush}" Background="{x:Null}" />
 										<DockPanel>
 											<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,5">
 												<TextBlock Text="Largeur : " Foreground="#FF000000" />

@@ -1,24 +1,34 @@
 ﻿<Window
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:Converters="clr-namespace:Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" xmlns:local="clr-namespace:MediaManager"
+	xmlns:MediaManager="clr-namespace:MediaManager"
+	xmlns:Converters="clr-namespace:MediaManager.Converters"
+	xmlns:Controls="clr-namespace:MediaManager.Controls"
     xmlns:MediaManager_Library="clr-namespace:MediaManager.Library;assembly=MMLibrary"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" xmlns:il="clr-namespace:Microsoft.Expression.Interactivity.Layout;assembly=Microsoft.Expression.Interactions"
     x:Class="MediaManager.Window1"
+    Title="Media Manager" Height="768" Width="1024" SizeToContent="Manual" WindowState="Maximized" Background="Black" >
+	<Window.CommandBindings>
+        <CommandBinding Command="Save"
+			Executed="btnSave_Click"/>
+    </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Command="Save"
+			Gesture="CTRL+S"/>
 
-    Title="Media Manager" Height="768" Width="1024" SizeToContent="Manual" WindowState="Maximized" Background="{DynamicResource BackMain}" >
+    </Window.InputBindings>
+
     <Window.Resources>
+			
 			<DataTemplate x:Key="dtChamps">
 			<Grid>
 				<CheckBox Content="{Binding NomChamp}" IsChecked="{Binding IsModifiable}" IsThreeState="False" OverridesDefaultStyle="True" />
 			</Grid>
 		</DataTemplate>
-        <Converters:StringToImageSource x:Key="StringToImageSource"/>
-		 <Converters:StudioToImage x:Key="StudioToImage"/>
-		 <Converters:AvisToImage x:Key="AvisToImage"/>
+        
         <ItemsPanelTemplate x:Key="MovieTemplate">
         	<StackPanel Width="Auto" Height="Auto"/>
         </ItemsPanelTemplate>
@@ -40,11 +50,12 @@
     		</DoubleAnimationUsingKeyFrames>
     	</Storyboard>
 
-        <Converters:ToImage x:Key="ToImage"/>
-
     </Window.Resources>
-    <Grid x:Name="GridMain" >    	
-    	<DockPanel x:Name="dockPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True" Visibility="Visible">
+    <Grid x:Name="GridMain" Background="{DynamicResource BackMain}" >    	
+    	<DockPanel x:Name="dpInfosFilm" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True" Visibility="Visible" >
+			<DockPanel.Background>
+				<ImageBrush ImageSource="{Binding Fanart.Image}" Stretch="UniformToFill" Opacity="0.05" />
+			</DockPanel.Background>
     		<Menu DockPanel.Dock="Top">
     			<MenuItem Header="Fichier">
     				<MenuItem x:Name="mnuQuitter" Header="Quitter" ToolTip="Quitte l'application" Click="mnuQuitter_Click">
@@ -72,39 +83,43 @@
 					</MenuItem>
     			</MenuItem>
     		</Menu>
-    		<DockPanel x:Name="dpInfosFilm" DockPanel.Dock="Top" LastChildFill="True" d:LayoutOverrides="Height">
+    		<Border BorderBrush="{DynamicResource NormalBrush}" BorderThickness="0" CornerRadius="0,0,10,10" Margin="0,0,0,5" VerticalAlignment="Stretch" DockPanel.Dock="Top" Background="{DynamicResource ControlBackgroundBrush}" d:LayoutOverrides="Width">
+    			<Border.Effect>
+    				<DropShadowEffect/>
+    			</Border.Effect>
+				<Grid>
+	    			<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,5,5,5">
+	    				<Button Click="btnScraper_Click" x:Name="btnScraper" Width="36" HorizontalAlignment="Center" Margin="5,0,5,0" VerticalAlignment="Center" Height="36" ToolTip="Recherche les informations du film depuis internet.">
+	    					<Image Width="32" Height="32" Source="Images\IE_128.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	    				</Button>
+	    				<Button Command="Save" x:Name="btnSave" Width="36" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Stretch" Height="36" ToolTip="Sauvegarde les informations du film.">
+	    					<Image Width="32" Height="32" Source="Images\Save_128.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	    				</Button>
+	    				<Button Click="btnRefresh_Click"  x:Name="btnRefresh" Width="36" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Stretch" Height="36" ToolTip="Recharge le film">
+	    					<Image Width="32" Height="32" Source="Images\Recharger_128.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	    				</Button>
+	    			</StackPanel>
+					<TextBox TextChanged="txt_Recherche_TextChanged" x:Name="txt_Recherche" Margin="5" BorderBrush="{DynamicResource NormalBrush}" Width="167" HorizontalAlignment="Right" VerticalAlignment="Center" />
+
+					<Image Source="Images/Scan_16.png" HorizontalAlignment="Right" VerticalAlignment="Center" Stretch="None" Margin="0,0,10,0" />
+				</Grid>
+    		</Border>
+    		<DockPanel x:Name="dpInfosFilm2" DockPanel.Dock="Top" LastChildFill="True" d:LayoutOverrides="Height">
     			<Border Margin="5,5,5,5" Width="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10">
                     <DockPanel>
-						<TextBox TextChanged="txt_Recherche_TextChanged" x:Name="txt_Recherche" DockPanel.Dock="Top" Margin="5,5,5,0" BorderBrush="{DynamicResource NormalBorderBrush}"/>
-						<ListBox SelectionChanged="listBox_Films_SelectionChanged" x:Name="listBox_Films" ItemsPanel="{DynamicResource MovieTemplate}" Background="{x:Null}" BorderBrush="{DynamicResource NormalBorderBrush}" Foreground="#FF000000" Margin="5,5,5,5" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" d:LayoutOverrides="Height" ItemsSource="{Binding}" ItemTemplate="{DynamicResource MovieDataTemplate}" IsSynchronizedWithCurrentItem="False" IsTextSearchEnabled="True" MaxWidth="300" MinWidth="200" DockPanel.Dock="Top" />
+						<ListBox SelectionChanged="listBox_Films_SelectionChanged" x:Name="listBox_Films" ItemsPanel="{DynamicResource MovieTemplate}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF000000" Margin="5,5,5,5" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" d:LayoutOverrides="Height" ItemsSource="{Binding}" ItemTemplate="{DynamicResource MovieDataTemplate}" IsSynchronizedWithCurrentItem="False" IsTextSearchEnabled="True" MaxWidth="300" MinWidth="200" DockPanel.Dock="Top" />
                 	</DockPanel>
 				</Border>
     			<DockPanel x:Name="dpInfosFilmDetails" LastChildFill="True">
     				<i:Interaction.Behaviors>
     					<il:FluidMoveBehavior/>
     				</i:Interaction.Behaviors>
-    				<Border BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,5,5,5" VerticalAlignment="Stretch" DockPanel.Dock="Top" Background="{DynamicResource ControlBackgroundBrush}">
-    					<Border.Effect>
-    						<DropShadowEffect/>
-    					</Border.Effect>
-    					<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,5,5,5">
-    						<Button Click="btnScraper_Click" x:Name="btnScraper" Width="36" HorizontalAlignment="Center" Margin="5,0,5,0" VerticalAlignment="Center" Height="36" ToolTip="Recherche les informations du film depuis internet.">
-    							<Image Width="32" Height="32" Source="Images\IE_128.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    						</Button>
-    						<Button Click="btnSave_Click"  x:Name="btnSave" Width="36" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Stretch" Height="36" ToolTip="Sauvegarde les informations du film.">
-    							<Image Width="32" Height="32" Source="Images\Save_128.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    						</Button>
-    						<Button Click="btnRefresh_Click"  x:Name="btnRefresh" Width="36" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Stretch" Height="36" ToolTip="Recharge le film">
-    							<Image Width="32" Height="32" Source="Images\Recharger_128.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    						</Button>
-    					</StackPanel>
-    				</Border>
 					<Border x:Name="bdFlags" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" Margin="5,5,5,5" DockPanel.Dock="Bottom">
-    					<StackPanel Height="80" Orientation="Horizontal">
-						<Image Source="{Binding Studio, Converter={StaticResource StudioToImage}, Mode=Default}" HorizontalAlignment="Left" Margin="5,5,5,5" Stretch="Fill" Height="70" Width="100" ToolTip="{Binding Studio}" />
-						<Image Source="{Binding Certification, Converter={StaticResource AvisToImage}, Mode=Default}" HorizontalAlignment="Left" Margin="5,5,5,5" Stretch="Uniform" Height="70" Width="100" ToolTip="{Binding Certification}" />
-
-						</StackPanel>
+    					<DockPanel Height="80" >
+						<Image x:Name="imgStudio" Source="{Binding Studio, Converter={StaticResource StudioToImage}, Mode=Default}" HorizontalAlignment="Left" Margin="5,5,5,5" ToolTip="{Binding Studio}" />
+						<Image x:Name="imgCertif" Source="{Binding Certification, Converter={StaticResource AvisToImage}, Mode=Default}" Margin="5,5,5,5" Stretch="Uniform" Height="70" ToolTip="{Binding Certification}" />
+						<Image Margin="5,5,5,5" Stretch="Uniform" Height="70" ToolTip="{Binding Certification}" />
+						</DockPanel>
     				</Border>
     				<Border BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" d:LayoutOverrides="Height" Margin="5,5,5,5">
     					<local:FilmDetails x:Name="ucFilmDetails" Margin="5,5,5,5" />

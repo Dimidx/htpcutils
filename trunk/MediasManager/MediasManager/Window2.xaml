@@ -33,5 +33,6 @@
 		<Button Click="btn_ChargeDetails_Click" x:Name="btn_ChargeDetails" HorizontalAlignment="Left" Margin="8,8,0,0" VerticalAlignment="Top" Width="109" Height="28" Content="Button"/>
 		<TreeView TreeView.SelectedItemChanged="tvSeries_SelectedItemChanged" x:Name="tvSeries" HorizontalAlignment="Left" Margin="8,40,0,8" Width="183" ItemsSource="{Binding Source={StaticResource MyList}}">
         </TreeView>
+		<Image Margin="327,253,379,25" Source="The Descent-fanart.jpg"/>
     </Grid>
 </Window>

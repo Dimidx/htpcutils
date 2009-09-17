@@ -4,21 +4,13 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:MediaManager="clr-namespace:MediaManager"
-    xmlns:Controls="clr-namespace:MediaManager.Controls"
+	xmlns:Converters="clr-namespace:MediaManager.Converters"
+	xmlns:Controls="clr-namespace:MediaManager.Controls"
 	mc:Ignorable="d"
-	xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" xmlns:ic="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
 	x:Class="MediaManager.FilmDetails"
 	x:Name="UserControl_FilmDetails"
 	d:DesignWidth="640" FontFamily="./Fonts/#Aeon Info">
     <UserControl.Resources>
-
-		<DataTemplate x:Key="DataTemplateThumbs">
-			<Grid VerticalAlignment="Stretch" Width="220">
-					<Controls:Sablier Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default}"/>
-                    <Image x:Name="ImageThumbs" Source="{Binding Miniature}" />
-			</Grid>
-		</DataTemplate>
-
         <VisualBrush x:Key="Reflet_Poster">
             <VisualBrush.Visual>
                 <Image Source="Images/list_movieicon_glass.png"/>
@@ -87,6 +79,7 @@
                          	<Border.Effect>
                          		<DropShadowEffect Color="{DynamicResource HoverColor}"/>
                          	</Border.Effect>
+							
                             <Controls:Sablier Visibility="{Binding Cover.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default, FallbackValue=Hidden}"/>
                         </Border>
                          <Image x:Name="Affiche" Source="{Binding Cover.Miniature}" Margin="10" MinHeight="300" />
@@ -129,7 +122,7 @@
                         	</Border.Effect>
                     		<Controls:Sablier Visibility="{Binding Fanart.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default, FallbackValue=Hidden}"/>
                     	</Border>
-                        <Image x:Name="Fanart" Source="{Binding Fanart.Miniature}" MinHeight="120" Margin="10" />
+                        <Image x:Name="Fanart" Source="{Binding Fanart.Miniature}" MinHeight="120" Margin="10" Stretch="Uniform" />
                         <Border x:Name="border" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10" BorderBrush="{DynamicResource NormalBorderBrush}" Background="{DynamicResource Reflet_Poster}" >
 							<Border.ToolTip>
                                 <StackPanel>
@@ -149,7 +142,7 @@
                     <Border x:Name="bdThumbs" Width="Auto" Height="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="0,1,0,0" Padding="5,5,5,5">
                     	<Expander Header="Thumbs" Style="{DynamicResource ExpanderStyle1}" >
                     		<StackPanel>
-								<ListBox ItemsSource="{Binding ListeThumbs}" ItemTemplate="{DynamicResource DataTemplateThumbs}" IsSynchronizedWithCurrentItem="True"/>
+								<ListBox ItemsSource="{Binding ListeThumbs}" ItemTemplate="{DynamicResource DataTemplateThumbs}" IsSynchronizedWithCurrentItem="True" Background="{x:Null}" BorderBrush="{DynamicResource NormalBorderBrush}"/>
 							</StackPanel>
                     	</Expander>
                     </Border>
@@ -161,9 +154,9 @@
                         <StackPanel Width="Auto" Height="Auto" DockPanel.Dock="Left">
                             <DockPanel Width="Auto" Height="Auto" LastChildFill="True">
                                 <Label Width="90" Content="Réalisateurs :" Foreground="{DynamicResource DisabledForegroundBrush}" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,2,0,2"/>
-                                <Expander Header="{Binding Realisateurs, Converter={StaticResource PersonneToString}, Mode=Default, FallbackValue=' '}" BorderThickness="0,0,0,0" Style="{DynamicResource ExpanderStyle1}" Margin="10,0,0,0" MinHeight="0">
+                                <Expander Header="{Binding Realisateurs,Converter={StaticResource PersonneToString}, Mode=Default, FallbackValue=' '}" BorderThickness="0,0,0,0" Style="{DynamicResource ExpanderStyle1}" Margin="10,0,0,0" MinHeight="0">
                                     <Grid>
-                                        <ListBox ItemsSource="{Binding Realisateurs}" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplate_Acteurs}"/>
+                                        <ListBox ItemsSource="{Binding Realisateurs}" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplate_Acteurs}" Background="{x:Null}" BorderBrush="{DynamicResource NormalBrush}"/>
                                     </Grid>
                                 </Expander>
                             </DockPanel>
@@ -176,7 +169,7 @@
 												<Controls:Sablier Visibility="{Binding Photo.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default, FallbackValue=Hidden}"/>
                                 				<Image x:Name="imageacteur" Source="{Binding Photo.Image}" Margin="5,0,5,0" />
 											</Grid>
-                                        	<ListBox ItemsSource="{Binding Acteurs}" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplate_Acteurs}" Width="Auto" DockPanel.Dock="Right" />
+                                        	<ListBox ItemsSource="{Binding Acteurs}" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplate_Acteurs}" Width="Auto" DockPanel.Dock="Right" Background="{x:Null}" BorderBrush="{DynamicResource NormalBorderBrush}" />
 
 										</DockPanel>
 									</Grid>
@@ -186,7 +179,7 @@
                                 <Label Width="90" Content="GENRES :" Foreground="{DynamicResource DisabledForegroundBrush}" Background="{x:Null}" HorizontalAlignment="Left" Height="Auto" Margin="0,2,0,2" VerticalAlignment="Center"/>
                                 <Expander Header="{Binding Genres, Converter={StaticResource TableauToString}, Mode=Default, FallbackValue=' '}" Style="{DynamicResource ExpanderStyle1}" Margin="10,0,0,0">
                                     <Grid>
-                                        <ListBox ItemsSource="{Binding Genres}" IsSynchronizedWithCurrentItem="True"/>
+                                        <ListBox ItemsSource="{Binding Genres}" IsSynchronizedWithCurrentItem="True" Background="{x:Null}" BorderBrush="{DynamicResource NormalBorderBrush}"/>
                                     </Grid>
                                 </Expander>
                             </DockPanel>
