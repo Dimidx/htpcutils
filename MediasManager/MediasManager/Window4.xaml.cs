@@ -8,24 +8,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace MediaManager
 {
 	/// <summary>
-	/// Logique d’interaction pour UC_FilmDetails.xaml
+	/// Interaction logic for Window4.xaml
 	/// </summary>
-	public partial class UC_FilmDetails
+	public partial class Window4 : Window
 	{
-		public UC_FilmDetails()
+		public Window4()
 		{
 			this.InitializeComponent();
+			
+			// Insert code required on object creation below this point.
 		}
-
-        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
 	}
 }

@@ -19,8 +19,7 @@ namespace MediaManager.Plugins
         public string Name { get { return "SpeedAllocine"; } }
         public string Author { get { return "Danone-KiD"; } }
         public string Version { get { return "1.0"; } }
-        public string Description { get { return "Récupère les informations avec le scraper de Passion-xbmc (Merci à l8tig)"; } }
-
+        public string Description { get { return "Récupère les informations avec le scraper de Passion-xbmc"; } }
 
         public List<MMPluginOption> GetOptions()
         {
@@ -51,7 +50,7 @@ namespace MediaManager.Plugins
             }
             else
             {
-                _source = Utils.GetSourceHTML(@"http://passion-xbmc.org/scraper/index.php?idimdb=" + _Film.ID.Replace("tt",""));
+                _source = Utils.GetSourceHTML(@"http://passion-xbmc.org/scraper/index.php?idimdb=" + _Film.ID.Replace("tt", ""));
             }
 
             _source = Regex.Replace(_source, "[\r\n]", "");
@@ -62,8 +61,6 @@ namespace MediaManager.Plugins
                 MonFilm.Annee = Regex.Match(_source, "<year>(.*)</year>").Groups[1].ToString();
             if (Regex.Match(_source, "<director>(.*)</director>").Success)
                 MonFilm.Realisateurs.Add(new Personne(Regex.Match(_source, "<director>(.*)</director>").Groups[1].ToString(), "Réalisateur"));
-            if (Regex.Match(_source, "<tagline>(.*)</tagline>").Success)
-                MonFilm.Accroche = Regex.Match(_source, "<tagline>(.*)</tagline>").Groups[1].ToString();
             if (Regex.Match(_source, "<runtime>(.*)</runtime>").Success)
                 MonFilm.Duree = Regex.Match(_source, "<runtime>(.*)</runtime>").Groups[1].ToString();
             if (Regex.Match(_source, "<studio>(.*)</studio>").Success)
@@ -83,6 +80,15 @@ namespace MediaManager.Plugins
 
 
             MonFilm.AlloID = _Film.AlloID;
+
+            #region Accroche tagline
+            if (Regex.Match(_source, "<tagline>(.*)</tagline>").Success)
+            {
+                MonFilm.Accroche = Regex.Match(_source, "<tagline>(.*)</tagline>").Groups[1].ToString();
+                MonFilm.Accroche.ToLower().Contains("voir la critique");
+                MonFilm.Accroche = string.Empty;
+            }
+            #endregion
 
             #region Certification
             if (Regex.Match(_source, "<certification>(.*)</certification>").Success)
@@ -254,7 +260,7 @@ namespace MediaManager.Plugins
             if (!String.IsNullOrEmpty(_Film.ID))
             {
                 Film _temp = new Film();
-                _temp = GetMovie(_Film,true);
+                _temp = GetMovie(_Film, true);
                 if (!String.IsNullOrEmpty(_temp.Titre))
                 {
                     ListeFilm.Add(GetMovie(_Film));

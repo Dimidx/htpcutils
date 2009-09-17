@@ -45,7 +45,7 @@
 											<Image Width="16" Height="16" Source="Images\Moins_16.png" />
 										</Button>
 									</StackPanel>
-									<ListBox x:Name="lstMoviePaths" ItemsSource="{Binding confMovie.MovieFolders}" VerticalAlignment="Stretch" Width="Auto" Height="Auto" IsSynchronizedWithCurrentItem="True" DockPanel.Dock="Top" ItemTemplate="{DynamicResource MoviePathDataTemplate}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" />
+									<ListBox x:Name="lstMoviePaths" ItemsSource="{Binding confMovie.MovieFolders}" VerticalAlignment="Stretch" Width="Auto" Height="Auto" IsSynchronizedWithCurrentItem="True" DockPanel.Dock="Top" ItemTemplate="{DynamicResource MoviePathDataTemplate}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Background="{x:Null}" BorderBrush="{DynamicResource NormalBrush}" />
 								</DockPanel>
 						</GroupBox>
 					</Grid>

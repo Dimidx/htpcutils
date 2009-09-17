@@ -12,7 +12,7 @@ using System.Globalization;
 using System.Xml.Linq;
 using System.Linq;
 
-namespace Converters
+namespace MediaManager.Converters
 {
 
     #region DateTimeConverter
@@ -262,7 +262,7 @@ namespace Converters
     }
     #endregion
 
-    #region PersonneCollectionToString
+    #region PersonneToString
     /// <summary>
     /// Convertie un Collection de chaine en une chaine séparée par des ", "
     /// </summary>
