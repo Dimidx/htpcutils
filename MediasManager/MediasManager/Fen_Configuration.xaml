@@ -30,25 +30,35 @@
 				<DropShadowEffect Color="{DynamicResource HoverColor}"/>
 			</Border.Effect>
 			<TabControl Margin="5" IsSynchronizedWithCurrentItem="True" DockPanel.Dock="Top">
-				<TabItem Header="Films">
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="*"/>
-						</Grid.ColumnDefinitions>
-						<GroupBox Margin="8,8,8,8" Header="Dossiers">
-								<DockPanel Margin="0,5,0,0">
-									<StackPanel Width="Auto" Height="Auto" DockPanel.Dock="Left">
-										<Button x:Name="btnAjouterMoviePath" Width="20" Height="20" HorizontalAlignment="Left" Margin="0,0,5,5" ToolTip="Ajouter un dossier à analyser" Click="btnAjouterMoviePath_Click">
-											<Image Width="16" Height="16" Source="Images\Plus_16.png"/>
-										</Button>
-										<Button x:Name="btnSupprimerMoviePath" Width="20" Height="20" HorizontalAlignment="Left" Margin="0,0,5,5" ToolTip="Supprimer le dossier sélectionné" Click="btnSupprimerMoviePath_Click">
-											<Image Width="16" Height="16" Source="Images\Moins_16.png" />
-										</Button>
-									</StackPanel>
-									<ListBox x:Name="lstMoviePaths" ItemsSource="{Binding confMovie.MovieFolders}" VerticalAlignment="Stretch" Width="Auto" Height="Auto" IsSynchronizedWithCurrentItem="True" DockPanel.Dock="Top" ItemTemplate="{DynamicResource MoviePathDataTemplate}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Background="{x:Null}" BorderBrush="{DynamicResource NormalBrush}" />
-								</DockPanel>
+				<TabItem Header="Interface">
+					<DockPanel>
+						<GroupBox Header="Main">
+							<StackPanel>
+								<Slider Value="{Binding Source={StaticResource SettingsGUI}, Path=Default.GUIFanartOpacite, Mode=TwoWay}" Maximum="1" LargeChange="0.1" TickPlacement="Both" SmallChange="0.01" />
+								<TextBox Text="{Binding Source={StaticResource SettingsGUI}, Path=Default.GUIFanartOpacite, Mode=TwoWay}"/>
+							</StackPanel>
 						</GroupBox>
-					</Grid>
+					</DockPanel>
+				</TabItem>
+				<TabItem Header="Films">
+					<DockPanel>
+						<GroupBox Margin="8,8,8,8" Header="Extensions" DockPanel.Dock="Bottom">
+							<TextBox Text="{Binding confMovie.Extensions, Converter={StaticResource TableauToString}}" x:Name="txtExtensions" Margin="5" ToolTip="Saisissez les extensions séparées par des &quot;,&quot;" />
+						</GroupBox>
+						<GroupBox Margin="8,8,8,8" Header="Dossiers" DockPanel.Dock="Bottom">
+							<DockPanel Margin="0,5,0,0">
+								<StackPanel Width="Auto" Height="Auto" DockPanel.Dock="Left">
+									<Button x:Name="btnAjouterMoviePath" Width="20" Height="20" HorizontalAlignment="Left" Margin="0,0,5,5" ToolTip="Ajouter un dossier à analyser" Click="btnAjouterMoviePath_Click">
+										<Image Width="16" Height="16" Source="Images\Plus_16.png"/>
+									</Button>
+									<Button x:Name="btnSupprimerMoviePath" Width="20" Height="20" HorizontalAlignment="Left" Margin="0,0,5,5" ToolTip="Supprimer le dossier sélectionné" Click="btnSupprimerMoviePath_Click">
+										<Image Width="16" Height="16" Source="Images\Moins_16.png" />
+									</Button>
+								</StackPanel>
+								<ListBox x:Name="lstMoviePaths" ItemsSource="{Binding confMovie.MovieFolders}" VerticalAlignment="Stretch" Width="Auto" Height="Auto" IsSynchronizedWithCurrentItem="True" DockPanel.Dock="Top" ItemTemplate="{DynamicResource MoviePathDataTemplate}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Background="{x:Null}" BorderBrush="{DynamicResource NormalBrush}" />
+							</DockPanel>
+						</GroupBox>
+					</DockPanel>
 				</TabItem>
 				<TabItem Header="Réseau">
 					<Grid>

@@ -37,48 +37,7 @@ namespace MediaManager
 
             this.DataContext = Master.Settings.XML.Config;
             
-
-            //#region Films
-
-            //ConfigMovie conf = Settings.XML.Config.confMovie;
-            ////La liste des paths
-            //if (conf.MovieFolders != null)
-            //{
-            //    foreach (MovieFolder p in conf.MovieFolders)
-            //    {
-            //        lstMoviePaths.Items.Add(p);
-            //    }
-            //}
             
-            //#endregion
-
-
-
-            //cmbExtensions.Text = "";
-
-            //foreach (String s in conf.extensions)
-            //{
-            //    cmbExtensions.Text += s + ", ";
-            //}
-            //// remove last ','
-            //if (cmbExtensions.Text.EndsWith(", "))
-            //{
-            //    cmbExtensions.Text = cmbExtensions.Text.Remove(cmbExtensions.Text.LastIndexOf(","));
-            //}
-
-            //if (conf.lastFolder != null) folderPicker.SelectedPath = conf.lastFolder;
-            //if (conf.MovieFolders != null)
-            //{
-            //    listFoldersMovie.Items.Clear();
-            //    foreach (MovieFolder p in conf.MovieFolders)
-            //    {
-            //        listFoldersMovie.Items.Add(new ListViewItemMovie(p));
-            //    }
-            //}
-            //Console.WriteLine("LOAD OK");
-            
-
-			// Insert code required on object creation below this point.
 		}
 
         private void btnSupprimerMoviePath_Click(object sender, RoutedEventArgs e)
@@ -89,7 +48,6 @@ namespace MediaManager
                 {
 					Master.Settings.XML.Config.confMovie.MovieFolders.RemoveAt(lstMoviePaths.SelectedIndex);
 					
-                    //lstMoviePaths.Items.RemoveAt(lstMoviePaths.SelectedIndex);
                 }
             }
 
@@ -122,25 +80,8 @@ namespace MediaManager
             Console.WriteLine("SAVING: " + Master.Settings.xmlPath);
             try
             {
-                //ConfigMovie conf = Settings.XML.Config.confMovie;
-
-
-                //conf.savePosterJpg = chkAutoPoster.Checked;
-
-                
-
-                //MovieFolder[] paths = new MovieFolder[lstMoviePaths.Items.Count];
-                //conf.MovieFolders.Clear();
-                //for (int i = 0; i < lstMoviePaths.Items.Count; i++)
-                //{
-                //    MovieFolder p = ((MovieFolder)lstMoviePaths.Items[i]);
-                //    conf.MovieFolders.Add(p);
-                    //paths[i] = p;
-                //}
-                //conf.MovieFolders = paths;
                 Master.Settings.Save();
-				
-                //Settings.Save();
+                MediaManager.Properties.Settings.Default.Save();
                 Console.WriteLine("SAVE OK");
             }
             catch (Exception)

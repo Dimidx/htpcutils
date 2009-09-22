@@ -255,7 +255,25 @@ namespace MediaManager.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            throw new Exception("The method or operation is not implemented.");
+         
+
+            if ( string.IsNullOrEmpty(value.ToString())) return null;
+
+            string[] _TableauTemp = value.ToString().Split(',');
+            string[] _TableauFinal = new string[_TableauTemp.Length];
+            //Nettoyage des espaces
+            int i = 0;
+            if (_TableauTemp.Length != 0)
+            {
+                foreach (string item in _TableauTemp)
+                {
+                    _TableauFinal[i] = item.Trim();
+                    i++;
+                }
+            }
+            return _TableauFinal;
+
+            
         }
 
 

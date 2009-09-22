@@ -54,7 +54,7 @@
     <Grid x:Name="GridMain" Background="{DynamicResource BackMain}" >    	
     	<DockPanel x:Name="dpInfosFilm" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True" Visibility="Visible" >
 			<DockPanel.Background>
-				<ImageBrush ImageSource="{Binding Fanart.Image}" Stretch="UniformToFill" Opacity="0.05" />
+				<ImageBrush ImageSource="{Binding Fanart.Image}" Stretch="UniformToFill" Opacity="{Binding Source={StaticResource SettingsGUI}, Path=Default.GUIFanartOpacite}" />
 			</DockPanel.Background>
     		<Menu DockPanel.Dock="Top">
     			<MenuItem Header="Fichier">

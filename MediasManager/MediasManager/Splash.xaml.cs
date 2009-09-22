@@ -122,7 +122,7 @@ namespace MediaManager
             if (!Directory.Exists(System.Environment.CurrentDirectory + @"\Cache\Series\")) Directory.CreateDirectory(System.Environment.CurrentDirectory + @"\Cache\Series\");
 
             message.Message = "Création de la base de données...";
-            MediaManager.Database.Database.CreateDB();
+            //MediaManager.Database.Database.CreateDB();
             message.Message = "Chargement Terminé !";
 
             this.Dispatcher.BeginInvoke(DispatcherPriority.Send, new DispatcherOperationCallback(delegate(Object state)

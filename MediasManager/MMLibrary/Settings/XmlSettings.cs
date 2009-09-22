@@ -116,8 +116,15 @@ public class ConfigMovie
 {
 
     private ObservableCollection<MovieFolder> _MovieFolders;
+    private string[] _Extensions = { "*.mkv", "*.mp4", "*.avi", "*.wmv", "*.rar", "*.ifo", "*.iso", "*.img" };
 
-    public String[] extensions = { "*.mkv", "*.mp4", "*.avi", "*.wmv", "*.rar", "*.ifo", "*.iso", "*.img" };
+    [XmlElement(ElementName = "extensions")]
+    public string[] Extensions
+    {
+        get { return _Extensions; }
+        set { _Extensions = value; }
+    }
+
     [XmlIgnore]
     public char[] split = { ',', ';' };
 

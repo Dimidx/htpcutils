@@ -130,7 +130,7 @@ namespace MediaManager
                     {
                         foreach (DirectoryInfo dinf in dir.GetDirectories())
                         {
-                            foreach (String ext in Master.Settings.XML.Config.confMovie.extensions)
+                            foreach (String ext in Master.Settings.XML.Config.confMovie.Extensions)
                             {
                                 foreach (FileInfo fileInfo in dinf.GetFiles(ext))
                                 {
@@ -152,7 +152,7 @@ namespace MediaManager
                     }
                     else
                     {
-                        foreach (String ext in Master.Settings.XML.Config.confMovie.extensions)
+                        foreach (String ext in Master.Settings.XML.Config.confMovie.Extensions)
                         {
                             foreach (FileInfo fileInfo in dir.GetFiles(ext))
                             {
