@@ -154,7 +154,12 @@
                         <StackPanel Width="Auto" Height="Auto" DockPanel.Dock="Left">
                             <DockPanel Width="Auto" Height="Auto" LastChildFill="True">
                                 <Label Width="90" Content="Réalisateurs :" Foreground="{DynamicResource DisabledForegroundBrush}" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,2,0,2"/>
-                                <Expander Header="{Binding Realisateurs,Converter={StaticResource PersonneToString}, Mode=Default, FallbackValue=' '}" BorderThickness="0,0,0,0" Style="{DynamicResource ExpanderStyle1}" Margin="10,0,0,0" MinHeight="0">
+                                <Expander Header="{Binding Realisateurs,Converter={StaticResource PersonneToString}, Mode=Default, FallbackValue=' '}" 
+								BorderThickness="0,0,0,0" 
+								Style="{DynamicResource ExpanderStyle1}" 
+								IsExpanded="{Binding Source={StaticResource SettingsGUI}, Path=Default.GUIRealisateursOpen, Mode=TwoWay}"
+								Margin="10,0,0,0" 
+								MinHeight="0">
                                     <Grid>
                                         <ListBox ItemsSource="{Binding Realisateurs}" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource DataTemplate_Acteurs}" Background="{x:Null}" BorderBrush="{DynamicResource NormalBrush}"/>
                                     </Grid>
@@ -162,7 +167,11 @@
                             </DockPanel>
                             <DockPanel Width="Auto" Height="Auto">
                                 <Label Width="90" Content="ACTEURS :" Foreground="{DynamicResource DisabledForegroundBrush}" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>
-                                <Expander x:Name="expander" Header="{Binding Acteurs, Converter={StaticResource PersonneToString}, Mode=Default, FallbackValue=' '}" BorderThickness="0,0,0,0" Style="{DynamicResource ExpanderStyle1}" Margin="10,0,0,0" MinHeight="20" IsExpanded="False">
+                                <Expander x:Name="expander" 
+										 Header="{Binding Acteurs, Converter={StaticResource PersonneToString}, Mode=Default, FallbackValue=' '}"
+										 BorderThickness="0,0,0,0" 
+										 IsExpanded="{Binding Source={StaticResource SettingsGUI}, Path=Default.GUIActeursOpen, Mode=TwoWay}"
+										 Style="{DynamicResource ExpanderStyle1}" Margin="10,0,0,0" MinHeight="20">
                                     <Grid>
 										<DockPanel>
 											<Grid DataContext="{Binding Acteurs}" VerticalAlignment="Top" Height="120" Width="90" DockPanel.Dock="Right">
@@ -177,7 +186,9 @@
                             </DockPanel>
                             <DockPanel Width="Auto" Height="Auto">
                                 <Label Width="90" Content="GENRES :" Foreground="{DynamicResource DisabledForegroundBrush}" Background="{x:Null}" HorizontalAlignment="Left" Height="Auto" Margin="0,2,0,2" VerticalAlignment="Center"/>
-                                <Expander Header="{Binding Genres, Converter={StaticResource TableauToString}, Mode=Default, FallbackValue=' '}" Style="{DynamicResource ExpanderStyle1}" Margin="10,0,0,0">
+                                <Expander Header="{Binding Genres, Converter={StaticResource TableauToString}, Mode=Default, FallbackValue=' '}" 
+								IsExpanded="{Binding Source={StaticResource SettingsGUI}, Path=Default.GUIGenresOpen, Mode=TwoWay}"
+								Style="{DynamicResource ExpanderStyle1}" Margin="10,0,0,0">
                                     <Grid>
                                         <ListBox ItemsSource="{Binding Genres}" IsSynchronizedWithCurrentItem="True" Background="{x:Null}" BorderBrush="{DynamicResource NormalBorderBrush}"/>
                                     </Grid>
@@ -209,7 +220,8 @@
                         <TextBox Text="{Binding Synopsis}" Width="Auto" Height="Auto" TextWrapping="Wrap" x:Name="txt_Synopsis" TextAlignment="Justify" Foreground="{DynamicResource TextBrush}" Style="{DynamicResource TextBoxStyleEdit}" AcceptsReturn="True" ToolTip="Synopsis"/>
                     </Border>
                     <Border x:Name="bdDivers" Width="Auto" Height="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="0,1,0,0" Padding="5,5,5,5" DockPanel.Dock="Bottom">
-                        <Expander Header="Divers" Style="{DynamicResource ExpanderStyle1}" >
+                        <Expander Header="Divers" Style="{DynamicResource ExpanderStyle1}"
+						IsExpanded="{Binding Source={StaticResource SettingsGUI}, Path=Default.GUIDiversOpen, Mode=TwoWay}" >
                             <StackPanel>
                                 <DockPanel Width="Auto" Height="Auto">
                                     <Label Content="ID Allociné :" Foreground="{DynamicResource DisabledForegroundBrush}" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Margin="0,2,0,2"/>

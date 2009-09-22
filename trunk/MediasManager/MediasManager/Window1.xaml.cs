@@ -45,12 +45,12 @@ namespace MediaManager
 
         public IMMPluginScraper Scraper = null;
         public ObservableCollection<Utils.ChampModifiable> ListeChampReplace = new ObservableCollection<Utils.ChampModifiable>();
-
+        
 
         public Window1()
         {
 
-
+            
             InitializeComponent();
             ListCollectionView lcv = new ListCollectionView(MovieManager.Movies);
             lcv.SortDescriptions.Add(new System.ComponentModel.SortDescription("MovieName", System.ComponentModel.ListSortDirection.Ascending));
@@ -63,7 +63,7 @@ namespace MediaManager
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-
+            MediaManager.Properties.Settings.Default.Save();
             App.Current.Shutdown();
         }
 
