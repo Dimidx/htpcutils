@@ -30,15 +30,15 @@
 				<DropShadowEffect Color="{DynamicResource HoverColor}"/>
 			</Border.Effect>
 			<TabControl Margin="5" IsSynchronizedWithCurrentItem="True" DockPanel.Dock="Top">
-				<TabItem Header="Interface">
-					<DockPanel>
-						<GroupBox Header="Main">
+				<TabItem Header="Interface" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+					<Grid>
+						<GroupBox Header="Main" >
 							<StackPanel>
 								<Slider Value="{Binding Source={StaticResource SettingsGUI}, Path=Default.GUIFanartOpacite, Mode=TwoWay}" Maximum="1" LargeChange="0.1" TickPlacement="Both" SmallChange="0.01" />
 								<TextBox Text="{Binding Source={StaticResource SettingsGUI}, Path=Default.GUIFanartOpacite, Mode=TwoWay}"/>
 							</StackPanel>
 						</GroupBox>
-					</DockPanel>
+					</Grid>
 				</TabItem>
 				<TabItem Header="Films">
 					<DockPanel>

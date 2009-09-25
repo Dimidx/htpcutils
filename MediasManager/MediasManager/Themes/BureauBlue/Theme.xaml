@@ -1005,14 +1005,14 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBox}">
                     <Grid>
-                        <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="1" Background="{DynamicResource ControlBackgroundBrush}">
+                        <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="1" Background="{TemplateBinding Background}">
                             <ScrollViewer Margin="1" Focusable="false" Foreground="{TemplateBinding Foreground}">
 
                                 <StackPanel Margin="2" IsItemsHost="true" />
 
                             </ScrollViewer>
                         </Border>
-                        <Border x:Name="DisabledVisualElement" IsHitTestVisible="false" Background="#A5FFFFFF" BorderBrush="#66FFFFFF" BorderThickness="1" Opacity="0" />
+                        <Border x:Name="DisabledVisualElement" IsHitTestVisible="false" Background="{TemplateBinding Background}" BorderBrush="#66FFFFFF" BorderThickness="1" Opacity="0" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
@@ -2281,7 +2281,7 @@
                 <ControlTemplate TargetType="{x:Type Menu}">
                     <Grid>
                         <Border Margin="1" x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" />
-                        <StackPanel IsItemsHost="True" ClipToBounds="True" Orientation="Horizontal" Background="{DynamicResource TabControlHeaderBrush}" />
+                        <StackPanel IsItemsHost="True" ClipToBounds="True" Orientation="Horizontal" Background="{DynamicResource ControlBackgroundBrush}" />
                         <Border x:Name="DisabledVisualElement" IsHitTestVisible="false" Background="#A5FFFFFF" BorderBrush="#66FFFFFF" BorderThickness="1" Opacity="0" />
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -2472,7 +2472,7 @@
                             </TabPanel>
                         </Border>
                         <Border Grid.Row="1" x:Name="ContentPanel" Background="{DynamicResource TabControlContentBrush}" BorderBrush="{DynamicResource TabControlContentBorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3,3,1,1">
-                            <ContentPresenter Margin="4" x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" />
+                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="4" x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" />
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -2527,8 +2527,8 @@
 
 
     <Style d:IsControlPart="True" TargetType="{x:Type TabItem}">
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="Padding" Value="10,6,10,6" />
         <Setter Property="MinWidth" Value="5" />
         <Setter Property="MinHeight" Value="5" />
@@ -2603,7 +2603,7 @@
                                 </Border>
                             </Grid>
                             <Border x:Name="DisabledVisualTopSelected" Margin="1,0,1,0" Background="{DynamicResource DisabledBackgroundBrush}" CornerRadius="3,3,0,0" IsHitTestVisible="false" Visibility="Collapsed" />
-                            <ContentPresenter HorizontalAlignment="Center" Margin="{TemplateBinding Padding}" x:Name="ContentSite" VerticalAlignment="Center" RecognizesAccessKey="True" ContentSource="Header" />
+                            <ContentPresenter HorizontalAlignment="Stretch" Margin="{TemplateBinding Padding}" x:Name="ContentSite" VerticalAlignment="Stretch" RecognizesAccessKey="True" ContentSource="Header" />
 
                         </Grid>
                     </Grid>
