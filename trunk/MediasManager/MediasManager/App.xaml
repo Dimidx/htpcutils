@@ -11,10 +11,10 @@
 		<ResourceDictionary>
 
 			<ResourceDictionary.MergedDictionaries>
-			<ResourceDictionary Source="Themes/ExpressionDark/Theme.xaml"/>
+			<ResourceDictionary Source="Themes/BureauBlue/Theme.xaml"/>
 			<ResourceDictionary Source="SettingsGUI.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
-			<VisualBrush x:Key="BackMain">
+			<VisualBrush x:Key="BackMain" Opacity="0.3">
 				<VisualBrush.Visual>
 					<Image Source="./Images/Fond_Main.png"/>
 				</VisualBrush.Visual>

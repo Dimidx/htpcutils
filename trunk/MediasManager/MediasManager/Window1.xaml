@@ -10,7 +10,7 @@
     xmlns:MediaManager_Library="clr-namespace:MediaManager.Library;assembly=MMLibrary"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" xmlns:il="clr-namespace:Microsoft.Expression.Interactivity.Layout;assembly=Microsoft.Expression.Interactions"
     x:Class="MediaManager.Window1"
-    Title="Media Manager" Height="768" Width="1024" SizeToContent="Manual" WindowState="Maximized" Background="Black" >
+    Title="Media Manager" Height="768" Width="1024" SizeToContent="Manual" WindowState="Maximized" Background="{DynamicResource WindowBackgroundBrush}" >
 	<Window.CommandBindings>
         <CommandBinding Command="Save"
 			Executed="btnSave_Click"/>
@@ -107,7 +107,7 @@
     		<DockPanel x:Name="dpInfosFilm2" DockPanel.Dock="Top" LastChildFill="True" d:LayoutOverrides="Height">
     			<Border Margin="5,5,5,5" Width="Auto" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10">
                     <DockPanel>
-						<ListBox SelectionChanged="listBox_Films_SelectionChanged" x:Name="listBox_Films" ItemsPanel="{DynamicResource MovieTemplate}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF000000" Margin="5,5,5,5" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" d:LayoutOverrides="Height" ItemsSource="{Binding}" ItemTemplate="{DynamicResource MovieDataTemplate}" IsSynchronizedWithCurrentItem="False" IsTextSearchEnabled="True" MaxWidth="300" MinWidth="200" DockPanel.Dock="Top" />
+						<ListBox SelectionChanged="listBox_Films_SelectionChanged" x:Name="listBox_Films" ItemsPanel="{DynamicResource MovieTemplate}" Foreground="#FF000000" Margin="5,5,5,5" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" d:LayoutOverrides="Height" ItemsSource="{Binding}" ItemTemplate="{DynamicResource MovieDataTemplate}" IsSynchronizedWithCurrentItem="False" IsTextSearchEnabled="True" MaxWidth="300" MinWidth="200" DockPanel.Dock="Top" Background="{x:Null}" BorderBrush="{x:Null}" />
                 	</DockPanel>
 				</Border>
     			<DockPanel x:Name="dpInfosFilmDetails" LastChildFill="True">
@@ -150,11 +150,33 @@
 			</GroupBox>
 		</Grid>
 		<Grid x:Name="GridAbout" Background="#99000000" Visibility="Collapsed">
-			<GroupBox x:Name="gbWait1" Header="A propos..." Width="400" Height="400">
-				<StackPanel>
-					<Image Source="Images/Logo.png" Height="300" />
-					<Button x:Name="btn_AboutFermer" Click="btn_Annuler_Click" Height="20" HorizontalAlignment="Right" Content="  Annuler  " IsCancel="True" Margin="0,0,10,0" />
-				</StackPanel>
+			<GroupBox x:Name="gbWait1" Header="A propos..." Height="400" HorizontalAlignment="Center" VerticalAlignment="Center" Width="600">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="0.4*"/>
+						<ColumnDefinition Width="0.6*"/>
+					</Grid.ColumnDefinitions>
+					<StackPanel>
+
+				
+						<Button x:Name="btn_AboutFermer" Click="btn_Annuler_Click" Height="20" HorizontalAlignment="Right" Content="  Annuler  " IsCancel="True" Margin="0,0,10,0" />
+
+									<Image x:Name="image" Source="Images/Logo.png"   Margin="10" />
+
+
+
+
+
+
+
+
+
+
+
+
+					</StackPanel>
+				</Grid>
+				
 			</GroupBox>
 		</Grid>
     </Grid>
