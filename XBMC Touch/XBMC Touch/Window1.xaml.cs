@@ -30,10 +30,10 @@ namespace XBMC_Touch
         public Window1()
         {
 
-
+            InitializeComponent();
             Load();
             this.DataContext = XBMC;
-            InitializeComponent();
+
 
             if (Settings.Default.FirstTime)
             {
@@ -53,6 +53,21 @@ namespace XBMC_Touch
             XBMC.SetCredentials(Settings.Default.UserName, Settings.Default.Password);
             XBMC.NowPlaying.FistTime = true;
             XBMC.Status.Refresh();
+
+
+            //Chargement des artistes
+            string[] _art = XBMC.Database.GetArtists();
+            ObservableCollection<MusicArtist> _artistes = new ObservableCollection<MusicArtist>();
+
+            foreach (string item in _art)
+            {
+                MusicArtist art = new MusicArtist();
+                art.Artist = item;
+                _artistes.Add(art);
+            }
+
+            lstArtistes.ItemsSource = _artistes;
+            Console.WriteLine(lstPlaylist.Items.Count.ToString());
         }
 
 
@@ -169,18 +184,26 @@ namespace XBMC_Touch
 
         private void btnLoadPlaylist_Click(object sender, RoutedEventArgs e)
         {
-            string[] pl = XBMC.Playlist.Get(false, true);
-            ObservableCollection<MusicSong> plsong = new ObservableCollection<MusicSong>();
-            
-            foreach (string item in pl)
+            string[] _art = XBMC.Database.GetArtists();
+
+
+            //ObservableCollection<MusicSong> plsong = new ObservableCollection<MusicSong>();
+
+            ObservableCollection<MusicArtist> _artistes = new ObservableCollection<MusicArtist>();
+
+            foreach (string item in _art)
             {
-                MusicSong song = new MusicSong(); ;
-                song = XBMC.Database.GetSongByFileName(item);
-                plsong.Add(song);
+                //MusicSong song = new MusicSong(); ;
+                //song = XBMC.Database.GetSongByFileName(item);
+                //plsong.Add(song);
+                MusicArtist art = new MusicArtist();
+                art.Artist = item;
+
+                _artistes.Add(art);
 
             }
 
-            lstPlaylist.ItemsSource = plsong;
+            lstPlaylist.ItemsSource = _artistes;
             Console.WriteLine(lstPlaylist.Items.Count.ToString());
 
             

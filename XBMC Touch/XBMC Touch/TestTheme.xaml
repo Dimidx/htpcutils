@@ -1,0 +1,26 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	x:Class="XBMC_Touch.TestTheme"
+	x:Name="Window"
+	Title="TestTheme"
+	Width="640" Height="480">
+	<Window.Resources>
+		<ItemsPanelTemplate x:Key="ItemsPanelTemplate1">
+			<StackPanel Orientation="Horizontal" Style="{DynamicResource StackPanelStyle1}"/>
+		</ItemsPanelTemplate>
+		<ControlTemplate x:Key="ListBoxControlTemplate1" TargetType="{x:Type ListBox}">
+			<Grid ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False"/>
+		</ControlTemplate>
+		<Style x:Key="StackPanelStyle1" TargetType="{x:Type StackPanel}"/>
+	</Window.Resources>
+
+	<Grid x:Name="LayoutRoot">
+		<ListBox Margin="68,141,0,0" VerticalAlignment="Top" Height="77" ItemsPanel="{DynamicResource ItemsPanelTemplate1}"  Style="{DynamicResource ButtonFocusVisual}" HorizontalAlignment="Left" Width="226">
+			<ListBoxItem Content="ListBoxItem"/>
+			<ListBoxItem Content="ListBoxItem"/>
+			<ListBoxItem Content="ListBoxItem"/>
+			<ListBoxItem Content="ListBoxItem"/>
+		</ListBox>
+	</Grid>
+</Window>

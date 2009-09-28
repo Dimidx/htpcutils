@@ -62,6 +62,11 @@
 		<ItemsPanelTemplate x:Key="ItemsPanelTemplate1">
 			<VirtualizingStackPanel IsItemsHost="True"/>
 		</ItemsPanelTemplate>
+		<DataTemplate x:Key="DataTemplateArtistes">
+			<Grid>
+				<TextBlock HorizontalAlignment="Right" Width="Auto" Text="{Binding Artist}" TextWrapping="Wrap"/>
+			</Grid>
+		</DataTemplate>
 
 	</Window.Resources>
 	<Window.Triggers>
@@ -86,49 +91,49 @@
             </DockPanel>
         </Grid>
         <DockPanel LastChildFill="False">
-        <StackPanel VerticalAlignment="Bottom" Margin="0,0,0,0" HorizontalAlignment="Stretch" Background="#64000000" DockPanel.Dock="Bottom">
-            <DockPanel LastChildFill="True" Margin="10,10,10,10" Visibility="{Binding Path=NowPlaying.IsPlaying, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default}">
-                <ProgressBar Value="{Binding Path=NowPlaying.Percentage}" Width="Auto" Height="16" Style="{DynamicResource ProgressBarStyle1}" VerticalAlignment="Top" DockPanel.Dock="Top"/>
-            	<DockPanel Margin="0,3,0,0">
-					<TextBlock x:Name="txt_Time" Text="{Binding Path=NowPlaying.Time}"  FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="#FFFFFFFF" />
-					<TextBlock x:Name="txt_Duration" Text="{Binding Path=NowPlaying.Song.Duration, Converter={StaticResource SecondesToTime}, Mode=Default}"   FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="#FFFFFFFF"  />
-				</DockPanel>
-			</DockPanel>
-            <DockPanel >
-                <UniformGrid Columns="6" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10,0,10,10">
-                    <Button x:Name="btn_Recule" VerticalAlignment="Center" Width="50" Height="50" Click="btn_Recule_Click"  Style="{DynamicResource ButtonStyle1}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-                		<Image Source="Resources\osd_button_rew.png"/>
-                	</Button>
-                    <Button x:Name="btn_Precedent" VerticalAlignment="Center" Width="50" Height="50" Click="btn_Precedent_Click" Style="{DynamicResource ButtonStyle1}">
-                        <Image Source="Resources\osd_button_skipbwd.png"/>
-                    </Button>
+        <StackPanel VerticalAlignment="Bottom" Margin="0,0,0,0" HorizontalAlignment="Stretch" Background="#64000000" DockPanel.Dock="Bottom" Visibility="{Binding Status.IsPlaying, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default}">
+        		<DockPanel LastChildFill="True" Margin="10,10,10,10" Visibility="{Binding NowPlaying.IsPlaying, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default}">
+        			<ProgressBar Value="{Binding NowPlaying.Percentage}" Width="Auto" Height="16" Style="{DynamicResource ProgressBarStyle1}" VerticalAlignment="Top" DockPanel.Dock="Top"/>
+        			<DockPanel Margin="0,3,0,0">
+        				<TextBlock x:Name="txt_Time" Text="{Binding NowPlaying.Time}"  FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="#FFFFFFFF" />
+        				<TextBlock x:Name="txt_Duration" Text="{Binding NowPlaying.Song.Duration, Converter={StaticResource SecondesToTime}, Mode=Default}"   FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="#FFFFFFFF"  />
+        			</DockPanel>
+        		</DockPanel>
+        		<DockPanel >
+        			<UniformGrid Columns="6" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10,0,10,10">
+        				<Button x:Name="btn_Recule" VerticalAlignment="Center" Width="50" Height="50" Click="btn_Recule_Click"  Style="{DynamicResource ButtonStyle1}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+        					<Image Source="Resources\osd_button_rew.png"/>
+        				</Button>
+        				<Button x:Name="btn_Precedent" VerticalAlignment="Center" Width="50" Height="50" Click="btn_Precedent_Click" Style="{DynamicResource ButtonStyle1}">
+        					<Image Source="Resources\osd_button_skipbwd.png"/>
+        				</Button>
 
-                    <Button x:Name="btn_Play" Width="50" Height="50" Click="btn_Play_Click" Style="{DynamicResource ButtonStyle1}">
-                        <Image Source="Resources\osd_button_play.png"/>
-                    </Button>
-                    <Button x:Name="btn_Stop" Width="50" Height="50" Click="btn_Stop_Click"  Style="{DynamicResource ButtonStyle1}">
-                    	<Image Source="Resources\osd_button_stop.png"/>
-                    </Button>
-                    <Button x:Name="btn_Next" VerticalAlignment="Center" Width="50" Height="50" Click="btn_Next_Click" Style="{DynamicResource ButtonStyle1}">
-                        <Image Source="Resources\osd_button_skipfwd.png"/>
-                    </Button>
-                	<Button x:Name="btn_Avance" VerticalAlignment="Center" Width="50" Height="50" Click="btn_Avance_Click"  Style="{DynamicResource ButtonStyle1}">
-                		<Image Source="Resources\osd_button_ff.png"/>
-                	</Button>
-                </UniformGrid>
-                <UniformGrid Margin="10,0,10,10" Columns="3" HorizontalAlignment="Right">
-                    <Button x:Name="btn_VolDown" VerticalAlignment="Center" Width="50" Height="50" Click="btn_VolDown_Click" Style="{DynamicResource ButtonStyle1}">
-                        <Image Source="Resources\osd_button_volume_down.png"/>
-                    </Button>
-                        <Button x:Name="btn_VolMute" VerticalAlignment="Center" Width="50" Height="50" Click="btn_VolMute_Click" Style="{DynamicResource ButtonStyle1}">
-                            <Image Source="Resources\osd_button_volume_mute.png"/>
-                        </Button>
-                        <Button x:Name="btn_VolUp" VerticalAlignment="Center" Width="50" Height="50" Click="btn_VolUp_Click" Style="{DynamicResource ButtonStyle1}" ClickMode="Press">
-                            <Image Source="Resources\osd_button_volume_up.png" />
-                        </Button>
-                    </UniformGrid>
-            </DockPanel>
-        </StackPanel>
+        				<Button x:Name="btn_Play" Width="50" Height="50" Click="btn_Play_Click" Style="{DynamicResource ButtonStyle1}">
+        					<Image Source="Resources\osd_button_play.png"/>
+        				</Button>
+        				<Button x:Name="btn_Stop" Width="50" Height="50" Click="btn_Stop_Click"  Style="{DynamicResource ButtonStyle1}">
+        					<Image Source="Resources\osd_button_stop.png"/>
+        				</Button>
+        				<Button x:Name="btn_Next" VerticalAlignment="Center" Width="50" Height="50" Click="btn_Next_Click" Style="{DynamicResource ButtonStyle1}">
+        					<Image Source="Resources\osd_button_skipfwd.png"/>
+        				</Button>
+        				<Button x:Name="btn_Avance" VerticalAlignment="Center" Width="50" Height="50" Click="btn_Avance_Click"  Style="{DynamicResource ButtonStyle1}">
+        					<Image Source="Resources\osd_button_ff.png"/>
+        				</Button>
+        			</UniformGrid>
+        			<UniformGrid Margin="10,0,10,10" Columns="3" HorizontalAlignment="Right">
+        				<Button x:Name="btn_VolDown" VerticalAlignment="Center" Width="50" Height="50" Click="btn_VolDown_Click" Style="{DynamicResource ButtonStyle1}">
+        					<Image Source="Resources\osd_button_volume_down.png"/>
+        				</Button>
+        				<Button x:Name="btn_VolMute" VerticalAlignment="Center" Width="50" Height="50" Click="btn_VolMute_Click" Style="{DynamicResource ButtonStyle1}">
+        					<Image Source="Resources\osd_button_volume_mute.png"/>
+        				</Button>
+        				<Button x:Name="btn_VolUp" VerticalAlignment="Center" Width="50" Height="50" Click="btn_VolUp_Click" Style="{DynamicResource ButtonStyle1}" ClickMode="Press">
+        					<Image Source="Resources\osd_button_volume_up.png" />
+        				</Button>
+        			</UniformGrid>
+        		</DockPanel>
+        	</StackPanel>
         <Grid Width="Auto" Height="20" DockPanel.Dock="Bottom" Visibility="{Binding Path=NowPlaying.IsPlaying, Converter={StaticResource BooleanToVisibilityConverter}, Mode=Default}" >
 			<Image Source="Resources\osd_button_paused.png" Stretch="Uniform"/>
 			<TextBlock x:Name="txt_Status" Text="{Binding Path=NowPlaying.PlayStatus}" FontFamily="Aeon Player CE" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource NormalBorderBrush}" Height="20"  />
@@ -258,6 +263,9 @@
 				</Border>
 				<Border Background="#FF4A4949" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1,0,1,1" CornerRadius="0,0,5,5" Height="10" DockPanel.Dock="Bottom"/>
 			</StackPanel>
+		</Grid>
+		<Grid x:Name="GridArtistes">
+			<ListBox x:Name="lstArtistes" Background="{x:Null}" Margin="50" ItemTemplate="{DynamicResource DataTemplateArtistes}" />
 		</Grid>
 </Grid>
 

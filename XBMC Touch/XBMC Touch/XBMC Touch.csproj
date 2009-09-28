@@ -16,6 +16,7 @@
     <WarningLevel>4</WarningLevel>
     <ApplicationIcon>Resources\Icone.ico</ApplicationIcon>
     <NoWin32Manifest>true</NoWin32Manifest>
+    <ExpressionBlendVersion>3.0.1927.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -62,6 +63,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="TestTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UCControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -98,6 +103,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="TestTheme.xaml.cs">
+      <DependentUpon>TestTheme.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UCControl.xaml.cs">
       <DependentUpon>UCControl.xaml</DependentUpon>
     </Compile>
@@ -126,8 +134,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    
-    
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\default.png" />
@@ -211,28 +217,6 @@
   -->
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Expression\Blend\3.0\WPF\Microsoft.Expression.Blend.WPF.targets" />
   <!-- Import of the MSBuildCommunityTask targets -->
-  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
+  <!-- <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" /> -->
   <!-- to manage version number -->
-  <Target Name="Version">
-    <Version VersionFile="version.txt" RevisionType="Increment">
-      <Output TaskParameter="Major" PropertyName="Major" />
-      <Output TaskParameter="Minor" PropertyName="Minor" />
-      <Output TaskParameter="Build" PropertyName="Build" />
-      <Output TaskParameter="Revision" PropertyName="Revision" />
-    </Version>
-  </Target>
-  <!-- to generate our personnal version info -->
-  <Target Name="AssemblyInfo">
-    <SvnVersion LocalPath="$(MSBuildProjectDirectory)">
-      <Output TaskParameter="Revision" PropertyName="Build" />
-    </SvnVersion>
-    <AssemblyInfo CodeLanguage="CS" OutputFile="Properties\AssemblyInfo.cs" AssemblyTitle="XBMC Touch" AssemblyDescription="" AssemblyCompany="Danone-KiD" AssemblyProduct="XBMC Touch" AssemblyCopyright="Copyright Danone-KiD© 2009" ComVisible="false" Guid="88812638-9547-4480-9bf4-4fe25103b35c" AssemblyVersion="$(Major).$(Minor).$(Build).$(Revision)" AssemblyFileVersion="$(Major).$(Minor).$(Build).$(Revision)" Condition="$(Revision) != '0' " />
-  </Target>
-  <!-- We launch these two targets -->
-  <Target Name="BeforeBuild">
-    <CallTarget Targets="Version" />
-    <CallTarget Targets="AssemblyInfo" />
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
 </Project>
