@@ -58,14 +58,15 @@ namespace XBMC_Touch
             //Chargement des artistes
             string[] _art = XBMC.Database.GetArtists();
             ObservableCollection<MusicArtist> _artistes = new ObservableCollection<MusicArtist>();
-
-            foreach (string item in _art)
+            if (_art != null)
             {
-                MusicArtist art = new MusicArtist();
-                art.Artist = item;
-                _artistes.Add(art);
+                foreach (string item in _art)
+                {
+                    MusicArtist art = new MusicArtist();
+                    art.Artist = item;
+                    _artistes.Add(art);
+                }
             }
-
             lstArtistes.ItemsSource = _artistes;
             Console.WriteLine(lstPlaylist.Items.Count.ToString());
         }
