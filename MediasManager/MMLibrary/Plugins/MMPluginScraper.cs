@@ -34,7 +34,7 @@ namespace MediaManager.Plugins
         public string Author { get { return instancePlugin.Author; } }
         public string Version { get { return instancePlugin.Version; } }
         public string Description { get { return instancePlugin.Description; } }
-        public List<MMPluginOption> Options { get { return instancePlugin.GetOptions(); } }
+        //public List<MMPluginOption> Options { get { return instancePlugin.GetOptions(); } }
 
         public void LoadOptions()
         {
@@ -44,11 +44,11 @@ namespace MediaManager.Plugins
         public void SaveOptions()
         {
 
-            if (File.Exists(_CheminConfig) != true ) File.Create(_CheminConfig);
-            TextWriter w = new StreamWriter(@_CheminConfig);
-            XmlSerializer xmlSerial = new XmlSerializer(typeof(List<MMPluginOption>));
-            xmlSerial.Serialize(w, Options);
-            w.Close();
+            //if (File.Exists(_CheminConfig) != true ) File.Create(_CheminConfig);
+            //TextWriter w = new StreamWriter(@_CheminConfig);
+            //XmlSerializer xmlSerial = new XmlSerializer(typeof(List<MMPluginOption>));
+            //xmlSerial.Serialize(w, Options);
+            //w.Close();
             
             
 

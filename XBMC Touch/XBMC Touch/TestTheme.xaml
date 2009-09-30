@@ -22,5 +22,7 @@
 			<ListBoxItem Content="ListBoxItem"/>
 			<ListBoxItem Content="ListBoxItem"/>
 		</ListBox>
+		<Button Margin="149,40,289,0" VerticalAlignment="Top" Height="55" Content="Button" Style="{DynamicResource ButtonStyle}"/>
+		<Rectangle Fill="{DynamicResource FocusBackgroundBrush}" Stroke="{DynamicResource FocusBorderBrush}" HorizontalAlignment="Left" Margin="160,0,0,83" VerticalAlignment="Bottom" Width="103" Height="97"/>
 	</Grid>
 </Window>

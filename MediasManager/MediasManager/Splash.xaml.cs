@@ -104,7 +104,7 @@ namespace MediaManager
                     if (ImportExportPlugin != null)
                     {
                         Master.Settings.PluginsImportExport.Add(ImportExportPlugin);
-
+                        
                     }
 
                 }

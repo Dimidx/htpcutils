@@ -29,7 +29,7 @@ namespace MediaManager
         public PluginOptions()
         {
             InitializeComponent();
-            MonPlug = new MMPluginScraper(@"C:\Documents and Settings\Administrateur\Mes documents\Dev\HTPCUtils\MediasManager\MediasManager\bin\Debug\Scraper\Movies\Allocine.dll");
+            MonPlug = new MMPluginScraper(@"C:\Users\Julien\Documents\Dev\HTPCUTils\MediasManager\MediasManager\bin\Release\Plugins\ImportExport\XBMC.dll");
             MonPlug.SaveOptions();
 
             List<MMPluginOption> plugin = new List<MMPluginOption>();

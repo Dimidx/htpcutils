@@ -36,6 +36,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework.Aero" />
     <Reference Include="PresentationFramework.Luna" />
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -59,6 +60,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="PageArtistes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\Theme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -89,6 +94,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PageArtistes.xaml.cs">
+      <DependentUpon>PageArtistes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -206,6 +214,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\fondliste.png" />
+    <Resource Include="Resources\Rapier\button-list-alt-focus.png" />
+    <Resource Include="Resources\Rapier\button-list-focus.png" />
+    <Resource Include="Resources\Rapier\button-list-nofocus.png" />
+    <Resource Include="Resources\Rapier\scrollbar-background.png" />
+    <Resource Include="Resources\Rapier\scrollbar-slider-focus.png" />
+    <Resource Include="Resources\Rapier\scrollbar-slider-horz-focus.png" />
+    <Resource Include="Resources\Rapier\scrollbar-slider-horz-nofocus.png" />
+    <Resource Include="Resources\Rapier\scrollbar-slider-nofocus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

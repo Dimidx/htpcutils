@@ -364,12 +364,15 @@ namespace MediaManager.Library
                     try
                     {
                         _Largeur = Math.Round(_Image.Width, 0);
-                        _Hauteur = Math.Round(_Image.Height, 0);
+                        //_Hauteur = Math.Round(_Image.Height, 0);
                     }
-                    catch (Exception)
+                    catch 
                     {
                         Console.WriteLine("Erreur recup dimension image :" + _FichierCache);
+                        return;
                     }
+
+
                 }
                 //Si le fichier est bien en cache on crée la miniature
                 if (IsCached)
@@ -379,9 +382,9 @@ namespace MediaManager.Library
                         //Création de la miniature
                         _Miniature = Utils.GetImageSource(_FichierCache, 250);
                     }
-                    catch (Exception ex)
+                    catch
                     {
-                        Console.WriteLine("Invalid operation: " + ex.ToString());
+                        Console.WriteLine("Invalid operation: ") ;//+ ex.ToString());
                     }
 
                 }
