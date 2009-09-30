@@ -14,12 +14,63 @@ namespace MediaManager.Plugins
         public string Version { get { return "1.0"; } }
         public string Description { get { return "Gestion des fichiers NFO de XBMC"; } }
 
+        private MMPluginOptionCollection _Options ;
+        public MMPluginOptionCollection Options
+        { 
+            get { return _Options;}
+            set { _Options = value; }
+        }
+
+        public List<MMPluginOption> LoadOptions()
+        {
+            List<MMPluginOption> _OptionsDispo = new List<MMPluginOption>();
+
+            MMPluginOption p = new MMPluginOption();
+            p.Caption = "<moviename>.tbn";
+            p.DefaultValue = true;
+            p.Name = "opt_MovieNameTbn";
+            p.GroupCaption = "Export Affiches";
+            p.HelpText = "Enregistre l'affiche sous la forme <Non du fichier video>.tbn";
+            p.DataType = MMPluginOption.EnumDataType.Boolean;
+            _OptionsDispo.Add(p);
+
+            p = new MMPluginOption();
+            p.Caption = "movie.tbn";
+            p.Name = "opt_MovieTbn";
+            p.GroupCaption = "Export Affiches";
+            p.HelpText = "Enregistre l'affiche sous la forme movie.tbn";
+            p.DataType = MMPluginOption.EnumDataType.Boolean;
+            p.DefaultValue = false;
+            _OptionsDispo.Add(p);
+
+
+
+       
+            
+
+            return _OptionsDispo;
+        }
+
+
+        public XBMC()
+        {
+            _Options = new MMPluginOptionCollection(this);
+            
+            bool opt_MovieNameTbn = (bool)_Options.GetValue("opt_MovieNameTbn");
+            Console.WriteLine("Valeur de Test = " + opt_MovieNameTbn.ToString());
+
+
+        }
+
+
 
         public List<MMPluginOption> GetOptions()
         {
             List<MMPluginOption> options = new List<MMPluginOption>();
             return options;
         }
+
+
 
         public Film Import(FileInfo _FileInfo)
         {
@@ -50,7 +101,7 @@ namespace MediaManager.Plugins
                 MonFilm.Annee = Nfo.Year;
                 MonFilm.MPAA = Nfo.Mpaa;
                 MonFilm.Certification = Nfo.Certification;
-                MonFilm.Resume= Nfo.Outline;
+                MonFilm.Resume = Nfo.Outline;
                 MonFilm.Accroche = Nfo.Tagline;
                 MonFilm.Synopsis = Nfo.Plot;
                 MonFilm.AlloID = Nfo.AlloId;
@@ -130,16 +181,34 @@ namespace MediaManager.Plugins
             _PathsPosters[4] = _FileInfo.DirectoryName + "/poster.tbn";
             _PathsPosters[5] = _FileInfo.DirectoryName + "/poster.jpg";
             _PathsPosters[6] = _FileInfo.DirectoryName + "/folder.jpg";
-
-            string _pathPoster = "";
+            //Chargements des posters locaux
             foreach (string item in _PathsPosters)
             {
-                if (File.Exists(item)) _pathPoster = item;
+                if (File.Exists(item))
+                {
+                    MonFilm.ListeCover.Add(new Thumb(item));
+                }
             }
-            if (_pathPoster != "")
+            //Chargements des posters du nfo
+            if (Nfo.Thumb != null)
             {
-                MonFilm.ListeCover.Add(new Thumb(_pathPoster));
+                foreach (string item in Nfo.Thumb)
+                {
+                    Thumb _t = new Thumb(item);
+                    if (!MonFilm.ListeCover.Contains(_t))
+                        MonFilm.ListeCover.Add(_t);
+                }
             }
+            if (Nfo.ThumbSVN != null)
+            {
+                foreach (string item in Nfo.ThumbSVN)
+                {
+                    Thumb _t = new Thumb(item);
+                    if (!MonFilm.ListeCover.Contains(_t))
+                        MonFilm.ListeCover.Add(_t);
+                }
+            }
+
             #endregion
 
             #region Chargement des Fanarts
@@ -149,14 +218,20 @@ namespace MediaManager.Plugins
             _PathsFanarts[2] = _FileInfo.DirectoryName + "/fanart.jpg";
             _PathsFanarts[3] = _FileInfo.DirectoryName + "/backdrop.jpg";
 
-            string _pathFanart = "";
             foreach (string item in _PathsFanarts)
             {
-                if (File.Exists(item)) _pathFanart = item;
+                if (File.Exists(item))
+                {
+                    MonFilm.ListeFanart.Add(new Thumb(item));
+                }
             }
-            if (_pathFanart != "")
+            //Chargements des fanarts du nfo
+            if (Nfo.Fanart != null)
             {
-                MonFilm.ListeFanart.Add(new Thumb(_pathFanart));
+                foreach (string item in Nfo.Fanart)
+                {
+                    MonFilm.ListeFanart.Add(new Thumb(item));
+                }
             }
 
             #endregion
@@ -205,7 +280,7 @@ namespace MediaManager.Plugins
             Nfo.AlloId = _Film.AlloID;
             Nfo.Studio = _Film.Studio;
             Nfo.Certification = _Film.Certification;
-            Nfo.Playcount = _Film.NombreLectures.ToString() ;
+            Nfo.Playcount = _Film.NombreLectures.ToString();
             if ((Nfo.Playcount == "0") && (_Film.Vu == true)) Nfo.Playcount = "1";
 
             #region Date de sortie
@@ -248,8 +323,23 @@ namespace MediaManager.Plugins
             #region Affiche
             try
             {
+
+
                 if (_Film.Cover != null)
                 {
+                    List<string> _covers = new List<string>();
+                    foreach (Thumb item in _Film.ListeCover)
+                    {
+                        if (!item.IsLocal)
+                        {
+                            if (!_covers.Contains(item.URLImage))
+                                _covers.Add(item.URLImage);
+                        }
+
+                    }
+                    Nfo.Thumb = _covers.ToArray();
+                    Nfo.ThumbSVN = _covers.ToArray();
+
                     string _PostersPath = _FileInfo.FullName.Replace(_FileInfo.Extension, ".tbn");
                     if (_Film.Cover.IsCached)
                     {
@@ -269,8 +359,22 @@ namespace MediaManager.Plugins
             #region Fanart
             try
             {
+
+
                 if (_Film.Fanart != null)
                 {
+                    //Remplit la liste des fanarts
+                    List<string> _fanarts = new List<string>();
+                    foreach (Thumb item in _Film.ListeFanart)
+                    {
+                        if (!item.IsLocal)
+                        {
+                            _fanarts.Add(item.URLImage);
+                        }
+
+                    }
+                    Nfo.Fanart = _fanarts.ToArray();
+
                     string _FanartPath = _FileInfo.FullName.Replace(_FileInfo.Extension, "-fanart.jpg");
                     if (_Film.Fanart.IsCached)
                     {

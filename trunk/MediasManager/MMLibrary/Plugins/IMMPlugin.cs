@@ -27,7 +27,13 @@ namespace MediaManager.Plugins
         /// </summary>
         string Version { get; }
 
-        List<MMPluginOption> GetOptions();
+        //List<MMPluginOption> GetOptions();
+        
+        MMPluginOptionCollection Options { get; set ;}
+        List<MMPluginOption> LoadOptions();
+       
+
+        
 
 
 

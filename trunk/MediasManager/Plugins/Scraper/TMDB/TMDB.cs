@@ -18,12 +18,6 @@ namespace MediaManager.Plugins
         public string Version { get { return "1.0"; } }
         public string Description { get { return ""; } }
 
-        public List<MMPluginOption> GetOptions()
-        {
-            List<MMPluginOption> options = new List<MMPluginOption>();
-            return options;
-        }
-
 
         private static String APIKey = "1a9efd23fff9c2ed07c90358e2b3d280";
         private static String osUri = "http://a9.com/-/spec/opensearch/1.1/";
@@ -32,6 +26,17 @@ namespace MediaManager.Plugins
         //private String defaultCacheDir = System.Environment.CurrentDirectory + @"\Cache\MovieCache\";
         //private DateTime dtDefaultCache = DateTime.Now.Subtract(new TimeSpan(14, 0, 0, 0));
 
+        private MMPluginOptionCollection _Options;
+        public MMPluginOptionCollection Options
+        {
+            get { return _Options; }
+            set { _Options = value; }
+        }
+        public List<MMPluginOption> LoadOptions()
+        {
+            List<MMPluginOption> _OptionsDispo = new List<MMPluginOption>();
+            return _OptionsDispo;
+        }
 
         public Film GetMovie(Film _Film)
         {

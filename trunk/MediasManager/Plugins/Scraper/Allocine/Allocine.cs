@@ -29,12 +29,16 @@ namespace MediaManager.Plugins
         public string Author { get { return "Danone-KiD"; } }
         public string Version { get { return "1.0"; } }
         public string Description { get { return "Récupère les informations sur Allocine"; } }
-
-
-        public List<MMPluginOption> GetOptions()
+        private MMPluginOptionCollection _Options;
+        public MMPluginOptionCollection Options
         {
-            List<MMPluginOption> options = new List<MMPluginOption>();
-            return options;
+            get { return _Options; }
+            set { _Options = value; }
+        }
+        public List<MMPluginOption> LoadOptions()
+        {
+            List<MMPluginOption> _OptionsDispo = new List<MMPluginOption>();
+            return _OptionsDispo;
         }
 
 

@@ -7,36 +7,39 @@ using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace XBMC
-    {
-        [XmlRoot(
-        ElementName = "movie",
-        DataType = "Name"
-    )]
+{
+    [XmlRoot(
+    ElementName = "movie",
+    DataType = "Name"
+)]
     public class NfoMovie : INotifyPropertyChanged
     {
-        private String title = "";
-        private String rating = "";
-        private String year = "";
-        private String top250 = "";
-        private String votes = "";
-        private String outline = "";
-        private String plot = "";
-        private String tagline = "";
-        private String runtime = "";
-        private String thumb = "";
-        private String mpaa = "";
-        private String playcount = "";
-        private String id = "";
-        private String genre = "";
-        private String credits = "";
-        private String director = "";
-        private String premiered = "";
-        private String studio = "";
-        private String trailer = "";
-        private String alloid = "";
+        private string title = "";
+        private string rating = "";
+        private string year = "";
+        private string top250 = "";
+        private string votes = "";
+        private string outline = "";
+        private string plot = "";
+        private string tagline = "";
+        private string runtime = "";
+        private string mpaa = "";
+        private string playcount = "";
+        private string id = "";
+        private string genre = "";
+        private string credits = "";
+        private string director = "";
+        private string premiered = "";
+        private string studio = "";
+        private string trailer = "";
+        private string alloid = "";
         private string certification = "";
         private string _OriginalTitle = "";
-        private List<Actor> actors  = new List<Actor>();
+        private List<Actor> actors = new List<Actor>();
+
+        private string[] _thumbs;// = new string[1];
+        private string[] _thumbsSVN;// = new string[1];
+        private string[] _fanart;// = new List<ThumbFanart>();
 
         [XmlElement(ElementName = "title")]
         public String Title
@@ -115,12 +118,52 @@ namespace XBMC
             set { runtime = value; OnPropertyChanged("Runtime"); }
         }
 
-        [XmlElement(ElementName = "thumb")]
-        public String Thumb
+        [XmlArray(ElementName = "thumbs")]
+        [XmlArrayItem(ElementName = "thumb")]
+         //[XmlElement(ElementName = "thumb")]
+        public string[] Thumb
         {
-            get { return thumb; }
-            set { thumb = value; OnPropertyChanged("Thumb"); }
+            get
+            {
+                return _thumbs;
+            }
+            set
+            {
+                _thumbs = value; OnPropertyChanged("Thumb");
+            }
         }
+        //Pour les version SVN
+        [XmlElement(ElementName = "thumb")]
+        public string[] ThumbSVN
+        {
+            get
+            {
+                return _thumbsSVN;
+            }
+
+            set
+            {
+                _thumbsSVN = value; OnPropertyChanged("ThumbSVN");
+            }
+        }
+
+        [XmlArray(ElementName="fanart")]
+        [XmlArrayItem(ElementName = "thumb")]
+        //[XmlElement(ElementName = "fanart")]
+        //[XmlIgnore]
+        public string[] Fanart
+        {
+            get
+            {
+                return _fanart;
+            }
+            set
+            {
+                _fanart = value;
+                OnPropertyChanged("Fanart");
+            }
+        }
+
 
         [XmlElement(ElementName = "certification")]
         public String Certification
@@ -183,10 +226,10 @@ namespace XBMC
         [XmlElement(ElementName = "studio")]
         public String Studio
         {
-            get 
+            get
             {
-                return studio; 
-                
+                return studio;
+
             }
             set { studio = value; OnPropertyChanged("Studio"); }
         }
@@ -231,6 +274,46 @@ namespace XBMC
         #endregion
 
     }
+}
+
+//Classe pour les thumbs babylon
+public class ThumbFanart : INotifyPropertyChanged
+{
+    private String _thumb;
+
+    [XmlElement(ElementName = "thumb")]
+    public String Thumb
+    {
+        get { return _thumb; }
+        set { _thumb = value; OnPropertyChanged("Thumb"); }
+    }
+
+    public ThumbFanart(string _url)
+    {
+        _thumb = _url;
+    }
+
+    public ThumbFanart()
+    {
+        
+    }
+
+
+    #region INotifyPropertyChanged Members
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    public void OnPropertyChanged(string propertyName)
+    {
+        if (PropertyChanged != null)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    #endregion
+
+
 }
 
 public class Actor : INotifyPropertyChanged

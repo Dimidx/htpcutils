@@ -89,45 +89,48 @@ namespace MediaManager.Library
         /// <returns></returns>
         public static BitmapImage GetImageSource(string path, int largeur)
         {
-            // Ouverture d'une stream vers le fichier original
-            StreamReader reader = new StreamReader(path);
-
-            // Préparation d'un tableau de Byte pour lire la stream
-            Int32 length = Convert.ToInt32(reader.BaseStream.Length);
-            Byte[] data = new Byte[length];
-
-            // Lecture de la stream
-            reader.BaseStream.Read(data, 0, length);
-
-            // Création d'une nouvelle stream mémoire
-            // afin de copier le contenu de la stream originale
-            MemoryStream stream = new MemoryStream(data);
-
-            // Création de l'image à parir de la stream en mémoire
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.CreateOptions = BitmapCreateOptions.IgnoreColorProfile | BitmapCreateOptions.DelayCreation | BitmapCreateOptions.PreservePixelFormat;
-            image.CacheOption = BitmapCacheOption.None;
-            if (largeur != 0)
+            try
             {
-                image.DecodePixelWidth = largeur; //Miniature
+                // Ouverture d'une stream vers le fichier original
+                StreamReader reader = new StreamReader(path);
+
+                // Préparation d'un tableau de Byte pour lire la stream
+                Int32 length = Convert.ToInt32(reader.BaseStream.Length);
+                Byte[] data = new Byte[length];
+
+                // Lecture de la stream
+                reader.BaseStream.Read(data, 0, length);
+
+                // Création d'une nouvelle stream mémoire
+                // afin de copier le contenu de la stream originale
+                MemoryStream stream = new MemoryStream(data);
+
+                // Création de l'image à parir de la stream en mémoire
+                BitmapImage image = new BitmapImage();
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.IgnoreColorProfile | BitmapCreateOptions.DelayCreation;
+                image.CacheOption = BitmapCacheOption.None;
+                if (largeur != 0)
+                {
+                    image.DecodePixelWidth = largeur; //Miniature
+                }
+                image.StreamSource = stream;
+                image.EndInit();
+                image.Freeze();
+                reader.Close();
+
+                // Libération des ressources
+                reader.Dispose();
+                reader = null;
+                data = null;
+                stream = null;
+                return image;
             }
-            image.StreamSource = stream;
-            image.EndInit();
-            image.Freeze();
-            reader.Close();
-
-            // Libération des ressources
-            reader.Dispose();
-            reader = null;
-            data = null;
-            stream = null;
-
-
-
-
-
-            return image;
+            catch
+            {
+                Console.WriteLine("Impossible de charger l'image.");
+                return null;
+            }
         }
 
         public static BitmapImage GetImageSource(string url)
@@ -171,7 +174,7 @@ namespace MediaManager.Library
                 // Création de l'image à parir de la stream en mémoire
                 BitmapImage image = new BitmapImage();
                 image.BeginInit();
-                image.CreateOptions = BitmapCreateOptions.IgnoreColorProfile | BitmapCreateOptions.DelayCreation | BitmapCreateOptions.PreservePixelFormat;
+                image.CreateOptions = BitmapCreateOptions.IgnoreColorProfile | BitmapCreateOptions.DelayCreation;
                 image.CacheOption = BitmapCacheOption.None;
 
                 image.StreamSource = ms;
