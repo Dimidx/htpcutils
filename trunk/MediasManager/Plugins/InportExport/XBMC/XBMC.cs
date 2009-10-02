@@ -56,8 +56,8 @@ namespace MediaManager.Plugins
         {
             _Options = new MMPluginOptionCollection(this);
             
-            bool opt_MovieNameTbn = (bool)_Options.GetValue("opt_MovieNameTbn");
-            Console.WriteLine("Valeur de Test = " + opt_MovieNameTbn.ToString());
+            //bool opt_MovieNameTbn = (bool)_Options.GetValue("opt_MovieNameTbn");
+            //Console.WriteLine("Valeur de Test = " + opt_MovieNameTbn.ToString());
 
 
         }
