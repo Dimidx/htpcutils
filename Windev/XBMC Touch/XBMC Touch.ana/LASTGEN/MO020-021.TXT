@@ -1,0 +1,3 @@
+//MO020-021.TXT ANA00020 TO ANA00021
+DebugHF		TAR	340	nouvelle taille enregistrement : 340
+DebugHF	Date	CNW	Date et Heure (aaaammjjhhmmsslll)$Chaîne	la rubrique Date a pour nouveau type Date et Heure (aaaammjjhhmmssl

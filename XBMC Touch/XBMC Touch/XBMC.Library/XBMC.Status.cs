@@ -25,6 +25,9 @@ using System.Text;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Timers;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace XBMC
 {
@@ -45,8 +48,15 @@ namespace XBMC
         private string mediaNowPlaying = null;
         private bool newMediaPlaying = true;
         private Timer heartBeatTimer = null;
-        private int connectedInterval = 5000;
+        private int connectedInterval = 1;
         private int disconnectedInterval = 10000;
+        private BitmapImage _screenshot = null;
+
+        public BitmapImage Screenshot
+        {
+            get { return _screenshot; }
+            set { _screenshot = value; OnPropertyChanged("Screenshot"); }
+        }
 
         /// <summary>
         /// Volume %
@@ -97,6 +107,7 @@ namespace XBMC
             isConnected = parent.Controls.SetResponseFormat();
 
             heartBeatTimer.Interval = (isConnected) ? connectedInterval : disconnectedInterval;
+            //Refresh();
         }
 
         public void Refresh()
@@ -127,6 +138,7 @@ namespace XBMC
                 GetVolume();
                 GetProgress();
 
+             
             }
         }
 

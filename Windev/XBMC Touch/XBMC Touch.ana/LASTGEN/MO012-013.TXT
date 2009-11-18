@@ -1,0 +1,7 @@
+//MO012-013.TXT ANA00012 TO ANA00013
+CoversAlbum		NFI		nouveau fichier
+Albums		NFI		nouveau fichier
+Albums		NWL	Albums (Cle_Album) et CoversAlbum (Cle_Album)	Nouvelle liaison entre les fichiers Albums (Cle_Album) et CoversAlbum (Cle_Album)
+Artistes		NWL	Artistes (Cle_Artiste) et Albums (Cle_Artiste)	Nouvelle liaison entre les fichiers Artistes (Cle_Artiste) et Albums (Cle_Artiste)
+Albums		FRN		
+CoversAlbum		FRN		

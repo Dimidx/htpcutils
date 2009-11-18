@@ -1,0 +1,6 @@
+//MO000-001.TXT ANA00000 TO ANA00001
+Films		NFI		nouveau fichier
+Files		NFI		nouveau fichier
+Covers		NFI		nouveau fichier
+Artistes		NFI		nouveau fichier
+Films		NWL	Films (IDFilm) et Covers (IDFilm)	Nouvelle liaison entre les fichiers Films (IDFilm) et Covers (IDFilm)

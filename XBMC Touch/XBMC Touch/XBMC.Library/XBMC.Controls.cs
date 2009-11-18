@@ -150,7 +150,9 @@ namespace XBMC
 
         public string GetScreenshotBase64()
         {
-            string[] base64screenshot = parent.Request("takescreenshot", "screenshot.png;false;0;" + this.GetGuiDescription("width") + ";" + this.GetGuiDescription("height") + ";75;true;");
+            //string[] base64screenshot = parent.Request("takescreenshot", ";false;0;" + this.GetGuiDescription("width") + ";" + this.GetGuiDescription("height") + ";75;true;");
+            string[] base64screenshot = parent.Request("takescreenshot", ";false;0;640;480;100;true;");
+
             return (base64screenshot == null) ? null : base64screenshot[0];
         }
 

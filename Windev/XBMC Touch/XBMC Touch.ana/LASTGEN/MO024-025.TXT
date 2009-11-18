@@ -1,0 +1,2 @@
+//MO024-025.TXT ANA00024 TO ANA00025
+Machines	RecupInfosOK	NNR	InfosRecup	ATTENTION : la rubrique InfosRecup a pour nouveau nom RecupInfosOK

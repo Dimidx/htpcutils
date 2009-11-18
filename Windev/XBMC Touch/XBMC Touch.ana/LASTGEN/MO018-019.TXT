@@ -1,0 +1,4 @@
+//MO018-019.TXT ANA00018 TO ANA00019
+Titres		TAR	683	nouvelle taille enregistrement : 683
+Titres	strFilename	RUB+		strFilename est une nouvelle clé
+Titres	strPath	RUB+		strPath est une nouvelle clé
