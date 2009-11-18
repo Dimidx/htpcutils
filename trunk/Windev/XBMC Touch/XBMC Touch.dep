@@ -1,0 +1,54 @@
+.\XBMC Touch.ana\XBMC Touch.wda
+
+.\Exe
+.\Taches
+.\XBMC Touch.sty
+.\FEN_Main.wdw
+.\XBMC_HTTPServeur.wdc
+.\REQ_Films.WDR
+.\FI_Films_ListView.wdw
+.\FEN_FicheMachine.wdw
+.\Procedures globales de XBMC Touch.wdg
+.\FEN_Configuration.wdw
+.\MDLC_AccesRapide.wdt
+.\Hash.wdg
+.\FI_DetailsFilm.wdw
+.\XBMC_HTTPApi.wdc
+.\Procedures globales de XDM.wdg
+.\Settings.wdc
+.\iStyle_Table_ColPict.gif
+.\iStyle_Resize.gif
+.\iStyle_Tab_Top.gif
+.\iStyle_Pict_ok_16_5.gif
+.\iStyle_Pict_Modify_16_5.gif
+.\iStyle_Scroll_V.gif
+.\iStyle_CBox.gif
+.\iStyle_Rollover.png
+.\iStyle_Pict_Add_16_5.gif
+.\iStyle_Pict_Close_16_5.gif
+.\Gauche.png
+.\connexion_16_5.png
+.\defaultvideo.png.png
+.\Exe\Skins\Rapier\top-bar-power-focus.png
+.\separator2v.png
+.\iStyle_Btn_Brw.png
+.\iStyle_Btn_Std.png
+.\iStyle_PROGBAR_Activ.jpg
+.\iStyle_Pict_Delete_16_5.gif
+.\Exe\Skins\Rapier\breadcrumb-background.png
+.\Exe\Skins\Rapier\bottom-bar-background.png
+.\iStyle_Edt.png
+.\Exe\Skins\Rapier\item-focus-background.png
+.\xbox.png
+.\iStyle_PROGBAR_Bg.gif
+.\bandeau.png
+.\iStyle_Scroll_H.gif
+.\C.png
+.\Droite.png
+.\osd-play-focus.png
+.\overlaywatched.png
+.\iStyle_Select.png
+.\iStyle_Frame.png
+.\osd-video-settings-focus.png
+.\Attente.WDI
+.\Exe\Attente.WDK

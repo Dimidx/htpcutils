@@ -1,0 +1,3 @@
+//MO021-022.TXT ANA00021 TO ANA00022
+DebugHF		TAR	596	nouvelle taille enregistrement : 596
+DebugHF	Element	RUB+		Element est une nouvelle rubrique

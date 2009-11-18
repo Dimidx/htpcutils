@@ -1,0 +1,4 @@
+//MO006-007.TXT ANA00006 TO ANA00007
+Artistes		TAR	115	nouvelle taille enregistrement : 115
+Artistes	Machine	RUB+		Machine est une nouvelle clé
+Artistes	Cle_Artiste	RUB+		Cle_Artiste est une nouvelle clé

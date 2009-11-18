@@ -1,0 +1,4 @@
+//MO008-009.TXT ANA00008 TO ANA00009
+Machines		TAR	631	nouvelle taille enregistrement : 631
+Machines	OS	RUB+		OS est une nouvelle rubrique
+Machines	DateBuild	RUB+		DateBuild est une nouvelle rubrique

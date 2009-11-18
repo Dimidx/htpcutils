@@ -204,7 +204,7 @@ namespace XBMC
 
         void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            Refresh();
+            //Refresh();
         }
 
         public string Get(string field, bool refresh)

@@ -1,0 +1,3 @@
+//MO005-006.TXT ANA00005 TO ANA00006
+Machines		TAR	323	nouvelle taille enregistrement : 323
+Machines	Version	RUB+		Version est une nouvelle rubrique

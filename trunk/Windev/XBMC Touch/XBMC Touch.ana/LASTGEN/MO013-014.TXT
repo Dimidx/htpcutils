@@ -1,0 +1,3 @@
+//MO013-014.TXT ANA00013 TO ANA00014
+Albums		TAR	376	nouvelle taille enregistrement : 376
+Albums	Album	RUB+		Album est une nouvelle rubrique

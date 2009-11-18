@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright Danone-KiD© 2009")]
 [assembly: ComVisible(false)]
 [assembly: Guid("88812638-9547-4480-9bf4-4fe25103b35c")]
-[assembly: AssemblyVersion("1.0.96.84")]
-[assembly: AssemblyFileVersion("1.0.96.84")]
+[assembly: AssemblyVersion("1.0.99.103")]
+[assembly: AssemblyFileVersion("1.0.99.103")]
 
 

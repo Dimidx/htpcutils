@@ -1,0 +1,7 @@
+//MO017-018.TXT ANA00017 TO ANA00018
+Titres		TAR	171	nouvelle taille enregistrement : 171
+Titres	idSong	RUB+		idSong est une nouvelle clé
+Titres	strTitle	RUB+		strTitle est une nouvelle rubrique
+Titres	Cle_Album	RUB+		Cle_Album est une nouvelle clé
+Titres	Cle_Song	RUB+		Cle_Song est une nouvelle clé
+Albums		NWL	Albums (Cle_Album) et Titres (Cle_Album)	Nouvelle liaison entre les fichiers Albums (Cle_Album) et Titres (Cle_Album)
