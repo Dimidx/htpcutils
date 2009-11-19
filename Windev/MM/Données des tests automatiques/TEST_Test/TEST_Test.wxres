@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="iso8859-1"?>
+<DOC>
+<Erreur>
+<Libelle>Les paramètres d&apos;ouverture de la fenêtre FEN_Test sont incorrects : on attendait 1 paramètres et on en a reçu 0.</Libelle>
+<Position>
+<IdTrt>00000000</IdTrt>
+</Position>
+</Erreur>
+</DOC>
