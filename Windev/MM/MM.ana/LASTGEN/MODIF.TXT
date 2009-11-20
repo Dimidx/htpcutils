@@ -1,3 +1,2 @@
-//MO001-002.TXT ANA00001 TO ANA00002
-Tvdb_BannerFic		TAR	501	nouvelle taille enregistrement : 501
-Tvdb_BannerFic	SeriesId	CNW	Entier non signé sur 8 octets$Chaîne	la rubrique SeriesId a pour nouveau type Entier non signé sur 8 octets
+//MO003-004.TXT ANA00003 TO ANA00004
+Tvdb_BannerFic	BannerPath	CLEU*		la rubrique BannerPath est maintenant une clé
