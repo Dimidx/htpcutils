@@ -66,7 +66,7 @@ namespace MediaManager.Library
                 }
                 #endregion
 
-                //m_webClient.Encoding = Encoding.UTF8;
+                m_webClient.Encoding = Encoding.UTF8;
                 sourceHTML = m_webClient.DownloadString(url);
 
             }

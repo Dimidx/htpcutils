@@ -11,7 +11,7 @@
 		<ResourceDictionary>
 
 			<ResourceDictionary.MergedDictionaries>
-			<ResourceDictionary Source="Themes/BureauBlue/Theme.xaml"/>
+			<ResourceDictionary Source="Themes/ExpressionDark/Theme.xaml"/>
 			<ResourceDictionary Source="SettingsGUI.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 			<VisualBrush x:Key="BackMain" Opacity="0.3">
