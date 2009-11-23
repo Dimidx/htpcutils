@@ -1,12 +1,234 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
-<ANALYSE GenNum="5" VersionStructure="1">
+<ANALYSE GenNum="9" VersionStructure="1">
+  <FICHIER Nom="Tvdb_SerieFic" Abreviation="" NomPhysique="Tvdb_SerieFic" NomLogiqueDataBase="Tvdb_SerieFic" FicNullSupporte="1">
+    <INFOS_ETENDUES></INFOS_ETENDUES>
+    <RUBRIQUE Nom="id">
+      <TYPE>26</TYPE>
+      <TYPE_CLE>1</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur="0"></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Actors">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>255</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Airs_DayOfWeek">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>255</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Airs_Time">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>255</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="ContentRating">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>255</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="FirstAired">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>255</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Genre">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>255</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="IMDB_ID">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>255</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Language">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>255</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Network">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>255</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="NetworkID">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>255</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Overview">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>255</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Rating">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>255</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Runtime">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>255</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="SeriesID">
+      <TYPE>26</TYPE>
+      <TYPE_CLE>2</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur="0"></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="SeriesName">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>2</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>255</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Status">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>10</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="added">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>255</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="addedBy">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>255</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="banner">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>255</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="fanart">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>255</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="lastupdated">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>255</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="poster">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>255</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="zap2it_id">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>255</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+  </FICHIER>
+  <FICHIER Nom="Series" Abreviation="" NomPhysique="Series" NomLogiqueDataBase="Series" FicNullSupporte="1">
+    <INFOS_ETENDUES></INFOS_ETENDUES>
+    <RUBRIQUE Nom="SeriesId">
+      <TYPE>26</TYPE>
+      <TYPE_CLE>1</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur="0"></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="TitrePerso">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>50</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="DossierBase">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>255</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+  </FICHIER>
   <FICHIER Nom="Tvdb_BannerFic" Abreviation="" NomPhysique="Tvdb_BannerFic" NomLogiqueDataBase="Tvdb_BannerFic" FicNullSupporte="1">
     <INFOS_ETENDUES></INFOS_ETENDUES>
     <RUBRIQUE Nom="id">
-      <TYPE>27</TYPE>
+      <TYPE>26</TYPE>
       <TYPE_CLE>1</TYPE_CLE>
       <SENS_PARCOURS>0</SENS_PARCOURS>
-      <TAILLE>8</TAILLE>
+      <TAILLE>4</TAILLE>
       <INDICERUBRIQUE Indice="0" Null="0" Valeur="0"></INDICERUBRIQUE>
       <INFOS_ETENDUES></INFOS_ETENDUES>
     </RUBRIQUE>
@@ -83,10 +305,10 @@
       <INFOS_ETENDUES></INFOS_ETENDUES>
     </RUBRIQUE>
     <RUBRIQUE Nom="SeriesId">
-      <TYPE>27</TYPE>
+      <TYPE>26</TYPE>
       <TYPE_CLE>2</TYPE_CLE>
       <SENS_PARCOURS>0</SENS_PARCOURS>
-      <TAILLE>8</TAILLE>
+      <TAILLE>4</TAILLE>
       <INDICERUBRIQUE Indice="0" Null="0" Valeur="0"></INDICERUBRIQUE>
       <INFOS_ETENDUES></INFOS_ETENDUES>
     </RUBRIQUE>
