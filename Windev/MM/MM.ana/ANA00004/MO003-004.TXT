@@ -1,5 +1,0 @@
-//MO003-004.TXT ANA00003 TO ANA00004
-Tvdb_BannerFic	BannerType	CLEN*		la rubrique BannerType est maintenant une clé
-Tvdb_BannerFic	BannerType2	CLEN*		la rubrique BannerType2 est maintenant une clé
-Tvdb_BannerFic	Language	CLEN*		la rubrique Language est maintenant une clé
-Tvdb_BannerFic	Season	CLEN*		la rubrique Season est maintenant une clé

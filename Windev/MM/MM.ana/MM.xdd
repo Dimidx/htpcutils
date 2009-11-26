@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
-<ANALYSE GenNum="9" VersionStructure="1">
+<ANALYSE GenNum="20" VersionStructure="1">
+  <FICHIER Nom="Language" Abreviation="" NomPhysique="Language" NomLogiqueDataBase="Language" FicNullSupporte="1">
+    <INFOS_ETENDUES></INFOS_ETENDUES>
+    <RUBRIQUE Nom="id">
+      <TYPE>26</TYPE>
+      <TYPE_CLE>1</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur="0"></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="name">
+      <TYPE>39</TYPE>
+      <TYPE_CLE>2</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>50</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="abbreviation">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>1</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>2</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+  </FICHIER>
   <FICHIER Nom="Tvdb_SerieFic" Abreviation="" NomPhysique="Tvdb_SerieFic" NomLogiqueDataBase="Tvdb_SerieFic" FicNullSupporte="1">
     <INFOS_ETENDUES></INFOS_ETENDUES>
     <RUBRIQUE Nom="id">
@@ -221,6 +248,30 @@
       <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
       <INFOS_ETENDUES></INFOS_ETENDUES>
     </RUBRIQUE>
+    <RUBRIQUE Nom="NomSaisons">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>50</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur="Saison "></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="SaisonNbrCar">
+      <TYPE>36</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>1</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur="1"></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="SaisonIgnore">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>50</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
   </FICHIER>
   <FICHIER Nom="Tvdb_BannerFic" Abreviation="" NomPhysique="Tvdb_BannerFic" NomLogiqueDataBase="Tvdb_BannerFic" FicNullSupporte="1">
     <INFOS_ETENDUES></INFOS_ETENDUES>
@@ -274,7 +325,7 @@
     </RUBRIQUE>
     <RUBRIQUE Nom="SeriesName">
       <TYPE>37</TYPE>
-      <TYPE_CLE>0</TYPE_CLE>
+      <TYPE_CLE>2</TYPE_CLE>
       <SENS_PARCOURS>0</SENS_PARCOURS>
       <TAILLE>1</TAILLE>
       <INDICERUBRIQUE Indice="0" Null="0" Valeur="0"></INDICERUBRIQUE>
@@ -317,6 +368,46 @@
       <TYPE_CLE>2</TYPE_CLE>
       <SENS_PARCOURS>0</SENS_PARCOURS>
       <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Prefere">
+      <TYPE>37</TYPE>
+      <TYPE_CLE>2</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>1</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur="0"></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Hauteur">
+      <TYPE>5</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur="0"></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Largeur">
+      <TYPE>5</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur="0"></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Poids">
+      <TYPE>25</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>8</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur="0"></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Resolution">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>2</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>15</TAILLE>
       <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
       <INFOS_ETENDUES></INFOS_ETENDUES>
     </RUBRIQUE>

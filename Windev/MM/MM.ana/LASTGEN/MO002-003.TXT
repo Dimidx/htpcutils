@@ -1,8 +1,0 @@
-//MO002-003.TXT ANA00002 TO ANA00003
-Tvdb_BannerFic		TAR	279	nouvelle taille enregistrement : 279
-Tvdb_BannerFic	BannerType	TAI-	35	la rubrique BannerType a comme nouvelle taille 16 au lieu de 51
-Tvdb_BannerFic	BannerType2	TAI-	35	la rubrique BannerType2 a comme nouvelle taille 16 au lieu de 51
-Tvdb_BannerFic	Language	TAI-	48	la rubrique Language a comme nouvelle taille 3 au lieu de 51
-Tvdb_BannerFic	SeriesName	CNW	Booléen$Chaîne	la rubrique SeriesName a pour nouveau type Booléen
-Tvdb_BannerFic	Season	TAI-	46	la rubrique Season a comme nouvelle taille 5 au lieu de 51
-Tvdb_BannerFic	ImageMini	RUB-		la rubrique ImageMini est supprimée

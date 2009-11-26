@@ -1,4 +1,0 @@
-//MO008-009.TXT ANA00008 TO ANA00009
-Tvdb_SerieFic	id	CLEU*		la rubrique id est maintenant une clé
-Tvdb_SerieFic	SeriesID	CLEN*		la rubrique SeriesID est maintenant une clé
-Tvdb_SerieFic	SeriesName	CLEN*		la rubrique SeriesName est maintenant une clé
