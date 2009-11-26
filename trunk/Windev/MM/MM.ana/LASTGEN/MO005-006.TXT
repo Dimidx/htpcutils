@@ -1,3 +1,0 @@
-//MO005-006.TXT ANA00005 TO ANA00006
-Series		NFI		nouveau fichier
-Series		FRN		

@@ -1,3 +1,0 @@
-//MO000-001.TXT ANA00000 TO ANA00001
-Tvdb_BannerFic		NFI		nouveau fichier
-Tvdb_BannerFic		FRN		

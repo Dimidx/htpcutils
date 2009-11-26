@@ -1,4 +1,5 @@
-//MO008-009.TXT ANA00008 TO ANA00009
-Tvdb_SerieFic	id	CLEU*		la rubrique id est maintenant une clé
-Tvdb_SerieFic	SeriesID	CLEN*		la rubrique SeriesID est maintenant une clé
-Tvdb_SerieFic	SeriesName	CLEN*		la rubrique SeriesName est maintenant une clé
+//MO019-020.TXT ANA00019 TO ANA00020
+Tvdb_BannerFic		TAR	305	nouvelle taille enregistrement : 305
+Tvdb_BannerFic	SeriesName	CLEN*		la rubrique SeriesName est maintenant une clé
+Tvdb_BannerFic	Prefere	CLEN*		la rubrique Prefere est maintenant une clé
+Tvdb_BannerFic	Resolution	RUB+		Resolution est une nouvelle clé
