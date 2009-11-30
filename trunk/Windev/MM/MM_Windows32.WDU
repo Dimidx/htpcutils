@@ -1,6 +1,8 @@
 MM.WDP
 MM.WDP
 MM.WDP
+MM.eu.emf
+MMFR.eu.emf
 MM.wdd
 FEN_ExportFondEcran.wdw
 ISTYLE_BTN_BRW.PNG
@@ -49,7 +51,6 @@ PHOTO_16_1.PNG
 THUMB_16_1.PNG
 FEN_Debug.wdw
 REQ_FiltresImages.WDR
-FI_Serie.wdw
 FEN_ZoomImage.wdw
 ENREGISTRER_16_5.PNG
 IMAGES\BOUTONS\ADAPTERTAILLE_16_5.PNG
@@ -57,15 +58,16 @@ ISTYLE_BANNER_BOTTOM.GIF
 ISTYLE_PICT_BRWFORWARD_H_24_5.GIF
 ISTYLE_PICT_BRWNEXT_H_24_5.GIF
 ZOOM_16_5.PNG
-REQ_DelLanguage.WDR
+FI_Serie.wdw
 FEN_ParamSerie.wdw
 ISTYLE_PICT_CLOSE_16_5.GIF
+REQ_DelLanguage.WDR
 TvdbAPI.wdc
 FEN_ChercheSerie.wdw
 ISTYLE_PICT_SEARCH_16_5.GIF
 TVDB_Mirror.wdc
 Settings.wdc
-Database.wdg
 Serie.wdc
+Database.wdg
 MM.wdy
-D:\WinDev 14\Personnel\Gabarits\140 iStyle\iStyle.wdy
+C:\WinDev 14\Personnel\Gabarits\140 iStyle\iStyle.wdy
