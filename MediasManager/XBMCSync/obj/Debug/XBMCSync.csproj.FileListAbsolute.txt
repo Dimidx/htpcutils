@@ -1,0 +1,5 @@
+D:\Perso\Dev\HTPCUtils\MediasManager\XBMCSync\bin\Debug\XBMCSync.exe
+D:\Perso\Dev\HTPCUtils\MediasManager\XBMCSync\bin\Debug\XBMCSync.pdb
+D:\Perso\Dev\HTPCUtils\MediasManager\XBMCSync\obj\Debug\ResolveAssemblyReference.cache
+D:\Perso\Dev\HTPCUtils\MediasManager\XBMCSync\obj\Debug\XBMCSync.exe
+D:\Perso\Dev\HTPCUtils\MediasManager\XBMCSync\obj\Debug\XBMCSync.pdb
