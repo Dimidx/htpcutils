@@ -1106,3 +1106,14 @@ RFRA1025,12/09/09,08:10:42,08:51:18,0:40:36,2,FEN_Configuration,D:\Perso\Dev\HTP
 RFRA1025,12/09/09,08:18:57,08:51:18,0:32:21,4,XBMC_HTTPApi,D:\Perso\Dev\HTPCUtils\Windev\XBMC Touch\XBMC_HTTPApi.wdc
 RFRA1025,12/09/09,08:33:10,08:51:19,0:18:9,8,FI_Albums_CoversView,D:\Perso\Dev\HTPCUtils\Windev\XBMC Touch\FI_Albums_CoversView.wdw
 RFRA1025,12/09/09,08:03:39,08:51:19,0:47:40,7,Database,D:\Perso\Dev\HTPCUtils\Windev\XBMC Touch\Database.wdg
+RFRA1025,12/10/09,08:52:34,08:52:55,0:0:21,8,FI_DetailsFilm,D:\Perso\Dev\HTPCUtils\Windev\XBMC Touch\FI_DetailsFilm.wdw
+RFRA1025,12/10/09,08:52:55,08:53:11,0:0:16,8,FI_Films_ListView,D:\Perso\Dev\HTPCUtils\Windev\XBMC Touch\FI_Films_ListView.wdw
+RFRA1025,12/10/09,08:53:11,08:53:22,0:0:11,8,FI_DetailsFilm,D:\Perso\Dev\HTPCUtils\Windev\XBMC Touch\FI_DetailsFilm.wdw
+RFRA1025,12/10/09,08:42:29,09:02:27,0:19:58,2,FEN_Main,D:\Perso\Dev\HTPCUtils\Windev\XBMC Touch\FEN_Main.wdw
+RFRA1025,12/10/09,08:42:29,09:02:27,0:19:58,2,FEN_EditeurTelecommande,D:\Perso\Dev\HTPCUtils\Windev\XBMC Touch\FEN_EditeurTelecommande.wdw
+RFRA1025,12/10/09,08:42:29,09:02:27,0:19:58,2,FEN_Configuration,D:\Perso\Dev\HTPCUtils\Windev\XBMC Touch\FEN_Configuration.wdw
+RFRA1025,12/10/09,08:42:30,09:02:27,0:19:57,4,XBMC_HTTPApi,D:\Perso\Dev\HTPCUtils\Windev\XBMC Touch\XBMC_HTTPApi.wdc
+RFRA1025,12/10/09,08:42:30,09:02:27,0:19:57,8,FI_Albums_CoversView,D:\Perso\Dev\HTPCUtils\Windev\XBMC Touch\FI_Albums_CoversView.wdw
+RFRA1025,12/10/09,08:52:34,09:02:27,0:9:53,8,FI_DetailsFilm,D:\Perso\Dev\HTPCUtils\Windev\XBMC Touch\FI_DetailsFilm.wdw
+RFRA1025,12/10/09,08:42:27,09:02:27,0:20:0,7,Database,D:\Perso\Dev\HTPCUtils\Windev\XBMC Touch\Database.wdg
+RFRA1025,12/10/09,08:52:54,09:02:27,0:9:33,8,FI_Films_ListView,D:\Perso\Dev\HTPCUtils\Windev\XBMC Touch\FI_Films_ListView.wdw
