@@ -1,2 +1,3 @@
-//MO020-021.TXT ANA00020 TO ANA00021
-Series	TitrePerso	CLEN*		la rubrique TitrePerso est maintenant une clé
+//MO021-022.TXT ANA00021 TO ANA00022
+Tvdb_SerieFic		TAR	5159	nouvelle taille enregistrement : 5159
+Tvdb_SerieFic	Overview	CNW	Mémo texte$Chaîne	la rubrique Overview a pour nouveau type Mémo texte

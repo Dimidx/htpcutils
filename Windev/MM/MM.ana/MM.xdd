@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
-<ANALYSE GenNum="21" VersionStructure="1">
+<ANALYSE GenNum="22" VersionStructure="1">
   <FICHIER Nom="Language" Abreviation="" NomPhysique="Language" NomLogiqueDataBase="Language" FicNullSupporte="1">
     <INFOS_ETENDUES></INFOS_ETENDUES>
     <RUBRIQUE Nom="id">
@@ -118,10 +118,10 @@
       <INFOS_ETENDUES></INFOS_ETENDUES>
     </RUBRIQUE>
     <RUBRIQUE Nom="Overview">
-      <TYPE>2</TYPE>
+      <TYPE>29</TYPE>
       <TYPE_CLE>0</TYPE_CLE>
       <SENS_PARCOURS>0</SENS_PARCOURS>
-      <TAILLE>255</TAILLE>
+      <TAILLE>8</TAILLE>
       <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
       <INFOS_ETENDUES></INFOS_ETENDUES>
     </RUBRIQUE>
