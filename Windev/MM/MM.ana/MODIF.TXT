@@ -1,3 +1,4 @@
-//MO021-022.TXT ANA00021 TO ANA00022
-Tvdb_SerieFic		TAR	5159	nouvelle taille enregistrement : 5159
-Tvdb_SerieFic	Overview	CNW	Mémo texte$Chaîne	la rubrique Overview a pour nouveau type Mémo texte
+//MO031-032.TXT ANA00031 TO ANA00032
+Films_Image		TAR	605	nouvelle taille enregistrement : 605
+Films_Image	URL	RUB+		URL est une nouvelle rubrique
+Films_Image	URL_Preview	RUB+		URL_Preview est une nouvelle rubrique
