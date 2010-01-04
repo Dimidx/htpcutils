@@ -1,3 +1,4 @@
-//MO008-009.TXT ANA00008 TO ANA00009
-Films_Genres		NNF*	Genres_Films	nouveau nom Films_Genres
-Films_Genres		FRN		
+//MO010-011.TXT ANA00010 TO ANA00011
+Contrainte_Films_Films_Image		MCL	1,1->0,1	
+Films	Titre	RRM		
+Films	Synopsis	RRM		
