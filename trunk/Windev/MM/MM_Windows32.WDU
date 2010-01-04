@@ -1,6 +1,3 @@
-MM.WDP
-MM.WDP
-MM.WDP
 MM.eu.emf
 MMFR.eu.emf
 MM.wdd
@@ -44,9 +41,13 @@ Tvdb_Serie.wdc
 CP_API.wdc
 Saison.wdc
 CP_Person.wdc
+ETAT_Films.wde
+Report_Header.png
+Report_Footer.png
 CP_Studios.wdc
 REQ_BannerCount.WDR
 CP_Director.wdc
+MM.wdg
 FI_Film.wdw
 CP_Image.wdc
 FEN_Missing.wdw
@@ -57,7 +58,6 @@ PAUSE_16_1.PNG
 STOP_16_1.PNG
 TERMINEE_16_1.PNG
 Tvdb_Language.wdc
-Procedures globales de MM.wdg
 FEN_ChercheFilm.wdw
 ISTYLE_PICT_CLOSE_16_5.GIF
 ISTYLE_PICT_DETAIL_16_5.GIF
@@ -103,9 +103,10 @@ FEN_UpdateFilm.wdw
 FEN_ChercheSerie.wdw
 TVDB_Mirror.wdc
 CP_Credits.wdc
+FEN_ImagesFilms.wdw
 Settings.wdc
 CP_Movie.wdc
 Serie.wdc
 Database.wdg
 MM.wdy
-D:\WinDev 14\Personnel\Gabarits\140 iStyle\iStyle.wdy
+D:\WinDev 15\Personnel\Gabarits\140 iStyle\iStyle.wdy

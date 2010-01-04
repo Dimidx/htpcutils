@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<movie>
+    <title>300</title>
+    <originaltitle>300</originaltitle>
+    <rating>3.000000</rating>
+    <year>2006</year>
+    <top250>0</top250>
+    <votes>12789</votes>
+    <outline>Adapté du roman graphique de Frank Miller, 300 est un récit épique de la Bataille des Thermopyles, qui opposa en l&apos;an - 480 le roi Léonidas et 300 soldats spartiates à Xerxès et l&apos;immense armée perse. Face à un invincible ennemi, les 300 déployèrent jusqu&apos;à leur dernier souffle un courage surhumain ; leur vaillance et leur héroïque sacrifice inspirèrent toute la Grèce à se dresser contre la Perse, posant ainsi les premières pierres de la démocratie.</outline>
+    <plot>Adapté du roman graphique de Frank Miller, 300 est un récit épique de la Bataille des Thermopyles, qui opposa en l&apos;an - 480 le roi Léonidas et 300 soldats spartiates à Xerxès et l&apos;immense armée perse. Face à un invincible ennemi, les 300 déployèrent jusqu&apos;à leur dernier souffle un courage surhumain ; leur vaillance et leur héroïque sacrifice inspirèrent toute la Grèce à se dresser contre la Perse, posant ainsi les premières pierres de la démocratie.</plot>
+    <tagline>Adapter à l&apos;écran le roman graphique du génial Frank Miller représentait un défi sacrément spartiate que Zack Snyder relève avec intelligence et brio.</tagline>
+    <runtime>1h55 min</runtime>
+    <thumb>http://passion-xbmc.org/scraper/Gallery/main/Poster_300-287378.jpg</thumb>
+    <thumb>http://passion-xbmc.org/scraper/Gallery/main/Poster_300-287361.jpg</thumb>
+    <thumb>http://passion-xbmc.org/scraper/Gallery/main/Poster_300-287382.jpg</thumb>
+    <thumb>http://passion-xbmc.org/scraper/Gallery/main/Poster_300-287381.jpg</thumb>
+    <thumb>http://passion-xbmc.org/scraper/Gallery/main/Poster_300-287380.jpg</thumb>
+    <thumb>http://passion-xbmc.org/scraper/Gallery/main/Poster_300-287379.jpg</thumb>
+    <fanart>
+        <thumb>http://passion-xbmc.org/scraper/Gallery/main/Fanart_300-287377.jpg</thumb>
+        <thumb>http://passion-xbmc.org/scraper/Gallery/main/Fanart_300-287376.jpg</thumb>
+        <thumb>http://passion-xbmc.org/scraper/Gallery/main/Fanart_300-287375.jpg</thumb>
+        <thumb>http://passion-xbmc.org/scraper/Gallery/main/Fanart_300-287374.jpg</thumb>
+        <thumb>http://passion-xbmc.org/scraper/Gallery/main/Fanart_300-287373.jpg</thumb>
+    </fanart>
+    <mpaa>Box Office France : 1 661 288 entrées / Budget : 60 000 000 $ / N° de visa : 117322 / Couleur  / Format du son : Dolby SR + Digital SR-D + DTS &amp; SDDS / Format de projection : 2.35 : 1 Cinemascope / Format de production : 35 mm</mpaa>
+    <playcount>11</playcount>
+    <lastplayed>2009-11-04 10:10:50</lastplayed>
+    <id>416449</id>
+    <genre>Péplum / Guerre / Historique / Action</genre>
+    <set></set>
+    <credits>Zack Snyder / Kurt Johnstad / Michael Gordon</credits>
+    <director>Zack Snyder</director>
+    <premiered></premiered>
+    <status></status>
+    <code></code>
+    <aired></aired>
+    <studio>Warner Bros.</studio>
+    <trailer></trailer>
+    <actor>
+        <name>Tom Wisdom</name>
+        <role>Astinos</role>
+        <thumb>http://passion-xbmc.org/scraper/images/86931_18744207_jpg7c98b6d6f9ccd0714ad0ecfe1b01261a_extjpg.jpg</thumb>
+    </actor>
+    <actor>
+        <name>Michael Fassbender</name>
+        <role>Stelios</role>
+        <thumb>http://passion-xbmc.org/scraper/images/86929_19001238_jpg8cf023876d6898465cc92c3292f7395e_extjpg.jpg</thumb>
+    </actor>
+    <actor>
+        <name>Vincent Regan</name>
+        <role>le capitaine</role>
+        <thumb>http://passion-xbmc.org/scraper/images/86927_18461593_jpg2c0fc5c0d1dffac84cd6bc68f1f7e709_extjpg.jpg</thumb>
+    </actor>
+    <actor>
+        <name>Dominic West</name>
+        <role>Theron</role>
+        <thumb>http://passion-xbmc.org/scraper/images/86925_18744171_jpgcdb7297020be3be0bbf427781bc174ce_extjpg.jpg</thumb>
+    </actor>
+    <actor>
+        <name>David Wenham</name>
+        <role>Dilios</role>
+        <thumb>http://passion-xbmc.org/scraper/images/86923_18398817_jpgce56ef4b8b04c4dd7379905306786ee4_extjpg.jpg</thumb>
+    </actor>
+    <actor>
+        <name>Rodrigo Santoro</name>
+        <role>Xerxes</role>
+        <thumb>http://passion-xbmc.org/scraper/images/86921_18744202_jpgdc4b4632b56e1c335461e636f2ccdc32_extjpg.jpg</thumb>
+    </actor>
+    <actor>
+        <name>Lena Headey</name>
+        <role>la Reine Gorgo</role>
+        <thumb>http://passion-xbmc.org/scraper/images/86919_19001233_jpg9aa38e3c160aa270863651f94cdac23c_extjpg.jpg</thumb>
+    </actor>
+    <actor>
+        <name>Gerard Butler</name>
+        <role>le Roi Leonidas</role>
+        <thumb>http://passion-xbmc.org/scraper/images/86917_19001072_jpg54be28396b69ebcff7ce19de39da5b2b_extjpg.jpg</thumb>
+    </actor>
+    <actor>
+        <name>Andrew Tiernan</name>
+        <role>Ephialtes</role>
+        <thumb></thumb>
+    </actor>
+    <actor>
+        <name>Andrew Pleavin</name>
+        <role>Daxos</role>
+        <thumb></thumb>
+    </actor>
+    <artist></artist>
+</movie>
