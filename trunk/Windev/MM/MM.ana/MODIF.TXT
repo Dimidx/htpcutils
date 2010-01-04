@@ -1,3 +1,3 @@
-//MO002-003.TXT ANA00002 TO ANA00003
-Films_Image		TAR	618	nouvelle taille enregistrement : 618
-Films_Image	Poids	RUB+		Poids est une nouvelle rubrique
+//MO008-009.TXT ANA00008 TO ANA00009
+Films_Genres		NNF*	Genres_Films	nouveau nom Films_Genres
+Films_Genres		FRN		

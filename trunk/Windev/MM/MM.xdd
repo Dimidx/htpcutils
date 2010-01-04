@@ -1,5 +1,115 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
-<ANALYSE GenNum="3" VersionStructure="1">
+<ANALYSE GenNum="9" VersionStructure="1">
+  <FICHIER Nom="Films_Acteurs" Abreviation="" NomPhysique="Films_Acteurs" NomLogiqueDataBase="Films_Acteurs" FicNullSupporte="0">
+    <INFOS_ETENDUES></INFOS_ETENDUES>
+    <RUBRIQUE Nom="IDActeur">
+      <TYPE>5</TYPE>
+      <TYPE_CLE>2</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="IDFilm">
+      <TYPE>5</TYPE>
+      <TYPE_CLE>2</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="IDFilms_Acteurs">
+      <TYPE_CLE>1</TYPE_CLE>
+      <COMPOSEE><COMPOSANTE Nom="IDFilm"><SENS_PARCOURS>0</SENS_PARCOURS></COMPOSANTE><COMPOSANTE Nom="IDActeur"><SENS_PARCOURS>0</SENS_PARCOURS></COMPOSANTE></COMPOSEE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Role">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>50</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+  </FICHIER>
+  <FICHIER Nom="Acteurs" Abreviation="" NomPhysique="Acteurs" NomLogiqueDataBase="Acteurs" FicNullSupporte="1">
+    <INFOS_ETENDUES></INFOS_ETENDUES>
+    <RUBRIQUE Nom="IDActeur">
+      <TYPE>5</TYPE>
+      <TYPE_CLE>1</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur="0"></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Nom">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>2</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>50</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Image">
+      <TYPE>30</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>8</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="URLImage">
+      <TYPE>29</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>8</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+  </FICHIER>
+  <FICHIER Nom="Films_Genres" Abreviation="" NomPhysique="Films_Genres" NomLogiqueDataBase="Films_Genres" FicNullSupporte="0">
+    <INFOS_ETENDUES></INFOS_ETENDUES>
+    <RUBRIQUE Nom="IDFilm">
+      <TYPE>5</TYPE>
+      <TYPE_CLE>2</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="IDGenre">
+      <TYPE>5</TYPE>
+      <TYPE_CLE>2</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="IDGenres_Films">
+      <TYPE_CLE>1</TYPE_CLE>
+      <COMPOSEE><COMPOSANTE Nom="IDGenre"><SENS_PARCOURS>0</SENS_PARCOURS></COMPOSANTE><COMPOSANTE Nom="IDFilm"><SENS_PARCOURS>0</SENS_PARCOURS></COMPOSANTE></COMPOSEE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+  </FICHIER>
+  <FICHIER Nom="Genres" Abreviation="" NomPhysique="Genres" NomLogiqueDataBase="Genres" FicNullSupporte="1">
+    <INFOS_ETENDUES></INFOS_ETENDUES>
+    <RUBRIQUE Nom="IDGenre">
+      <TYPE>38</TYPE>
+      <TYPE_CLE>1</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Genre">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>1</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>50</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+  </FICHIER>
   <FICHIER Nom="Films_Image" Abreviation="" NomPhysique="Films_Image" NomLogiqueDataBase="Films_Image" FicNullSupporte="1">
     <INFOS_ETENDUES></INFOS_ETENDUES>
     <RUBRIQUE Nom="id">
@@ -138,6 +248,22 @@
       <INDICERUBRIQUE Indice="0" Null="0" Valeur="0"></INDICERUBRIQUE>
       <INFOS_ETENDUES></INFOS_ETENDUES>
     </RUBRIQUE>
+    <RUBRIQUE Nom="Id_CinePassion">
+      <TYPE>5</TYPE>
+      <TYPE_CLE>2</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur="0"></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Id_Imdb">
+      <TYPE>5</TYPE>
+      <TYPE_CLE>2</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur="0"></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
     <RUBRIQUE Nom="Titre">
       <TYPE>2</TYPE>
       <TYPE_CLE>2</TYPE_CLE>
@@ -154,20 +280,44 @@
       <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
       <INFOS_ETENDUES></INFOS_ETENDUES>
     </RUBRIQUE>
-    <RUBRIQUE Nom="id_CinePassion">
-      <TYPE>5</TYPE>
-      <TYPE_CLE>2</TYPE_CLE>
-      <SENS_PARCOURS>0</SENS_PARCOURS>
-      <TAILLE>4</TAILLE>
-      <INDICERUBRIQUE Indice="0" Null="0" Valeur="0"></INDICERUBRIQUE>
-      <INFOS_ETENDUES></INFOS_ETENDUES>
-    </RUBRIQUE>
     <RUBRIQUE Nom="last_change">
       <TYPE>2</TYPE>
       <TYPE_CLE>2</TYPE_CLE>
       <SENS_PARCOURS>0</SENS_PARCOURS>
       <TAILLE>50</TAILLE>
       <INDICERUBRIQUE Indice="0" Null="0" Valeur="0"></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Annee">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>2</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Realisateur">
+      <TYPE>29</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>8</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Casting">
+      <TYPE>29</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>8</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="DateFichier">
+      <TYPE>14</TYPE>
+      <TYPE_CLE>2</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>8</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
       <INFOS_ETENDUES></INFOS_ETENDUES>
     </RUBRIQUE>
   </FICHIER>
