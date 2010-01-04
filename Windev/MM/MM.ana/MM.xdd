@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
-<ANALYSE GenNum="9" VersionStructure="1">
+<ANALYSE GenNum="11" VersionStructure="2" RepertoireDefaut="">
   <FICHIER Nom="Films_Acteurs" Abreviation="" NomPhysique="Films_Acteurs" NomLogiqueDataBase="Films_Acteurs" FicNullSupporte="0">
     <INFOS_ETENDUES></INFOS_ETENDUES>
     <RUBRIQUE Nom="IDActeur">
