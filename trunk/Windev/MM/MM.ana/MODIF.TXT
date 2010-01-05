@@ -1,3 +1,3 @@
-//MO017-018.TXT ANA00017 TO ANA00018
-Set	SetFilm	NNR	Set	ATTENTION : la clé Set a pour nouveau nom SetFilm
-Films	SetFilm	NNR	Set	ATTENTION : la clé Set a pour nouveau nom SetFilm
+//MO020-021.TXT ANA00020 TO ANA00021
+Films_Path		TAR	320	nouvelle taille enregistrement : 320
+Films_Path	Nom	RUB+		Nom est une nouvelle clé
