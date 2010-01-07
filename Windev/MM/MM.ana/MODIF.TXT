@@ -1,3 +1,3 @@
-//MO020-021.TXT ANA00020 TO ANA00021
-Films_Path		TAR	320	nouvelle taille enregistrement : 320
-Films_Path	Nom	RUB+		Nom est une nouvelle clé
+//MO022-023.TXT ANA00022 TO ANA00023
+Films		TAR	1461	nouvelle taille enregistrement : 1461
+Films	MPAA	RUB+		MPAA est une nouvelle rubrique
