@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
-<ANALYSE GenNum="21" VersionStructure="2" RepertoireDefaut="">
+<ANALYSE GenNum="23" VersionStructure="2" RepertoireDefaut="">
   <FICHIER Nom="Set" Abreviation="" NomPhysique="Set" NomLogiqueDataBase="Set" FicNullSupporte="1">
     <INFOS_ETENDUES></INFOS_ETENDUES>
     <RUBRIQUE Nom="SetFilm">
@@ -251,6 +251,14 @@
       <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
       <INFOS_ETENDUES></INFOS_ETENDUES>
     </RUBRIQUE>
+    <RUBRIQUE Nom="FileName">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>255</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
     <RUBRIQUE Nom="Id_Allocine">
       <TYPE>5</TYPE>
       <TYPE_CLE>2</TYPE_CLE>
@@ -369,6 +377,14 @@
       <SENS_PARCOURS>0</SENS_PARCOURS>
       <TAILLE>4</TAILLE>
       <INDICERUBRIQUE Indice="0" Null="0" Valeur="0"></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="MPAA">
+      <TYPE>29</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>8</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
       <INFOS_ETENDUES></INFOS_ETENDUES>
     </RUBRIQUE>
   </FICHIER>
