@@ -1,3 +1,4 @@
-//MO022-023.TXT ANA00022 TO ANA00023
-Films		TAR	1461	nouvelle taille enregistrement : 1461
-Films	MPAA	RUB+		MPAA est une nouvelle rubrique
+//MO027-028.TXT ANA00027 TO ANA00028
+Films		TAR	1478	nouvelle taille enregistrement : 1478
+Films	Critique	RUB+		Critique est une nouvelle rubrique
+Films	Intrique	RUB+		Intrique est une nouvelle rubrique

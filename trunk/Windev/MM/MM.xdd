@@ -1,5 +1,67 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
-<ANALYSE GenNum="23" VersionStructure="2" RepertoireDefaut="">
+<ANALYSE GenNum="28" VersionStructure="2" RepertoireDefaut="">
+  <FICHIER Nom="Films_Credits" Abreviation="" NomPhysique="Films_Credits" NomLogiqueDataBase="Films_Credits" FicNullSupporte="0">
+    <INFOS_ETENDUES></INFOS_ETENDUES>
+    <RUBRIQUE Nom="IDCredit">
+      <TYPE>5</TYPE>
+      <TYPE_CLE>2</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="IDFilm">
+      <TYPE>5</TYPE>
+      <TYPE_CLE>2</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="IDFilms_Credits">
+      <TYPE_CLE>1</TYPE_CLE>
+      <COMPOSEE><COMPOSANTE Nom="IDFilm"><SENS_PARCOURS>0</SENS_PARCOURS></COMPOSANTE><COMPOSANTE Nom="IDCredit"><SENS_PARCOURS>0</SENS_PARCOURS></COMPOSANTE></COMPOSEE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+  </FICHIER>
+  <FICHIER Nom="Realisateurs" Abreviation="" NomPhysique="Realisateurs" NomLogiqueDataBase="Realisateurs" FicNullSupporte="1">
+    <INFOS_ETENDUES></INFOS_ETENDUES>
+    <RUBRIQUE Nom="IDRealisateur">
+      <TYPE>38</TYPE>
+      <TYPE_CLE>1</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Realisateur">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>1</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>50</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+  </FICHIER>
+  <FICHIER Nom="Credits" Abreviation="" NomPhysique="Credits" NomLogiqueDataBase="Credits" FicNullSupporte="1">
+    <INFOS_ETENDUES></INFOS_ETENDUES>
+    <RUBRIQUE Nom="IDCredit">
+      <TYPE>38</TYPE>
+      <TYPE_CLE>1</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Credit">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>1</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>50</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+  </FICHIER>
   <FICHIER Nom="Set" Abreviation="" NomPhysique="Set" NomLogiqueDataBase="Set" FicNullSupporte="1">
     <INFOS_ETENDUES></INFOS_ETENDUES>
     <RUBRIQUE Nom="SetFilm">
@@ -380,6 +442,30 @@
       <INFOS_ETENDUES></INFOS_ETENDUES>
     </RUBRIQUE>
     <RUBRIQUE Nom="MPAA">
+      <TYPE>29</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>8</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Vu">
+      <TYPE>37</TYPE>
+      <TYPE_CLE>2</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>1</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur="0"></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Critique">
+      <TYPE>29</TYPE>
+      <TYPE_CLE>0</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>8</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Intrique">
       <TYPE>29</TYPE>
       <TYPE_CLE>0</TYPE_CLE>
       <SENS_PARCOURS>0</SENS_PARCOURS>
@@ -824,6 +910,73 @@
       <SENS_PARCOURS>0</SENS_PARCOURS>
       <TAILLE>15</TAILLE>
       <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+  </FICHIER>
+  <FICHIER Nom="Films_Studios" Abreviation="" NomPhysique="Films_Studios" NomLogiqueDataBase="Films_Studios" FicNullSupporte="0">
+    <INFOS_ETENDUES></INFOS_ETENDUES>
+    <RUBRIQUE Nom="IDStudio">
+      <TYPE>5</TYPE>
+      <TYPE_CLE>2</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="IDFilm">
+      <TYPE>5</TYPE>
+      <TYPE_CLE>2</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="IDFilms_Studios">
+      <TYPE_CLE>1</TYPE_CLE>
+      <COMPOSEE><COMPOSANTE Nom="IDFilm"><SENS_PARCOURS>0</SENS_PARCOURS></COMPOSANTE><COMPOSANTE Nom="IDStudio"><SENS_PARCOURS>0</SENS_PARCOURS></COMPOSANTE></COMPOSEE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+  </FICHIER>
+  <FICHIER Nom="Studios" Abreviation="" NomPhysique="Studios" NomLogiqueDataBase="Studios" FicNullSupporte="1">
+    <INFOS_ETENDUES></INFOS_ETENDUES>
+    <RUBRIQUE Nom="IDStudio">
+      <TYPE>38</TYPE>
+      <TYPE_CLE>1</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="Studio">
+      <TYPE>2</TYPE>
+      <TYPE_CLE>1</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>50</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+  </FICHIER>
+  <FICHIER Nom="Films_Realisateurs" Abreviation="" NomPhysique="Films_Realisateurs" NomLogiqueDataBase="Films_Realisateurs" FicNullSupporte="0">
+    <INFOS_ETENDUES></INFOS_ETENDUES>
+    <RUBRIQUE Nom="IDRealisateur">
+      <TYPE>5</TYPE>
+      <TYPE_CLE>2</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="IDFilm">
+      <TYPE>5</TYPE>
+      <TYPE_CLE>2</TYPE_CLE>
+      <SENS_PARCOURS>0</SENS_PARCOURS>
+      <TAILLE>4</TAILLE>
+      <INDICERUBRIQUE Indice="0" Null="0" Valeur=""></INDICERUBRIQUE>
+      <INFOS_ETENDUES></INFOS_ETENDUES>
+    </RUBRIQUE>
+    <RUBRIQUE Nom="IDFilms_Realisateurs">
+      <TYPE_CLE>1</TYPE_CLE>
+      <COMPOSEE><COMPOSANTE Nom="IDFilm"><SENS_PARCOURS>0</SENS_PARCOURS></COMPOSANTE><COMPOSANTE Nom="IDRealisateur"><SENS_PARCOURS>0</SENS_PARCOURS></COMPOSANTE></COMPOSEE>
       <INFOS_ETENDUES></INFOS_ETENDUES>
     </RUBRIQUE>
   </FICHIER>
