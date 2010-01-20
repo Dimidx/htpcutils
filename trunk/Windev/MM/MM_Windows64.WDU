@@ -60,8 +60,12 @@ Report_Footer.png
 CP_Studios.wdc
 REQ_BannerCount.WDR
 REQ_FilmsGenres.WDR
+FEN_Attente.wdw
+ATTENTEBIG.GIF
+STOP_16_5.PNG
 CP_Director.wdc
 MM.wdg
+Attente.wdg
 FI_Film.wdw
 ISTYLE_EDT2.PNG
 CP_Image.wdc
@@ -123,7 +127,6 @@ CORBEILLE_16_5.PNG
 REQ_DelLanguage.WDR
 TvdbAPI.wdc
 CP_Countries.wdc
-FEN_UpdateFilm.wdw
 FEN_ChercheSerie.wdw
 IMAGES\DIVERS\BANDEAU_SERIE.PNG
 TVDB_Mirror.wdc
@@ -131,7 +134,6 @@ CP_Credits.wdc
 FEN_ImagesFilms.wdw
 Settings.wdc
 CP_Movie.wdc
-FEN_Patientez.wdw
 Serie.wdc
 Database.wdg
 XML\CP_Movie.xml
